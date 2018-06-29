@@ -17,13 +17,15 @@ services:
       args:
         - SERVICE=qwc-config-service
     environment:
-      - QWC2_THEMES_CONFIG=/data/themesConfig.json
       - QGIS_SERVER_URL=http://qwc-qgis-server/ows/
+      - QWC2_PATH=/qwc2/
+      - QWC2_THEMES_CONFIG=/qwc2/themesConfig.json
       - FLASK_DEBUG=1
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
       - ./volumes/qgs-resources:/data
+      - ./volumes/qwc2:/qwc2
 
   qwc-ogc-service:
     build:
@@ -39,6 +41,24 @@ services:
     depends_on:
       - qwc-qgis-server
       - qwc-config-service
+
+  qwc-map-viewer:
+    build:
+      context: ./wsgi-service
+      args:
+        - SERVICE=qwc-map-viewer
+    environment:
+      - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
+      - QWC2_PATH=/qwc2/
+      - QWC2_CONFIG=/qwc2/config.json
+      - OGC_SERVICE_URL=/ows/
+    ports:
+      - "127.0.0.1:5030:9090"
+    volumes:
+      - ./volumes/qwc2:/qwc2:ro
+    depends_on:
+      - qwc-config-service
+      - qwc-ogc-service
 
   qwc-api-gateway:
     image: nginx

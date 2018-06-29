@@ -1,0 +1,69 @@
+{
+  "defaultScales": [4000000, 2000000, 1000000, 400000, 200000, 80000, 40000, 20000, 10000, 8000, 6000, 4000, 2000, 1000, 500, 250, 100],
+  "defaultPrintGrid": [{"s": 10000, "x": 1000, "y": 1000}, {"s": 1000, "x": 100, "y": 100}, {"s": 100, "x": 10, "y": 10}],
+  "defaultWMSVersion":"1.3.0",
+  "themes": {
+    "items": [
+      {
+        "title": "Demo",
+        "url": "/ows/qwc_demo",
+        "default": true,
+        "attribution": "Demo attribution",
+        "attributionUrl": "https://127.0.0.1/",
+        "backgroundLayers": [
+            {
+              "name": "mapnik",
+              "visibility": true
+            },
+            {
+              "name": "bluemarble"
+            }
+        ],
+        "searchProviders": ["coordinates"],
+        "mapCrs": "EPSG:3857",
+        "additionalMouseCrs": ["EPSG:21781", "EPSG:2056"],
+        "skipEmptyFeatureAttributes": true,
+        "printResolutions": [300],
+        "thumbnail": "default.jpg"
+      }
+    ],
+    "backgroundLayers": [
+      {
+        "name": "mapnik",
+        "title": "Open Street Map",
+        "type": "osm",
+        "source": "osm",
+        "thumbnail": "mapnik.jpg",
+        "attribution": "OpenStreetMap contributors",
+        "attributionUrl": "https://www.openstreetmap.org/copyright",
+        "thumbnail": "mapnik.jpg"
+      },
+      {
+        "type": "wmts",
+        "url": "http://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief/default/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.jpeg",
+        "title": "Blue Marble",
+        "name": "bluemarble",
+        "tileMatrixPrefix": "",
+        "tileMatrixSet": "GoogleMapsCompatible_Level8",
+        "originX": -20037508.34278925,
+        "originY": 20037508.34278925,
+        "projection:": "EPSG:3857",
+        "resolutions": [
+          156543.03390625,
+          78271.516953125,
+          39135.7584765625,
+          19567.87923828125,
+          9783.939619140625,
+          4891.9698095703125,
+          2445.9849047851562,
+          1222.9924523925781
+        ],
+        "tileSize": [
+          256,
+          256
+        ],
+        "thumbnail": "default.jpg"
+      }
+    ]
+  }
+}
