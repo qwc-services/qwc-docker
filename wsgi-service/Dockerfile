@@ -22,9 +22,9 @@ RUN cd /srv/$SERVICE && git fetch && git checkout -b docker $GIT_VERSION
 RUN pip3 install --no-cache-dir -r /srv/$SERVICE/requirements.txt
 
 ADD pg_service.conf /var/www/.pg_service.conf
-ARG DB_USER=qwc2_viewer
-ARG DB_PASSWORD=qwc2_viewer
-RUN sed -i -e "s/^user=qwc2_viewer/user=$DB_USER/" -e "s/^password=qwc2_viewer/password=$DB_PASSWORD/" /var/www/.pg_service.conf
+ARG DB_USER=qwc_service
+ARG DB_PASSWORD=qwc_service
+RUN sed -i -e "s/^user=qwc_service/user=$DB_USER/" -e "s/^password=qwc_service/password=$DB_PASSWORD/" /var/www/.pg_service.conf
 
 # Install service packages
 ARG SERVICE_PACKAGES=''

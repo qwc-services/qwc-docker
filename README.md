@@ -54,6 +54,39 @@ Container Build:
 
     docker-compose build
 
+**NOTE:** Building the PostGIS container overwrites its database
+
+Setup PostgreSQL connection service file `~/.pg_service.conf` 
+for DB connections to PostGIS container:
+
+```
+cat >>~/.pg_service.conf <<EOS
+[qwc_configdb]
+host=localhost
+port=5439
+dbname=qwc_demo
+user=qwc_admin
+password=qwc_admin
+sslmode=disable
+
+[qwc_geodb]
+host=localhost
+port=5439
+dbname=qwc_demo
+user=qwc_service_write
+password=qwc_service_write
+sslmode=disable
+
+[qwc_webmapping]
+host=localhost
+port=5439
+dbname=qwc_demo
+user=qgis_server
+password=qgis_server
+sslmode=disable
+EOS
+```
+
 
 Usage
 -----
@@ -70,6 +103,10 @@ Open map viewer:
 
     http://localhost:8088/
 
-Alle Container beenden:
+Connect to config DB:
+
+    psql "service=qwc_configdb"
+
+Stop all containers:
 
     docker-compose down
