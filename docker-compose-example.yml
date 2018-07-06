@@ -37,6 +37,9 @@ services:
     volumes:
       - ./volumes/qgs-resources:/data
       - ./volumes/qwc2:/qwc2
+    depends_on:
+      qwc-postgis:
+        condition: service_healthy
 
   qwc-ogc-service:
     build:
@@ -71,9 +74,27 @@ services:
       - qwc-config-service
       - qwc-ogc-service
 
+  qwc-admin-gui:
+    build:
+      context: ./wsgi-service
+      args:
+        - SERVICE=qwc-admin-gui
+        - SERVICE_MOUNTPOINT=/qwc_admin
+    environment:
+      - FLASK_DEBUG=1
+    ports:
+      - "127.0.0.1:5031:9090"
+    depends_on:
+      qwc-postgis:
+        condition: service_healthy
+
   qwc-api-gateway:
     image: nginx
     ports:
       - "8088:80"
     volumes:
       - ./api-gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - qwc-ogc-service
+      - qwc-map-viewer
+      - qwc-admin-gui
