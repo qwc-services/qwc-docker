@@ -14,7 +14,7 @@ RUN pip3 install --upgrade pip
 ARG GIT_REPO=https://github.com/qwc-services/qwc-config-db.git
 RUN cd /tmp/ && git clone $GIT_REPO qwc-config-db
 # Set ALEMBIC_VERSION to force git pull
-ARG ALEMBIC_VERSION=56846d9f2753
+ARG ALEMBIC_VERSION=db5a31995054
 RUN cd /tmp/qwc-config-db/ && git pull
 RUN pip3 install --no-cache-dir -r /tmp/qwc-config-db/requirements.txt
 
