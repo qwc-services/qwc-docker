@@ -18,6 +18,9 @@ EOSQL
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d qwc_demo <<-EOSQL
   CREATE EXTENSION postgis;
+  GRANT SELECT ON TABLE geometry_columns TO PUBLIC;
+  GRANT SELECT ON TABLE geography_columns TO PUBLIC;
+  GRANT SELECT ON TABLE spatial_ref_sys TO PUBLIC;
 
   CREATE SCHEMA qwc_geodb;
   COMMENT ON SCHEMA qwc_geodb IS 'Demo GeoDB for qwc-services';
