@@ -1,1 +1,3 @@
 *.qgs
+*.qgs~
+!qwc_demo.qgs
