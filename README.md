@@ -121,6 +121,13 @@ for ctr in $CONTAINERS; do
 done
 ```
 
+Update authentication service:
+```
+AUTH_SERVICE=qwc-db-auth
+git_version=$(git ls-remote https://github.com/qwc-services/$AUTH_SERVICE HEAD | cut -f 1)
+docker-compose build --build-arg GIT_VERSION=$git_version qwc-auth-service
+```
+
 Update PostGIS container to ConfigDB migration `ALEMBIC_VERSION` (**NOTE**: Overwrites current database):
 
     docker-compose build --build-arg ALEMBIC_VERSION=56846d9f2753 qwc-postgis

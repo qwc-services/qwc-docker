@@ -92,6 +92,15 @@ services:
       qwc-postgis:
         condition: service_healthy
 
+  qwc-auth-service:
+    build:
+      context: ./wsgi-service
+      args:
+        - SERVICE=qwc-db-auth
+        - SERVICE_MOUNTPOINT=/auth
+    ports:
+      - "127.0.0.1:5017:9090"
+
   qwc-api-gateway:
     image: nginx
     ports:
