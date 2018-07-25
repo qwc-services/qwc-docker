@@ -114,7 +114,7 @@ Stop all containers:
 Update service containers to latest versions from Git:
 
 ```
-CONTAINERS="qwc-admin-gui qwc-config-service qwc-map-viewer qwc-ogc-service"
+CONTAINERS="qwc-admin-gui qwc-config-service qwc-data-service qwc-map-viewer qwc-ogc-service"
 for ctr in $CONTAINERS; do
   git_version=$(git ls-remote https://github.com/qwc-services/$ctr HEAD | cut -f 1)
   docker-compose build --build-arg GIT_VERSION=$git_version $ctr
@@ -130,4 +130,4 @@ docker-compose build --build-arg GIT_VERSION=$git_version qwc-auth-service
 
 Update PostGIS container to ConfigDB migration `ALEMBIC_VERSION` (**NOTE**: Overwrites current database):
 
-    docker-compose build --build-arg ALEMBIC_VERSION=56846d9f2753 qwc-postgis
+    docker-compose build --build-arg ALEMBIC_VERSION=217f272b9c26 qwc-postgis

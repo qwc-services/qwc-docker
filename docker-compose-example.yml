@@ -4,7 +4,7 @@ services:
     build:
       context: ./postgis
 #      args:
-#        - ALEMBIC_VERSION=db5a31995054
+#        - ALEMBIC_VERSION=217f272b9c26
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -29,13 +29,14 @@ services:
         - SERVICE=qwc-config-service
     environment:
       - QGIS_SERVER_URL=http://qwc-qgis-server/ows/
+      - QGIS_RESOURCES_PATH=/data/
       - QWC2_PATH=/qwc2/
       - QWC2_THEMES_CONFIG=/qwc2/themesConfig.json
       - FLASK_DEBUG=1
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
-      - ./volumes/qgs-resources:/data
+      - ./volumes/qgs-resources:/data:ro
       - ./volumes/qwc2:/qwc2
     depends_on:
       qwc-postgis:
@@ -56,6 +57,23 @@ services:
       - "127.0.0.1:5013:9090"
     depends_on:
       - qwc-qgis-server
+      - qwc-config-service
+
+  qwc-data-service:
+    build:
+      context: ./wsgi-service
+      args:
+        - SERVICE=qwc-data-service
+        - SERVICE_MOUNTPOINT=/api/v1/data
+        - DB_USER=qwc_service_write
+        - DB_PASSWORD=qwc_service_write
+    environment:
+      - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
+#      - CONFIG_CHECK_INTERVAL=60
+#      - DEFAULT_CONFIG_CACHE_DURATION=86400
+    ports:
+      - "127.0.0.1:5012:9090"
+    depends_on:
       - qwc-config-service
 
   qwc-map-viewer:
@@ -109,5 +127,6 @@ services:
       - ./api-gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - qwc-ogc-service
+      - qwc-data-service
       - qwc-map-viewer
       - qwc-admin-gui
