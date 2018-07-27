@@ -86,6 +86,7 @@ services:
       - QWC2_PATH=/qwc2/
       - QWC2_CONFIG=/qwc2/config.json
       - OGC_SERVICE_URL=/ows/
+      - DATA_SERVICE_URL=/data/
 #      - CONFIG_CHECK_INTERVAL=60
 #      - DEFAULT_CONFIG_CACHE_DURATION=86400
     ports:
@@ -95,6 +96,7 @@ services:
     depends_on:
       - qwc-config-service
       - qwc-ogc-service
+      - qwc-data-service
 
   qwc-admin-gui:
     build:
