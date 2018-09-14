@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="QWC Services Demo WMS" version="2.18.17">
+<qgis projectname="QWC Services Demo WMS" version="2.18.23">
   <title>QWC Services Demo WMS</title>
   <autotransaction active="0"/>
   <evaluateDefaultValues active="0"/>
@@ -44,10 +44,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>-1172198.37123970687389374</xmin>
-      <ymin>3121333.3303970992565155</ymin>
-      <xmax>3172198.37123970687389374</xmax>
-      <ymax>8878666.6696029007434845</ymax>
+      <xmin>680402.23176469758618623</xmin>
+      <ymin>5591617.72445117309689522</ymin>
+      <xmax>1223451.82457462465390563</xmax>
+      <ymax>6311284.39185190573334694</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -1756,18 +1756,22 @@ def my_form_open(dialog, layer, feature):
       <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
         <symbols>
           <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
-            <layer pass="0" class="SimpleFill" locked="0">
-              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="224,224,224,255"/>
-              <prop k="joinstyle" v="bevel"/>
+            <layer pass="0" class="ShapeburstFill" locked="0">
+              <prop k="blur_radius" v="0"/>
+              <prop k="color" v="238,121,19,255"/>
+              <prop k="color1" v="0,0,255,255"/>
+              <prop k="color2" v="0,255,0,255"/>
+              <prop k="color_type" v="0"/>
+              <prop k="discrete" v="0"/>
+              <prop k="distance_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="distance_unit" v="MM"/>
+              <prop k="gradient_color2" v="255,255,255,0"/>
+              <prop k="ignore_rings" v="0"/>
+              <prop k="max_distance" v="1.3"/>
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="255,127,0,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.3"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="no"/>
+              <prop k="use_whole_shape" v="0"/>
             </layer>
           </symbol>
         </symbols>
@@ -2070,7 +2074,18 @@ def my_form_open(dialog, layer, feature):
         <alias field="name_vi" index="93" name=""/>
         <alias field="name_zh" index="94" name=""/>
       </aliases>
-      <excludeAttributesWMS/>
+      <excludeAttributesWMS>
+        <attribute>max_label</attribute>
+        <attribute>scalerank</attribute>
+        <attribute>mapcolor7</attribute>
+        <attribute>min_label</attribute>
+        <attribute>mapcolor8</attribute>
+        <attribute>ogc_fid</attribute>
+        <attribute>mapcolor9</attribute>
+        <attribute>min_zoom</attribute>
+        <attribute>labelrank</attribute>
+        <attribute>mapcolor13</attribute>
+      </excludeAttributesWMS>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
@@ -2891,7 +2906,7 @@ def my_form_open(dialog, layer, feature):
               <prop k="customdash_unit" v="MM"/>
               <prop k="draw_inside_polygon" v="0"/>
               <prop k="joinstyle" v="bevel"/>
-              <prop k="line_color" v="253,191,111,255"/>
+              <prop k="line_color" v="253,202,110,255"/>
               <prop k="line_style" v="solid"/>
               <prop k="line_width" v="0.26"/>
               <prop k="line_width_unit" v="MM"/>
@@ -3129,7 +3144,15 @@ def my_form_open(dialog, layer, feature):
         <alias field="min_label" index="20" name=""/>
         <alias field="scalerank" index="21" name=""/>
       </aliases>
-      <excludeAttributesWMS/>
+      <excludeAttributesWMS>
+        <attribute>shape_leng</attribute>
+        <attribute>scalerank</attribute>
+        <attribute>min_label</attribute>
+        <attribute>ogc_fid</attribute>
+        <attribute>mapcolor9</attribute>
+        <attribute>min_zoom</attribute>
+        <attribute>mapcolor13</attribute>
+      </excludeAttributesWMS>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
