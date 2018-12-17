@@ -3,8 +3,8 @@ services:
   qwc-postgis:
     build:
       context: ./postgis
-#      args:
-#        - ALEMBIC_VERSION=217f272b9c26
+      args:
+        - ALEMBIC_VERSION=0f409f15e0b7
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -86,7 +86,7 @@ services:
       - QWC2_PATH=/qwc2/
       - QWC2_CONFIG=/qwc2/config.json
       - OGC_SERVICE_URL=/ows/
-      - DATA_SERVICE_URL=/data/
+      - DATA_SERVICE_URL=/api/v1/data
 #      - CONFIG_CHECK_INTERVAL=60
 #      - DEFAULT_CONFIG_CACHE_DURATION=86400
     ports:
@@ -104,6 +104,9 @@ services:
       args:
         - SERVICE=qwc-admin-gui
         - SERVICE_MOUNTPOINT=/qwc_admin
+    environment:
+      - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}
+]'
     ports:
       - "127.0.0.1:5031:9090"
     depends_on:

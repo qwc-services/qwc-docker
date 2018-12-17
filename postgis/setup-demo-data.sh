@@ -93,7 +93,7 @@ psql -v ON_ERROR_STOP=1 --username qwc_admin -d qwc_demo <<-EOSQL
   INSERT INTO qwc_config.roles (name, description)
     VALUES ('demo', 'Demo role');
   INSERT INTO qwc_config.users (name, description, password_hash)
-    VALUES('demo', 'Demo user', 'pbkdf2:sha256:50000$qwQxJa3a$91e81c06ce49eb76692e69f430e937dc5eac5b2f301eced831d0bd4e0f1e3120');
+    VALUES('demo', 'Demo user', 'pbkdf2:sha256:50000\$qwQxJa3a\$91e81c06ce49eb76692e69f430e937dc5eac5b2f301eced831d0bd4e0f1e3120');
   INSERT INTO qwc_config.users_roles (user_id, role_id)
     VALUES ((SELECT id FROM qwc_config.users WHERE name = 'demo'), (SELECT id FROM qwc_config.roles WHERE name = 'demo'));
 
@@ -116,6 +116,20 @@ psql -v ON_ERROR_STOP=1 --username qwc_admin -d qwc_demo <<-EOSQL
     VALUES ((SELECT id FROM qwc_config.roles WHERE name = 'public'), (SELECT id FROM qwc_config.resources WHERE type = 'data' AND name = 'edit_lines'), TRUE);
   INSERT INTO qwc_config.permissions (role_id, resource_id, write)
     VALUES ((SELECT id FROM qwc_config.roles WHERE name = 'public'), (SELECT id FROM qwc_config.resources WHERE type = 'data' AND name = 'edit_polygons'), TRUE);
+EOSQL
+
+# add demo user info columns
+psql -v ON_ERROR_STOP=1 --username qwc_admin -d qwc_demo <<-EOSQL
+  ALTER TABLE qwc_config.user_infos
+    ADD COLUMN surname character varying NOT NULL;
+  ALTER TABLE qwc_config.user_infos
+    ADD COLUMN first_name character varying NOT NULL;
+  ALTER TABLE qwc_config.user_infos
+    ADD COLUMN street character varying;
+  ALTER TABLE qwc_config.user_infos
+    ADD COLUMN zip character varying(255);
+  ALTER TABLE qwc_config.user_infos
+    ADD COLUMN city character varying;
 EOSQL
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d qwc_demo <<-EOSQL
