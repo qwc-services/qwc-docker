@@ -32,7 +32,7 @@ services:
       - QGIS_RESOURCES_PATH=/data/
       - QWC2_PATH=/qwc2/
       - QWC2_THEMES_CONFIG=/qwc2/themesConfig.json
-      - FLASK_DEBUG=1
+      #- FLASK_DEBUG=1
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
@@ -104,8 +104,6 @@ services:
       args:
         - SERVICE=qwc-admin-gui
         - SERVICE_MOUNTPOINT=/qwc_admin
-    environment:
-      - FLASK_DEBUG=1
     ports:
       - "127.0.0.1:5031:9090"
     depends_on:
