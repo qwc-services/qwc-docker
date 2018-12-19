@@ -51,8 +51,8 @@ services:
     environment:
       - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
       - QGIS_SERVER_URL=http://qwc-qgis-server/ows/
-#      - CONFIG_CHECK_INTERVAL=60
-#      - DEFAULT_CONFIG_CACHE_DURATION=86400
+      #- CONFIG_CHECK_INTERVAL=60
+      #- DEFAULT_CONFIG_CACHE_DURATION=86400
     ports:
       - "127.0.0.1:5013:9090"
     depends_on:
@@ -69,8 +69,8 @@ services:
         - DB_PASSWORD=qwc_service_write
     environment:
       - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
-#      - CONFIG_CHECK_INTERVAL=60
-#      - DEFAULT_CONFIG_CACHE_DURATION=86400
+      #- CONFIG_CHECK_INTERVAL=60
+      #- DEFAULT_CONFIG_CACHE_DURATION=86400
     ports:
       - "127.0.0.1:5012:9090"
     depends_on:
@@ -86,9 +86,13 @@ services:
       - QWC2_PATH=/qwc2/
       - QWC2_CONFIG=/qwc2/config.json
       - OGC_SERVICE_URL=/ows/
-      - DATA_SERVICE_URL=/api/v1/data
-#      - CONFIG_CHECK_INTERVAL=60
-#      - DEFAULT_CONFIG_CACHE_DURATION=86400
+      - DATA_SERVICE_URL=/api/v1/data/
+      #- AUTH_SERVICE_URL=/auth/
+      #- 'AUTH_SERVICES_CONFIG={"_intern_": "/auth/"}'
+      # NOTE: escape literal '$' with '$$' to avoid variable substitution from docker-compose
+      #- 'ORIGIN_CONFIG={"host": {"_intern_": "^127.0.0.1(:\\\\d+)?$$"}}'
+      #- CONFIG_CHECK_INTERVAL=60
+      #- DEFAULT_CONFIG_CACHE_DURATION=86400
     ports:
       - "127.0.0.1:5030:9090"
     volumes:
