@@ -13,7 +13,7 @@ Overview
                   +-------------------+
                             |
     .-----------------------^---------------------------.
-    |                                                   |
+    '                                                   '
     +-------------------+
     |                   |
     |  Admin GUI        +-----------------------------------------------------------------------------+
@@ -175,4 +175,4 @@ Update service containers to latest versions from Git:
 
 Update PostGIS container to ConfigDB migration `ALEMBIC_VERSION` (**NOTE**: Overwrites current database):
 
-    docker-compose build --build-arg ALEMBIC_VERSION=0f409f15e0b7 qwc-postgis
+    docker-compose build --build-arg ALEMBIC_VERSION=4ff55a84dd72 qwc-postgis
