@@ -4,7 +4,7 @@ services:
     build:
       context: ./postgis
       args:
-        - ALEMBIC_VERSION=4ff55a84dd72
+        - ALEMBIC_VERSION=90b3b4fbc8f6
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -112,6 +112,7 @@ services:
     environment:
       - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}
 ]'
+      #- TOTP_ENABLED=False
     ports:
       - "127.0.0.1:5031:9090"
     depends_on:
@@ -124,6 +125,9 @@ services:
       args:
         - SERVICE=qwc-db-auth
         - SERVICE_MOUNTPOINT=/auth
+    #environment:
+      #- TOTP_ENABLED=False
+      #- TOTP_ISSUER_NAME=QWC Services
     ports:
       - "127.0.0.1:5017:9090"
 

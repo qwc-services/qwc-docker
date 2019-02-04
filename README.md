@@ -175,4 +175,4 @@ Update service containers to latest versions from Git:
 
 Update PostGIS container to ConfigDB migration `ALEMBIC_VERSION` (**NOTE**: Overwrites current database):
 
-    docker-compose build --build-arg ALEMBIC_VERSION=4ff55a84dd72 qwc-postgis
+    docker-compose build --build-arg ALEMBIC_VERSION=90b3b4fbc8f6 qwc-postgis
