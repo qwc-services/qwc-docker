@@ -11,13 +11,7 @@ RUN apt-get update && apt-get upgrade -y
 
 #Fonts
 RUN apt-get update && apt-get install -y ttf-dejavu ttf-bitstream-vera fonts-liberation ttf-ubuntu-font-family
-
-# Cadastra Font
-# "...wird auf der Internetseite der amtlichen Vermessung (www.cadastre.ch->AVS und Datenmodell->Dokumente) kostenlos zur Verfügung gestellt."
-RUN apt-get update && apt-get install -y fontconfig unzip
-RUN curl -s -o /tmp/Cadastra.zip http://www.geo.bl.ch/fileadmin/user_upload/Geodaten/Datenvertrieb/Cadastra_neue_Normen.zip && \
-    unzip -d /usr/share/fonts/truetype /tmp/Cadastra.zip '*.ttf' && \
-    rm /tmp/Cadastra.zip
+RUN apt-get update && apt-get install -y fontconfig
 
 # Additional user fonts
 ADD fonts/* /usr/share/fonts/truetype/
