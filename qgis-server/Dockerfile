@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y apache2 libapache2-mod-fcgid
 
 #QGIS Server
 RUN echo "deb http://qgis.org/debian-ltr xenial main" > /etc/apt/sources.list.d/qgis.org-debian.list
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key CAEB3DC3BDF7FB45
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key CAEB3DC3BDF7FB45
 
 RUN apt-get update && apt-get install -y qgis-server
 
