@@ -20,19 +20,25 @@ Overview
     |  localhost:5031   |                                                                             |
     +-------------------+                                                                             |
                                                                                                       |
-                                +-------------------+                                                 |
-                 authentication |                   |                                                 |
-              +----------------->  Auth Service     +-----------------------------------------+       |
-              |                 |  localhost:5017   |                                         |       |
-              |                 +-------------------+                                         |       |
-              |                                                                               |       |
-    +---------+---------+                                                             +-------|-------|-------+
-    |                   |  viewer config and maps                                     |       |       |       |
-    |  QWC Map Viewer   +---------------------------------------------+               |  PostGIS      |       |
+    +-------------------+                                                                             |
+    |                   |  group registration requests                                                |
+    |  Registration GUI +-------------------------------------------------------------------------+   |
+    |  localhost:5032   |                                                                         |   |
+    +-------------------+                                                                         |   |
+                                                                                                  |   |
+                                +-------------------+                                             |   |
+                 authentication |                   |                                             |   |
+              +----------------->  Auth Service     +-----------------------------------------+   |   |
+              |                 |  localhost:5017   |                                         |   |   |
+              |                 +-------------------+                                         |   |   |
+              |                                                                               |   |   |
+    +---------+---------+                                                             +-------|---|---|-------+
+    |                   |  viewer config and maps                                     |       |   |   |       |
+    |  QWC Map Viewer   +---------------------------------------------+               |  PostGIS  |   |       |
     |  localhost:5030   |                                             |               |  localhost:5439       |
-    +---------+---------+                                             |               |       |       |       |
-              |                                                       |               |       |       |       |
-              |                 +-------------------+       +---------v---------+     | .-----v-------v-----. |
+    +---------+---------+                                             |               |       |   |   |       |
+              |                                                       |               |       |   |   |       |
+              |                 +-------------------+       +---------v---------+     | .-----v---v---v-----. |
               |  GeoJSON        |                   |       |                   +------->                   | |
               +----------------->  Data Service     +---+--->  Config Service   |     | |  Config DB        | |
               |                 |  localhost:5012   |   |   |  localhost:5010   +--+  | |                   | |
@@ -57,6 +63,7 @@ Containers:
 * `qwc-ogc-service`: Proxy for WMS/WFS requests filtered by permissions, calls QGIS Server (http://localhost:8088/ows/api)
 * `qwc-postgis:` QWC ConfigDB and Demo PostGIS GeoDB (user: `qwc_admin:qwc_admin`) (http://localhost:5439)
 * `qwc-qgis-server`: Demo QGIS Server 2.18 (http://localhost:8001)
+* `qwc-registration-gui`: GUI for requesting group memberships (http://localhost:8088/registration/register)
 
 
 Docker installation
@@ -175,4 +182,4 @@ Update service containers to latest versions from Git:
 
 Update PostGIS container to ConfigDB migration `ALEMBIC_VERSION` (**NOTE**: Overwrites current database):
 
-    docker-compose build --build-arg ALEMBIC_VERSION=90b3b4fbc8f6 qwc-postgis
+    docker-compose build --build-arg ALEMBIC_VERSION=e9c31b610e0a qwc-postgis

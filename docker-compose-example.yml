@@ -4,7 +4,7 @@ services:
     build:
       context: ./postgis
       args:
-        - ALEMBIC_VERSION=90b3b4fbc8f6
+        - ALEMBIC_VERSION=e9c31b610e0a
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -91,7 +91,7 @@ services:
       #- AUTH_SERVICE_URL=/auth/
       #- 'AUTH_SERVICES_CONFIG={"_intern_": "/auth/"}'
       # NOTE: escape literal '$' with '$$' to avoid variable substitution from docker-compose
-      #- 'ORIGIN_CONFIG={"host": {"_intern_": "^127.0.0.1(:\\\\d+)?$$"}}'
+      #- 'ORIGIN_CONFIG={"host": {"_intern_": "^127.0.0.1(:\\d+)?$$"}}'
       #- CONFIG_CHECK_INTERVAL=60
       #- DEFAULT_CONFIG_CACHE_DURATION=86400
     ports:
@@ -113,8 +113,27 @@ services:
       - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}
 ]'
       #- TOTP_ENABLED=False
+      - GROUP_REGISTRATION_ENABLED=True
+      - MAIL_SUPPRESS_SEND=True
+      - MAIL_DEFAULT_SENDER=from@example.com
     ports:
       - "127.0.0.1:5031:9090"
+    depends_on:
+      qwc-postgis:
+        condition: service_healthy
+
+  qwc-registration-gui:
+    build:
+      context: ./wsgi-service
+      args:
+        - SERVICE=qwc-registration-gui
+        - SERVICE_MOUNTPOINT=/registration
+    environment:
+      - ADMIN_RECIPIENTS=admin@example.com
+      - MAIL_SUPPRESS_SEND=True
+      - MAIL_DEFAULT_SENDER=from@example.com
+    ports:
+      - "127.0.0.1:5032:9090"
     depends_on:
       qwc-postgis:
         condition: service_healthy
@@ -125,11 +144,16 @@ services:
       args:
         - SERVICE=qwc-db-auth
         - SERVICE_MOUNTPOINT=/auth
-    #environment:
+    environment:
       #- TOTP_ENABLED=False
       #- TOTP_ISSUER_NAME=QWC Services
+      - MAIL_SUPPRESS_SEND=True
+      - MAIL_DEFAULT_SENDER=from@example.com
     ports:
       - "127.0.0.1:5017:9090"
+    depends_on:
+      qwc-postgis:
+        condition: service_healthy
 
   qwc-api-gateway:
     image: nginx
@@ -142,3 +166,5 @@ services:
       - qwc-data-service
       - qwc-map-viewer
       - qwc-admin-gui
+      - qwc-registration-gui
+      - qwc-auth-service

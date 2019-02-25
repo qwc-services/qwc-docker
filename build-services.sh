@@ -3,7 +3,7 @@ set -e
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
-containers="qwc-admin-gui qwc-config-service qwc-data-service qwc-map-viewer qwc-ogc-service"
+containers="qwc-admin-gui qwc-config-service qwc-data-service qwc-map-viewer qwc-ogc-service qwc-registration-gui"
 
 declare -A git_versions
 
