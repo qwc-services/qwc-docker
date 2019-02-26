@@ -114,6 +114,7 @@ services:
 ]'
       #- TOTP_ENABLED=False
       - GROUP_REGISTRATION_ENABLED=True
+      - DEFAULT_LOCALE=en
       - MAIL_SUPPRESS_SEND=True
       - MAIL_DEFAULT_SENDER=from@example.com
     ports:
@@ -129,6 +130,7 @@ services:
         - SERVICE=qwc-registration-gui
         - SERVICE_MOUNTPOINT=/registration
     environment:
+      - DEFAULT_LOCALE=en
       - ADMIN_RECIPIENTS=admin@example.com
       - MAIL_SUPPRESS_SEND=True
       - MAIL_DEFAULT_SENDER=from@example.com
