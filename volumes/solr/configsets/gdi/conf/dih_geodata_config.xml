@@ -1,0 +1,41 @@
+<dataConfig>
+    <dataSource
+        driver="org.postgresql.Driver"
+        url="jdbc:postgresql://qwc-postgis/qwc_demo" user="qwc_service" password="qwc_service" />
+    <document>
+        <entity name="ne_10m_admin_0_countries" query="
+            WITH index_base AS (
+                /* ==== Base query for search index ==== */
+                SELECT
+                    'ne_10m_admin_0_countries'::text AS subclass,
+                    ogc_fid AS id_in_class,
+                    'ogc_fid' AS id_name,
+                    'str:n' AS id_type,
+                    name_long || ' (Country)' AS displaytext,
+                    name_long || ' ' || iso_a2 AS search_part_1,
+                    'Country ISO'::text AS search_part_2,
+                    wkb_geometry AS geom
+                FROM qwc_geodb.ne_10m_admin_0_countries
+                /* ===================================== */
+            )
+            SELECT
+                (array_to_json(array_append(ARRAY[subclass::text], id_in_class::text)))::text AS id,
+                displaytext AS display,
+                search_part_1 AS search_1_stem,
+                search_part_1 || ' ' || search_part_2 AS search_2_stem,
+                search_part_1 AS sort,
+                subclass AS facet,
+                (array_to_json(array_append(ARRAY[id_name::text], id_type::text)))::text AS idfield_meta,
+                st_asgeojson(st_envelope(geom), 0, 1)::json -> 'bbox' AS bbox
+            FROM index_base">
+            <field column="search_1_stem" name="search_1_stem" />
+            <field column="search_2_stem" name="search_2_stem" />
+            <field column="facet" name="facet" />
+            <field column="id" name="id" />
+            <field column="sort" name="sort" />
+            <field column="display" name="display" />    
+            <field column="idfield_meta" name="idfield_meta" />
+            <field column="bbox" name="bbox" />
+        </entity>      
+    </document>
+</dataConfig>
