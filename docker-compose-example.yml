@@ -77,6 +77,22 @@ services:
     depends_on:
       - qwc-config-service
 
+  qwc-solr:
+    image: solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - gdi
+      - /gdi_conf
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./volumes/solr/configsets/gdi:/gdi_conf:ro
+      - ./volumes/solr/data:/var/solr/data
+    depends_on:
+      qwc-postgis:
+        condition: service_healthy
+
   qwc-map-viewer:
     build:
       context: ./wsgi-service
