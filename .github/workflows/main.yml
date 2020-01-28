@@ -1,0 +1,17 @@
+name: Publish docker image
+
+on: [push]
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@master
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@2.12
+        with:
+          name: husseinkabbout/qwc2-permalink-service
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          dockerfile: wsgi-service/Dockerfile
+          snapshot: true
