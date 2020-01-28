@@ -7,7 +7,7 @@
 # cf. https://github.com/camptocamp/docker-postgres/blob/master/9.6/Dockerfile
 # --- FROM camptocamp/postgres -------------------------------------------------
 
-FROM postgres:9.6
+FROM postgres:9.6.9
 
 RUN apt-get update \
   && for POSTGIS_VERSION in 2.3; do \
