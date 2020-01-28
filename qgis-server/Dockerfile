@@ -7,7 +7,8 @@ MAINTAINER Pirmin Kalberer
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-RUN apt-get update && apt-get upgrade -y
+# This line will cause a stdin error. It expects a user input when upgrading utils-linux. So I commented it out.
+# RUN apt-get update && apt-get upgrade -y
 
 #Fonts
 RUN apt-get update && apt-get install -y ttf-dejavu ttf-bitstream-vera fonts-liberation ttf-ubuntu-font-family
