@@ -14,7 +14,7 @@ RUN sed -i -e "s/^user=qwc_service/user=$DB_USER/" -e "s/^password=qwc_service/p
 ARG SERVICE_MOUNTPOINT='/'
 
 RUN addgroup -S www-data \
-	&& adduser -D -S -h /var/cache/www-data -s /sbin/nologin -G www-data www-data
+	&& adduser -D -S -h /var/www/ -s /sbin/nologin -G www-data www-data
 
 RUN echo uwsgi --http-socket :9090 --plugins python3 --protocol uwsgi --wsgi-disable-file-wrapper \
     --uid www-data --gid www-data --master --chdir /srv/qwc_service \
