@@ -10,7 +10,7 @@ jobs:
 
       - name: Set docker hub repository owner
         id: get_dockerhub_username
-        run: echo ::set-output name=username::husseinkabbout
+        run: echo ::set-output name=username::sourcepole
 
       - uses: actions/checkout@master
 
