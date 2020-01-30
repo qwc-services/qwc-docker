@@ -3,14 +3,31 @@ name: Publish docker image
 on: [push]
 
 jobs:
+
     build:
       runs-on: ubuntu-latest
       steps:
+
+      - name: Set docker hub repository owner
+        id: get_dockerhub_username
+        run: echo ::set-output name=username::husseinkabbout
+
       - uses: actions/checkout@master
+
+      - name: Get version tag
+        id: get_tag
+        run: |
+          if [ ${{ startsWith(github.ref, 'refs/tags/') }} = true ]; then
+            echo ::set-output name=tag::latest,${GITHUB_REF:10}
+          else
+            echo ::set-output name=tag::latest
+          fi
+
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@2.12
         with:
-          name: husseinkabbout/qwc-docker
+          name: ${{ steps.get_dockerhub_username.outputs.username }}/${{ github.event.repository.name }}
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          tags: "${{ steps.get_tag.outputs.tag }}"
           dockerfile: wsgi-service/Dockerfile
