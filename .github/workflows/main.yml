@@ -19,7 +19,7 @@ jobs:
             echo ::set-output name=tag::latest
           fi
 
-      - name: Publish to Registry
+      - name: Publish alpine docker image to Registry
         uses: elgohr/Publish-Docker-Github-Action@2.12
         with:
           name: sourcepole/qwc-uwsgi-base
@@ -27,3 +27,12 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           tags: "${{ steps.get_tag.outputs.tag }}"
           dockerfile: uwsgi-base/Dockerfile
+
+      - name: Publish ubuntu docker image to Registry
+        uses: elgohr/Publish-Docker-Github-Action@2.12
+        with:
+          name: sourcepole/qwc-uwsgi-base-ubuntu
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          tags: "${{ steps.get_tag.outputs.tag }}"
+          dockerfile: uwsgi-base-ubuntu/Dockerfile
