@@ -110,6 +110,7 @@
          If you don't need it, consider removing it and the corresponding copyField directive.
     -->
 <field name="facet" type="string" indexed="true" required="true" stored="true" multiValued="false"/>
+<field name="tenant" type="string" indexed="true" required="true" stored="true" multiValued="false"/>
 <field name="display" type="string" indexed="false" required="true" stored="true" multiValued="false"/>
 <field name="idfield_meta" type="string" indexed="false" required="false" stored="true" multiValued="false"/>
 <field name="dset_children" type="string" indexed="false" required="false" stored="true" multiValued="false"/>
