@@ -14,9 +14,9 @@ jobs:
         id: get_tag
         run: |
           if [ ${{ startsWith(github.ref, 'refs/tags/') }} = true ]; then
-            echo ::set-output name=tag::latest,${GITHUB_REF:10}
+            echo ::set-output name=tag::,${GITHUB_REF:10}
           else
-            echo ::set-output name=tag::latest
+            echo ::set-output name=tag::
           fi
 
       - name: Publish alpine docker image to Registry
@@ -25,14 +25,14 @@ jobs:
           name: sourcepole/qwc-uwsgi-base
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          tags: "${{ steps.get_tag.outputs.tag }}"
-          dockerfile: uwsgi-base/Dockerfile
+          tags: "latest,alpine-latest${{ steps.get_tag.outputs.tag }}"
+          dockerfile: uwsgi-base/alpine/Dockerfile
 
       - name: Publish ubuntu docker image to Registry
         uses: elgohr/Publish-Docker-Github-Action@2.12
         with:
-          name: sourcepole/qwc-uwsgi-base-ubuntu
+          name: sourcepole/qwc-uwsgi-base
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          tags: "${{ steps.get_tag.outputs.tag }}"
-          dockerfile: uwsgi-base-ubuntu/Dockerfile
+          tags: "ubuntu-latest${{ steps.get_tag.outputs.tag }}"
+          dockerfile: uwsgi-base/ubuntu/Dockerfile
