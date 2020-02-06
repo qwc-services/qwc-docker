@@ -4,7 +4,7 @@ Docker containers for QWC Services
 Overview
 --------
 
-                                   external services    |    internal services    
+                                   external services    |    internal services
                                                         |
                   +-------------------+
                   |                   |
@@ -72,7 +72,7 @@ Docker installation
 * https://docs.docker.com/engine/installation/linux/ubuntu/
 
 * docker-compose (https://docs.docker.com/compose/install/):
-    
+
 ```
 dockerComposeVersion=1.21.2
 curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > ~/bin/docker-compose
@@ -121,7 +121,7 @@ Container Build:
 
 **NOTE:** Building the PostGIS container overwrites its database
 
-Setup PostgreSQL connection service file `~/.pg_service.conf` 
+Setup PostgreSQL connection service file `~/.pg_service.conf`
 for DB connections to PostGIS container:
 
 ```
@@ -183,3 +183,30 @@ Update service containers to latest versions from Git:
 Update PostGIS container to ConfigDB migration `ALEMBIC_VERSION` (**NOTE**: Overwrites current database):
 
     docker-compose build --build-arg ALEMBIC_VERSION=e9c31b610e0a qwc-postgis
+
+
+Health checks for Kubernetes
+----------------------------
+
+Health checks are a simple way to let the system know if an instance of the app is working or not working. If an instance of the app is not working, then other services should not access it or send a request to it. Instead, requests should be sent to another instance of the app that is ready, or retried at a later time. The system should also bring the app back to a healthy state.
+
+### Readyness:
+
+Readiness probes are designed to let Kubernetes know when the app is ready to serve traffic. Kubernetes makes sure the readiness probe passes before allowing a service to send traffic to the pod. If a readiness probe starts to fail, Kubernetes stops sending traffic to the pod until it passes.
+
+**Check is available at: /ready**
+
+Example check:
+
+* Return ok, if web service is initialized and running
+
+### Liveness:
+
+**Check is available at: /healthz**
+
+Liveness probes let Kubernetes know if the app is alive or dead. If the app is alive, then Kubernetes leaves it alone. If the app is dead, Kubernetes removes the Pod and starts a new one to replace it.
+
+Example checks:
+
+* Check database connection (Example service: qwc-admin-gui)
+* Check if all data files are available and readable (Example service: qwc-elevation-service)
