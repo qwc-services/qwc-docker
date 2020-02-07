@@ -1,4 +1,4 @@
-name: Publish docker image of postgis container
+name: Publish qwc-demo-db docker image
 
 on:
     push:

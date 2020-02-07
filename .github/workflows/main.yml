@@ -1,4 +1,4 @@
-name: Publish docker image
+name: Publish qwc-uwsgi-base docker image
 
 on:
   push:
