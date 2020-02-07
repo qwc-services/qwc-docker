@@ -3,7 +3,7 @@ name: Publish qwc-uwsgi-base docker image
 on:
   push:
     paths:
-    - 'uwsgi-base/*'
+    - 'uwsgi-base/**'
 
 jobs:
 
