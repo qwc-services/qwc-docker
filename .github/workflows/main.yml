@@ -1,6 +1,9 @@
 name: Publish docker image
 
-on: [push]
+on:
+  push:
+    paths:
+    - 'uwsgi-base/*'
 
 jobs:
 
