@@ -1,6 +1,9 @@
-name: Publish docker image
+name: Publish qwc-uwsgi-base docker image
 
-on: [push]
+on:
+  push:
+    paths:
+    - 'uwsgi-base/**'
 
 jobs:
 

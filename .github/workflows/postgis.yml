@@ -1,0 +1,35 @@
+name: Publish qwc-demo-db docker image
+
+on:
+    push:
+      paths:
+      - 'postgis/**'
+
+jobs:
+
+    build:
+      runs-on: ubuntu-latest
+      steps:
+
+      - uses: actions/checkout@master
+
+      - name: Get version tag
+        id: get_tag
+        run: |
+          if [ ${{ startsWith(github.ref, 'refs/tags/') }} = true ]; then
+            echo ::set-output name=tag::${GITHUB_REF:10}
+          else
+            echo ::set-output name=tag::
+          fi
+
+      - name: Publish alpine docker image to Registry
+        uses: elgohr/Publish-Docker-Github-Action@2.12
+        env:
+          ALEMBIC_VERSION: e9c31b610e0a
+        with:
+          name: sourcepole/qwc-demo-db
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          tags: "latest,${{ steps.get_tag.outputs.tag }}"
+          dockerfile: postgis/Dockerfile
+          buildargs: ALEMBIC_VERSION
