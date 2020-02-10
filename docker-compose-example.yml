@@ -1,10 +1,11 @@
 version: '2.1'
 services:
   qwc-postgis:
-    build:
-      context: ./postgis
-      args:
-        - ALEMBIC_VERSION=e9c31b610e0a
+    image: sourcepole/qwc-demo-db
+    # build:
+    #   context: ./postgis
+    #   args:
+    #     - ALEMBIC_VERSION=e9c31b610e0a
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -94,10 +95,12 @@ services:
         condition: service_healthy
 
   qwc-map-viewer:
-    build:
-      context: ./wsgi-service
-      args:
-        - SERVICE=qwc-map-viewer
+    image: sourcepole/qwc-map-viewer-demo
+    # image: sourcepole/qwc-map-viewer-base
+    # build:
+    #   context: ./wsgi-service
+    #   args:
+    #     - SERVICE=qwc-map-viewer
     environment:
       - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
       - QWC2_PATH=/qwc2/
@@ -112,19 +115,20 @@ services:
       #- DEFAULT_CONFIG_CACHE_DURATION=86400
     ports:
       - "127.0.0.1:5030:9090"
-    volumes:
-      - ./volumes/qwc2:/qwc2:ro
+    # volumes:
+    #   - ./volumes/qwc2:/qwc2:ro
     depends_on:
       - qwc-config-service
       - qwc-ogc-service
       - qwc-data-service
 
   qwc-admin-gui:
-    build:
-      context: ./wsgi-service
-      args:
-        - SERVICE=qwc-admin-gui
-        - SERVICE_MOUNTPOINT=/qwc_admin
+    image: sourcepole/qwc-admin-gui
+    # build:
+    #   context: ./wsgi-service
+    #   args:
+    #     - SERVICE=qwc-admin-gui
+    #     - SERVICE_MOUNTPOINT=/qwc_admin
     environment:
       - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}
 ]'
@@ -135,6 +139,8 @@ services:
       - MAIL_DEFAULT_SENDER=from@example.com
     ports:
       - "127.0.0.1:5031:9090"
+    volumes:
+        - ./wsgi-service/pg_service.conf:/var/www/.pg_service.conf:ro
     depends_on:
       qwc-postgis:
         condition: service_healthy
@@ -172,6 +178,16 @@ services:
     depends_on:
       qwc-postgis:
         condition: service_healthy
+
+  qwc-elevation-service:
+    image: sourcepole/qwc-elevation-service
+    ports:
+      - "127.0.0.1:5002:9090"
+
+  qwc-permalink-service:
+    image: sourcepole/qwc-permalink-service
+    ports:
+      - "127.0.0.1:5018:9090"
 
   qwc-api-gateway:
     image: nginx
