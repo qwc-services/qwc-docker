@@ -4,8 +4,8 @@ Docker containers for QWC Services
 Overview
 --------
 
-                                   external services    I    internal services
-                                                        I
+                                   external services    :    internal services
+                                                        :
                   +-------------------+
                   |                   |
                   |  API Gateway      |
@@ -52,8 +52,8 @@ Overview
               |                                         |                             |    |                  |
               |                 +-------------------+   |   +-------------------+     +-----------------------+
               |                 |                   +---+   |                   |          |
-              +----------------->  Search Service   |------->  Apache Solr      |          |
-                                |  localhost:5011   +---+   |  localhost:8983   +----------+
+              +----------------->  Search Service   |------->  Apache Solr      +----------+
+                                |  localhost:5011   +---+   |  localhost:8983   |          |
                                 +-------------------+   |   +-------------------+          |
                                                         +----------------------------------+
 

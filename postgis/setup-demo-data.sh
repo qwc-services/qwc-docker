@@ -4,6 +4,23 @@ set -e
 # import demo data into GeoDB
 ogr2ogr -f PostgreSQL PG:"dbname=qwc_demo user=qwc_admin password=qwc_admin" -lco SCHEMA=qwc_geodb /tmp/demo_geodata.gpkg
 
+# create view for fulltext search
+psql -v ON_ERROR_STOP=1 --username qwc_admin -d qwc_demo <<-EOSQL
+CREATE OR REPLACE VIEW qwc_geodb.search_v AS
+    SELECT
+        'ne_10m_admin_0_countries'::text AS subclass,
+        'Country'::text AS filterword,
+        ogc_fid AS id_in_class,
+        'ogc_fid' AS id_name,
+        'str:n' AS id_type,
+        name_long || ' (Country)' AS displaytext,
+        name_long || ' ' || iso_a2 AS search_part_1,
+        'Country ISO'::text AS search_part_2,
+        wkb_geometry AS geom
+    FROM qwc_geodb.ne_10m_admin_0_countries
+;
+EOSQL
+
 # create demo tables and features for editing
 psql -v ON_ERROR_STOP=1 --username qwc_admin -d qwc_demo <<-EOSQL
     CREATE TABLE qwc_geodb.edit_points
