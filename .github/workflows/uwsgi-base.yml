@@ -1,9 +1,6 @@
 name: Publish qwc-uwsgi-base docker image
 
-on:
-  push:
-    paths:
-    - 'uwsgi-base/**'
+on: [push]
 
 jobs:
 
@@ -24,20 +21,20 @@ jobs:
             echo ::set-output name=ubuntu_tag::
           fi
 
-      - name: Publish alpine docker image to Registry
+      - name: Build and publish Alpine docker image
         uses: elgohr/Publish-Docker-Github-Action@2.12
         with:
           name: sourcepole/qwc-uwsgi-base
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           tags: "latest,alpine-latest${{ steps.get_tag.outputs.alpine_tag }}"
-          dockerfile: uwsgi-base/alpine/Dockerfile
+          workdir: uwsgi-base/alpine
 
-      - name: Publish ubuntu docker image to Registry
+      - name: Build and publish Ubuntu docker image
         uses: elgohr/Publish-Docker-Github-Action@2.12
         with:
           name: sourcepole/qwc-uwsgi-base
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           tags: "ubuntu-latest${{ steps.get_tag.outputs.ubuntu_tag }}"
-          dockerfile: uwsgi-base/ubuntu/Dockerfile
+          workdir: uwsgi-base/ubuntu
