@@ -22,7 +22,7 @@ jobs:
             echo ::set-output name=tag::
           fi
 
-      - name: Publish alpine docker image to Registry
+      - name: Build and publish docker image
         uses: elgohr/Publish-Docker-Github-Action@2.12
         env:
           ALEMBIC_VERSION: e9c31b610e0a
@@ -31,5 +31,5 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           tags: "latest,${{ steps.get_tag.outputs.tag }}"
-          dockerfile: postgis/Dockerfile
+          workdir: postgis
           buildargs: ALEMBIC_VERSION
