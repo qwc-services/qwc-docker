@@ -1,9 +1,6 @@
 name: Publish qwc-demo-db docker image
 
-on:
-    push:
-      paths:
-      - 'postgis/**'
+on: [push]
 
 jobs:
 
