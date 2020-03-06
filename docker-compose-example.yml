@@ -62,21 +62,17 @@ services:
       - qwc-config-service
 
   qwc-data-service:
-    build:
-      context: ./wsgi-service
-      args:
-        - SERVICE=qwc-data-service
-        - SERVICE_MOUNTPOINT=/api/v1/data
-        - DB_USER=qwc_service_write
-        - DB_PASSWORD=qwc_service_write
+    image: sourcepole/qwc-data-service
     environment:
-      - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
-      #- CONFIG_CHECK_INTERVAL=60
-      #- DEFAULT_CONFIG_CACHE_DURATION=86400
+      - CONFIG_PATH=/etc/qwc_service
+    volumes:
+      - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./demo-config:/etc/qwc_service:ro
     ports:
       - "127.0.0.1:5012:9090"
     depends_on:
-      - qwc-config-service
+      qwc-postgis:
+        condition: service_healthy
 
   qwc-solr:
     image: solr
@@ -94,13 +90,28 @@ services:
       qwc-postgis:
         condition: service_healthy
 
+  qwc-fulltext-search-service:
+    image: sourcepole/qwc-fulltext-search-service
+    environment:
+      - CONFIG_PATH=/etc/qwc_service
+      - SOLR_SERVICE_URL=http://qwc-solr:8983/solr/gdi/select
+      - SEARCH_ID_COL=id_in_class
+      - WORD_SPLIT_RE=[\s,.:;"]+
+      - SEARCH_RESULT_LIMIT=50
+      # - GEODB_URL=
+      - SEARCH_VIEW_NAME=search_v
+      - GEOMETRY_COLUMN=geom
+      # - SEARCH_GEOM_SRID=
+    ports:
+      - "127.0.0.1:5011:9090"
+    volumes:
+        - ./demo-config:/etc/qwc_service:ro
+    depends_on:
+      - qwc-solr
+
   qwc-map-viewer:
     image: sourcepole/qwc-map-viewer-demo
     # image: sourcepole/qwc-map-viewer-base
-    # build:
-    #   context: ./wsgi-service
-    #   args:
-    #     - SERVICE=qwc-map-viewer
     environment:
       - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
       - QWC2_PATH=/qwc2/
@@ -113,6 +124,7 @@ services:
       #- 'ORIGIN_CONFIG={"host": {"_intern_": "^127.0.0.1(:\\d+)?$$"}}'
       #- CONFIG_CHECK_INTERVAL=60
       #- DEFAULT_CONFIG_CACHE_DURATION=86400
+      #- SEARCH_SERVICE_URL=
     ports:
       - "127.0.0.1:5030:9090"
     # volumes:
@@ -124,11 +136,6 @@ services:
 
   qwc-admin-gui:
     image: sourcepole/qwc-admin-gui
-    # build:
-    #   context: ./wsgi-service
-    #   args:
-    #     - SERVICE=qwc-admin-gui
-    #     - SERVICE_MOUNTPOINT=/qwc_admin
     environment:
       - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}
 ]'
@@ -140,7 +147,7 @@ services:
     ports:
       - "127.0.0.1:5031:9090"
     volumes:
-        - ./wsgi-service/pg_service.conf:/var/www/.pg_service.conf:ro
+        - ./pg_service.conf:/var/www/.pg_service.conf:ro
     depends_on:
       qwc-postgis:
         condition: service_healthy
@@ -186,6 +193,15 @@ services:
 
   qwc-permalink-service:
     image: sourcepole/qwc-permalink-service
+    environment:
+      - CONFIGDB_URL=postgresql:///?service=qwc_configdb
+      - PERMALINKS_TABLE=qwc_config.permalinks
+      - USER_PERMALINK_TABLE=qwc_config.user_permalinks
+    volumes:
+      - ./pg_service.conf:/var/www/.pg_service.conf:ro
+    depends_on:
+      qwc-postgis:
+        condition: service_healthy
     ports:
       - "127.0.0.1:5018:9090"
 
