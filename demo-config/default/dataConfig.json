@@ -1,0 +1,84 @@
+{
+  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-data-service/v2/schemas/qwc-data-service.json",
+  "service": "data",
+  "config": {},
+  "resources": {
+    "datasets": [
+      {
+        "name": "qwc_demo.edit_points",
+        "database": "postgresql:///?service=qwc_geodb_write",
+        "schema": "qwc_geodb",
+        "table_name": "edit_points",
+        "primary_key": "id",
+        "fields": [
+          {
+            "name": "id",
+            "data_type": "integer",
+            "constraints": {
+              "min": -2147483648,
+              "max": 2147483647
+            }
+          },
+          {
+            "name": "name",
+            "data_type": "character varying",
+            "constraints": {
+              "maxlength": 32
+            }
+          },
+          {
+            "name": "description",
+            "data_type": "text"
+          },
+          {
+            "name": "num",
+            "data_type": "integer",
+            "constraints": {
+              "min": -2147483648,
+              "max": 2147483647
+            }
+          },
+          {
+            "name": "value",
+            "data_type": "double precision",
+            "constraints": {
+              "pattern": "[0-9]+([\\.,][0-9]+)?"
+            }
+          },
+          {
+            "name": "type",
+            "data_type": "smallint",
+            "constraints": {
+              "min": -32768,
+              "max": 32767
+            }
+          },
+          {
+            "name": "amount",
+            "data_type": "numeric",
+            "constraints": {
+              "numeric_precision": 5,
+              "numeric_scale": 2,
+              "min": -999.99,
+              "max": 999.99,
+              "step": 0.01
+            }
+          },
+          {
+            "name": "validated",
+            "data_type": "boolean"
+          },
+          {
+            "name": "datetime",
+            "data_type": "timestamp without time zone"
+          }
+        ],
+        "geometry": {
+          "geometry_column": "geom",
+          "geometry_type": "POINT",
+          "srid": 3857
+        }
+      }
+    ]
+  }
+}
