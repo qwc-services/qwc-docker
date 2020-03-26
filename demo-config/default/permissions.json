@@ -43,6 +43,32 @@
         "solr_facets": [
           "foreground",
           "ne_10m_admin_0_countries"
+        ],
+        "maps": [
+          {
+            "name": "qwc_demo",
+            "ows_type": "WMS",
+            "layers": [
+              {
+                "name": "qwc_demo"
+              },
+              {
+                "name": "edit_demo"
+              },
+              {
+                "name": "edit_points",
+                "attributes": [
+                  "id", "name", "description", "num", "value", "type", "amount", "validated",
+                  "datetime", "geometry", "maptip"
+                ]
+              },
+              {
+                "name": "countries",
+                "attributes": ["id", "name", "formal_en", "pop_est", "subregion", "geometry"],
+                "info_template": true
+              }
+            ]
+          }
         ]
       }
     },

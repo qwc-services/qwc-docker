@@ -205,6 +205,19 @@ services:
     ports:
       - "127.0.0.1:5018:9090"
 
+  qwc-feature-info-service:
+    image: sourcepole/qwc-feature-info-service
+    environment:
+      - CONFIG_PATH=/etc/qwc_service
+    volumes:
+      - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./demo-config:/etc/qwc_service:ro
+    depends_on:
+      - qwc-postgis
+      - qwc-qgis-server
+    ports:
+      - "127.0.0.1:5015:9090"
+
   qwc-api-gateway:
     image: nginx
     ports:
