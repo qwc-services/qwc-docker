@@ -82,7 +82,7 @@ services:
       - gdi
       - /gdi_conf
     ports:
-      - "8983:8983"
+     - "127.0.0.1:8983:8983"
     volumes:
       - ./volumes/solr/configsets/gdi:/gdi_conf:ro
       - ./volumes/solr/data:/var/solr/data
