@@ -44,10 +44,9 @@
           "foreground",
           "ne_10m_admin_0_countries"
         ],
-        "maps": [
+        "wms_services": [
           {
             "name": "qwc_demo",
-            "ows_type": "WMS",
             "layers": [
               {
                 "name": "qwc_demo"
@@ -64,7 +63,7 @@
               },
               {
                 "name": "countries",
-                "attributes": ["id", "name", "formal_en", "pop_est", "subregion", "geometry"],
+                "attributes": ["name", "formal_en", "pop_est", "subregion", "geometry"],
                 "info_template": true
               }
             ]
