@@ -45,21 +45,18 @@ services:
         condition: service_healthy
 
   qwc-ogc-service:
-    build:
-      context: ./wsgi-service
-      args:
-        - SERVICE=qwc-ogc-service
-        - SERVICE_MOUNTPOINT=/ows
+    image: sourcepole/qwc-ogc-service
     environment:
-      - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
       - QGIS_SERVER_URL=http://qwc-qgis-server/ows/
+      - CONFIG_PATH=/etc/qwc_service
       #- CONFIG_CHECK_INTERVAL=60
       #- DEFAULT_CONFIG_CACHE_DURATION=86400
+    volumes:
+      - ./demo-config:/etc/qwc_service:ro
     ports:
       - "127.0.0.1:5013:9090"
     depends_on:
       - qwc-qgis-server
-      - qwc-config-service
 
   qwc-data-service:
     image: sourcepole/qwc-data-service
