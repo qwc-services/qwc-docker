@@ -10,15 +10,15 @@
   "resources": {
     "facets": [
       {
-        "identifier": "background",
+        "name": "background",
         "filter_word": "Background"
       },
       {
-        "identifier": "foreground",
+        "name": "foreground",
         "filter_word": "Map"
       },
       {
-        "identifier": "ne_10m_admin_0_countries",
+        "name": "ne_10m_admin_0_countries",
         "filter_word": "Country",
         "table_name": "qwc_geodb.search_v",
         "geometry_column": "geom",
