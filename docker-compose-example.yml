@@ -107,7 +107,7 @@ services:
       - qwc-solr
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo
+    image: sourcepole/qwc-map-viewer-demo:v1.1.0
     # image: sourcepole/qwc-map-viewer-base
     environment:
       - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
@@ -115,6 +115,7 @@ services:
       - QWC2_CONFIG=/qwc2/config.json
       - OGC_SERVICE_URL=/ows/
       - DATA_SERVICE_URL=/api/v1/data/
+      - ELEVATION_SERVICE_URL=/elevation/
       #- AUTH_SERVICE_URL=/auth/
       #- 'AUTH_SERVICES_CONFIG={"_intern_": "/auth/"}'
       # NOTE: escape literal '$' with '$$' to avoid variable substitution from docker-compose
@@ -185,6 +186,10 @@ services:
 
   qwc-elevation-service:
     image: sourcepole/qwc-elevation-service
+    environment:
+      - CONFIG_PATH=/etc/qwc_service
+    volumes:
+      - ./demo-config:/etc/qwc_service:ro
     ports:
       - "127.0.0.1:5002:9090"
 

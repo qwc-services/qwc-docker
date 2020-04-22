@@ -57,31 +57,6 @@
               {
                 "name": "edit_points",
                 "attributes": [
-                  "id", "name", "description", "num", "value", "type", "amount", "validated",
-                  "datetime", "geometry", "maptip"
-                ]
-              },
-              {
-                "name": "countries",
-                "attributes": ["name", "formal_en", "pop_est", "subregion", "geometry"],
-                "info_template": true
-              }
-            ]
-          }
-        ],
-        "wms_services": [
-          {
-            "name": "qwc_demo",
-            "layers": [
-              {
-                "name": "qwc_demo"
-              },
-              {
-                "name": "edit_demo"
-              },
-              {
-                "name": "edit_points",
-                "attributes": [
                   "id", "name", "description", "num", "value", "type", "amount", "validated", "datetime", "geometry", "maptip"
                 ]
               },
