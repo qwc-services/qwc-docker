@@ -59,6 +59,7 @@ services:
   qwc-data-service:
     image: sourcepole/qwc-data-service
     environment:
+      - SERVICE_MOUNTPOINT=/api/v1/data
       - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
@@ -88,15 +89,8 @@ services:
   qwc-fulltext-search-service:
     image: sourcepole/qwc-fulltext-search-service
     environment:
+      - SERVICE_MOUNTPOINT=/api/v2/search
       - CONFIG_PATH=/etc/qwc_service
-      - SOLR_SERVICE_URL=http://qwc-solr:8983/solr/gdi/select
-      - SEARCH_ID_COL=id_in_class
-      - WORD_SPLIT_RE=[\s,.:;"]+
-      - SEARCH_RESULT_LIMIT=50
-      # - GEODB_URL=
-      - SEARCH_VIEW_NAME=search_v
-      - GEOMETRY_COLUMN=geom
-      # - SEARCH_GEOM_SRID=
     ports:
       - "127.0.0.1:5011:9090"
     volumes:
