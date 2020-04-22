@@ -34,7 +34,6 @@ services:
       - QWC2_PATH=/qwc2/
       - QWC2_THEMES_CONFIG=/qwc2/themesConfig.json
       #- DEFAULT_ALLOW=True
-      #- FLASK_DEBUG=1
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
@@ -47,10 +46,9 @@ services:
   qwc-ogc-service:
     image: sourcepole/qwc-ogc-service
     environment:
-      - QGIS_SERVER_URL=http://qwc-qgis-server/ows/
+      - SERVICE_MOUNTPOINT=/ows
       - CONFIG_PATH=/etc/qwc_service
-      #- CONFIG_CHECK_INTERVAL=60
-      #- DEFAULT_CONFIG_CACHE_DURATION=86400
+      #- FLASK_ENV=development
     volumes:
       - ./demo-config:/etc/qwc_service:ro
     ports:

@@ -10,9 +10,9 @@
           "name": "qwc_demo",
           "wms_url": "http://qwc-qgis-server/ows/qwc_demo",
           "online_resources": {
-            "service": "http://localhost:5013/qwc_demo",
-            "feature_info": "http://localhost:5013/qwc_demo",
-            "legend": "http://localhost:5013/qwc_demo"
+            "service": "http://qwc-qgis-server/ows/qwc_demo",
+            "feature_info": "http://qwc-qgis-server/ows/qwc_demo",
+            "legend": "http://qwc-qgis-server/ows/qwc_demo"
           },
           "root_layer": {
             "name": "qwc_demo",
@@ -65,7 +65,7 @@
               }
             ]
           },
-          "print_url": "http://localhost:5013/qwc_demo",
+          "print_url": "http://qwc-qgis-server/ows/qwc_demo",
           "print_templates": ["A4 Landscape"],
           "internal_print_layers": ["bluemarble_bg", "osm_bg"]
         }
@@ -74,7 +74,7 @@
         {
           "name": "qwc_demo",
           "wfs_url": "http://qwc-qgis-server/ows/qwc_demo_wfs",
-          "online_resource": "http://localhost:5013/qwc_demo",
+          "online_resource": "http://qwc-qgis-server/ows/qwc_demo",
           "layers": [
             {
               "name": "edit_points",
