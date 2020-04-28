@@ -116,6 +116,9 @@
             }
           ]
         }
+        ],
+        "document_templates": [
+          "demo"
         ]
       },
     {

@@ -13,10 +13,7 @@ services:
      - "127.0.0.1:5439:5432"
 
   qwc-qgis-server:
-    build:
-      context: ./qgis-server
-      args:
-        - URL_PREFIX=/ows
+    image: sourcepole/qwc-qgis-server
     ports:
      - "127.0.0.1:8001:80"
     volumes:
@@ -211,6 +208,44 @@ services:
       - qwc-qgis-server
     ports:
       - "127.0.0.1:5015:9090"
+
+  qwc-document-service:
+    image: sourcepole/qwc-document-service
+    environment:
+      - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
+      - JASPER_SERVICE_URL=http://jasper-reporting-sevice:8002/
+      - CONFIG_PATH=/etc/qwc_service
+    volumes:
+      - ./demo-config:/etc/qwc_service:ro
+    depends_on:
+      - jasper-reporting-sevice
+      - qwc-config-service
+    ports:
+      - "127.0.0.1:5018:9090"
+
+  jasper-reporting-sevice:
+    image: sourcepole/jasper-reporting-service
+    volumes:
+      - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
+      - ./volumes/jasper-reports/reports:/srv/jasper-reporting-service/demo/reports:ro
+    ports:
+      - "127.0.0.1:8002:8080"
+
+  qwc-mapinfo-service:
+    image: sourcepole/qwc-mapinfo-service
+    environment:
+      - INFO_TABLE=agi_hoheitsgrenzen_pub.hoheitsgrenzen_gemeindegrenze
+      - INFO_GEOM_COL=geometrie
+      - INFO_DISPLAY_COL=gemeindename
+      - INFO_TITLE=gemeinde
+      - CONFIG_PATH=/etc/qwc_service
+    volumes:
+      - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./demo-config:/etc/qwc_service:ro
+    depends_on:
+      - qwc-postgis
+    ports:
+      - "127.0.0.1:5016:9090"
 
   qwc-api-gateway:
     image: nginx
