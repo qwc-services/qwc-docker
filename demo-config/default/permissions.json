@@ -96,8 +96,7 @@
             ],
             "print_templates": ["A4 Landscape"]
           }
-        ]
-        },
+        ],
         "wfs_services": [
         {
           "name": "qwc_demo",
@@ -120,7 +119,8 @@
         "document_templates": [
           "demo"
         ]
-      },
+      }
+    },
     {
       "role": "demo",
       "permissions": {
