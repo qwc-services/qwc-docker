@@ -1,16 +1,16 @@
 {
-    "$schema": "https://git.sourcepole.ch/ktso/somap/-/raw/master/docs/schemas/qwc-document-service.json",
-    "service": "document",
-    "config": {
-      "jasper_service_url": "http://localhost:8002/reports",
-      "jasper_timeout": 60
-    },
-    "resources": {
-      "document_templates": [
-        {
-          "template": "demo",
-          "report_filename": "PieChartReport"
-        }
-      ]
-    }
+  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-document-service/master/schemas/qwc-document-service.json",
+  "service": "document",
+  "config": {
+    "jasper_service_url": "http://jasper-reporting-service:8080/reports",
+    "jasper_timeout": 60
+  },
+  "resources": {
+    "document_templates": [
+      {
+        "template": "demo",
+        "report_filename": "PieChartReport"
+      }
+    ]
   }
+}

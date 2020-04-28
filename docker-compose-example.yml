@@ -210,16 +210,14 @@ services:
       - "127.0.0.1:5015:9090"
 
   qwc-document-service:
-    image: sourcepole/qwc-document-service
+    image: sourcepole/qwc-document-service:v0.9.1
     environment:
-      - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
-      - JASPER_SERVICE_URL=http://jasper-reporting-service:8002/
+      - SERVICE_MOUNTPOINT=/api/v1/document
       - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./demo-config:/etc/qwc_service:ro
     depends_on:
       - jasper-reporting-service
-      - qwc-config-service
     ports:
       - "127.0.0.1:5018:9090"
 
