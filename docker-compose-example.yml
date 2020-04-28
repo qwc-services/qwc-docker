@@ -213,21 +213,21 @@ services:
     image: sourcepole/qwc-document-service
     environment:
       - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
-      - JASPER_SERVICE_URL=http://jasper-reporting-sevice:8002/
+      - JASPER_SERVICE_URL=http://jasper-reporting-service:8002/
       - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./demo-config:/etc/qwc_service:ro
     depends_on:
-      - jasper-reporting-sevice
+      - jasper-reporting-service
       - qwc-config-service
     ports:
       - "127.0.0.1:5018:9090"
 
-  jasper-reporting-sevice:
-    image: sourcepole/jasper-reporting-service
+  jasper-reporting-service:
+    image: sourcepole/jasper-reporting-service:0.6.0
     volumes:
       - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
-      - ./volumes/jasper-reports/reports:/srv/jasper-reporting-service/demo/reports:ro
+      - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
     ports:
       - "127.0.0.1:8002:8080"
 
