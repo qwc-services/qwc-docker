@@ -183,13 +183,12 @@ services:
       - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
-    image: sourcepole/qwc-permalink-service
+    image: sourcepole/qwc-permalink-service:v0.9.0
     environment:
-      - CONFIGDB_URL=postgresql:///?service=qwc_configdb
-      - PERMALINKS_TABLE=qwc_config.permalinks
-      - USER_PERMALINK_TABLE=qwc_config.user_permalinks
+      - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./demo-config:/etc/qwc_service:ro
     depends_on:
       qwc-postgis:
         condition: service_healthy
