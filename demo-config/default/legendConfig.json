@@ -1,0 +1,48 @@
+{
+    "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-legend-service/v2/schemas/qwc-legend-service.json",
+    "service": "legend",
+    "config": {
+      "default_qgis_server_url": "http://qwc-qgis-server/",
+      "legend_images_path": "/PATH/TO/LEGENDS/"
+    },
+    "resources": {
+      "wms_services": [
+        {
+          "name": "qwc_demo",
+          "root_layer": {
+            "name": "qwc_demo",
+            "layers": [
+              {
+                "name": "edit_demo",
+                "layers": [
+                  {
+                    "name": "edit_points",
+                    "legend_image": "edit_demo.png"
+                  },
+                  {
+                    "name": "edit_lines",
+                    "legend_image": "edit_lines.png"
+                  },
+                  {
+                    "name": "edit_polygons"
+                  }
+                ]
+              },
+              {
+                "name": "geographic_lines"
+              },
+              {
+                "name": "country_names"
+              },
+              {
+                "name": "states_provinces"
+              },
+              {
+                "name": "countries"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }

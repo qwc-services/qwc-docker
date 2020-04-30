@@ -244,6 +244,17 @@ services:
     ports:
       - "127.0.0.1:5016:9090"
 
+  qwc-legend-service:
+    image: sourcepole/qwc-legend-service
+    environment:
+      - CONFIG_PATH=/etc/qwc_service
+    volumes:
+      - ./demo-config:/etc/qwc_service:ro
+    depends_on:
+      - qwc-qgis-server
+    ports:
+      - "127.0.0.1:5014:9090"
+
   qwc-api-gateway:
     image: nginx
     ports:
