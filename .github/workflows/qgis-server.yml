@@ -22,7 +22,7 @@ jobs:
       - name: Build and publish docker image
         uses: elgohr/Publish-Docker-Github-Action@2.12
         env:
-            URL_PREFIX=: /ows
+          URL_PREFIX: /ows
         with:
           name: sourcepole/qwc-qgis-server
           username: ${{ secrets.DOCKER_HUB_USER }}
