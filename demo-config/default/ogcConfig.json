@@ -2,7 +2,7 @@
     "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-ogc-service/v2/schemas/qwc-ogc-service.json",
     "service": "ogc",
     "config": {
-      "default_ogc_service_url": "http://qwc-qgis-server/ows/"
+      "default_qgis_server_url": "http://qwc-qgis-server/ows/"
     },
     "resources": {
       "wms_services": [

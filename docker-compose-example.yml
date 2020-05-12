@@ -15,7 +15,7 @@ services:
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server
     ports:
-     - "127.0.0.1:8001:80"
+      - "127.0.0.1:8001:80"
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./volumes/geodata:/geodata:ro
@@ -30,7 +30,7 @@ services:
       - QGIS_RESOURCES_PATH=/data/
       - QWC2_PATH=/qwc2/
       - QWC2_THEMES_CONFIG=/qwc2/themesConfig.json
-      #- DEFAULT_ALLOW=True
+      #- DEFAULT_ALLOW=False
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
@@ -120,6 +120,7 @@ services:
       - qwc-config-service
       - qwc-ogc-service
       - qwc-data-service
+      - qwc-elevation-service
 
   qwc-admin-gui:
     image: sourcepole/qwc-admin-gui
@@ -229,10 +230,6 @@ services:
   qwc-mapinfo-service:
     image: sourcepole/qwc-mapinfo-service
     environment:
-      - INFO_TABLE=agi_hoheitsgrenzen_pub.hoheitsgrenzen_gemeindegrenze
-      - INFO_GEOM_COL=geometrie
-      - INFO_DISPLAY_COL=gemeindename
-      - INFO_TITLE=gemeinde
       - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
@@ -248,6 +245,7 @@ services:
       - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./demo-config:/etc/qwc_service:ro
+      - ./volumes/legends:/legends
     depends_on:
       - qwc-qgis-server
     ports:
@@ -260,9 +258,9 @@ services:
     volumes:
       - ./api-gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-      - qwc-ogc-service
-      - qwc-data-service
       - qwc-map-viewer
+      - qwc-permalink-service
+      - qwc-fulltext-search-service
       - qwc-admin-gui
       - qwc-registration-gui
       - qwc-auth-service

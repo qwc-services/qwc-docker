@@ -16,34 +16,6 @@
     {
       "role": "public",
       "permissions": {
-        "data_datasets": [
-          {
-            "name": "qwc_demo.edit_points",
-            "attributes": [
-              "id",
-              "name",
-              "description",
-              "num",
-              "value",
-              "type",
-              "amount",
-              "validated",
-              "datetime"
-            ],
-            "writable": true,
-            "creatable": true,
-            "readable": true,
-            "updatable": true,
-            "deletable": true
-          }
-        ],
-        "dataproducts": [
-          "qwc_demo"
-        ],
-        "solr_facets": [
-          "foreground",
-          "ne_10m_admin_0_countries"
-        ],
         "wms_services": [
           {
             "name": "qwc_demo",
@@ -98,33 +70,65 @@
           }
         ],
         "wfs_services": [
-        {
-          "name": "qwc_demo",
-          "layers": [
-            {
-              "name": "edit_points",
-              "attributes": [
-                "id", "name", "description", "num", "value", "type", "amount", "validated", "datetime", "geometry"
-              ]
-            },
-            {
-              "name": "edit_lines",
-              "attributes": [
-                "id", "name", "description", "num", "value", "type", "amount", "validated", "datetime", "geometry"
-              ]
-            }
-          ]
-        }
+          {
+            "name": "qwc_demo",
+            "layers": [
+              {
+                "name": "edit_points",
+                "attributes": [
+                  "id", "name", "description", "num", "value", "type", "amount", "validated", "datetime", "geometry"
+                ]
+              },
+              {
+                "name": "edit_lines",
+                "attributes": [
+                  "id", "name", "description", "num", "value", "type", "amount", "validated", "datetime", "geometry"
+                ]
+              }
+            ]
+          }
+        ],
+        "data_datasets": [
+          {
+            "name": "qwc_demo.edit_points",
+            "attributes": [
+              "id",
+              "name",
+              "description",
+              "num",
+              "value",
+              "type",
+              "amount",
+              "validated",
+              "datetime"
+            ],
+            "writable": true,
+            "creatable": true,
+            "readable": true,
+            "updatable": true,
+            "deletable": true
+          }
+        ],
+        "dataproducts": [
+          "qwc_demo"
         ],
         "document_templates": [
           "demo"
+        ],
+        "solr_facets": [
+          "foreground",
+          "ne_10m_admin_0_countries"
         ]
       }
     },
     {
       "role": "demo",
       "permissions": {
+        "wms_services": [],
+        "wfs_services": [],
+        "data_datasets": [],
         "dataproducts": [],
+        "document_templates": [],
         "solr_facets": []
       }
     }

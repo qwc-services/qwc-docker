@@ -1,11 +1,11 @@
 {
-    "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-mapinfo-service/master/schemas/qwc-mapinfo-service.json",
-    "service": "mapinfo",
-    "config": {
-      "db_url": "postgresql:///?service=qwc_geodb",
-      "info_table": "qwc_geodb.ne_10m_admin_0_countries",
-      "info_geom_col": "geometry",
-      "info_display_col": "name",
-      "info_title": "Country"
-    }
+  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-mapinfo-service/master/schemas/qwc-mapinfo-service.json",
+  "service": "mapinfo",
+  "config": {
+    "db_url": "postgresql:///?service=qwc_geodb",
+    "info_table": "qwc_geodb.ne_10m_admin_0_countries",
+    "info_geom_col": "wkb_geometry",
+    "info_display_col": "name",
+    "info_title": "Country"
   }
+}

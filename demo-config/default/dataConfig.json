@@ -6,7 +6,7 @@
     "datasets": [
       {
         "name": "qwc_demo.edit_points",
-        "database": "postgresql:///?service=qwc_geodb_write",
+        "db_url": "postgresql:///?service=qwc_geodb_write",
         "schema": "qwc_geodb",
         "table_name": "edit_points",
         "primary_key": "id",

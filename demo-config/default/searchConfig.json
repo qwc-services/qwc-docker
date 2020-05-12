@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-fulltext-search-service/master/schemas/qwc-search-service.json",
   "service": "search",
   "config": {
-    "solr_service_url": "http://sogis-solr:8983/solr/gdi/select",
+    "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",
     "word_split_re": "[\\s,.:;\"]+",
     "search_result_limit": 50,
     "geodb_url": "postgresql:///?service=qwc_geodb"
