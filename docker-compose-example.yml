@@ -190,7 +190,7 @@ services:
       qwc-postgis:
         condition: service_healthy
     ports:
-      - "127.0.0.1:5018:9090"
+      - "127.0.0.1:5001:9090"
 
   qwc-feature-info-service:
     image: sourcepole/qwc-feature-info-service
