@@ -158,6 +158,7 @@ services:
   qwc-auth-service:
     image: sourcepole/qwc-db-auth
     environment:
+      - SERVICE_MOUNTPOINT=/auth
       #- TOTP_ENABLED=False
       #- TOTP_ISSUER_NAME=QWC Services
       - MAIL_SUPPRESS_SEND=True
