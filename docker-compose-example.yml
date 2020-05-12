@@ -140,33 +140,30 @@ services:
         condition: service_healthy
 
   qwc-registration-gui:
-    build:
-      context: ./wsgi-service
-      args:
-        - SERVICE=qwc-registration-gui
-        - SERVICE_MOUNTPOINT=/registration
+    image: sourcepole/qwc-registration-gui
     environment:
+      - SERVICE_MOUNTPOINT=/registration
       - DEFAULT_LOCALE=en
       - ADMIN_RECIPIENTS=admin@example.com
       - MAIL_SUPPRESS_SEND=True
       - MAIL_DEFAULT_SENDER=from@example.com
     ports:
       - "127.0.0.1:5032:9090"
+    volumes:
+      - ./pg_service.conf:/var/www/.pg_service.conf:ro
     depends_on:
       qwc-postgis:
         condition: service_healthy
 
   qwc-auth-service:
-    build:
-      context: ./wsgi-service
-      args:
-        - SERVICE=qwc-db-auth
-        - SERVICE_MOUNTPOINT=/auth
+    image: sourcepole/qwc-db-auth
     environment:
       #- TOTP_ENABLED=False
       #- TOTP_ISSUER_NAME=QWC Services
       - MAIL_SUPPRESS_SEND=True
       - MAIL_DEFAULT_SENDER=from@example.com
+    volumes:
+      - ./pg_service.conf:/var/www/.pg_service.conf:ro
     ports:
       - "127.0.0.1:5017:9090"
     depends_on:
