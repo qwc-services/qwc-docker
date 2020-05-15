@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-admin-gui/master/schemas/qwc-admin-gui.json",
+  "service": "admin-gui",
+  "config": {
+    "db_url": "postgresql:///?service=qwc_configdb",
+    "totp_enabled": false,
+    "user_info_fields": [],
+    "proxy_url_whitelist": [],
+    "proxy_timeout": 60
+  }
+}
