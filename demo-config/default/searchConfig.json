@@ -3,9 +3,8 @@
   "service": "search",
   "config": {
     "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",
-    "word_split_re": "[\\s,.:;\"]+",
     "search_result_limit": 50,
-    "geodb_url": "postgresql:///?service=qwc_geodb"
+    "db_url": "postgresql:///?service=qwc_geodb"
   },
   "resources": {
     "facets": [
