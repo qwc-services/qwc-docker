@@ -44,10 +44,9 @@ services:
     image: sourcepole/qwc-ogc-service
     environment:
       - SERVICE_MOUNTPOINT=/ows
-      - CONFIG_PATH=/etc/qwc_service
       #- FLASK_ENV=development
     volumes:
-      - ./demo-config:/etc/qwc_service:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     ports:
       - "127.0.0.1:5013:9090"
     depends_on:
@@ -57,10 +56,9 @@ services:
     image: sourcepole/qwc-data-service
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/data
-      - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
-      - ./demo-config:/etc/qwc_service:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     ports:
       - "127.0.0.1:5012:9090"
     depends_on:
@@ -87,11 +85,10 @@ services:
     image: sourcepole/qwc-fulltext-search-service
     environment:
       - SERVICE_MOUNTPOINT=/api/v2/search
-      - CONFIG_PATH=/etc/qwc_service
     ports:
       - "127.0.0.1:5011:9090"
     volumes:
-        - ./demo-config:/etc/qwc_service:ro
+        - ./demo-config:/srv/qwc_service/config:ro
     depends_on:
       - qwc-solr
 
@@ -135,7 +132,8 @@ services:
     ports:
       - "127.0.0.1:5031:9090"
     volumes:
-        - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     depends_on:
       qwc-postgis:
         condition: service_healthy
@@ -166,6 +164,7 @@ services:
       - MAIL_DEFAULT_SENDER=from@example.com
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     ports:
       - "127.0.0.1:5017:9090"
     depends_on:
@@ -174,20 +173,16 @@ services:
 
   qwc-elevation-service:
     image: sourcepole/qwc-elevation-service
-    environment:
-      - CONFIG_PATH=/etc/qwc_service
     volumes:
-      - ./demo-config:/etc/qwc_service:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     ports:
       - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
     image: sourcepole/qwc-permalink-service:v0.9.0
-    environment:
-      - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
-      - ./demo-config:/etc/qwc_service:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     depends_on:
       qwc-postgis:
         condition: service_healthy
@@ -196,11 +191,9 @@ services:
 
   qwc-feature-info-service:
     image: sourcepole/qwc-feature-info-service
-    environment:
-      - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
-      - ./demo-config:/etc/qwc_service:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     depends_on:
       - qwc-postgis
       - qwc-qgis-server
@@ -211,9 +204,8 @@ services:
     image: sourcepole/qwc-document-service:v0.9.1
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/document
-      - CONFIG_PATH=/etc/qwc_service
     volumes:
-      - ./demo-config:/etc/qwc_service:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     depends_on:
       - jasper-reporting-service
     ports:
@@ -229,11 +221,9 @@ services:
 
   qwc-mapinfo-service:
     image: sourcepole/qwc-mapinfo-service
-    environment:
-      - CONFIG_PATH=/etc/qwc_service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
-      - ./demo-config:/etc/qwc_service:ro
+      - ./demo-config:/srv/qwc_service/config:ro
     depends_on:
       - qwc-postgis
     ports:
@@ -241,10 +231,8 @@ services:
 
   qwc-legend-service:
     image: sourcepole/qwc-legend-service
-    environment:
-      - CONFIG_PATH=/etc/qwc_service
     volumes:
-      - ./demo-config:/etc/qwc_service:ro
+      - ./demo-config:/srv/qwc_service/config:ro
       - ./volumes/legends:/legends
     depends_on:
       - qwc-qgis-server
