@@ -1,0 +1,822 @@
+{
+  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-map-viewer/v2/schemas/qwc-map-viewer.json",
+  "service": "map-viewer",
+  "config": {
+    "qwc2_path": "/qwc2/",
+    "auth_service_url": "/auth/",
+    "data_service_url": "/api/v1/data/",
+    "#document_service_url": "/api/v1/document/",
+    "elevation_service_url": "/elevation/",
+    "#info_service_url": "/api/v1/featureinfo/",
+    "#legend_service_url": "/api/v1/legend/",
+    "mapinfo_service_url": "/api/v1/mapinfo/",
+    "ogc_service_url": "/ows/",
+    "permalink_service_url": "/api/v1/permalink/",
+    "#print_service_url": "/api/v1/print/",
+    "search_data_service_url": "/api/v1/data/",
+    "search_service_url": "/api/v2/search/"
+  },
+  "resources": {
+    "qwc2_config": {
+      "config": {
+        "translationsPath": "/translations",
+        "assetsPath": "/assets",
+        "urlPositionFormat": "extent",
+        "urlPositionCrs": "",
+        "preserveExtentOnThemeSwitch": true,
+        "preserveBackgroundOnThemeSwitch": true,
+        "preserveNonThemeLayersOnThemeSwitch": true,
+        "allowReorderingLayers": true,
+        "allowRemovingThemeLayers": true,
+        "allowFractionalZoom": true,
+        "localeAwareNumbers": false,
+        "wmsDpi": 96,
+        "defaultFeatureStyle": {
+          "strokeColor": [
+            0,
+            0,
+            255,
+            1
+          ],
+          "strokeWidth": 1,
+          "strokeDash": [
+            4
+          ],
+          "fillColor": [
+            255,
+            0,
+            255,
+            0.33
+          ],
+          "circleRadius": 10,
+          "textFill": "black",
+          "textStroke": "white"
+        },
+        "projections": [
+          {
+            "code": "EPSG:32632",
+            "proj": "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs",
+            "label": "WGS 84 / UTM zone 32N"
+          }
+        ],
+        "plugins": {
+          "mobile": [
+            {
+              "name": "Map",
+              "mapOptions": {
+                "zoomDuration": 250,
+                "antialiasing": true
+              },
+              "toolsOptions": {
+                "OverviewSupport": {
+                  "tipLabel": "Overview"
+                },
+                "LocateSupport": {
+                  "keepCurrentZoomLevel": true
+                },
+                "ScaleBarSupport": {
+                  "units": "metric"
+                }
+              }
+            },
+            {
+              "name": "HomeButton",
+              "cfg": {
+                "position": 2
+              }
+            },
+            {
+              "name": "LocateButton",
+              "cfg": {
+                "position": 1
+              }
+            },
+            {
+              "name": "BackgroundSwitcher",
+              "cfg": {
+                "position": 0
+              }
+            },
+            {
+              "name": "TopBar",
+              "cfg": {
+                "menuItems": [
+                  {
+                    "key": "ThemeSwitcher",
+                    "icon": "themes"
+                  },
+                  {
+                    "key": "LayerTree",
+                    "icon": "layers"
+                  },
+                  {
+                    "key": "Share",
+                    "icon": "share"
+                  },
+                  {
+                    "key": "Tools",
+                    "icon": "tools",
+                    "subitems": [
+                      {
+                        "key": "IdentifyRegion",
+                        "icon": "identify_region"
+                      },
+                      {
+                        "key": "Measure",
+                        "icon": "measure"
+                      },
+                      {
+                        "key": "Redlining",
+                        "icon": "draw"
+                      },
+                      {
+                        "key": "Editing",
+                        "icon": "editing"
+                      },
+                      {
+                        "key": "DxfExport",
+                        "icon": "dxfexport"
+                      },
+                      {
+                        "key": "RasterExport",
+                        "icon": "rasterexport"
+                      }
+                    ]
+                  },
+                  {
+                    "key": "Print",
+                    "icon": "print"
+                  },
+                  {
+                    "key": "Help",
+                    "icon": "info"
+                  }
+                ],
+                "searchOptions": {
+                  "minScale": 1000,
+                  "showProviderSelection": true,
+                  "providerSelectionAllowAll": true,
+                  "zoomToLayers": false,
+                  "showProvidersInPlaceholder": false
+                },
+                "appMenuClearsTask": true,
+                "logoClickResetsTheme": true
+              }
+            },
+            {
+              "name": "ThemeSwitcher"
+            },
+            {
+              "name": "Measure",
+              "cfg": {
+                "showMeasureModeSwitcher": true
+              }
+            },
+            {
+              "name": "Identify",
+              "cfg": {
+                "params": {
+                  "FI_POINT_TOLERANCE": 32,
+                  "FI_LINE_TOLERANCE": 16,
+                  "FI_POLYGON_TOLERANCE": 8
+                },
+                "enableExport": true,
+                "longAttributesDisplay": "ellipsis",
+                "displayResultTree": true
+              }
+            },
+            {
+              "name": "Share",
+              "cfg": {
+                "showSocials": true,
+                "showLink": true,
+                "showQRCode": true
+              }
+            },
+            {
+              "name": "Print"
+            },
+            {
+              "name": "Help"
+            },
+            {
+              "name": "MapCopyright"
+            },
+            {
+              "name": "LayerTree",
+              "cfg": {
+                "showLegendIcons": true,
+                "showRootEntry": true,
+                "showQueryableIcon": true,
+                "allowMapTips": true,
+                "allowCompare": true,
+                "allowImport": true,
+                "groupTogglesSublayers": false,
+                "grayUnchecked": false,
+                "flattenGroups": false,
+                "layerInfoWindowSize": {
+                  "width": 480,
+                  "height": 400
+                },
+                "bboxDependentLegend": false
+              }
+            },
+            {
+              "name": "DxfExport"
+            },
+            {
+              "name": "RasterExport",
+              "cfg": {
+                "dpis": [
+                  96,
+                  300
+                ]
+              }
+            },
+            {
+              "name": "Redlining"
+            },
+            {
+              "name": "Editing"
+            },
+            {
+              "name": "MapCompare"
+            },
+            {
+              "name": "HeightProfile",
+              "cfg": {
+                "heighProfilePrecision": 0
+              }
+            },
+            {
+              "name": "MapInfoTooltip",
+              "cfg": {
+                "elevationPrecision": 0,
+                "includeWGS84": true
+              }
+            },
+            {
+              "name": "IdentifyRegion",
+              "cfg": {
+                "useWfs": false
+              }
+            }
+          ],
+          "desktop": [
+            {
+              "name": "Map",
+              "cfg": {
+                "mapOptions": {
+                  "zoomDuration": 250,
+                  "antialiasing": true
+                },
+                "toolsOptions": {
+                  "OverviewSupport": {
+                    "tipLabel": "Overview"
+                  },
+                  "LocateSupport": {
+                    "keepCurrentZoomLevel": true
+                  },
+                  "ScaleBarSupport": {
+                    "units": "metric"
+                  }
+                }
+              }
+            },
+            {
+              "name": "HomeButton",
+              "cfg": {
+                "position": 4
+              }
+            },
+            {
+              "name": "LocateButton",
+              "cfg": {
+                "position": 3
+              }
+            },
+            {
+              "name": "ZoomIn",
+              "cfg": {
+                "position": 2
+              }
+            },
+            {
+              "name": "ZoomOut",
+              "cfg": {
+                "position": 1
+              }
+            },
+            {
+              "name": "BackgroundSwitcher",
+              "cfg": {
+                "position": 0
+              }
+            },
+            {
+              "name": "TopBar",
+              "cfg": {
+                "menuItems": [
+                  {
+                    "key": "ThemeSwitcher",
+                    "icon": "themes"
+                  },
+                  {
+                    "key": "LayerTree",
+                    "icon": "layers"
+                  },
+                  {
+                    "key": "Share",
+                    "icon": "share"
+                  },
+                  {
+                    "key": "Tools",
+                    "icon": "tools",
+                    "subitems": [
+                      {
+                        "key": "IdentifyRegion",
+                        "icon": "identify_region"
+                      },
+                      {
+                        "key": "Measure",
+                        "icon": "measure"
+                      },
+                      {
+                        "key": "Redlining",
+                        "icon": "draw"
+                      },
+                      {
+                        "key": "Editing",
+                        "icon": "editing"
+                      },
+                      {
+                        "key": "DxfExport",
+                        "icon": "dxfexport"
+                      },
+                      {
+                        "key": "RasterExport",
+                        "icon": "rasterexport"
+                      }
+                    ]
+                  },
+                  {
+                    "key": "Print",
+                    "icon": "print"
+                  },
+                  {
+                    "key": "Help",
+                    "icon": "info"
+                  }
+                ],
+                "toolbarItems": [
+                  {
+                    "key": "Measure",
+                    "mode": "LineString",
+                    "icon": "measure_line"
+                  },
+                  {
+                    "key": "Measure",
+                    "mode": "Polygon",
+                    "icon": "measure_polygon"
+                  },
+                  {
+                    "key": "Print",
+                    "icon": "print"
+                  },
+                  {
+                    "key": "IdentifyRegion",
+                    "icon": "identify_region"
+                  }
+                ],
+                "searchOptions": {
+                  "minScale": 1000,
+                  "showProviderSelection": true,
+                  "providerSelectionAllowAll": true,
+                  "zoomToLayers": false,
+                  "showProvidersInPlaceholder": false
+                },
+                "appMenuClearsTask": true,
+                "logoUrl": "/"
+              }
+            },
+            {
+              "name": "BottomBar",
+              "cfg": {
+                "viewertitleUrl": "http://qgis.org/",
+                "termsUrl": "http://qgis.org/"
+              }
+            },
+            {
+              "name": "Measure",
+              "cfg": {
+                "showMeasureModeSwitcher": true
+              }
+            },
+            {
+              "name": "ThemeSwitcher"
+            },
+            {
+              "name": "LayerTree",
+              "cfg": {
+                "showLegendIcons": true,
+                "showRootEntry": true,
+                "showQueryableIcon": true,
+                "allowMapTips": true,
+                "allowCompare": true,
+                "allowImport": true,
+                "groupTogglesSublayers": true,
+                "grayUnchecked": false,
+                "flattenGroups": false,
+                "layerInfoWindowSize": {
+                  "width": 480,
+                  "height": 400
+                },
+                "bboxDependentLegend": false
+              }
+            },
+            {
+              "name": "Identify",
+              "cfg": {
+                "params": {
+                  "FI_POINT_TOLERANCE": 16,
+                  "FI_LINE_TOLERANCE": 8,
+                  "FI_POLYGON_TOLERANCE": 4
+                },
+                "enableExport": true,
+                "longAttributesDisplay": "ellipsis",
+                "displayResultTree": true,
+                "initialWidth": 480,
+                "initialHeight": 550
+              }
+            },
+            {
+              "name": "MapTip"
+            },
+            {
+              "name": "Share",
+              "cfg": {
+                "showSocials": true,
+                "showLink": true,
+                "showQRCode": true
+              }
+            },
+            {
+              "name": "Print"
+            },
+            {
+              "name": "Help"
+            },
+            {
+              "name": "MapCopyright"
+            },
+            {
+              "name": "DxfExport"
+            },
+            {
+              "name": "RasterExport",
+              "cfg": {
+                "dpis": [
+                  96,
+                  300
+                ]
+              }
+            },
+            {
+              "name": "Redlining"
+            },
+            {
+              "name": "Editing"
+            },
+            {
+              "name": "MapCompare"
+            },
+            {
+              "name": "HeightProfile",
+              "cfg": {
+                "heighProfilePrecision": 0
+              }
+            },
+            {
+              "name": "MapInfoTooltip",
+              "cfg": {
+                "elevationPrecision": 0,
+                "includeWGS84": true
+              }
+            },
+            {
+              "name": "IdentifyRegion",
+              "cfg": {
+                "useWfs": false
+              }
+            }
+          ]
+        }
+      }
+    },
+    "qwc2_themes": {
+      "themes": {
+        "title": "root",
+        "items": [
+          {
+            "id": "qwc_demo",
+            "name": "qwc_demo",
+            "title": "Demo",
+            "description": "",
+            "wms_name": "qwc_demo",
+            "url": "/ows/qwc_demo",
+            "attribution": {
+              "Title": "Demo attribution",
+              "OnlineResource": "https://127.0.0.1/"
+            },
+            "abstract": "",
+            "keywords": "",
+            "mapCrs": "EPSG:3857",
+            "additionalMouseCrs": [],
+            "bbox": {
+              "crs": "EPSG:4326",
+              "bounds": [
+                -180.0,
+                -89.0,
+                180.0,
+                89.0
+              ]
+            },
+            "initialBbox": {
+              "crs": "EPSG:3857",
+              "bounds": [
+                -1000000,
+                4000000,
+                3000000,
+                8000000
+              ]
+            },
+            "sublayers": [
+              {
+                "name": "edit_demo",
+                "title": "Edit Demo",
+                "sublayers": [
+                  {
+                    "name": "edit_points",
+                    "title": "Edit Points",
+                    "visibility": true,
+                    "queryable": true,
+                    "displayField": "name",
+                    "opacity": 255,
+                    "bbox": [
+                      8.5408,
+                      47.3777,
+                      8.5408,
+                      47.3777
+                    ]
+                  },
+                  {
+                    "name": "edit_lines",
+                    "title": "Edit Lines",
+                    "visibility": true,
+                    "queryable": true,
+                    "displayField": "name",
+                    "opacity": 255,
+                    "bbox": [
+                      8.54212,
+                      47.3771,
+                      8.54228,
+                      47.3775
+                    ]
+                  },
+                  {
+                    "name": "edit_polygons",
+                    "title": "Edit Polygons",
+                    "visibility": true,
+                    "queryable": true,
+                    "displayField": "name",
+                    "opacity": 255,
+                    "bbox": [
+                      8.54122,
+                      47.3775,
+                      8.54146,
+                      47.3778
+                    ]
+                  }
+                ],
+                "expanded": true
+              },
+              {
+                "name": "geographic_lines",
+                "title": "Geographic lines",
+                "visibility": true,
+                "queryable": true,
+                "displayField": "name",
+                "opacity": 255,
+                "bbox": [
+                  -180.0,
+                  -90.0,
+                  180.0,
+                  90.0
+                ]
+              },
+              {
+                "name": "country_names",
+                "title": "Country names",
+                "visibility": true,
+                "queryable": false,
+                "opacity": 255,
+                "bbox": [
+                  -179.701,
+                  -55.1816,
+                  172.133,
+                  73.5987
+                ]
+              },
+              {
+                "name": "states_provinces",
+                "title": "States and Provinces",
+                "visibility": true,
+                "queryable": false,
+                "opacity": 255,
+                "bbox": [
+                  -179.964,
+                  -47.2981,
+                  171.813,
+                  81.2809
+                ]
+              },
+              {
+                "name": "countries",
+                "title": "Countries",
+                "visibility": true,
+                "queryable": true,
+                "displayField": "name",
+                "opacity": 255,
+                "bbox": [
+                  -178.2,
+                  -89.5217,
+                  178.2,
+                  83.8932
+                ]
+              }
+            ],
+            "expanded": true,
+            "drawingOrder": [
+              "Blue Marble Shaded Relief",
+              "OpenStreetMap",
+              "Countries",
+              "States and Provinces",
+              "Country names",
+              "Geographic lines",
+              "Edit Polygons",
+              "Edit Lines",
+              "Edit Points"
+            ],
+            "backgroundLayers": [
+              {
+                "name": "bluemarble",
+                "printLayer": "bluemarble_bg",
+                "visibility": true
+              },
+              {
+                "name": "mapnik",
+                "printLayer": "osm_bg"
+              }
+            ],
+            "print": [
+              {
+                "name": "A4 Landscape",
+                "map": {
+                  "name": "map0",
+                  "width": 220.0,
+                  "height": 190.0
+                },
+                "labels": [
+                  "user_text"
+                ]
+              }
+            ],
+            "skipEmptyFeatureAttributes": true,
+            "searchProviders": [
+              "coordinates"
+            ],
+            "editConfig": null,
+            "thumbnail": "img/mapthumbs/default.jpg",
+            "availableFormats": [
+              "image/jpeg",
+              "image/png",
+              "image/png; mode=16bit",
+              "image/png; mode=8bit",
+              "image/png; mode=1bit"
+            ],
+            "infoFormats": [
+              "text/plain",
+              "text/html",
+              "text/xml",
+              "application/vnd.ogc.gml",
+              "application/vnd.ogc.gml/3.1.1"
+            ],
+            "printResolutions": [
+              300
+            ]
+          }
+        ],
+        "subdirs": [],
+        "defaultTheme": "qwc_demo",
+        "externalLayers": [],
+        "backgroundLayers": [
+          {
+            "name": "mapnik",
+            "title": "Open Street Map",
+            "type": "osm",
+            "source": "osm",
+            "thumbnail": "mapnik.jpg",
+            "attribution": "OpenStreetMap contributors",
+            "attributionUrl": "https://www.openstreetmap.org/copyright"
+          },
+          {
+            "type": "wmts",
+            "url": "http://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief/default/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.jpeg",
+            "title": "Blue Marble",
+            "name": "bluemarble",
+            "tileMatrixPrefix": "",
+            "tileMatrixSet": "GoogleMapsCompatible_Level8",
+            "originX": -20037508.34278925,
+            "originY": 20037508.34278925,
+            "projection:": "EPSG:3857",
+            "resolutions": [
+              156543.03390625,
+              78271.516953125,
+              39135.7584765625,
+              19567.87923828125,
+              9783.939619140625,
+              4891.9698095703125,
+              2445.9849047851562,
+              1222.9924523925781
+            ],
+            "tileSize": [
+              256,
+              256
+            ],
+            "thumbnail": "default.jpg"
+          }
+        ],
+        "pluginData": [],
+        "themeInfoLinks": [],
+        "defaultWMSVersion": "1.3.0",
+        "defaultScales": [
+          100000000,
+          50000000,
+          25000000,
+          10000000,
+          4000000,
+          2000000,
+          1000000,
+          400000,
+          200000,
+          80000,
+          40000,
+          20000,
+          10000,
+          8000,
+          6000,
+          4000,
+          2000,
+          1000,
+          500,
+          250,
+          100
+        ],
+        "defaultPrintScales": null,
+        "defaultPrintResolutions": null,
+        "defaultPrintGrid": [
+          {
+            "s": 10000000,
+            "x": 1000000,
+            "y": 1000000
+          },
+          {
+            "s": 1000000,
+            "x": 100000,
+            "y": 100000
+          },
+          {
+            "s": 100000,
+            "x": 10000,
+            "y": 10000
+          },
+          {
+            "s": 10000,
+            "x": 1000,
+            "y": 1000
+          },
+          {
+            "s": 1000,
+            "x": 100,
+            "y": 100
+          },
+          {
+            "s": 100,
+            "x": 10,
+            "y": 10
+          }
+        ]
+      }
+    }
+  }
+}

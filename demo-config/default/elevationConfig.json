@@ -1,5 +1,5 @@
 {
-  "$schema": "https://git.sourcepole.ch/ktso/somap/-/raw/master/docs/schemas/qwc-elevation-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-elevation-service/raw/master/schemas/qwc-elevation-service.json",
   "service": "elevation",
   "config": {
     "elevation_dataset": "/vsicurl/https://data.sourcepole.com/srtm_1km_3857.tif"

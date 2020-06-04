@@ -20,25 +20,25 @@ services:
       - ./volumes/qgs-resources:/data:ro
       - ./volumes/geodata:/geodata:ro
 
-  qwc-config-service:
-    build:
-      context: ./wsgi-service
-      args:
-        - SERVICE=qwc-config-service
-    environment:
-      - QGIS_SERVER_URL=http://qwc-qgis-server/ows/
-      - QGIS_RESOURCES_PATH=/data/
-      - QWC2_PATH=/qwc2/
-      - QWC2_THEMES_CONFIG=/qwc2/themesConfig.json
-      #- DEFAULT_ALLOW=False
-    ports:
-      - "127.0.0.1:5010:9090"
-    volumes:
-      - ./volumes/qgs-resources:/data:ro
-      - ./volumes/qwc2:/qwc2
-    depends_on:
-      qwc-postgis:
-        condition: service_healthy
+  # qwc-config-service:
+  #   build:
+  #     context: ./wsgi-service
+  #     args:
+  #       - SERVICE=qwc-config-service
+  #   environment:
+  #     - QGIS_SERVER_URL=http://qwc-qgis-server/ows/
+  #     - QGIS_RESOURCES_PATH=/data/
+  #     - QWC2_PATH=/qwc2/
+  #     - QWC2_THEMES_CONFIG=/qwc2/themesConfig.json
+  #     #- DEFAULT_ALLOW=False
+  #   ports:
+  #     - "127.0.0.1:5010:9090"
+  #   volumes:
+  #     - ./volumes/qgs-resources:/data:ro
+  #     - ./volumes/qwc2:/qwc2
+  #   depends_on:
+  #     qwc-postgis:
+  #       condition: service_healthy
 
   qwc-ogc-service:
     image: sourcepole/qwc-ogc-service
@@ -93,28 +93,14 @@ services:
       - qwc-solr
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v1.1.0
+    image: sourcepole/qwc-map-viewer-demo
     # image: sourcepole/qwc-map-viewer-base
-    environment:
-      - CONFIG_SERVICE_URL=http://qwc-config-service:9090/
-      - QWC2_PATH=/qwc2/
-      - QWC2_CONFIG=/qwc2/config.json
-      - OGC_SERVICE_URL=/ows/
-      - DATA_SERVICE_URL=/api/v1/data/
-      - ELEVATION_SERVICE_URL=/elevation/
-      #- AUTH_SERVICE_URL=/auth/
-      #- 'AUTH_SERVICES_CONFIG={"_intern_": "/auth/"}'
-      # NOTE: escape literal '$' with '$$' to avoid variable substitution from docker-compose
-      #- 'ORIGIN_CONFIG={"host": {"_intern_": "^127.0.0.1(:\\d+)?$$"}}'
-      #- CONFIG_CHECK_INTERVAL=60
-      #- DEFAULT_CONFIG_CACHE_DURATION=86400
-      #- SEARCH_SERVICE_URL=
     ports:
       - "127.0.0.1:5030:9090"
-    # volumes:
+    volumes:
+        - ./demo-config:/srv/qwc_service/config:ro
     #   - ./volumes/qwc2:/qwc2:ro
     depends_on:
-      - qwc-config-service
       - qwc-ogc-service
       - qwc-data-service
       - qwc-elevation-service

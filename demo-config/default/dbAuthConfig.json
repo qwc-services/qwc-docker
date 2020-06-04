@@ -5,4 +5,3 @@
     "db_url": "postgresql:///?service=qwc_configdb"
   }
 }
-
