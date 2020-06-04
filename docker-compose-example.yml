@@ -20,25 +20,17 @@ services:
       - ./volumes/qgs-resources:/data:ro
       - ./volumes/geodata:/geodata:ro
 
-  # qwc-config-service:
-  #   build:
-  #     context: ./wsgi-service
-  #     args:
-  #       - SERVICE=qwc-config-service
-  #   environment:
-  #     - QGIS_SERVER_URL=http://qwc-qgis-server/ows/
-  #     - QGIS_RESOURCES_PATH=/data/
-  #     - QWC2_PATH=/qwc2/
-  #     - QWC2_THEMES_CONFIG=/qwc2/themesConfig.json
-  #     #- DEFAULT_ALLOW=False
-  #   ports:
-  #     - "127.0.0.1:5010:9090"
-  #   volumes:
-  #     - ./volumes/qgs-resources:/data:ro
-  #     - ./volumes/qwc2:/qwc2
-  #   depends_on:
-  #     qwc-postgis:
-  #       condition: service_healthy
+  qwc-config-service:
+    image: sourcepole/qwc-config-generator
+    ports:
+      - "127.0.0.1:5010:9090"
+    volumes:
+      - ./demo-config:/srv/qwc_service/config
+      - ./volumes/qwc2:/qwc2
+      - ./volumes/qgs-resources:/data:ro
+    depends_on:
+      - qwc-qgis-server
+      - qwc-postgis
 
   qwc-ogc-service:
     image: sourcepole/qwc-ogc-service
