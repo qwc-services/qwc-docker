@@ -1,0 +1,132 @@
+{
+  "service": "config-generator",
+  "config": {
+    "tenant": "default",
+    "qwc2_themes_config_file": "/qwc2/themesConfig-example.json",
+    "default_qgis_server_url": "http://qwc-qgis-server/ows/",
+    "config_db_url": "postgresql:///?service=qwc_configdb",
+    "config_path": "/srv/qwc_service/config/"
+  },
+  "services": [
+    {
+      "name": "ogc",
+      "generator_config": {
+        "wms_services": {
+          "online_resources": {
+            "service": "http://qwc-qgis-server/ows/",
+            "feature_info": "http://qwc-qgis-server/ows/",
+            "legend": "http://qwc-qgis-server/ows/"
+          }
+        }
+      },
+      "config": {
+        "default_qgis_server_url": "http://qwc-qgis-server/ows/"
+      }
+    },
+    {
+      "name": "mapViewer",
+      "generator_config": {
+        "qwc2_config": {
+          "qwc2_config_file": "/qwc2/config.json",
+          "qwc2_index_file": "/qwc2/index.html"
+        }
+      },
+      "config": {
+        "qwc2_path": "/qwc2/",
+        "auth_service_url": "/auth/",
+        "data_service_url": "/api/v1/data/",
+        "#document_service_url": "/api/v1/document/",
+        "elevation_service_url": "/elevation/",
+        "#info_service_url": "/api/v1/featureinfo/",
+        "#legend_service_url": "/api/v1/legend/",
+        "mapinfo_service_url": "/api/v1/mapinfo/",
+        "ogc_service_url": "/ows/",
+        "permalink_service_url": "/api/v1/permalink/",
+        "#print_service_url": "/api/v1/print/",
+        "search_data_service_url": "/api/v1/data/",
+        "search_service_url": "/api/v2/search/"
+      }
+    },
+    {
+      "name": "search",
+      "config": {
+        "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",
+        "search_result_limit": 50,
+        "db_url": "postgresql:///?service=qwc_geodb"
+      },
+      "resources": {
+        "facets": [
+          {
+            "name": "background",
+            "filter_word": "Background"
+          },
+          {
+            "name": "foreground",
+            "filter_word": "Map"
+          },
+          {
+            "name": "ne_10m_admin_0_countries",
+            "filter_word": "Country",
+            "table_name": "qwc_geodb.search_v",
+            "geometry_column": "geom",
+            "facet_column": "subclass"
+          }
+        ]
+      },
+      "permissions": [
+        {
+          "role": "public",
+          "permissions": {
+            "dataproducts": [
+              "qwc_demo"
+            ],
+            "solr_facets": [
+              "foreground",
+              "ne_10m_admin_0_countries"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "adminGui",
+      "config": {
+        "db_url": "postgresql:///?service=qwc_configdb",
+        "totp_enabled": false,
+        "user_info_fields": [],
+        "proxy_url_whitelist": [],
+        "proxy_timeout": 60
+      }
+    },
+    {
+      "name": "dbAuth",
+      "config": {
+        "db_url": "postgresql:///?service=qwc_configdb"
+      }
+    },
+    {
+      "name": "elevation",
+      "config": {
+        "elevation_dataset": "/vsicurl/https://data.sourcepole.com/srtm_1km_3857.tif"
+      }
+    },
+    {
+      "name": "mapinfo",
+      "config": {
+        "db_url": "postgresql:///?service=qwc_geodb",
+        "info_table": "qwc_geodb.ne_10m_admin_0_countries",
+        "info_geom_col": "wkb_geometry",
+        "info_display_col": "name",
+        "info_title": "Country"
+      }
+    },
+    {
+      "name": "permalink",
+      "config": {
+        "db_url": "postgresql:///?service=qwc_configdb",
+        "permalinks_table": "qwc_config.permalinks",
+        "user_permalink_table": "qwc_config.user_permalinks"
+      }
+    }
+  ]
+}

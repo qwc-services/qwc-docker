@@ -25,6 +25,8 @@ services:
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
+      #- ./volumes/config-in:/srv/qwc_service/config-inro
+      - ./volumes/config-in/default/configGeneratorConfig.json:/srv/qwc_service/configGeneratorConfig.json:ro
       - ./demo-config:/srv/qwc_service/config
       - ./volumes/qwc2:/qwc2
       - ./volumes/qgs-resources:/data:ro
