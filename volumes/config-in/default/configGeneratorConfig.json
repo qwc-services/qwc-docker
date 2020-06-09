@@ -4,8 +4,7 @@
     "tenant": "default",
     "qwc2_themes_config_file": "/qwc2/themesConfig-example.json",
     "default_qgis_server_url": "http://qwc-qgis-server/ows/",
-    "config_db_url": "postgresql:///?service=qwc_configdb",
-    "config_path": "/srv/qwc_service/config/"
+    "config_db_url": "postgresql:///?service=qwc_configdb"
   },
   "services": [
     {
