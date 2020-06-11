@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-map-viewer/v2/schemas/qwc-map-viewer.json",
+  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-map-viewer/master/schemas/qwc-map-viewer.json",
   "service": "map-viewer",
   "config": {
     "qwc2_path": "/qwc2/",

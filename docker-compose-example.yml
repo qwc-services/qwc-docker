@@ -25,6 +25,7 @@ services:
     environment:
         - INPUT_CONFIG_PATH=/srv/qwc_service/config-in
         - OUTPUT_CONFIG_PATH=/srv/qwc_service/config-out
+        - QGIS_RESOURCES_PATH=/data
     ports:
       - "127.0.0.1:5010:9090"
     volumes:

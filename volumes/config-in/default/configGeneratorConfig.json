@@ -91,6 +91,7 @@
       "name": "adminGui",
       "config": {
         "db_url": "postgresql:///?service=qwc_configdb",
+        "config_generator_service_url": "http://qwc-config-service:9090",
         "totp_enabled": false,
         "user_info_fields": [],
         "proxy_url_whitelist": [],
@@ -126,6 +127,10 @@
         "permalinks_table": "qwc_config.permalinks",
         "user_permalink_table": "qwc_config.user_permalinks"
       }
+    },
+    {
+      "name": "data",
+      "config": {}
     }
   ]
 }

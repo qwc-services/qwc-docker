@@ -284,7 +284,17 @@
           "mapnik",
           "bluemarble"
         ],
-        "data_datasets": [],
+        "data_datasets": [
+          {
+            "name": "edit_points",
+            "attributes": [],
+            "writable": true,
+            "creatable": true,
+            "readable": true,
+            "updatable": true,
+            "deletable": true
+          }
+        ],
         "dataproducts": [
           "qwc_demo"
         ],
