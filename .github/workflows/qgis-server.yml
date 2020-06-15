@@ -1,4 +1,4 @@
-name: Publish qwc-qgis-server docker image
+name: Publish qwc-qgis-server docker images
 
 on: [push]
 
@@ -10,12 +10,12 @@ jobs:
 
       - uses: actions/checkout@master
 
-      - name: Get version tag
-        id: get_tag
+      - name: Get version tag QGIS 3
+        id: get_tag_qgis_3
         run: |
-          echo ::set-output name=tag::2.18.28
+          echo ::set-output name=tag::3.10
 
-      - name: Build and publish docker image
+      - name: Build and publish docker image for QGIS Server 3
         uses: elgohr/Publish-Docker-Github-Action@2.12
         env:
           URL_PREFIX: /ows
@@ -23,6 +23,24 @@ jobs:
           name: sourcepole/qwc-qgis-server
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          tags: "latest,${{ steps.get_tag.outputs.tag }}"
+          tags: "latest,${{ steps.get_tag_qgis_3.outputs.tag }}"
           workdir: qgis-server
+          buildargs: URL_PREFIX
+
+      - name: Get version tag QGIS 2
+        id: get_tag_qgis_2
+        run: |
+          echo ::set-output name=tag::2.18.28
+
+      - name: Build and publish docker image for QGIS Server 2
+        uses: elgohr/Publish-Docker-Github-Action@2.12
+        env:
+          URL_PREFIX: /ows
+        with:
+          name: sourcepole/qwc-qgis-server
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          tags: "${{ steps.get_tag_qgis_2.outputs.tag }}"
+          workdir: qgis-server
+          dockerfile: Dockerfile-qgis2
           buildargs: URL_PREFIX
