@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-ogc-service/master/schemas/qwc-ogc-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-ogc-service/raw/master/schemas/qwc-ogc-service.json",
   "service": "ogc",
   "config": {
     "default_qgis_server_url": "http://qwc-qgis-server/ows/"
@@ -153,7 +153,8 @@
                 "iso_n3",
                 "geometry",
                 "maptip"
-              ]
+              ],
+              "queryable": true
             },
             {
               "name": "states_provinces",
@@ -176,7 +177,8 @@
                 "type",
                 "geometry",
                 "maptip"
-              ]
+              ],
+              "queryable": true
             },
             {
               "name": "countries",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-mapinfo-service/master/schemas/qwc-mapinfo-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-mapinfo-service/raw/master/schemas/qwc-mapinfo-service.json",
   "service": "mapinfo",
   "config": {
     "db_url": "postgresql:///?service=qwc_geodb",

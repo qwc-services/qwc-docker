@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-map-viewer/master/schemas/qwc-map-viewer.json",
+  "$schema": "https://github.com/qwc-services/qwc-map-viewer/raw/master/schemas/qwc-map-viewer.json",
   "service": "map-viewer",
   "config": {
     "qwc2_path": "/qwc2/",
@@ -528,16 +528,14 @@
               "Title": "Demo attribution",
               "OnlineResource": "https://127.0.0.1/"
             },
-            "abstract": "",
-            "keywords": "",
             "mapCrs": "EPSG:3857",
             "additionalMouseCrs": [],
             "bbox": {
               "crs": "EPSG:4326",
               "bounds": [
-                -180.0,
+                -179.999996,
                 -89.0,
-                180.0,
+                179.999996,
                 89.0
               ]
             },
@@ -563,11 +561,13 @@
                     "displayField": "name",
                     "opacity": 255,
                     "bbox": [
-                      8.5408,
-                      47.3777,
-                      8.5408,
-                      47.3777
-                    ]
+                      8.540804,
+                      47.377738,
+                      8.540805,
+                      47.377739
+                    ],
+                    "abstract": "",
+                    "keywords": ""
                   },
                   {
                     "name": "edit_lines",
@@ -577,11 +577,13 @@
                     "displayField": "name",
                     "opacity": 255,
                     "bbox": [
-                      8.54212,
-                      47.3771,
-                      8.54228,
-                      47.3775
-                    ]
+                      8.542115,
+                      47.377069,
+                      8.542278,
+                      47.377544
+                    ],
+                    "abstract": "",
+                    "keywords": ""
                   },
                   {
                     "name": "edit_polygons",
@@ -591,14 +593,17 @@
                     "displayField": "name",
                     "opacity": 255,
                     "bbox": [
-                      8.54122,
-                      47.3775,
-                      8.54146,
-                      47.3778
-                    ]
+                      8.541217,
+                      47.377464,
+                      8.541461,
+                      47.377751
+                    ],
+                    "abstract": "",
+                    "keywords": ""
                   }
                 ],
-                "expanded": true
+                "expanded": false,
+                "mutuallyExclusive": false
               },
               {
                 "name": "geographic_lines",
@@ -609,36 +614,44 @@
                 "opacity": 255,
                 "bbox": [
                   -180.0,
-                  -90.0,
-                  180.0,
-                  90.0
-                ]
+                  -66.549927,
+                  179.999997,
+                  66.549986
+                ],
+                "abstract": "",
+                "keywords": ""
               },
               {
                 "name": "country_names",
                 "title": "Country names",
                 "visibility": true,
-                "queryable": false,
+                "queryable": true,
+                "displayField": "z_name",
                 "opacity": 255,
                 "bbox": [
-                  -179.701,
-                  -55.1816,
-                  172.133,
-                  73.5987
-                ]
+                  -177.22902,
+                  -80.516568,
+                  178.519895,
+                  73.34887
+                ],
+                "abstract": "",
+                "keywords": ""
               },
               {
                 "name": "states_provinces",
                 "title": "States and Provinces",
                 "visibility": true,
-                "queryable": false,
+                "queryable": true,
+                "displayField": "name",
                 "opacity": 255,
                 "bbox": [
-                  -179.964,
-                  -47.2981,
-                  171.813,
-                  81.2809
-                ]
+                  -178.137086,
+                  -49.250871,
+                  178.448623,
+                  81.128532
+                ],
+                "abstract": "",
+                "keywords": ""
               },
               {
                 "name": "countries",
@@ -648,24 +661,26 @@
                 "displayField": "name",
                 "opacity": 255,
                 "bbox": [
-                  -178.2,
-                  -89.5217,
-                  178.2,
-                  83.8932
-                ]
+                  -180.0,
+                  -89.501386,
+                  180.0,
+                  83.634101
+                ],
+                "abstract": "",
+                "keywords": ""
               }
             ],
             "expanded": true,
             "drawingOrder": [
-              "Blue Marble Shaded Relief",
-              "OpenStreetMap",
-              "Countries",
-              "States and Provinces",
-              "Country names",
-              "Geographic lines",
-              "Edit Polygons",
-              "Edit Lines",
-              "Edit Points"
+              "bluemarble_bg",
+              "osm_bg",
+              "countries",
+              "states_provinces",
+              "country_names",
+              "geographic_lines",
+              "edit_polygons",
+              "edit_lines",
+              "edit_points"
             ],
             "backgroundLayers": [
               {

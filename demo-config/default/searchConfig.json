@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-fulltext-search-service/master/schemas/qwc-search-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-fulltext-search-service/raw/master/schemas/qwc-search-service.json",
   "service": "search",
   "config": {
     "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",

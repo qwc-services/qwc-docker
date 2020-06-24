@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-permalink-service/master/schemas/qwc-permalink-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-permalink-service/raw/master/schemas/qwc-permalink-service.json",
   "service": "permalink",
   "config": {
     "db_url": "postgresql:///?service=qwc_configdb",

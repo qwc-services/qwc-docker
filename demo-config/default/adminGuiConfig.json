@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-admin-gui/master/schemas/qwc-admin-gui.json",
+  "$schema": "https://github.com/qwc-services/qwc-admin-gui/raw/master/schemas/qwc-admin-gui.json",
   "service": "admin-gui",
   "config": {
     "db_url": "postgresql:///?service=qwc_configdb",
