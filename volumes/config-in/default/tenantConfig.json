@@ -5,7 +5,6 @@
     "default_qgis_server_url": "http://qwc-qgis-server/ows/",
     "config_db_url": "postgresql:///?service=qwc_configdb",
     "permissions_default_allow": true,
-    "qgis_projects_input_dir": "/qgis_projects",
     "qgis_projects_output_dir": "/data"
   },
   "themesConfig": {

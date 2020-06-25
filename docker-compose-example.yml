@@ -28,10 +28,9 @@ services:
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
-      - ./volumes/config-in:/srv/qwc_service/config-in:ro
+      - ./volumes/config-in:/srv/qwc_service/config-in
       - ./demo-config:/srv/qwc_service/config-out
       - ./volumes/qwc2:/qwc2
-      - ./volumes/config-in:/qgis_projects:ro
       - ./volumes/qgs-resources:/data
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
     depends_on:
