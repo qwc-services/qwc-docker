@@ -517,12 +517,9 @@
       <referencingLayers/>
       <fieldConfiguration>
         <field name="id">
-          <editWidget type="TextEdit">
+          <editWidget type="Hidden">
             <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="QString" value="0"/>
-                <Option name="UseHtml" type="QString" value="0"/>
-              </Option>
+              <Option/>
             </config>
           </editWidget>
         </field>
@@ -699,7 +696,17 @@ def my_form_open(dialog, layer, feature):
 ]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
-      <editable/>
+      <editable>
+        <field name="id" editable="0"/>
+        <field name="name" editable="1"/>
+        <field name="description" editable="1"/>
+        <field name="num" editable="1"/>
+        <field name="value" editable="1"/>
+        <field name="type" editable="1"/>
+        <field name="amount" editable="1"/>
+        <field name="validated" editable="1"/>
+        <field name="datetime" editable="1"/>
+      </editable>
       <labelOnTop/>
       <widgets/>
       <previewExpression>"name"</previewExpression>
@@ -921,12 +928,9 @@ def my_form_open(dialog, layer, feature):
       <referencingLayers/>
       <fieldConfiguration>
         <field name="id">
-          <editWidget type="TextEdit">
+          <editWidget type="Hidden">
             <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="QString" value="0"/>
-                <Option name="UseHtml" type="QString" value="0"/>
-              </Option>
+              <Option/>
             </config>
           </editWidget>
         </field>
@@ -1103,7 +1107,17 @@ def my_form_open(dialog, layer, feature):
 ]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
-      <editable/>
+      <editable>
+        <field name="id" editable="0"/>
+        <field name="name" editable="1"/>
+        <field name="description" editable="1"/>
+        <field name="num" editable="1"/>
+        <field name="value" editable="1"/>
+        <field name="type" editable="1"/>
+        <field name="amount" editable="1"/>
+        <field name="validated" editable="1"/>
+        <field name="datetime" editable="1"/>
+      </editable>
       <labelOnTop/>
       <widgets/>
       <previewExpression>"name"</previewExpression>
@@ -1268,12 +1282,9 @@ def my_form_open(dialog, layer, feature):
       <referencingLayers/>
       <fieldConfiguration>
         <field name="id">
-          <editWidget type="TextEdit">
+          <editWidget type="Hidden">
             <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="QString" value="0"/>
-                <Option name="UseHtml" type="QString" value="0"/>
-              </Option>
+              <Option/>
             </config>
           </editWidget>
         </field>
@@ -1450,7 +1461,17 @@ def my_form_open(dialog, layer, feature):
 ]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
-      <editable/>
+      <editable>
+        <field name="id" editable="0"/>
+        <field name="name" editable="1"/>
+        <field name="description" editable="1"/>
+        <field name="num" editable="1"/>
+        <field name="value" editable="1"/>
+        <field name="type" editable="1"/>
+        <field name="amount" editable="1"/>
+        <field name="validated" editable="1"/>
+        <field name="datetime" editable="1"/>
+      </editable>
       <labelOnTop/>
       <widgets/>
       <previewExpression>"name"</previewExpression>

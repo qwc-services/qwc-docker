@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-feature-info-service/master/schemas/qwc-feature-info-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-feature-info-service/raw/master/schemas/qwc-feature-info-service.json",
   "service": "feature-info",
   "config": {
     "default_qgis_server_url": "http://qwc-qgis-server/ows/"
@@ -10,6 +10,7 @@
         "name": "qwc_demo",
         "root_layer": {
           "name": "qwc_demo",
+          "title": "QWC Services Demo WMS",
           "layers": [
             {
               "name": "edit_demo",
@@ -53,9 +54,357 @@
                     {
                       "name": "maptip"
                     }
-                  ]
+                  ],
+                  "display_field": "name"
+                },
+                {
+                  "name": "edit_lines",
+                  "title": "Edit Lines",
+                  "attributes": [
+                    {
+                      "name": "id"
+                    },
+                    {
+                      "name": "name"
+                    },
+                    {
+                      "name": "description"
+                    },
+                    {
+                      "name": "num"
+                    },
+                    {
+                      "name": "value"
+                    },
+                    {
+                      "name": "type"
+                    },
+                    {
+                      "name": "amount"
+                    },
+                    {
+                      "name": "validated"
+                    },
+                    {
+                      "name": "datetime"
+                    },
+                    {
+                      "name": "geometry"
+                    },
+                    {
+                      "name": "maptip"
+                    }
+                  ],
+                  "display_field": "name"
+                },
+                {
+                  "name": "edit_polygons",
+                  "title": "Edit Polygons",
+                  "attributes": [
+                    {
+                      "name": "id"
+                    },
+                    {
+                      "name": "name"
+                    },
+                    {
+                      "name": "description"
+                    },
+                    {
+                      "name": "num"
+                    },
+                    {
+                      "name": "value"
+                    },
+                    {
+                      "name": "type"
+                    },
+                    {
+                      "name": "amount"
+                    },
+                    {
+                      "name": "validated"
+                    },
+                    {
+                      "name": "datetime"
+                    },
+                    {
+                      "name": "geometry"
+                    },
+                    {
+                      "name": "maptip"
+                    }
+                  ],
+                  "display_field": "name"
                 }
               ]
+            },
+            {
+              "name": "geographic_lines",
+              "title": "Geographic lines",
+              "attributes": [
+                {
+                  "name": "ogc_fid"
+                },
+                {
+                  "name": "scalerank"
+                },
+                {
+                  "name": "name"
+                },
+                {
+                  "name": "name_long"
+                },
+                {
+                  "name": "abbrev"
+                },
+                {
+                  "name": "note"
+                },
+                {
+                  "name": "featurecla"
+                },
+                {
+                  "name": "min_zoom"
+                },
+                {
+                  "name": "wikidataid"
+                },
+                {
+                  "name": "name_ar"
+                },
+                {
+                  "name": "name_bn"
+                },
+                {
+                  "name": "name_de"
+                },
+                {
+                  "name": "name_en"
+                },
+                {
+                  "name": "name_es"
+                },
+                {
+                  "name": "name_fr"
+                },
+                {
+                  "name": "name_el"
+                },
+                {
+                  "name": "name_hi"
+                },
+                {
+                  "name": "name_hu"
+                },
+                {
+                  "name": "name_id"
+                },
+                {
+                  "name": "name_it"
+                },
+                {
+                  "name": "name_ja"
+                },
+                {
+                  "name": "name_ko"
+                },
+                {
+                  "name": "name_nl"
+                },
+                {
+                  "name": "name_pl"
+                },
+                {
+                  "name": "name_pt"
+                },
+                {
+                  "name": "name_ru"
+                },
+                {
+                  "name": "name_sv"
+                },
+                {
+                  "name": "name_tr"
+                },
+                {
+                  "name": "name_vi"
+                },
+                {
+                  "name": "name_zh"
+                },
+                {
+                  "name": "wdid_score"
+                },
+                {
+                  "name": "ne_id"
+                },
+                {
+                  "name": "geometry"
+                },
+                {
+                  "name": "maptip"
+                }
+              ],
+              "display_field": "name"
+            },
+            {
+              "name": "country_names",
+              "title": "Country names",
+              "attributes": [
+                {
+                  "name": "ogc_fid"
+                },
+                {
+                  "name": "scalerank"
+                },
+                {
+                  "name": "labelrank"
+                },
+                {
+                  "name": "z_postal"
+                },
+                {
+                  "name": "z_abbrev"
+                },
+                {
+                  "name": "z_name"
+                },
+                {
+                  "name": "z_admin"
+                },
+                {
+                  "name": "featurecla"
+                },
+                {
+                  "name": "sovereignt"
+                },
+                {
+                  "name": "sov_a3"
+                },
+                {
+                  "name": "adm0_dif"
+                },
+                {
+                  "name": "level"
+                },
+                {
+                  "name": "type"
+                },
+                {
+                  "name": "admin"
+                },
+                {
+                  "name": "adm0_a3"
+                },
+                {
+                  "name": "geou_dif"
+                },
+                {
+                  "name": "name"
+                },
+                {
+                  "name": "abbrev"
+                },
+                {
+                  "name": "postal"
+                },
+                {
+                  "name": "name_forma"
+                },
+                {
+                  "name": "terr_"
+                },
+                {
+                  "name": "name_sort"
+                },
+                {
+                  "name": "map_color"
+                },
+                {
+                  "name": "pop_est"
+                },
+                {
+                  "name": "gdp_md_est"
+                },
+                {
+                  "name": "fips_10_"
+                },
+                {
+                  "name": "iso_a2"
+                },
+                {
+                  "name": "iso_a3"
+                },
+                {
+                  "name": "iso_n3"
+                },
+                {
+                  "name": "geometry"
+                },
+                {
+                  "name": "maptip"
+                }
+              ],
+              "display_field": "z_name"
+            },
+            {
+              "name": "states_provinces",
+              "title": "States and Provinces",
+              "attributes": [
+                {
+                  "name": "featurecla"
+                },
+                {
+                  "name": "name"
+                },
+                {
+                  "name": "adm0_a3"
+                },
+                {
+                  "name": "adm0_name"
+                },
+                {
+                  "name": "sov_a3"
+                },
+                {
+                  "name": "name_l"
+                },
+                {
+                  "name": "name_r"
+                },
+                {
+                  "name": "name_alt_l"
+                },
+                {
+                  "name": "name_alt_r"
+                },
+                {
+                  "name": "name_loc_l"
+                },
+                {
+                  "name": "name_loc_r"
+                },
+                {
+                  "name": "name_len_l"
+                },
+                {
+                  "name": "name_len_r"
+                },
+                {
+                  "name": "note"
+                },
+                {
+                  "name": "type"
+                },
+                {
+                  "name": "geometry"
+                },
+                {
+                  "name": "maptip"
+                }
+              ],
+              "display_field": "name"
             },
             {
               "name": "countries",

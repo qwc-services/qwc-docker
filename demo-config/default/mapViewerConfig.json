@@ -21,16 +21,22 @@
       "config": {
         "translationsPath": "/translations",
         "assetsPath": "/assets",
-        "urlPositionFormat": "extent",
+        "urlPositionFormat": "centerAndZoom",
         "urlPositionCrs": "",
+        "omitUrlParameterUpdates": false,
         "preserveExtentOnThemeSwitch": true,
         "preserveBackgroundOnThemeSwitch": true,
         "preserveNonThemeLayersOnThemeSwitch": true,
         "allowReorderingLayers": true,
+        "preventSplittingGroupsWhenReordering": false,
+        "allowLayerTreeSeparators": false,
         "allowRemovingThemeLayers": true,
+        "searchThemes": true,
+        "allowAddingOtherThemes": true,
         "allowFractionalZoom": true,
         "localeAwareNumbers": false,
         "wmsDpi": 96,
+        "wmsHidpi": true,
         "defaultFeatureStyle": {
           "strokeColor": [
             0,
@@ -57,25 +63,43 @@
             "code": "EPSG:32632",
             "proj": "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs",
             "label": "WGS 84 / UTM zone 32N"
+          },
+          {
+            "code": "EPSG:21781",
+            "proj": "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=600000 +y_0=200000 +ellps=bessel +towgs84=674.4,15.1,405.3,0,0,0,0 +units=m +no_defs",
+            "label": "CH1903 / LV03"
+          },
+          {
+            "code": "EPSG:2056",
+            "proj": "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs",
+            "label": "CH1903+ / LV95"
+          },
+          {
+            "code": "EPSG:25832",
+            "proj": "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
+            "label": "ETRS89 / UTM 32N"
           }
         ],
         "plugins": {
           "mobile": [
             {
               "name": "Map",
-              "mapOptions": {
-                "zoomDuration": 250,
-                "antialiasing": true
-              },
-              "toolsOptions": {
-                "OverviewSupport": {
-                  "tipLabel": "Overview"
+              "cfg": {
+                "mapOptions": {
+                  "zoomDuration": 250,
+                  "antialiasing": true
                 },
-                "LocateSupport": {
-                  "keepCurrentZoomLevel": true
-                },
-                "ScaleBarSupport": {
-                  "units": "metric"
+                "toolsOptions": {
+                  "OverviewSupport": {
+                    "tipLabel": "Overview"
+                  },
+                  "LocateSupport": {
+                    "keepCurrentZoomLevel": true,
+                    "startupMode": "ENABLED"
+                  },
+                  "ScaleBarSupport": {
+                    "units": "metric"
+                  }
                 }
               }
             },
@@ -153,18 +177,22 @@
                   }
                 ],
                 "searchOptions": {
-                  "minScale": 1000,
+                  "minScaleDenom": 1000,
                   "showProviderSelection": true,
                   "providerSelectionAllowAll": true,
                   "zoomToLayers": false,
                   "showProvidersInPlaceholder": false
                 },
                 "appMenuClearsTask": true,
+                "appMenuVisibleOnStartup": false,
                 "logoClickResetsTheme": true
               }
             },
             {
-              "name": "ThemeSwitcher"
+              "name": "ThemeSwitcher",
+              "cfg": {
+                "collapsibleGroups": true
+              }
             },
             {
               "name": "Measure",
@@ -178,11 +206,13 @@
                 "params": {
                   "FI_POINT_TOLERANCE": 32,
                   "FI_LINE_TOLERANCE": 16,
-                  "FI_POLYGON_TOLERANCE": 8
+                  "FI_POLYGON_TOLERANCE": 8,
+                  "feature_count": 20
                 },
                 "enableExport": true,
-                "longAttributesDisplay": "ellipsis",
-                "displayResultTree": true
+                "longAttributesDisplay": "wrap",
+                "displayResultTree": false,
+                "featureInfoReturnsLayerName": true
               }
             },
             {
@@ -191,13 +221,18 @@
                 "showSocials": true,
                 "showLink": true,
                 "showQRCode": true
+              },
+              "mapClickAction": "identify"
+            },
+            {
+              "name": "Print",
+              "cfg": {
+                "inlinePrintOutput": false
               }
             },
             {
-              "name": "Print"
-            },
-            {
-              "name": "Help"
+              "name": "Help",
+              "mapClickAction": "identify"
             },
             {
               "name": "MapCopyright"
@@ -219,7 +254,8 @@
                   "height": 400
                 },
                 "bboxDependentLegend": false
-              }
+              },
+              "mapClickAction": "unset"
             },
             {
               "name": "DxfExport"
@@ -260,6 +296,12 @@
               "cfg": {
                 "useWfs": false
               }
+            },
+            {
+              "name": "StartupMarker",
+              "cfg": {
+                "removeMode": "onclickonmarker"
+              }
             }
           ],
           "desktop": [
@@ -275,12 +317,22 @@
                     "tipLabel": "Overview"
                   },
                   "LocateSupport": {
-                    "keepCurrentZoomLevel": true
+                    "keepCurrentZoomLevel": true,
+                    "stopFollowingOnDrag": true,
+                    "startupMode": "FOLLOWING"
                   },
                   "ScaleBarSupport": {
                     "units": "metric"
                   }
                 }
+              }
+            },
+            {
+              "name": "TaskButton",
+              "cfg": {
+                "position": 5,
+                "task": "LayerTree",
+                "icon": "list-alt"
               }
             },
             {
@@ -366,6 +418,11 @@
                   {
                     "key": "Help",
                     "icon": "info"
+                  },
+                  {
+                    "key": "ExternalLink",
+                    "icon": "link",
+                    "url": "http://example.com?extent=$e$"
                   }
                 ],
                 "toolbarItems": [
@@ -389,13 +446,14 @@
                   }
                 ],
                 "searchOptions": {
-                  "minScale": 1000,
+                  "minScaleDenom": 1000,
                   "showProviderSelection": true,
                   "providerSelectionAllowAll": true,
                   "zoomToLayers": false,
                   "showProvidersInPlaceholder": false
                 },
                 "appMenuClearsTask": true,
+                "appMenuVisibleOnStartup": false,
                 "logoUrl": "/"
               }
             },
@@ -413,7 +471,10 @@
               }
             },
             {
-              "name": "ThemeSwitcher"
+              "name": "ThemeSwitcher",
+              "cfg": {
+                "collapsibleGroups": true
+              }
             },
             {
               "name": "LayerTree",
@@ -431,8 +492,10 @@
                   "width": 480,
                   "height": 400
                 },
-                "bboxDependentLegend": false
-              }
+                "bboxDependentLegend": false,
+                "showToggleAllLayersCheckbox": true
+              },
+              "mapClickAction": "identify"
             },
             {
               "name": "Identify",
@@ -440,11 +503,13 @@
                 "params": {
                   "FI_POINT_TOLERANCE": 16,
                   "FI_LINE_TOLERANCE": 8,
-                  "FI_POLYGON_TOLERANCE": 4
+                  "FI_POLYGON_TOLERANCE": 4,
+                  "feature_count": 20
                 },
                 "enableExport": true,
-                "longAttributesDisplay": "ellipsis",
-                "displayResultTree": true,
+                "longAttributesDisplay": "wrap",
+                "displayResultTree": false,
+                "featureInfoReturnsLayerName": true,
                 "initialWidth": 480,
                 "initialHeight": 550
               }
@@ -458,13 +523,18 @@
                 "showSocials": true,
                 "showLink": true,
                 "showQRCode": true
+              },
+              "mapClickAction": "identify"
+            },
+            {
+              "name": "Print",
+              "cfg": {
+                "inlinePrintOutput": false
               }
             },
             {
-              "name": "Print"
-            },
-            {
-              "name": "Help"
+              "name": "Help",
+              "mapClickAction": "identify"
             },
             {
               "name": "MapCopyright"
@@ -507,6 +577,12 @@
               "name": "IdentifyRegion",
               "cfg": {
                 "useWfs": false
+              }
+            },
+            {
+              "name": "StartupMarker",
+              "cfg": {
+                "removeMode": "onclickonmarker"
               }
             }
           ]
@@ -634,6 +710,8 @@
                   178.519895,
                   73.34887
                 ],
+                "minScale": 0,
+                "maxScale": 10000000,
                 "abstract": "",
                 "keywords": ""
               },
@@ -650,6 +728,8 @@
                   178.448623,
                   81.128532
                 ],
+                "minScale": 0,
+                "maxScale": 5000000,
                 "abstract": "",
                 "keywords": ""
               },
@@ -710,7 +790,254 @@
             "searchProviders": [
               "coordinates"
             ],
-            "editConfig": null,
+            "editConfig": {
+              "edit_lines": {
+                "layerName": "edit_lines",
+                "editDataset": "qwc_demo.edit_lines",
+                "fields": [
+                  {
+                    "id": "name",
+                    "name": "name",
+                    "type": "text",
+                    "constraints": {
+                      "maxlength": 32,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "description",
+                    "name": "description",
+                    "type": "text",
+                    "constraints": {
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "num",
+                    "name": "num",
+                    "type": "number",
+                    "constraints": {
+                      "min": -2147483648,
+                      "max": 2147483647,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "value",
+                    "name": "value",
+                    "type": "text",
+                    "constraints": {
+                      "pattern": "[0-9]+([\\.,][0-9]+)?",
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "type",
+                    "name": "type",
+                    "type": "number",
+                    "constraints": {
+                      "min": -32768,
+                      "max": 32767,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "amount",
+                    "name": "amount",
+                    "type": "number",
+                    "constraints": {
+                      "numeric_precision": 5,
+                      "numeric_scale": 2,
+                      "min": -999.99,
+                      "max": 999.99,
+                      "step": 0.01,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "validated",
+                    "name": "validated",
+                    "type": "boolean",
+                    "constraints": {
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "datetime",
+                    "name": "datetime",
+                    "type": "date",
+                    "constraints": {
+                      "required": false
+                    }
+                  }
+                ],
+                "geomType": "LineString"
+              },
+              "edit_points": {
+                "layerName": "edit_points",
+                "editDataset": "qwc_demo.edit_points",
+                "fields": [
+                  {
+                    "id": "name",
+                    "name": "name",
+                    "type": "text",
+                    "constraints": {
+                      "maxlength": 32,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "description",
+                    "name": "description",
+                    "type": "text",
+                    "constraints": {
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "num",
+                    "name": "num",
+                    "type": "number",
+                    "constraints": {
+                      "min": -2147483648,
+                      "max": 2147483647,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "value",
+                    "name": "value",
+                    "type": "text",
+                    "constraints": {
+                      "pattern": "[0-9]+([\\.,][0-9]+)?",
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "type",
+                    "name": "type",
+                    "type": "number",
+                    "constraints": {
+                      "min": -32768,
+                      "max": 32767,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "amount",
+                    "name": "amount",
+                    "type": "number",
+                    "constraints": {
+                      "numeric_precision": 5,
+                      "numeric_scale": 2,
+                      "min": -999.99,
+                      "max": 999.99,
+                      "step": 0.01,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "validated",
+                    "name": "validated",
+                    "type": "boolean",
+                    "constraints": {
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "datetime",
+                    "name": "datetime",
+                    "type": "date",
+                    "constraints": {
+                      "required": false
+                    }
+                  }
+                ],
+                "geomType": "Point"
+              },
+              "edit_polygons": {
+                "layerName": "edit_polygons",
+                "editDataset": "qwc_demo.edit_polygons",
+                "fields": [
+                  {
+                    "id": "name",
+                    "name": "name",
+                    "type": "text",
+                    "constraints": {
+                      "maxlength": 32,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "description",
+                    "name": "description",
+                    "type": "text",
+                    "constraints": {
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "num",
+                    "name": "num",
+                    "type": "number",
+                    "constraints": {
+                      "min": -2147483648,
+                      "max": 2147483647,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "value",
+                    "name": "value",
+                    "type": "text",
+                    "constraints": {
+                      "pattern": "[0-9]+([\\.,][0-9]+)?",
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "type",
+                    "name": "type",
+                    "type": "number",
+                    "constraints": {
+                      "min": -32768,
+                      "max": 32767,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "amount",
+                    "name": "amount",
+                    "type": "number",
+                    "constraints": {
+                      "numeric_precision": 5,
+                      "numeric_scale": 2,
+                      "min": -999.99,
+                      "max": 999.99,
+                      "step": 0.01,
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "validated",
+                    "name": "validated",
+                    "type": "boolean",
+                    "constraints": {
+                      "required": false
+                    }
+                  },
+                  {
+                    "id": "datetime",
+                    "name": "datetime",
+                    "type": "date",
+                    "constraints": {
+                      "required": false
+                    }
+                  }
+                ],
+                "geomType": "Polygon"
+              }
+            },
             "thumbnail": "img/mapthumbs/default.jpg",
             "availableFormats": [
               "image/jpeg",
@@ -740,9 +1067,9 @@
             "title": "Open Street Map",
             "type": "osm",
             "source": "osm",
-            "thumbnail": "mapnik.jpg",
             "attribution": "OpenStreetMap contributors",
-            "attributionUrl": "https://www.openstreetmap.org/copyright"
+            "attributionUrl": "https://www.openstreetmap.org/copyright",
+            "thumbnail": "mapnik.jpg"
           },
           {
             "type": "wmts",

@@ -54,7 +54,7 @@ services:
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/data
     volumes:
-      - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./pg_service-write.conf:/var/www/.pg_service.conf:ro
       - ./demo-config:/srv/qwc_service/config:ro
     ports:
       - "127.0.0.1:5012:9090"

@@ -103,22 +103,8 @@ Copy QWC2 files from a production build (see [QWC2 Quick start](https://github.c
     cp -r assets $DSTDIR/qwc2 && \
     cp -r translations/data.* $DSTDIR/qwc2/translations && \
     cp dist/QWC2App.js $DSTDIR/qwc2/dist/ && \
-    cp index.html $DSTDIR/qwc2/ && \
-    sed -e '/proxyServiceUrl/d' \
-      -e 's!permalinkServiceUrl":\s*".*"!permalinkServiceUrl": "/permalink"!' \
-      -e 's!elevationServiceUrl":\s*".*"!elevationServiceUrl": "/elevation"!' \
-      -e 's!searchServiceUrl":\s*".*"!searchServiceUrl": "/search"!' \
-      -e 's!editServiceUrl":\s*".*"!editServiceUrl": "/data"!' \
-      -e 's!authServiceUrl":\s*".*"!authServiceUrl": "/auth"!' \
-      -e 's!mapInfoService":\s*".*"!mapInfoService": "/mapinfo"!' \
-      -e 's!featureReportService":\s*".*"!featureReportService": "/document"!' \
-      -e 's!{"key": "Login", "icon": "img/login.svg"}!{{ login_logout_item }}!g' \
-      config.json > $DSTDIR/qwc2/config.json && \
+    cp index.html config.json $DSTDIR/qwc2/ && \
     cd -
-
-Copy QWC2 themes config file from example:
-
-    cp volumes/qwc2/themesConfig-example.json volumes/qwc2/themesConfig.json
 
 Container Build:
 

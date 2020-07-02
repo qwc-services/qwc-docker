@@ -286,8 +286,53 @@
         ],
         "data_datasets": [
           {
-            "name": "edit_points",
-            "attributes": [],
+            "name": "qwc_demo.edit_lines",
+            "attributes": [
+              "name",
+              "description",
+              "num",
+              "value",
+              "type",
+              "amount",
+              "validated",
+              "datetime"
+            ],
+            "writable": true,
+            "creatable": true,
+            "readable": true,
+            "updatable": true,
+            "deletable": true
+          },
+          {
+            "name": "qwc_demo.edit_points",
+            "attributes": [
+              "name",
+              "description",
+              "num",
+              "value",
+              "type",
+              "amount",
+              "validated",
+              "datetime"
+            ],
+            "writable": true,
+            "creatable": true,
+            "readable": true,
+            "updatable": true,
+            "deletable": true
+          },
+          {
+            "name": "qwc_demo.edit_polygons",
+            "attributes": [
+              "name",
+              "description",
+              "num",
+              "value",
+              "type",
+              "amount",
+              "validated",
+              "datetime"
+            ],
             "writable": true,
             "creatable": true,
             "readable": true,

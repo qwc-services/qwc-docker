@@ -36,7 +36,6 @@
         "title": "Open Street Map",
         "type": "osm",
         "source": "osm",
-        "thumbnail": "mapnik.jpg",
         "attribution": "OpenStreetMap contributors",
         "attributionUrl": "https://www.openstreetmap.org/copyright",
         "thumbnail": "mapnik.jpg"

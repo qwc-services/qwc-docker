@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-data-service/master/schemas/qwc-data-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-data-service/raw/master/schemas/qwc-data-service.json",
   "service": "data",
   "config": {},
   "resources": {
@@ -12,37 +12,35 @@
         "primary_key": "id",
         "fields": [
           {
-            "name": "id",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
             "name": "name",
             "data_type": "character varying",
             "constraints": {
-              "maxlength": 32
+              "maxlength": 32,
+              "required": false
             }
           },
           {
             "name": "description",
-            "data_type": "text"
+            "data_type": "text",
+            "constraints": {
+              "required": false
+            }
           },
           {
             "name": "num",
             "data_type": "integer",
             "constraints": {
               "min": -2147483648,
-              "max": 2147483647
+              "max": 2147483647,
+              "required": false
             }
           },
           {
             "name": "value",
             "data_type": "double precision",
             "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
+              "pattern": "[0-9]+([\\.,][0-9]+)?",
+              "required": false
             }
           },
           {
@@ -50,7 +48,8 @@
             "data_type": "smallint",
             "constraints": {
               "min": -32768,
-              "max": 32767
+              "max": 32767,
+              "required": false
             }
           },
           {
@@ -61,16 +60,23 @@
               "numeric_scale": 2,
               "min": -999.99,
               "max": 999.99,
-              "step": 0.01
+              "step": 0.01,
+              "required": false
             }
           },
           {
             "name": "validated",
-            "data_type": "boolean"
+            "data_type": "boolean",
+            "constraints": {
+              "required": false
+            }
           },
           {
             "name": "datetime",
-            "data_type": "timestamp without time zone"
+            "data_type": "timestamp without time zone",
+            "constraints": {
+              "required": false
+            }
           }
         ],
         "geometry": {
@@ -87,37 +93,35 @@
         "primary_key": "id",
         "fields": [
           {
-            "name": "id",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
             "name": "name",
             "data_type": "character varying",
             "constraints": {
-              "maxlength": 32
+              "maxlength": 32,
+              "required": false
             }
           },
           {
             "name": "description",
-            "data_type": "text"
+            "data_type": "text",
+            "constraints": {
+              "required": false
+            }
           },
           {
             "name": "num",
             "data_type": "integer",
             "constraints": {
               "min": -2147483648,
-              "max": 2147483647
+              "max": 2147483647,
+              "required": false
             }
           },
           {
             "name": "value",
             "data_type": "double precision",
             "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
+              "pattern": "[0-9]+([\\.,][0-9]+)?",
+              "required": false
             }
           },
           {
@@ -125,7 +129,8 @@
             "data_type": "smallint",
             "constraints": {
               "min": -32768,
-              "max": 32767
+              "max": 32767,
+              "required": false
             }
           },
           {
@@ -136,16 +141,23 @@
               "numeric_scale": 2,
               "min": -999.99,
               "max": 999.99,
-              "step": 0.01
+              "step": 0.01,
+              "required": false
             }
           },
           {
             "name": "validated",
-            "data_type": "boolean"
+            "data_type": "boolean",
+            "constraints": {
+              "required": false
+            }
           },
           {
             "name": "datetime",
-            "data_type": "timestamp without time zone"
+            "data_type": "timestamp without time zone",
+            "constraints": {
+              "required": false
+            }
           }
         ],
         "geometry": {
@@ -162,37 +174,35 @@
         "primary_key": "id",
         "fields": [
           {
-            "name": "id",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
             "name": "name",
             "data_type": "character varying",
             "constraints": {
-              "maxlength": 32
+              "maxlength": 32,
+              "required": false
             }
           },
           {
             "name": "description",
-            "data_type": "text"
+            "data_type": "text",
+            "constraints": {
+              "required": false
+            }
           },
           {
             "name": "num",
             "data_type": "integer",
             "constraints": {
               "min": -2147483648,
-              "max": 2147483647
+              "max": 2147483647,
+              "required": false
             }
           },
           {
             "name": "value",
             "data_type": "double precision",
             "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
+              "pattern": "[0-9]+([\\.,][0-9]+)?",
+              "required": false
             }
           },
           {
@@ -200,7 +210,8 @@
             "data_type": "smallint",
             "constraints": {
               "min": -32768,
-              "max": 32767
+              "max": 32767,
+              "required": false
             }
           },
           {
@@ -211,1059 +222,28 @@
               "numeric_scale": 2,
               "min": -999.99,
               "max": 999.99,
-              "step": 0.01
+              "step": 0.01,
+              "required": false
             }
           },
           {
             "name": "validated",
-            "data_type": "boolean"
+            "data_type": "boolean",
+            "constraints": {
+              "required": false
+            }
           },
           {
             "name": "datetime",
-            "data_type": "timestamp without time zone"
+            "data_type": "timestamp without time zone",
+            "constraints": {
+              "required": false
+            }
           }
         ],
         "geometry": {
           "geometry_column": "geom",
           "geometry_type": "POLYGON",
-          "srid": 3857
-        }
-      },
-      {
-        "name": "qwc_demo.countries",
-        "db_url": "postgresql:///?service=qwc_geodb",
-        "schema": "qwc_geodb",
-        "table_name": "ne_10m_admin_0_countries",
-        "primary_key": "ogc_fid",
-        "fields": [
-          {
-            "name": "ogc_fid",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "featurecla",
-            "data_type": "character varying"
-          },
-          {
-            "name": "scalerank",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "labelrank",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "sovereignt",
-            "data_type": "character varying"
-          },
-          {
-            "name": "sov_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "adm0_dif",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "level",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "type",
-            "data_type": "character varying"
-          },
-          {
-            "name": "admin",
-            "data_type": "character varying"
-          },
-          {
-            "name": "adm0_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "geou_dif",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "geounit",
-            "data_type": "character varying"
-          },
-          {
-            "name": "gu_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "su_dif",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "subunit",
-            "data_type": "character varying"
-          },
-          {
-            "name": "su_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "brk_diff",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "name",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_long",
-            "data_type": "character varying"
-          },
-          {
-            "name": "brk_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "brk_name",
-            "data_type": "character varying"
-          },
-          {
-            "name": "brk_group",
-            "data_type": "character varying"
-          },
-          {
-            "name": "abbrev",
-            "data_type": "character varying"
-          },
-          {
-            "name": "postal",
-            "data_type": "character varying"
-          },
-          {
-            "name": "formal_en",
-            "data_type": "character varying"
-          },
-          {
-            "name": "formal_fr",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ciawf",
-            "data_type": "character varying"
-          },
-          {
-            "name": "note_adm0",
-            "data_type": "character varying"
-          },
-          {
-            "name": "note_brk",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_sort",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_alt",
-            "data_type": "character varying"
-          },
-          {
-            "name": "mapcolor7",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "mapcolor8",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "mapcolor9",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "mapcolor13",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "pop_est",
-            "data_type": "bigint",
-            "constraints": {
-              "min": -9223372036854775808,
-              "max": 9223372036854775807
-            }
-          },
-          {
-            "name": "pop_rank",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "gdp_md_est",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "pop_year",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "lastcensus",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "gdp_year",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "economy",
-            "data_type": "character varying"
-          },
-          {
-            "name": "income_grp",
-            "data_type": "character varying"
-          },
-          {
-            "name": "wikipedia",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "fips_10_",
-            "data_type": "character varying"
-          },
-          {
-            "name": "iso_a2",
-            "data_type": "character varying"
-          },
-          {
-            "name": "iso_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "iso_a3_eh",
-            "data_type": "character varying"
-          },
-          {
-            "name": "iso_n3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "un_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "wb_a2",
-            "data_type": "character varying"
-          },
-          {
-            "name": "wb_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "woe_id",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "woe_id_eh",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "woe_note",
-            "data_type": "character varying"
-          },
-          {
-            "name": "adm0_a3_is",
-            "data_type": "character varying"
-          },
-          {
-            "name": "adm0_a3_us",
-            "data_type": "character varying"
-          },
-          {
-            "name": "adm0_a3_un",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "adm0_a3_wb",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "continent",
-            "data_type": "character varying"
-          },
-          {
-            "name": "region_un",
-            "data_type": "character varying"
-          },
-          {
-            "name": "subregion",
-            "data_type": "character varying"
-          },
-          {
-            "name": "region_wb",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_len",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "long_len",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "abbrev_len",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "tiny",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "homepart",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "min_zoom",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "min_label",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "max_label",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "ne_id",
-            "data_type": "bigint",
-            "constraints": {
-              "min": -9223372036854775808,
-              "max": 9223372036854775807
-            }
-          },
-          {
-            "name": "wikidataid",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ar",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_bn",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_de",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_en",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_es",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_fr",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_el",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_hi",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_hu",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_id",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_it",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ja",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ko",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_nl",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_pl",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_pt",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ru",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_sv",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_tr",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_vi",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_zh",
-            "data_type": "character varying"
-          }
-        ],
-        "geometry": {
-          "geometry_column": "wkb_geometry",
-          "geometry_type": "MULTIPOLYGON",
-          "srid": 3857
-        }
-      },
-      {
-        "name": "qwc_demo.country_names",
-        "db_url": "postgresql:///?service=qwc_geodb",
-        "schema": "qwc_geodb",
-        "table_name": "ne_10m_admin_0_country_points",
-        "primary_key": "ogc_fid",
-        "fields": [
-          {
-            "name": "ogc_fid",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "scalerank",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "labelrank",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "z_postal",
-            "data_type": "bigint",
-            "constraints": {
-              "min": -9223372036854775808,
-              "max": 9223372036854775807
-            }
-          },
-          {
-            "name": "z_abbrev",
-            "data_type": "bigint",
-            "constraints": {
-              "min": -9223372036854775808,
-              "max": 9223372036854775807
-            }
-          },
-          {
-            "name": "z_name",
-            "data_type": "bigint",
-            "constraints": {
-              "min": -9223372036854775808,
-              "max": 9223372036854775807
-            }
-          },
-          {
-            "name": "z_admin",
-            "data_type": "bigint",
-            "constraints": {
-              "min": -9223372036854775808,
-              "max": 9223372036854775807
-            }
-          },
-          {
-            "name": "featurecla",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 30
-            }
-          },
-          {
-            "name": "sovereignt",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 32
-            }
-          },
-          {
-            "name": "sov_a3",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 3
-            }
-          },
-          {
-            "name": "adm0_dif",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "level",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "type",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 17
-            }
-          },
-          {
-            "name": "admin",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 36
-            }
-          },
-          {
-            "name": "adm0_a3",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 3
-            }
-          },
-          {
-            "name": "geou_dif",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "name",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 26
-            }
-          },
-          {
-            "name": "abbrev",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 13
-            }
-          },
-          {
-            "name": "postal",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 4
-            }
-          },
-          {
-            "name": "name_forma",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 53
-            }
-          },
-          {
-            "name": "terr_",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 32
-            }
-          },
-          {
-            "name": "name_sort",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 43
-            }
-          },
-          {
-            "name": "map_color",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "pop_est",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "gdp_md_est",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "fips_10_",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "iso_a2",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 3
-            }
-          },
-          {
-            "name": "iso_a3",
-            "data_type": "character varying",
-            "constraints": {
-              "maxlength": 3
-            }
-          },
-          {
-            "name": "iso_n3",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          }
-        ],
-        "geometry": {
-          "geometry_column": "wkb_geometry",
-          "geometry_type": "POINT",
-          "srid": 3857
-        }
-      },
-      {
-        "name": "qwc_demo.states_provinces",
-        "db_url": "postgresql:///?service=qwc_geodb",
-        "schema": "qwc_geodb",
-        "table_name": "ne_10m_admin_1_states_provinces_lines",
-        "primary_key": "ogc_fid",
-        "fields": [
-          {
-            "name": "ogc_fid",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "featurecla",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name",
-            "data_type": "character varying"
-          },
-          {
-            "name": "adm0_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "adm0_name",
-            "data_type": "character varying"
-          },
-          {
-            "name": "shape_leng",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "mapcolor13",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "mapcolor9",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "sov_a3",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_l",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_r",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_alt_l",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_alt_r",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_loc_l",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_loc_r",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_len_l",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "name_len_r",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "note",
-            "data_type": "character varying"
-          },
-          {
-            "name": "type",
-            "data_type": "character varying"
-          },
-          {
-            "name": "min_zoom",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "min_label",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "scalerank",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          }
-        ],
-        "geometry": {
-          "geometry_column": "wkb_geometry",
-          "geometry_type": "MULTILINESTRING",
-          "srid": 3857
-        }
-      },
-      {
-        "name": "qwc_demo.geographic_lines",
-        "db_url": "postgresql:///?service=qwc_geodb",
-        "schema": "qwc_geodb",
-        "table_name": "ne_10m_geographic_lines",
-        "primary_key": "ogc_fid",
-        "fields": [
-          {
-            "name": "ogc_fid",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "scalerank",
-            "data_type": "bigint",
-            "constraints": {
-              "min": -9223372036854775808,
-              "max": 9223372036854775807
-            }
-          },
-          {
-            "name": "name",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_long",
-            "data_type": "character varying"
-          },
-          {
-            "name": "abbrev",
-            "data_type": "character varying"
-          },
-          {
-            "name": "note",
-            "data_type": "character varying"
-          },
-          {
-            "name": "featurecla",
-            "data_type": "character varying"
-          },
-          {
-            "name": "min_zoom",
-            "data_type": "double precision",
-            "constraints": {
-              "pattern": "[0-9]+([\\.,][0-9]+)?"
-            }
-          },
-          {
-            "name": "wikidataid",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ar",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_bn",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_de",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_en",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_es",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_fr",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_el",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_hi",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_hu",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_id",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_it",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ja",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ko",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_nl",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_pl",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_pt",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_ru",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_sv",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_tr",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_vi",
-            "data_type": "character varying"
-          },
-          {
-            "name": "name_zh",
-            "data_type": "character varying"
-          },
-          {
-            "name": "wdid_score",
-            "data_type": "integer",
-            "constraints": {
-              "min": -2147483648,
-              "max": 2147483647
-            }
-          },
-          {
-            "name": "ne_id",
-            "data_type": "bigint",
-            "constraints": {
-              "min": -9223372036854775808,
-              "max": 9223372036854775807
-            }
-          }
-        ],
-        "geometry": {
-          "geometry_column": "wkb_geometry",
-          "geometry_type": "MULTILINESTRING",
           "srid": 3857
         }
       }
