@@ -5,7 +5,7 @@ services:
     # build:
     #   context: ./postgis
     #   args:
-    #     - ALEMBIC_VERSION=e9c31b610e0a
+    #     - ALEMBIC_VERSION=c77774920e5b
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s

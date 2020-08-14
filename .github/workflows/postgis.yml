@@ -22,7 +22,7 @@ jobs:
       - name: Build and publish docker image
         uses: elgohr/Publish-Docker-Github-Action@2.12
         env:
-          ALEMBIC_VERSION: e9c31b610e0a
+          ALEMBIC_VERSION: c77774920e5b
         with:
           name: sourcepole/qwc-demo-db
           username: ${{ secrets.DOCKER_HUB_USER }}
