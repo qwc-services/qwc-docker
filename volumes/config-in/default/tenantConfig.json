@@ -1,11 +1,12 @@
 {
+  "$schema": "https://github.com/qwc-services/qwc-config-generator/raw/master/schemas/qwc-config-generator.json",
   "service": "config-generator",
   "config": {
     "tenant": "default",
     "default_qgis_server_url": "http://qwc-qgis-server/ows/",
     "config_db_url": "postgresql:///?service=qwc_configdb",
     "permissions_default_allow": true,
-    "qgis_projects_output_dir": "/data"
+    "qgis_projects_base_dir": "/data"
   },
   "themesConfig": {
     "defaultScales": [100000000, 50000000, 25000000, 10000000, 4000000, 2000000, 1000000, 400000, 200000, 80000, 40000, 20000, 10000, 8000, 6000, 4000, 2000, 1000, 500, 250, 100],
@@ -23,15 +24,15 @@
           "attribution": "Demo attribution",
           "attributionUrl": "https://127.0.0.1/",
           "backgroundLayers": [
-              {
-                "name": "bluemarble",
-                "printLayer": "bluemarble_bg",
-                "visibility": true
-              },
-              {
-                "name": "mapnik",
-                "printLayer": "osm_bg"
-              }
+            {
+              "name": "bluemarble",
+              "printLayer": "bluemarble_bg",
+              "visibility": true
+            },
+            {
+              "name": "mapnik",
+              "printLayer": "osm_bg"
+            }
           ],
           "searchProviders": ["coordinates"],
           "mapCrs": "EPSG:3857",
@@ -50,7 +51,7 @@
           "source": "osm",
           "attribution": "OpenStreetMap contributors",
           "attributionUrl": "https://www.openstreetmap.org/copyright",
-          "thumbnail": "mapnik.jpg"
+          "thumbnail": "img/mapthumbs/mapnik.jpg"
         },
         {
           "type": "wmts",
@@ -76,7 +77,7 @@
             256,
             256
           ],
-          "thumbnail": "default.jpg"
+          "thumbnail": "img/mapthumbs/default.jpg"
         }
       ]
     }
@@ -111,14 +112,14 @@
         "data_service_url": "/api/v1/data/",
         "#document_service_url": "/api/v1/document/",
         "elevation_service_url": "/elevation/",
-        "#info_service_url": "/api/v1/featureinfo/",
+        "#info_service_url": "/api/v1/feature-info/",
         "#legend_service_url": "/api/v1/legend/",
         "mapinfo_service_url": "/api/v1/mapinfo/",
         "ogc_service_url": "/ows/",
         "permalink_service_url": "/api/v1/permalink/",
         "#print_service_url": "/api/v1/print/",
-        "search_data_service_url": "/api/v1/data/",
-        "search_service_url": "/api/v2/search/"
+        "#search_data_service_url": "/api/v2/search/geom/",
+        "#search_service_url": "/api/v2/search/fts/"
       }
     },
     {

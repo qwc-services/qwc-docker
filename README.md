@@ -106,6 +106,17 @@ Copy QWC2 files from a production build (see [QWC2 Quick start](https://github.c
     cp index.html config.json $DSTDIR/qwc2/ && \
     cd -
 
+Copy `index.html` to `INPUT_CONFIG_PATH`:
+
+    cp $SRCDIR/index.html volumes/config-in/default/index.html
+
+Add your QWC2 themes config as `themesConfig` in the ConfigGenerator config file `volumes/config-in/default/tenantConfig.json`.
+
+Add write permissions to `OUTPUT_CONFIG_PATH` and `qgis_projects_base_dir` for ConfigGenerator:
+
+    chmod o+w -R demo-config/
+    chmod o+w volumes/qgs-resources/
+
 Container Build:
 
     docker-compose build
@@ -167,9 +178,10 @@ Stop all containers:
 
     docker-compose down
 
-Update service containers to latest versions from Git:
+Update a single containers:
 
-    ./build-services.sh
+    # docker-compose pull <container name>
+    docker-compose pull qwc-map-viewer
 
 Update PostGIS container to ConfigDB migration `ALEMBIC_VERSION` (**NOTE**: Overwrites current database):
 

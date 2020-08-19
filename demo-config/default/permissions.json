@@ -340,6 +340,9 @@
             "deletable": true
           }
         ],
+        "viewer_tasks": [],
+        "theme_info_links": [],
+        "plugin_data": [],
         "dataproducts": [
           "qwc_demo"
         ],
@@ -358,6 +361,9 @@
         "wfs_services": [],
         "background_layers": [],
         "data_datasets": [],
+        "viewer_tasks": [],
+        "theme_info_links": [],
+        "plugin_data": [],
         "dataproducts": [],
         "document_templates": [],
         "print_templates": [],
@@ -371,6 +377,9 @@
         "wfs_services": [],
         "background_layers": [],
         "data_datasets": [],
+        "viewer_tasks": [],
+        "theme_info_links": [],
+        "plugin_data": [],
         "dataproducts": [],
         "document_templates": [],
         "print_templates": [],
