@@ -19,9 +19,9 @@
       {
         "name": "ne_10m_admin_0_countries",
         "filter_word": "Country",
-        "table_name": "qwc_geodb.search_v",
-        "geometry_column": "geom",
-        "facet_column": "subclass"
+        "table_name": "qwc_geodb.ne_10m_admin_0_countries",
+        "geometry_column": "wkb_geometry",
+        "search_id_col": "ogc_fid"
       }
     ]
   }
