@@ -1,0 +1,490 @@
+{
+  "editServiceUrl": "http://localhost:5012/",
+  "mapInfoService":  "http://localhost:5016/",
+  "permalinkServiceUrl": "http://localhost:5018/",
+  "elevationServiceUrl": "http://localhost:5002/",
+  "featureReportService": "http://localhost:5020/",
+  "urlPositionFormat": "centerAndZoom",
+  "urlPositionCrs": "",
+  "omitUrlParameterUpdates": false,
+  "preserveExtentOnThemeSwitch": true,
+  "preserveBackgroundOnThemeSwitch": true,
+  "preserveNonThemeLayersOnThemeSwitch": true,
+  "allowReorderingLayers": true,
+  "preventSplittingGroupsWhenReordering": false,
+  "allowLayerTreeSeparators": false,
+  "allowRemovingThemeLayers": true,
+  "globallyDisableDockableDialogs": false,
+  "searchThemes": true,
+  "allowAddingOtherThemes": true,
+  "allowFractionalZoom": true,
+  "localeAwareNumbers": false,
+  "identifyTool": "Identify",
+  "wmsDpi": 96,
+  "wmsHidpi": true,
+  "defaultFeatureStyle": {
+    "strokeColor": [0, 0, 255, 1],
+    "strokeWidth": 1,
+    "strokeDash": [4],
+    "fillColor": [255, 0, 255, 0.33],
+    "circleRadius": 10,
+    "textFill": "black",
+    "textStroke": "white",
+    "textFont": "11pt sans-serif"
+  },
+  "importLayerUrlPresets": [
+      {"label": "Swisstopo WMTS", "value": "https://wmts10.geo.admin.ch/EPSG/2056/1.0.0/WMTSCapabilities.xml"}
+  ],
+  "projections": [
+    {
+      "code": "EPSG:32632",
+      "proj": "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs",
+      "label": "WGS 84 / UTM zone 32N"
+    },
+    {
+      "code": "EPSG:21781",
+      "proj": "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=600000 +y_0=200000 +ellps=bessel +towgs84=674.4,15.1,405.3,0,0,0,0 +units=m +no_defs",
+      "label": "CH1903 / LV03"
+    },
+    {
+      "code": "EPSG:2056",
+      "proj": "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs",
+      "label": "CH1903+ / LV95"
+    },
+    {
+      "code": "EPSG:25832",
+      "proj": "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
+      "label": "ETRS89 / UTM 32N"
+    },
+    {
+      "code": "EPSG:31983",
+      "proj": "+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
+      "label": "SIRGAS 2000 / UTM zone 23S"
+    }
+  ],
+  "plugins": {
+      "mobile": [
+        {
+          "name": "Map",
+          "cfg": {
+            "mapOptions": {
+              "zoomDuration": 250,
+              "antialiasing": true
+            },
+            "toolsOptions": {
+              "OverviewSupport": {
+                "tipLabel": "Overview"
+              },
+              "LocateSupport": {
+                "keepCurrentZoomLevel": true,
+                "startupMode": "DISABLED"
+              },
+              "ScaleBarSupport": {
+                "units": "metric"
+              }
+            }
+          }
+        },
+        {
+          "name": "HomeButton",
+          "cfg": {
+            "position": 2
+          }
+        },
+        {
+          "name": "LocateButton",
+          "cfg": {
+            "position": 1
+          }
+        },
+        {
+          "name": "BackgroundSwitcher",
+          "cfg": {
+            "position": 0
+          }
+        },
+        {
+            "name": "TopBar",
+            "cfg": {
+              "menuItems": [
+                {"key": "ThemeSwitcher", "icon": "themes"},
+                {"key": "LayerTree", "icon": "layers"},
+                {"key": "Share", "icon": "share"},
+                {"key": "Tools", "icon": "tools", "subitems": [
+                  {"key": "IdentifyRegion", "icon": "identify_region"},
+                  {"key": "Measure", "icon": "measure"},
+                  {"key": "Redlining", "icon": "draw"},
+                  {"key": "Editing", "icon": "editing", "themeWhitelist": ["Test"]},
+                  {"key": "DxfExport", "icon": "dxfexport"},
+                  {"key": "RasterExport", "icon": "rasterexport"}
+                ]},
+                {"key": "Print", "icon": "print"},
+                {"key": "Help", "icon": "info"}
+              ],
+              "searchOptions": {
+                "minScaleDenom": 1000,
+                "showProviderSelection": true,
+                "providerSelectionAllowAll": true,
+                "zoomToLayers": false,
+                "showProvidersInPlaceholder": false
+              },
+              "appMenuClearsTask": true,
+              "appMenuVisibleOnStartup": false,
+              "logoClickResetsTheme": true
+            }
+        },
+        {
+          "name": "ThemeSwitcher",
+          "cfg": {
+            "collapsibleGroups": true
+          }
+        },
+        {
+          "name": "Measure",
+          "cfg": {
+            "showMeasureModeSwitcher": true
+          }
+        },
+        {
+          "name": "BottomBar",
+          "cfg": {
+            "displayCoordinates": false,
+            "displayScales": false,
+            "viewertitleUrl": "http://qgis.org/",
+            "termsUrl":  "http://qgis.org/"
+          }
+        },
+        {
+          "name": "Identify",
+          "cfg": {
+            "params": {
+              "FI_POINT_TOLERANCE": 32,
+              "FI_LINE_TOLERANCE": 16,
+              "FI_POLYGON_TOLERANCE": 8,
+              "feature_count": 20
+            },
+            "enableExport": true,
+            "longAttributesDisplay": "wrap",
+            "displayResultTree": false,
+            "featureInfoReturnsLayerName": true
+          }
+        },
+        {
+          "name": "Share",
+          "cfg": {
+            "showSocials": true,
+            "showLink": true,
+            "showQRCode": true
+          },
+          "mapClickAction": "identify"
+        },
+        {
+          "name": "Print",
+          "cfg": {
+            "inlinePrintOutput": false,
+            "gridInitiallyEnabled": false
+          }
+        },
+        {
+          "name": "Help",
+          "mapClickAction": "identify"
+        },
+        {
+          "name": "MapCopyright"
+        },
+        {
+          "name": "LayerTree",
+          "cfg": {
+            "showLegendIcons": true,
+            "showRootEntry": true,
+            "showQueryableIcon": true,
+            "allowMapTips": true,
+            "allowCompare": true,
+            "allowImport": true,
+            "groupTogglesSublayers": false,
+            "grayUnchecked": false,
+            "layerInfoWindowSize": {"width": 480, "height": 400},
+            "bboxDependentLegend": false
+          },
+          "mapClickAction": "unset"
+        },
+        {
+          "name": "DxfExport"
+        },
+        {
+          "name": "RasterExport",
+          "cfg": {
+            "dpis": [96, 300]
+          }
+        },
+        {
+          "name": "Redlining"
+        },
+        {
+          "name": "Editing"
+        },
+        {
+          "name": "MapCompare"
+        },
+        {
+          "name": "HeightProfile",
+          "cfg": {
+            "heighProfilePrecision": 0
+          }
+        },
+        {
+          "name": "MapInfoTooltip",
+          "cfg": {
+            "elevationPrecision": 0,
+            "includeWGS84": true
+          }
+        },
+        {
+          "name": "IdentifyRegion",
+          "cfg": {
+            "useWfs": false
+          }
+        },
+        {
+          "name": "StartupMarker",
+          "cfg": {
+            "removeMode": "onclickonmarker"
+          }
+        }
+      ],
+      "desktop": [
+        {
+          "name": "Map",
+          "cfg": {
+            "mapOptions": {
+              "zoomDuration": 250,
+              "antialiasing": true
+            },
+            "toolsOptions": {
+              "OverviewSupport": {
+                "tipLabel": "Overview"
+              },
+              "LocateSupport": {
+                "keepCurrentZoomLevel": true,
+                "stopFollowingOnDrag": true,
+                "startupMode": "DISABLED"
+              },
+              "ScaleBarSupport": {
+                "units": "metric"
+              }
+            },
+            "swipeGeometryTypeBlacklist": ["Point"],
+            "swipeLayerNameBlacklist": ["*_noswipe"]
+          }
+        },
+        {
+          "name": "TaskButton",
+          "cfg": {
+            "position": 5,
+            "task": "LayerTree",
+            "icon": "list-alt"
+          }
+        },
+        {
+          "name": "HomeButton"
+          ,
+          "cfg": {
+            "position": 4
+          }
+        },
+        {
+          "name": "LocateButton"
+          ,
+          "cfg": {
+            "position": 3
+          }
+        },
+        {
+          "name": "ZoomIn",
+          "cfg": {
+            "position": 2
+          }
+        },
+        {
+          "name": "ZoomOut",
+          "cfg": {
+            "position": 1
+          }
+        },
+        {
+          "name": "BackgroundSwitcher",
+          "cfg": {
+            "position": 0
+          }
+        },
+        {
+            "name": "TopBar",
+            "cfg": {
+              "menuItems": [
+                {"key": "ThemeSwitcher", "icon": "themes"},
+                {"key": "LayerTree", "icon": "layers"},
+                {"key": "Share", "icon": "share"},
+                {"key": "Tools", "icon": "tools", "subitems": [
+                  {"key": "IdentifyRegion", "icon": "identify_region"},
+                  {"key": "Measure", "icon": "measure"},
+                  {"key": "Redlining", "icon": "draw"},
+                  {"key": "Editing", "icon": "editing", "themeWhitelist": ["Test"]},
+                  {"key": "DxfExport", "icon": "dxfexport"},
+                  {"key": "RasterExport", "icon": "rasterexport"}
+                ]},
+                {"key": "Print", "icon": "print"},
+                {"key": "Help", "icon": "info"},
+                {"key": "ExternalLink", "icon": "link", "url": "http://example.com?extent=$e$"}
+              ],
+              "toolbarItems": [
+                {"key": "Measure", "mode": "LineString", "icon": "measure_line"},
+                {"key": "Measure", "mode": "Polygon", "icon": "measure_polygon"},
+                {"key": "Print", "icon": "print"},
+                {"key": "IdentifyRegion", "icon": "identify_region"}
+              ],
+              "searchOptions": {
+                "minScaleDenom": 1000,
+                "showProviderSelection": true,
+                "providerSelectionAllowAll": true,
+                "zoomToLayers": false,
+                "showProvidersInPlaceholder": false
+              },
+              "appMenuClearsTask": true,
+              "appMenuVisibleOnStartup": false,
+              "logoUrl": "/"
+            }
+        },
+        {
+          "name": "BottomBar",
+          "cfg": {
+            "viewertitleUrl": "http://qgis.org/",
+            "termsUrl":  "http://qgis.org/"
+          }
+        },
+        {
+          "name": "Measure",
+          "cfg": {
+            "showMeasureModeSwitcher": true
+          }
+        },
+        {
+          "name": "ThemeSwitcher",
+          "cfg": {
+            "collapsibleGroups": true
+          }
+        },
+        {
+          "name": "LayerTree",
+          "cfg": {
+            "showLegendIcons": true,
+            "showRootEntry": true,
+            "showQueryableIcon": true,
+            "allowMapTips": true,
+            "allowCompare": true,
+            "allowImport": true,
+            "groupTogglesSublayers": true,
+            "grayUnchecked": false,
+            "layerInfoWindowSize": {"width": 480, "height": 400},
+            "bboxDependentLegend": false,
+            "showToggleAllLayersCheckbox": true
+          },
+          "mapClickAction": "identify"
+        },
+        {
+          "name": "Identify",
+          "cfg": {
+            "params": {
+              "FI_POINT_TOLERANCE": 16,
+              "FI_LINE_TOLERANCE": 8,
+              "FI_POLYGON_TOLERANCE": 4,
+              "feature_count": 20
+            },
+            "enableExport": true,
+            "longAttributesDisplay": "wrap",
+            "displayResultTree": false,
+            "featureInfoReturnsLayerName": true,
+            "initialWidth": 480,
+            "initialHeight": 550
+          }
+        },
+        {
+          "name": "MapTip"
+        },
+        {
+          "name": "Share",
+          "cfg": {
+            "showSocials": true,
+            "showLink": true,
+            "showQRCode": true
+          },
+          "mapClickAction": "identify"
+        },
+        {
+          "name": "Print",
+          "cfg": {
+            "inlinePrintOutput": false,
+            "gridInitiallyEnabled": false
+          }
+        },
+        {
+          "name": "Help",
+          "mapClickAction": "identify"
+        },
+        {
+          "name": "MapCopyright",
+          "cfg": {
+              "showThemeCopyrightOnly": true
+          }
+        },
+        {
+          "name": "DxfExport"
+        },
+        {
+          "name": "RasterExport",
+          "cfg": {
+            "dpis": [96, 300]
+          }
+        },
+        {
+          "name": "Redlining"
+        },
+        {
+          "name": "Editing"
+        },
+        {
+          "name": "MapCompare"
+        },
+        {
+          "name": "HeightProfile",
+          "cfg": {
+            "heighProfilePrecision": 0
+          }
+        },
+        {
+          "name": "MapInfoTooltip",
+          "cfg": {
+            "elevationPrecision": 0,
+            "includeWGS84": true
+          }
+        },
+        {
+          "name": "IdentifyRegion",
+          "cfg": {
+            "useWfs": false
+          }
+        },
+        {
+          "name": "StartupMarker",
+          "cfg": {
+            "removeMode": "onclickonmarker"
+          }
+      },
+      {
+          "name": "API"
+      },
+      {
+          "name": "ScratchDrawing"
+      }
+      ]
+  }
+}
