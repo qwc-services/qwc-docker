@@ -19,6 +19,7 @@ services:
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./volumes/geodata:/geodata:ro
+      # - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
     image: sourcepole/qwc-config-generator:v2.0.0-rc2
