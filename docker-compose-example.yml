@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   qwc-postgis:
-    image: sourcepole/qwc-demo-db:latest
+    image: sourcepole/qwc-demo-db
     # build:
     #   context: ./postgis
     #   args:
@@ -13,16 +13,16 @@ services:
      - "127.0.0.1:5439:5432"
 
   qwc-qgis-server:
-    image: sourcepole/qwc-qgis-server:3.10
+    image: sourcepole/qwc-qgis-server
     ports:
       - "127.0.0.1:8001:80"
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./volumes/geodata:/geodata:ro
-      # - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
+      - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2.0.0-rc2
+    image: sourcepole/qwc-config-generator
     environment:
         - INPUT_CONFIG_PATH=/srv/qwc_service/config-in
         - OUTPUT_CONFIG_PATH=/srv/qwc_service/config-out
@@ -39,7 +39,7 @@ services:
       - qwc-postgis
 
   qwc-ogc-service:
-    image: sourcepole/qwc-ogc-service:v2.0.0-rc2
+    image: sourcepole/qwc-ogc-service
     environment:
       - SERVICE_MOUNTPOINT=/ows
       #- FLASK_ENV=development
@@ -51,7 +51,7 @@ services:
       - qwc-qgis-server
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2.0.0-rc2
+    image: sourcepole/qwc-data-service
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/data
     volumes:
@@ -64,7 +64,7 @@ services:
         condition: service_healthy
 
   qwc-solr:
-    image: solr:8.4.1
+    image: solr
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -80,38 +80,31 @@ services:
         condition: service_healthy
 
   qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:v2.0.0-rc2
+    image: sourcepole/qwc-fulltext-search-service
     environment:
       - SERVICE_MOUNTPOINT=/api/v2/search
     ports:
       - "127.0.0.1:5011:9090"
     volumes:
-      - ./pg_service.conf:/var/www/.pg_service.conf:ro
-      - ./demo-config:/srv/qwc_service/config:ro
+        - ./demo-config:/srv/qwc_service/config:ro
     depends_on:
       - qwc-solr
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2.0.0-rc2
-    # image: sourcepole/qwc-map-viewer-base:v2.0.0-rc2
+    image: sourcepole/qwc-map-viewer-demo
+    # image: sourcepole/qwc-map-viewer-base
     ports:
       - "127.0.0.1:5030:9090"
     volumes:
-      - ./demo-config:/srv/qwc_service/config:ro
-      #- ./volumes/qwc2:/qwc2:ro
+        - ./demo-config:/srv/qwc_service/config:ro
+    #   - ./volumes/qwc2:/qwc2:ro
     depends_on:
-      - qwc-auth-service
+      - qwc-ogc-service
       - qwc-data-service
       - qwc-elevation-service
-      #- qwc-feature-info-service
-      #- qwc-legend-service
-      - qwc-mapinfo-service
-      - qwc-ogc-service
-      - qwc-permalink-service
-      #- qwc-fulltext-search-service
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2.0.0-rc2
+    image: sourcepole/qwc-admin-gui
     environment:
       - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}
 ]'
@@ -130,7 +123,7 @@ services:
         condition: service_healthy
 
   qwc-registration-gui:
-    image: sourcepole/qwc-registration-gui:latest
+    image: sourcepole/qwc-registration-gui
     environment:
       - SERVICE_MOUNTPOINT=/registration
       - DEFAULT_LOCALE=en
@@ -146,7 +139,7 @@ services:
         condition: service_healthy
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2.0.0-rc2
+    image: sourcepole/qwc-db-auth
     environment:
       - SERVICE_MOUNTPOINT=/auth
       #- TOTP_ENABLED=False
@@ -163,16 +156,14 @@ services:
         condition: service_healthy
 
   qwc-elevation-service:
-    image: sourcepole/qwc-elevation-service:v2.0.0-rc2
+    image: sourcepole/qwc-elevation-service
     volumes:
       - ./demo-config:/srv/qwc_service/config:ro
     ports:
       - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
-    image: sourcepole/qwc-permalink-service:v2.0.0-rc2
-    environment:
-      - SERVICE_MOUNTPOINT=/api/v1/permalink
+    image: sourcepole/qwc-permalink-service:v0.9.0
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
       - ./demo-config:/srv/qwc_service/config:ro
@@ -183,9 +174,7 @@ services:
       - "127.0.0.1:5001:9090"
 
   qwc-feature-info-service:
-    image: sourcepole/qwc-feature-info-service:v2.0.0-rc2
-    environment:
-      - SERVICE_MOUNTPOINT=/api/v1/feature-info
+    image: sourcepole/qwc-feature-info-service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
       - ./demo-config:/srv/qwc_service/config:ro
@@ -196,7 +185,7 @@ services:
       - "127.0.0.1:5015:9090"
 
   qwc-document-service:
-    image: sourcepole/qwc-document-service:v2.0.0-rc2
+    image: sourcepole/qwc-document-service:v0.9.1
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/document
     volumes:
@@ -207,7 +196,7 @@ services:
       - "127.0.0.1:5018:9090"
 
   jasper-reporting-service:
-    image: sourcepole/jasper-reporting-service:0.7.0
+    image: sourcepole/jasper-reporting-service:0.6.0
     volumes:
       - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
       - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
@@ -215,9 +204,7 @@ services:
       - "127.0.0.1:8002:8080"
 
   qwc-mapinfo-service:
-    image: sourcepole/qwc-mapinfo-service:v2.0.0-rc2
-    environment:
-      - SERVICE_MOUNTPOINT=/api/v1/mapinfo
+    image: sourcepole/qwc-mapinfo-service
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
       - ./demo-config:/srv/qwc_service/config:ro
@@ -227,9 +214,7 @@ services:
       - "127.0.0.1:5016:9090"
 
   qwc-legend-service:
-    image: sourcepole/qwc-legend-service:v2.0.0-rc2
-    environment:
-      - SERVICE_MOUNTPOINT=/api/v1/legend
+    image: sourcepole/qwc-legend-service
     volumes:
       - ./demo-config:/srv/qwc_service/config:ro
       - ./volumes/legends:/legends
@@ -239,20 +224,15 @@ services:
       - "127.0.0.1:5014:9090"
 
   qwc-api-gateway:
-    image: nginx:1.19
+    image: nginx
     ports:
       - "8088:80"
     volumes:
       - ./api-gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - qwc-map-viewer
-      - qwc-auth-service
-      #- qwc-feature-info-service
-      #- qwc-legend-service
-      - qwc-mapinfo-service
       - qwc-permalink-service
-      - qwc-elevation-service
       - qwc-fulltext-search-service
-      - qwc-data-service
       - qwc-admin-gui
       - qwc-registration-gui
+      - qwc-auth-service
