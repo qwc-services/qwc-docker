@@ -13,10 +13,11 @@ ENV SERVICE_MOUNTPOINT='/'
 ENV REQ_HEADER_BUFFER_SIZE=12288
 ENV UWSGI_PROCESSES=1
 ENV UWSGI_THREADS=4
+ENV UWSGI_EXTRA=""
 
 STOPSIGNAL SIGINT
 
 ENTRYPOINT uwsgi --http-socket :9090 --buffer-size $REQ_HEADER_BUFFER_SIZE --processes $UWSGI_PROCESSES \
-    --threads $UWSGI_THREADS --plugins python3 --protocol uwsgi --wsgi-disable-file-wrapper --uid www-data \
-    --gid www-data --master --chdir /srv/qwc_service --mount $SERVICE_MOUNTPOINT=server:app \
+    --threads $UWSGI_THREADS $UWSGI_EXTRA --plugins python3 --protocol uwsgi --wsgi-disable-file-wrapper \
+    --uid www-data --gid www-data --master --chdir /srv/qwc_service --mount $SERVICE_MOUNTPOINT=server:app \
     --manage-script-name
