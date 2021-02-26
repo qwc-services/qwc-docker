@@ -13,7 +13,7 @@ jobs:
       - name: Get version tag QGIS 3
         id: get_tag_qgis_3
         run: |
-          echo ::set-output name=tag::3.10
+          echo ::set-output name=tag::3.16
 
       - name: Build and publish docker image for QGIS Server 3
         uses: elgohr/Publish-Docker-Github-Action@2.12
