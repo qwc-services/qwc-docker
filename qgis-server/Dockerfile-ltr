@@ -1,6 +1,6 @@
 # QGIS Server 3 with Apache FCGI
 
-FROM phusion/baseimage:focal-1.0.0alpha1-amd64
+FROM phusion/baseimage:bionic-1.0.0
 
 MAINTAINER Pirmin Kalberer
 
@@ -27,7 +27,7 @@ RUN chmod +x /etc/service/xvfb/run
 RUN apt-get update && apt-get install -y apache2 libapache2-mod-fcgid
 
 #QGIS Server
-RUN echo "deb http://qgis.org/ubuntu focal main" > /etc/apt/sources.list.d/qgis.org-debian.list
+RUN echo "deb http://qgis.org/ubuntu-ltr bionic main" > /etc/apt/sources.list.d/qgis.org-debian.list
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F7E06F06199EF2F2
 
 RUN apt-get update && apt-get install -y qgis-server

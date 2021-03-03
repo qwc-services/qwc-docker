@@ -10,10 +10,28 @@ jobs:
 
       - uses: actions/checkout@master
 
+      - name: Get version tag QGIS 3 LTR
+        id: get_tag_qgis_3_ltr
+        run: |
+          echo ::set-output name=tag::3.16
+
+      - name: Build and publish docker image for QGIS Server 3 LTR
+        uses: elgohr/Publish-Docker-Github-Action@2.12
+        env:
+          URL_PREFIX: /ows
+        with:
+          name: sourcepole/qwc-qgis-server
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          tags: "${{ steps.get_tag_qgis_3_ltr.outputs.tag }}"
+          workdir: qgis-server
+          dockerfile: Dockerfile-ltr
+          buildargs: URL_PREFIX
+
       - name: Get version tag QGIS 3
         id: get_tag_qgis_3
         run: |
-          echo ::set-output name=tag::3.16
+          echo ::set-output name=tag::3.18
 
       - name: Build and publish docker image for QGIS Server 3
         uses: elgohr/Publish-Docker-Github-Action@2.12
