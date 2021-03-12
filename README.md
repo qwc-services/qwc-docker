@@ -83,7 +83,7 @@ Docker installation
 * docker-compose (https://docs.docker.com/compose/install/):
 
 ```
-dockerComposeVersion=1.21.2
+dockerComposeVersion=1.28.5
 curl -L https://github.com/docker/compose/releases/download/$dockerComposeVersion/docker-compose-`uname -s`-`uname -m` > ~/bin/docker-compose
 chmod +x ~/bin/docker-compose
 ```
@@ -161,6 +161,10 @@ EOS
 
 Usage
 -----
+
+Set JWT secret:
+
+    python3 -c 'import secrets; print("JWT_SECRET_KEY=\"%s\"" % secrets.token_hex(48))' >.env
 
 Start all containers:
 
