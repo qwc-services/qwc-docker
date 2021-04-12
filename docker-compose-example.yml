@@ -68,6 +68,9 @@ services:
     volumes:
       - ./volumes/solr/configsets/gdi:/gdi_conf:ro
       - ./volumes/solr/data:/var/solr/data
+      # Protectt admin GUI and admin API with Basic auth
+      # Change "#credentials" to "credentials" in security.json for adding a user 'solr' with password 'SolrRocks'
+      #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
   qwc-fulltext-search-service:
     image: sourcepole/qwc-fulltext-search-service:v2.0.0
