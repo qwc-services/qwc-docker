@@ -39,6 +39,7 @@ services:
     image: sourcepole/qwc-ogc-service:v2.0.0
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
       - SERVICE_MOUNTPOINT=/ows
     volumes:
       - ./demo-config:/srv/qwc_service/config:ro
@@ -50,6 +51,7 @@ services:
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/data
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
     volumes:
       - ./pg_service-write.conf:/var/www/.pg_service.conf:ro
       - ./demo-config:/srv/qwc_service/config:ro
@@ -79,6 +81,7 @@ services:
     environment:
       - SERVICE_MOUNTPOINT=/api/v2/search
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
     ports:
       - "127.0.0.1:5011:9090"
     volumes:
@@ -90,6 +93,7 @@ services:
     # image: sourcepole/qwc-map-viewer-base:v2.0.0-rc6
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
     ports:
       - "127.0.0.1:5030:9090"
     volumes:
@@ -100,6 +104,7 @@ services:
     image: sourcepole/qwc-admin-gui:v2.0.0-rc7
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
       - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}
 ]'
       #- TOTP_ENABLED=False
@@ -118,6 +123,7 @@ services:
   #   environment:
   #     - SERVICE_MOUNTPOINT=/registration
   #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
+  #     - JWT_COOKIE_CSRF_PROTECT=True
   #     - DEFAULT_LOCALE=en
   #     - ADMIN_RECIPIENTS=admin@example.com
   #     - MAIL_SUPPRESS_SEND=True
@@ -128,10 +134,15 @@ services:
   #     - ./pg_service.conf:/var/www/.pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2.0.0
+    image: sourcepole/qwc-db-auth:v2.0.1
     environment:
       - SERVICE_MOUNTPOINT=/auth
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
+      # https://flask-jwt-extended.readthedocs.io/en/stable/options/#cookie-options
+      - JWT_COOKIE_SAMESITE=Strict
+      # Enable the following in production (requires https):
+      #- JWT_COOKIE_SECURE=True
       #- TOTP_ENABLED=False
       #- TOTP_ISSUER_NAME=QWC Services
       - MAIL_SUPPRESS_SEND=True
@@ -154,6 +165,7 @@ services:
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/permalink
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
       - ./demo-config:/srv/qwc_service/config:ro
@@ -165,6 +177,7 @@ services:
   #   environment:
   #     - SERVICE_MOUNTPOINT=/api/v1/feature-info
   #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
+  #     - JWT_COOKIE_CSRF_PROTECT=True
   #   volumes:
   #     - ./pg_service.conf:/var/www/.pg_service.conf:ro
   #     - ./demo-config:/srv/qwc_service/config:ro
@@ -176,6 +189,7 @@ services:
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/document
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
     volumes:
       - ./demo-config:/srv/qwc_service/config:ro
     depends_on:
@@ -196,6 +210,7 @@ services:
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/mapinfo
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
     volumes:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
       - ./demo-config:/srv/qwc_service/config:ro
@@ -209,6 +224,7 @@ services:
   #   environment:
   #     - SERVICE_MOUNTPOINT=/api/v1/legend
   #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
+  #     - JWT_COOKIE_CSRF_PROTECT=True
   #   volumes:
   #     - ./demo-config:/srv/qwc_service/config:ro
   #     - ./volumes/legends:/legends
