@@ -22,7 +22,7 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2.0.0-rc4
+    image: sourcepole/qwc-config-generator:v2.0.0-rc5
     environment:
         - INPUT_CONFIG_PATH=/srv/qwc_service/config-in
         - OUTPUT_CONFIG_PATH=/srv/qwc_service/config-out
@@ -89,8 +89,9 @@ services:
       - ./demo-config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2.0.0-rc6
-    # image: sourcepole/qwc-map-viewer-base:v2.0.0-rc6
+    image: sourcepole/qwc-map-viewer-demo:v2.0.0
+    # With custom build added via volume:
+    # image: sourcepole/qwc-map-viewer-base:v2.0.0
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
       - JWT_COOKIE_CSRF_PROTECT=True
@@ -101,7 +102,7 @@ services:
       #- ./volumes/qwc2:/qwc2:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2.0.0-rc7
+    image: sourcepole/qwc-admin-gui:v2.0.0
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
       - JWT_COOKIE_CSRF_PROTECT=True
