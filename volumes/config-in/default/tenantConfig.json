@@ -127,6 +127,97 @@
       "name": "featureInfo",
       "config": {
         "default_qgis_server_url": "http://qwc-qgis-server/ows/"
+      },
+      "resources": {
+        "wms_services": [
+          {
+            "name": "qwc_demo",
+            "root_layer": {
+              "name": "qwc_demo",
+              "title": "QWC Services Demo WMS",
+              "layers": [
+                {
+                  "name": "edit_demo",
+                  "title": "Edit Demo",
+                  "layers": [
+                    {
+                      "name": "edit_points",
+                      "title": "Edit Points",
+                      "attributes": [
+                        {
+                          "name": "id"
+                        },
+                        {
+                          "name": "name"
+                        },
+                        {
+                          "name": "description"
+                        },
+                        {
+                          "name": "num"
+                        },
+                        {
+                          "name": "value"
+                        },
+                        {
+                          "name": "type"
+                        },
+                        {
+                          "name": "amount"
+                        },
+                        {
+                          "name": "validated",
+                          "format": "{\"t\": \"Yes\", \"f\": \"No\"}"
+                        },
+                        {
+                          "name": "datetime"
+                        },
+                        {
+                          "name": "geometry"
+                        },
+                        {
+                          "name": "maptip"
+                        }
+                      ],
+                      "display_field": "name"
+                    }
+                  ]
+                },
+                {
+                  "name": "countries",
+                  "title": "Countries",
+                  "attributes": [
+                    {
+                      "name": "name",
+                      "alias": "Name"
+                    },
+                    {
+                      "name": "formal_en",
+                      "alias": "Formal name"
+                    },
+                    {
+                      "name": "pop_est",
+                      "alias": "Population"
+                    },
+                    {
+                      "name": "subregion",
+                      "alias": "Subregion"
+                    },
+                    {
+                      "name": "geometry"
+                    }
+                  ],
+                  "display_field": "name",
+                  "info_template": {
+                    "type": "wms",
+                    "wms_url": "http://qwc-qgis-server/ows/qwc_demo",
+                    "template": "<div><h2>Demo Template</h2>Pos: {{ x }}, {{ y }}<br>Name: {{ feature.Name }}</div>"
+                  }
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {

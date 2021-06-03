@@ -351,7 +351,8 @@
         "solr_facets": [
           "foreground",
           "ne_10m_admin_0_countries"
-        ]
+        ],
+        "external_links": []
       }
     },
     {
@@ -367,7 +368,8 @@
         "dataproducts": [],
         "document_templates": [],
         "print_templates": [],
-        "solr_facets": []
+        "solr_facets": [],
+        "external_links": []
       }
     },
     {
@@ -383,7 +385,8 @@
         "dataproducts": [],
         "document_templates": [],
         "print_templates": [],
-        "solr_facets": []
+        "solr_facets": [],
+        "external_links": []
       }
     }
   ]

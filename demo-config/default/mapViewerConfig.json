@@ -20,8 +20,6 @@
     "qwc2_config": {
       "restricted_viewer_tasks": [],
       "config": {
-        "translationsPath": "/translations",
-        "assetsPath": "/assets",
         "urlPositionFormat": "centerAndZoom",
         "urlPositionCrs": "",
         "omitUrlParameterUpdates": false,
@@ -32,10 +30,12 @@
         "preventSplittingGroupsWhenReordering": false,
         "allowLayerTreeSeparators": false,
         "allowRemovingThemeLayers": true,
+        "globallyDisableDockableDialogs": false,
         "searchThemes": true,
         "allowAddingOtherThemes": true,
         "allowFractionalZoom": true,
         "localeAwareNumbers": false,
+        "identifyTool": "Identify",
         "wmsDpi": 96,
         "wmsHidpi": true,
         "defaultFeatureStyle": {
@@ -57,8 +57,15 @@
           ],
           "circleRadius": 10,
           "textFill": "black",
-          "textStroke": "white"
+          "textStroke": "white",
+          "textFont": "11pt sans-serif"
         },
+        "importLayerUrlPresets": [
+          {
+            "label": "Swisstopo WMTS",
+            "value": "https://wmts10.geo.admin.ch/EPSG/2056/1.0.0/WMTSCapabilities.xml"
+          }
+        ],
         "projections": [
           {
             "code": "EPSG:32632",
@@ -79,6 +86,11 @@
             "code": "EPSG:25832",
             "proj": "+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
             "label": "ETRS89 / UTM 32N"
+          },
+          {
+            "code": "EPSG:31983",
+            "proj": "+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
+            "label": "SIRGAS 2000 / UTM zone 23S"
           }
         ],
         "plugins": {
@@ -96,7 +108,7 @@
                   },
                   "LocateSupport": {
                     "keepCurrentZoomLevel": true,
-                    "startupMode": "ENABLED"
+                    "startupMode": "DISABLED"
                   },
                   "ScaleBarSupport": {
                     "units": "metric"
@@ -156,7 +168,10 @@
                       },
                       {
                         "key": "Editing",
-                        "icon": "editing"
+                        "icon": "editing",
+                        "themeWhitelist": [
+                          "Test"
+                        ]
                       },
                       {
                         "key": "DxfExport",
@@ -202,6 +217,15 @@
               }
             },
             {
+              "name": "BottomBar",
+              "cfg": {
+                "displayCoordinates": false,
+                "displayScales": false,
+                "viewertitleUrl": "http://qgis.org/",
+                "termsUrl": "http://qgis.org/"
+              }
+            },
+            {
               "name": "Identify",
               "cfg": {
                 "params": {
@@ -228,7 +252,8 @@
             {
               "name": "Print",
               "cfg": {
-                "inlinePrintOutput": false
+                "inlinePrintOutput": false,
+                "gridInitiallyEnabled": false
               }
             },
             {
@@ -249,7 +274,6 @@
                 "allowImport": true,
                 "groupTogglesSublayers": false,
                 "grayUnchecked": false,
-                "flattenGroups": false,
                 "layerInfoWindowSize": {
                   "width": 480,
                   "height": 400
@@ -320,12 +344,18 @@
                   "LocateSupport": {
                     "keepCurrentZoomLevel": true,
                     "stopFollowingOnDrag": true,
-                    "startupMode": "FOLLOWING"
+                    "startupMode": "DISABLED"
                   },
                   "ScaleBarSupport": {
                     "units": "metric"
                   }
-                }
+                },
+                "swipeGeometryTypeBlacklist": [
+                  "Point"
+                ],
+                "swipeLayerNameBlacklist": [
+                  "*_noswipe"
+                ]
               }
             },
             {
@@ -400,7 +430,10 @@
                       },
                       {
                         "key": "Editing",
-                        "icon": "editing"
+                        "icon": "editing",
+                        "themeWhitelist": [
+                          "Test"
+                        ]
                       },
                       {
                         "key": "DxfExport",
@@ -488,7 +521,6 @@
                 "allowImport": true,
                 "groupTogglesSublayers": true,
                 "grayUnchecked": false,
-                "flattenGroups": false,
                 "layerInfoWindowSize": {
                   "width": 480,
                   "height": 400
@@ -530,7 +562,8 @@
             {
               "name": "Print",
               "cfg": {
-                "inlinePrintOutput": false
+                "inlinePrintOutput": false,
+                "gridInitiallyEnabled": false
               }
             },
             {
@@ -538,7 +571,10 @@
               "mapClickAction": "identify"
             },
             {
-              "name": "MapCopyright"
+              "name": "MapCopyright",
+              "cfg": {
+                "showThemeCopyrightOnly": true
+              }
             },
             {
               "name": "DxfExport"
@@ -585,6 +621,12 @@
               "cfg": {
                 "removeMode": "onclickonmarker"
               }
+            },
+            {
+              "name": "API"
+            },
+            {
+              "name": "ScratchDrawing"
             }
           ]
         }
@@ -607,6 +649,14 @@
             },
             "abstract": "",
             "keywords": "",
+            "onlineResource": "",
+            "contact": {
+              "person": null,
+              "organization": null,
+              "position": null,
+              "phone": null,
+              "email": null
+            },
             "mapCrs": "EPSG:3857",
             "additionalMouseCrs": [],
             "bbox": {
@@ -636,107 +686,164 @@
                     "name": "edit_points",
                     "title": "Edit Points",
                     "visibility": true,
+                    "geometryType": "Point",
                     "queryable": true,
                     "displayField": "name",
                     "opacity": 255,
-                    "bbox": [
-                      8.540804,
-                      47.377738,
-                      8.540805,
-                      47.377739
-                    ]
+                    "bbox": {
+                      "crs": "EPSG:4326",
+                      "bounds": [
+                        -179.999996,
+                        -89.0,
+                        179.999996,
+                        89.0
+                      ]
+                    },
+                    "attribution": {
+                      "Title": null,
+                      "OnlineResource": null
+                    }
                   },
                   {
                     "name": "edit_lines",
                     "title": "Edit Lines",
                     "visibility": true,
+                    "geometryType": "LineString",
                     "queryable": true,
                     "displayField": "name",
                     "opacity": 255,
-                    "bbox": [
-                      8.542115,
-                      47.377069,
-                      8.542278,
-                      47.377544
-                    ]
+                    "bbox": {
+                      "crs": "EPSG:4326",
+                      "bounds": [
+                        8.542115,
+                        47.377069,
+                        8.542278,
+                        47.377544
+                      ]
+                    },
+                    "attribution": {
+                      "Title": null,
+                      "OnlineResource": null
+                    }
                   },
                   {
                     "name": "edit_polygons",
                     "title": "Edit Polygons",
                     "visibility": true,
+                    "geometryType": "Polygon",
                     "queryable": true,
                     "displayField": "name",
                     "opacity": 255,
-                    "bbox": [
-                      8.541217,
-                      47.377464,
-                      8.541461,
-                      47.377751
-                    ]
+                    "bbox": {
+                      "crs": "EPSG:4326",
+                      "bounds": [
+                        8.541217,
+                        47.377464,
+                        8.541461,
+                        47.377751
+                      ]
+                    },
+                    "attribution": {
+                      "Title": null,
+                      "OnlineResource": null
+                    }
                   }
                 ],
-                "expanded": false,
-                "mutuallyExclusive": false
+                "expanded": true,
+                "mutuallyExclusive": false,
+                "visibility": true
               },
               {
                 "name": "geographic_lines",
                 "title": "Geographic lines",
                 "visibility": true,
+                "geometryType": "MultiLineString",
                 "queryable": true,
                 "displayField": "name",
                 "opacity": 255,
-                "bbox": [
-                  -180.0,
-                  -66.549927,
-                  179.999997,
-                  66.549986
-                ]
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    -180.0,
+                    -66.549927,
+                    179.999997,
+                    66.549986
+                  ]
+                },
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                }
               },
               {
                 "name": "country_names",
                 "title": "Country names",
                 "visibility": true,
+                "geometryType": "Point",
                 "queryable": true,
                 "displayField": "z_name",
                 "opacity": 255,
-                "bbox": [
-                  -177.22902,
-                  -80.516568,
-                  178.519895,
-                  73.34887
-                ],
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    -177.22902,
+                    -80.516568,
+                    178.519895,
+                    73.34887
+                  ]
+                },
                 "minScale": 0,
-                "maxScale": 10000000
+                "maxScale": 10000000,
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                }
               },
               {
                 "name": "states_provinces",
                 "title": "States and Provinces",
                 "visibility": true,
+                "geometryType": "MultiLineString",
                 "queryable": true,
                 "displayField": "name",
                 "opacity": 255,
-                "bbox": [
-                  -178.137086,
-                  -49.250871,
-                  178.448623,
-                  81.128532
-                ],
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    -178.137086,
+                    -49.250871,
+                    178.448623,
+                    81.128532
+                  ]
+                },
                 "minScale": 0,
-                "maxScale": 5000000
+                "maxScale": 5000000,
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                }
               },
               {
                 "name": "countries",
                 "title": "Countries",
                 "visibility": true,
+                "geometryType": "MultiPolygon",
                 "queryable": true,
                 "displayField": "name",
                 "opacity": 255,
-                "bbox": [
-                  -180.0,
-                  -89.501386,
-                  180.0,
-                  83.634101
-                ]
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    -180.0,
+                    -89.501386,
+                    180.0,
+                    83.634101
+                  ]
+                },
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                }
               }
             ],
             "expanded": true,
@@ -751,6 +858,7 @@
               "edit_lines",
               "edit_points"
             ],
+            "externalLayers": [],
             "backgroundLayers": [
               {
                 "name": "bluemarble",
@@ -783,6 +891,7 @@
               "edit_lines": {
                 "layerName": "edit_lines",
                 "editDataset": "qwc_demo.edit_lines",
+                "geomType": "LineString",
                 "fields": [
                   {
                     "id": "name",
@@ -859,12 +968,12 @@
                       "required": false
                     }
                   }
-                ],
-                "geomType": "LineString"
+                ]
               },
               "edit_points": {
                 "layerName": "edit_points",
                 "editDataset": "qwc_demo.edit_points",
+                "geomType": "Point",
                 "fields": [
                   {
                     "id": "name",
@@ -941,12 +1050,12 @@
                       "required": false
                     }
                   }
-                ],
-                "geomType": "Point"
+                ]
               },
               "edit_polygons": {
                 "layerName": "edit_polygons",
                 "editDataset": "qwc_demo.edit_polygons",
+                "geomType": "Polygon",
                 "fields": [
                   {
                     "id": "name",
@@ -1023,8 +1132,7 @@
                       "required": false
                     }
                   }
-                ],
-                "geomType": "Polygon"
+                ]
               }
             },
             "thumbnail": "img/mapthumbs/default.jpg",
