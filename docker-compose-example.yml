@@ -22,14 +22,14 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2.0.0-rc5
+    image: sourcepole/qwc-config-generator:v2.0.1
     environment:
         - INPUT_CONFIG_PATH=/srv/qwc_service/config-in
         - OUTPUT_CONFIG_PATH=/srv/qwc_service/config-out
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
-      - ./volumes/config-in:/srv/qwc_service/config-in
+      - ./volumes/config-in:/srv/qwc_service/config-in:ro
       - ./demo-config:/srv/qwc_service/config-out
       - ./volumes/qwc2:/qwc2
       - ./volumes/qgs-resources:/data
@@ -47,7 +47,7 @@ services:
       - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2.0.0
+    image: sourcepole/qwc-data-service:v2.0.2
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/data
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
@@ -77,7 +77,7 @@ services:
       #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
   qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:v2.0.0
+    image: sourcepole/qwc-fulltext-search-service:v2.1.0
     environment:
       - SERVICE_MOUNTPOINT=/api/v2/search
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
@@ -89,9 +89,9 @@ services:
       - ./demo-config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2.0.0
+    image: sourcepole/qwc-map-viewer-demo:v2.0.1
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2.0.0
+    # image: sourcepole/qwc-map-viewer-base:v2.0.1
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
       - JWT_COOKIE_CSRF_PROTECT=True
@@ -102,10 +102,11 @@ services:
       #- ./volumes/qwc2:/qwc2:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2.0.0
+    image: sourcepole/qwc-admin-gui:v2.0.2
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
+      # Disable CSRF cookie check for now - breaks POST requests
+      #- JWT_COOKIE_CSRF_PROTECT=True
       - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}
 ]'
       #- TOTP_ENABLED=False
@@ -135,7 +136,7 @@ services:
   #     - ./pg_service.conf:/var/www/.pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2.0.1
+    image: sourcepole/qwc-db-auth:v2.1.4
     environment:
       - SERVICE_MOUNTPOINT=/auth
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
