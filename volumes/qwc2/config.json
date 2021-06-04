@@ -114,7 +114,7 @@
                   {"key": "IdentifyRegion", "icon": "identify_region"},
                   {"key": "Measure", "icon": "measure"},
                   {"key": "Redlining", "icon": "draw"},
-                  {"key": "Editing", "icon": "editing", "themeWhitelist": ["Test"]},
+                  {"key": "Editing", "icon": "editing"},
                   {"key": "DxfExport", "icon": "dxfexport"},
                   {"key": "RasterExport", "icon": "rasterexport"}
                 ]},
@@ -328,7 +328,7 @@
                   {"key": "IdentifyRegion", "icon": "identify_region"},
                   {"key": "Measure", "icon": "measure"},
                   {"key": "Redlining", "icon": "draw"},
-                  {"key": "Editing", "icon": "editing", "themeWhitelist": ["Test"]},
+                  {"key": "Editing", "icon": "editing"},
                   {"key": "DxfExport", "icon": "dxfexport"},
                   {"key": "RasterExport", "icon": "rasterexport"}
                 ]},

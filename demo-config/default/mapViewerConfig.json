@@ -168,10 +168,7 @@
                       },
                       {
                         "key": "Editing",
-                        "icon": "editing",
-                        "themeWhitelist": [
-                          "Test"
-                        ]
+                        "icon": "editing"
                       },
                       {
                         "key": "DxfExport",
@@ -430,10 +427,7 @@
                       },
                       {
                         "key": "Editing",
-                        "icon": "editing",
-                        "themeWhitelist": [
-                          "Test"
-                        ]
+                        "icon": "editing"
                       },
                       {
                         "key": "DxfExport",
