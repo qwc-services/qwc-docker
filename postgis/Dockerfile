@@ -38,6 +38,8 @@ RUN cd /tmp/ && git clone $GIT_REPO qwc-config-db
 # Set ALEMBIC_VERSION to force git pull
 ARG ALEMBIC_VERSION=head
 RUN cd /tmp/qwc-config-db/ && git pull
+# psycopg2-binary 2.9 is not available for Python 3.5
+RUN sed --in-place 's/psycopg2-binary==2.9.1/psycopg2-binary==2.8.6/' /tmp/qwc-config-db/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/qwc-config-db/requirements.txt
 
 # setup connection service for migrations
