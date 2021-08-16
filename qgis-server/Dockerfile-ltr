@@ -27,8 +27,8 @@ RUN chmod +x /etc/service/xvfb/run
 RUN apt-get update && apt-get install -y apache2 libapache2-mod-fcgid
 
 #QGIS Server
-RUN echo "deb http://qgis.org/ubuntu-ltr bionic main" > /etc/apt/sources.list.d/qgis.org-debian.list
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F7E06F06199EF2F2
+RUN echo "deb https://qgis.org/ubuntu-ltr bionic main" > /etc/apt/sources.list.d/qgis.org-debian.list
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 46B5721DBBD2996A
 
 RUN apt-get update && apt-get install -y qgis-server
 
