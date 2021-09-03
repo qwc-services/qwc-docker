@@ -10,6 +10,9 @@ services:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
     ports:
+    # 5439 is the container-*external* port, the other
+    # containers in this setup will reach this service
+    # over the *internal* network on port 5432!
      - "127.0.0.1:5439:5432"
 
   qwc-qgis-server:
