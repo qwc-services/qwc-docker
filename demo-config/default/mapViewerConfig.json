@@ -13,8 +13,8 @@
     "ogc_service_url": "/ows/",
     "permalink_service_url": "/api/v1/permalink/",
     "#print_service_url": "/api/v1/print/",
-    "#search_data_service_url": "/api/v2/search/geom/",
-    "#search_service_url": "/api/v2/search/fts/"
+    "search_service_url": "/api/v2/search/",
+    "search_data_service_url": "/api/v2/search/geom/"
   },
   "resources": {
     "qwc2_config": {
@@ -837,7 +837,10 @@
                 "attribution": {
                   "Title": null,
                   "OnlineResource": null
-                }
+                },
+                "searchterms": [
+                  "ne_10m_admin_0_countries"
+                ]
               }
             ],
             "expanded": true,
@@ -879,7 +882,14 @@
             ],
             "skipEmptyFeatureAttributes": true,
             "searchProviders": [
-              "coordinates"
+              "coordinates",
+              {
+                "provider": "solr",
+                "default": [],
+                "layers": {
+                  "countries": "ne_10m_admin_0_countries"
+                }
+              }
             ],
             "editConfig": {
               "edit_lines": {
@@ -1162,7 +1172,7 @@
               "Title": "OpenStreetMap contributors",
               "OnlineResource": "https://www.openstreetmap.org/copyright"
             },
-            "thumbnail": "img/mapthumbs/mapnik.jpg"
+            "thumbnail": "img/mapthumbs/default.jpg"
           },
           {
             "type": "wmts",

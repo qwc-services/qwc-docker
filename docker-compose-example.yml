@@ -89,7 +89,7 @@ services:
       - ./demo-config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2.0.1
+    image: sourcepole/qwc-map-viewer-demo:v2.0.5
     # With custom build added via volume:
     # image: sourcepole/qwc-map-viewer-base:v2.0.1
     environment:

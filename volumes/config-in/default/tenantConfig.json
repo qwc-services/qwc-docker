@@ -35,7 +35,17 @@
               "printLayer": "osm_bg"
             }
           ],
-          "searchProviders": ["coordinates"],
+          "searchProviders": [
+            "coordinates",
+            {
+              "provider": "solr",
+              "default": [
+              ],
+              "layers": {
+                "countries": "ne_10m_admin_0_countries"
+              }
+            }
+          ],
           "mapCrs": "EPSG:3857",
           "additionalMouseCrs": [],
           "extent": [-1000000, 4000000, 3000000, 8000000],
@@ -119,8 +129,8 @@
         "ogc_service_url": "/ows/",
         "permalink_service_url": "/api/v1/permalink/",
         "#print_service_url": "/api/v1/print/",
-        "#search_data_service_url": "/api/v2/search/geom/",
-        "#search_service_url": "/api/v2/search/fts/"
+        "search_service_url": "/api/v2/search/",
+        "search_data_service_url": "/api/v2/search/geom/"
       }
     },
     {
