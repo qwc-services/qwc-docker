@@ -1,9 +1,14 @@
 # WSGI service environment
 
-FROM alpine:3.9.5
+FROM alpine:3.13
 
-RUN apk add --no-cache --update shadow python3 uwsgi uwsgi-python3 && \
+RUN apk add --no-cache --update shadow python3 py3-pip uwsgi uwsgi-python3 && \
     pip3 install --no-cache --upgrade pip
+
+# -> pip 21.2.4 from /usr/lib/python3.8/site-packages/pip (python 3.8)
+# Alpine package has pip 20.3.4
+# On alpine:3.9.5 we had
+# pip 21.1 from /usr/lib/python3.6/site-packages/pip (python 3.6)
 
 RUN usermod -u 32 xfs && \
     groupmod -g 32 xfs && \
