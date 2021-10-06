@@ -127,3 +127,9 @@ password=qgis_server
 sslmode=disable
 EOS
 ```
+
+Overwiev which container accesses which volume
+----------------------------------------------
+
+An overview of how each container accesses which volume 
+can be found [here](docker-volume-matrix.md).
