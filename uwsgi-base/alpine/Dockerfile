@@ -2,11 +2,13 @@
 
 FROM alpine:3.9.5
 
-RUN apk add --no-cache --update python3 uwsgi uwsgi-python3 && \
+RUN apk add --no-cache --update shadow python3 uwsgi uwsgi-python3 && \
     pip3 install --no-cache --upgrade pip
 
-RUN addgroup -S www-data \
-	&& adduser -D -S -h /var/www/ -s /sbin/nologin -G www-data www-data
+RUN usermod -u 32 xfs && \
+    groupmod -g 32 xfs && \
+    addgroup -g 33 -S www-data && \
+    adduser -u 33 -D -S -h /var/www -s /sbin/nologin -G www-data www-data
 
 ENV SERVICE_MOUNTPOINT='/'
 # http://uwsgi-docs.readthedocs.io/en/latest/Options.html#buffer-size
