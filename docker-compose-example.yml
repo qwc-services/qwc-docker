@@ -25,7 +25,7 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:latest
+    image: sourcepole/qwc-config-generator:v2.0.11
     environment:
         - INPUT_CONFIG_PATH=/srv/qwc_service/config-in
         - OUTPUT_CONFIG_PATH=/srv/qwc_service/config-out
@@ -39,7 +39,7 @@ services:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
 
   qwc-ogc-service:
-    image: sourcepole/qwc-ogc-service:v2.0.0
+    image: sourcepole/qwc-ogc-service:v2.0.8
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
       - JWT_COOKIE_CSRF_PROTECT=True
@@ -50,7 +50,7 @@ services:
       - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2.0.3
+    image: sourcepole/qwc-data-service:v2.0.9
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/data
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
@@ -62,7 +62,7 @@ services:
       - "127.0.0.1:5012:9090"
 
   qwc-solr:
-    image: solr:8.4.1
+    image: solr:8.4
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -80,7 +80,7 @@ services:
       #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
   qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:v2.1.0
+    image: sourcepole/qwc-fulltext-search-service:v2.1.3
     environment:
       - SERVICE_MOUNTPOINT=/api/v2/search
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
@@ -92,9 +92,9 @@ services:
       - ./demo-config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2.0.5
+    image: sourcepole/qwc-map-viewer-demo:v2.0.6
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2.0.1
+    # image: sourcepole/qwc-map-viewer-base:v2.0.6
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
       - JWT_COOKIE_CSRF_PROTECT=True
@@ -108,7 +108,7 @@ services:
       - ./volumes/qwc2/assets/forms:/qwc2/assets/forms:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2.0.2
+    image: sourcepole/qwc-admin-gui:v2.0.10
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
       # Disable CSRF cookie check for now - breaks POST requests
@@ -142,7 +142,7 @@ services:
   #     - ./pg_service.conf:/var/www/.pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2.1.4
+    image: sourcepole/qwc-db-auth:v2.1.6
     environment:
       - SERVICE_MOUNTPOINT=/auth
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
@@ -169,7 +169,7 @@ services:
       - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
-    image: sourcepole/qwc-permalink-service:v2.0.0
+    image: sourcepole/qwc-permalink-service:v2.0.1
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/permalink
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
@@ -193,7 +193,7 @@ services:
   #     - "127.0.0.1:5015:9090"
 
   qwc-document-service:
-    image: sourcepole/qwc-document-service:v2.0.0
+    image: sourcepole/qwc-document-service:v2.0.4
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/document
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
@@ -206,7 +206,7 @@ services:
       - "127.0.0.1:5018:9090"
 
   jasper-reporting-service:
-    image: sourcepole/jasper-reporting-service:0.8.0
+    image: sourcepole/jasper-reporting-service:0.8.1
     volumes:
       - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
       - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
@@ -214,7 +214,7 @@ services:
       - "127.0.0.1:8002:8080"
 
   qwc-mapinfo-service:
-    image: sourcepole/qwc-mapinfo-service:v2.0.0
+    image: sourcepole/qwc-mapinfo-service:v2.0.2
     environment:
       - SERVICE_MOUNTPOINT=/api/v1/mapinfo
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
