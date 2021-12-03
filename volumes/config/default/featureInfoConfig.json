@@ -42,8 +42,7 @@
                       "name": "amount"
                     },
                     {
-                      "name": "validated",
-                      "format": "{\"t\": \"Yes\", \"f\": \"No\"}"
+                      "name": "validated"
                     },
                     {
                       "name": "datetime"
@@ -405,6 +404,330 @@
                 }
               ],
               "display_field": "name"
+            },
+            {
+              "name": "countries",
+              "title": "Countries",
+              "attributes": [
+                {
+                  "name": "featurecla"
+                },
+                {
+                  "name": "sovereignt"
+                },
+                {
+                  "name": "sov_a3"
+                },
+                {
+                  "name": "adm0_dif"
+                },
+                {
+                  "name": "level"
+                },
+                {
+                  "name": "type"
+                },
+                {
+                  "name": "admin"
+                },
+                {
+                  "name": "adm0_a3"
+                },
+                {
+                  "name": "geou_dif"
+                },
+                {
+                  "name": "geounit"
+                },
+                {
+                  "name": "gu_a3"
+                },
+                {
+                  "name": "su_dif"
+                },
+                {
+                  "name": "subunit"
+                },
+                {
+                  "name": "su_a3"
+                },
+                {
+                  "name": "brk_diff"
+                },
+                {
+                  "name": "name"
+                },
+                {
+                  "name": "name_long"
+                },
+                {
+                  "name": "brk_a3"
+                },
+                {
+                  "name": "brk_name"
+                },
+                {
+                  "name": "brk_group"
+                },
+                {
+                  "name": "abbrev"
+                },
+                {
+                  "name": "postal"
+                },
+                {
+                  "name": "formal_en"
+                },
+                {
+                  "name": "formal_fr"
+                },
+                {
+                  "name": "name_ciawf"
+                },
+                {
+                  "name": "note_adm0"
+                },
+                {
+                  "name": "note_brk"
+                },
+                {
+                  "name": "name_sort"
+                },
+                {
+                  "name": "name_alt"
+                },
+                {
+                  "name": "pop_est"
+                },
+                {
+                  "name": "pop_rank"
+                },
+                {
+                  "name": "gdp_md_est"
+                },
+                {
+                  "name": "pop_year"
+                },
+                {
+                  "name": "lastcensus"
+                },
+                {
+                  "name": "gdp_year"
+                },
+                {
+                  "name": "economy"
+                },
+                {
+                  "name": "income_grp"
+                },
+                {
+                  "name": "wikipedia"
+                },
+                {
+                  "name": "fips_10_"
+                },
+                {
+                  "name": "iso_a2"
+                },
+                {
+                  "name": "iso_a3"
+                },
+                {
+                  "name": "iso_a3_eh"
+                },
+                {
+                  "name": "iso_n3"
+                },
+                {
+                  "name": "un_a3"
+                },
+                {
+                  "name": "wb_a2"
+                },
+                {
+                  "name": "wb_a3"
+                },
+                {
+                  "name": "woe_id"
+                },
+                {
+                  "name": "woe_id_eh"
+                },
+                {
+                  "name": "woe_note"
+                },
+                {
+                  "name": "adm0_a3_is"
+                },
+                {
+                  "name": "adm0_a3_us"
+                },
+                {
+                  "name": "adm0_a3_un"
+                },
+                {
+                  "name": "adm0_a3_wb"
+                },
+                {
+                  "name": "continent"
+                },
+                {
+                  "name": "region_un"
+                },
+                {
+                  "name": "subregion"
+                },
+                {
+                  "name": "region_wb"
+                },
+                {
+                  "name": "name_len"
+                },
+                {
+                  "name": "long_len"
+                },
+                {
+                  "name": "abbrev_len"
+                },
+                {
+                  "name": "tiny"
+                },
+                {
+                  "name": "homepart"
+                },
+                {
+                  "name": "ne_id"
+                },
+                {
+                  "name": "wikidataid"
+                },
+                {
+                  "name": "name_ar"
+                },
+                {
+                  "name": "name_bn"
+                },
+                {
+                  "name": "name_de"
+                },
+                {
+                  "name": "name_en"
+                },
+                {
+                  "name": "name_es"
+                },
+                {
+                  "name": "name_fr"
+                },
+                {
+                  "name": "name_el"
+                },
+                {
+                  "name": "name_hi"
+                },
+                {
+                  "name": "name_hu"
+                },
+                {
+                  "name": "name_id"
+                },
+                {
+                  "name": "name_it"
+                },
+                {
+                  "name": "name_ja"
+                },
+                {
+                  "name": "name_ko"
+                },
+                {
+                  "name": "name_nl"
+                },
+                {
+                  "name": "name_pl"
+                },
+                {
+                  "name": "name_pt"
+                },
+                {
+                  "name": "name_ru"
+                },
+                {
+                  "name": "name_sv"
+                },
+                {
+                  "name": "name_tr"
+                },
+                {
+                  "name": "name_vi"
+                },
+                {
+                  "name": "name_zh"
+                },
+                {
+                  "name": "geometry"
+                },
+                {
+                  "name": "maptip"
+                }
+              ],
+              "display_field": "name"
+            }
+          ]
+        }
+      },
+      {
+        "name": "qwc_demo",
+        "root_layer": {
+          "name": "qwc_demo",
+          "title": "QWC Services Demo WMS",
+          "layers": [
+            {
+              "name": "edit_demo",
+              "title": "Edit Demo",
+              "layers": [
+                {
+                  "name": "edit_points",
+                  "title": "Edit Points",
+                  "attributes": [
+                    {
+                      "name": "id"
+                    },
+                    {
+                      "name": "name"
+                    },
+                    {
+                      "name": "description"
+                    },
+                    {
+                      "name": "num"
+                    },
+                    {
+                      "name": "value"
+                    },
+                    {
+                      "name": "type"
+                    },
+                    {
+                      "name": "amount"
+                    },
+                    {
+                      "name": "validated",
+                      "format": "{\"t\": \"Yes\", \"f\": \"No\"}"
+                    },
+                    {
+                      "name": "datetime"
+                    },
+                    {
+                      "name": "geometry"
+                    },
+                    {
+                      "name": "maptip"
+                    }
+                  ],
+                  "display_field": "name"
+                }
+              ]
             },
             {
               "name": "countries",
