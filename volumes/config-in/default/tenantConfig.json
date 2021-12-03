@@ -113,8 +113,8 @@
       "name": "mapViewer",
       "generator_config": {
         "qwc2_config": {
-          "qwc2_config_file": "/qwc2/config.json",
-          "qwc2_index_file": "/qwc2/index.html"
+          "qwc2_config_file": "/srv/qwc_service/config-in/default/config.json",
+          "qwc2_index_file": "/srv/qwc_service/config-in/default/index.html"
         }
       },
       "config": {

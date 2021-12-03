@@ -1,7 +1,9 @@
 {
+  "searchServiceUrl": "http://localhost:5011/",
+  "searchDataServiceUrl": "http://localhost:5011/geom/",
   "editServiceUrl": "http://localhost:5012/",
   "mapInfoService":  "http://localhost:5016/",
-  "permalinkServiceUrl": "http://localhost:5018/",
+  "permalinkServiceUrl": "http://localhost:5001/",
   "elevationServiceUrl": "http://localhost:5002/",
   "featureReportService": "http://localhost:5020/",
   "urlPositionFormat": "centerAndZoom",
@@ -9,7 +11,7 @@
   "omitUrlParameterUpdates": false,
   "preserveExtentOnThemeSwitch": true,
   "preserveBackgroundOnThemeSwitch": true,
-  "preserveNonThemeLayersOnThemeSwitch": true,
+  "preserveNonThemeLayersOnThemeSwitch": false,
   "allowReorderingLayers": true,
   "preventSplittingGroupsWhenReordering": false,
   "allowLayerTreeSeparators": false,
@@ -17,11 +19,12 @@
   "globallyDisableDockableDialogs": false,
   "searchThemes": true,
   "allowAddingOtherThemes": true,
-  "allowFractionalZoom": true,
+  "allowFractionalZoom": false,
   "localeAwareNumbers": false,
   "identifyTool": "Identify",
   "wmsDpi": 96,
-  "wmsHidpi": true,
+  "wmsHidpi": false,
+  "qgisServerVersion": 3,
   "defaultFeatureStyle": {
     "strokeColor": [0, 0, 255, 1],
     "strokeWidth": 1,
@@ -33,7 +36,8 @@
     "textFont": "11pt sans-serif"
   },
   "importLayerUrlPresets": [
-      {"label": "Swisstopo WMTS", "value": "https://wmts10.geo.admin.ch/EPSG/2056/1.0.0/WMTSCapabilities.xml"}
+      {"label": "Swisstopo WMTS", "value": "https://wmts10.geo.admin.ch/EPSG/2056/1.0.0/WMTSCapabilities.xml"},
+      {"label": "Test", "value": "https://ycas.ch/qwc/catalog.json"}
   ],
   "projections": [
     {
@@ -69,7 +73,7 @@
           "cfg": {
             "mapOptions": {
               "zoomDuration": 250,
-              "antialiasing": true
+              "enableRotation": true
             },
             "toolsOptions": {
               "OverviewSupport": {
@@ -109,9 +113,11 @@
               "menuItems": [
                 {"key": "ThemeSwitcher", "icon": "themes"},
                 {"key": "LayerTree", "icon": "layers"},
+                {"key": "LayerCatalog", "icon": "catalog"},
                 {"key": "Share", "icon": "share"},
+                {"key": "Bookmark", "icon": "bookmark"},
                 {"key": "Tools", "icon": "tools", "subitems": [
-                  {"key": "IdentifyRegion", "icon": "identify_region"},
+                  {"key": "Identify", "icon": "identify_region", "mode": "Region"},
                   {"key": "Measure", "icon": "measure"},
                   {"key": "Redlining", "icon": "draw"},
                   {"key": "Editing", "icon": "editing"},
@@ -129,8 +135,8 @@
                 "showProvidersInPlaceholder": false
               },
               "appMenuClearsTask": true,
-              "appMenuVisibleOnStartup": false,
-              "logoClickResetsTheme": true
+              "appMenuFilterField": true,
+              "appMenuVisibleOnStartup": false
             }
         },
         {
@@ -161,7 +167,8 @@
               "FI_POINT_TOLERANCE": 32,
               "FI_LINE_TOLERANCE": 16,
               "FI_POLYGON_TOLERANCE": 8,
-              "feature_count": 20
+              "feature_count": 20,
+              "region_feature_count": 100
             },
             "enableExport": true,
             "longAttributesDisplay": "wrap",
@@ -182,6 +189,7 @@
           "name": "Print",
           "cfg": {
             "inlinePrintOutput": false,
+            "printExternalLayers": true,
             "gridInitiallyEnabled": false
           }
         },
@@ -204,7 +212,8 @@
             "groupTogglesSublayers": false,
             "grayUnchecked": false,
             "layerInfoWindowSize": {"width": 480, "height": 400},
-            "bboxDependentLegend": false
+            "bboxDependentLegend": true,
+            "scaleDependentLegend": "theme"
           },
           "mapClickAction": "unset"
         },
@@ -214,7 +223,8 @@
         {
           "name": "RasterExport",
           "cfg": {
-            "dpis": [96, 300]
+            "dpis": [96, 300],
+            "exportExternalLayers": true
           }
         },
         {
@@ -240,16 +250,19 @@
           }
         },
         {
-          "name": "IdentifyRegion",
-          "cfg": {
-            "useWfs": false
-          }
-        },
-        {
           "name": "StartupMarker",
           "cfg": {
             "removeMode": "onclickonmarker"
           }
+        },
+        {
+          "name": "LayerCatalog",
+          "cfg": {
+              "catalogUrl": "http://qwc2.sourcepole.ch/catalog.json"
+          }
+        },
+        {
+          "name": "Bookmark"
         }
       ],
       "desktop": [
@@ -258,7 +271,7 @@
           "cfg": {
             "mapOptions": {
               "zoomDuration": 250,
-              "antialiasing": true
+              "enableRotation": true
             },
             "toolsOptions": {
               "OverviewSupport": {
@@ -283,6 +296,14 @@
             "position": 5,
             "task": "LayerTree",
             "icon": "list-alt"
+          }
+        },
+        {
+          "name": "TaskButton",
+          "cfg": {
+            "position": 6,
+            "task": "Editing",
+            "icon": "editing"
           }
         },
         {
@@ -323,12 +344,15 @@
               "menuItems": [
                 {"key": "ThemeSwitcher", "icon": "themes"},
                 {"key": "LayerTree", "icon": "layers"},
+                {"key": "LayerCatalog", "icon": "catalog"},
                 {"key": "Share", "icon": "share"},
+                {"key": "Bookmark", "icon": "bookmark"},
                 {"key": "Tools", "icon": "tools", "subitems": [
-                  {"key": "IdentifyRegion", "icon": "identify_region"},
+                  {"key": "Identify", "icon": "identify_region", "mode": "Region"},
                   {"key": "Measure", "icon": "measure"},
                   {"key": "Redlining", "icon": "draw"},
                   {"key": "Editing", "icon": "editing"},
+                  {"key": "AttributeTable", "icon": "editing"},
                   {"key": "DxfExport", "icon": "dxfexport"},
                   {"key": "RasterExport", "icon": "rasterexport"}
                 ]},
@@ -340,7 +364,7 @@
                 {"key": "Measure", "mode": "LineString", "icon": "measure_line"},
                 {"key": "Measure", "mode": "Polygon", "icon": "measure_polygon"},
                 {"key": "Print", "icon": "print"},
-                {"key": "IdentifyRegion", "icon": "identify_region"}
+                {"key": "Identify", "icon": "identify_region", "mode": "Region"}
               ],
               "searchOptions": {
                 "minScaleDenom": 1000,
@@ -350,6 +374,7 @@
                 "showProvidersInPlaceholder": false
               },
               "appMenuClearsTask": true,
+              "appMenuFilterField": true,
               "appMenuVisibleOnStartup": false,
               "logoUrl": "/"
             }
@@ -382,10 +407,11 @@
             "allowMapTips": true,
             "allowCompare": true,
             "allowImport": true,
-            "groupTogglesSublayers": true,
+            "groupTogglesSublayers": false,
             "grayUnchecked": false,
             "layerInfoWindowSize": {"width": 480, "height": 400},
-            "bboxDependentLegend": false,
+            "bboxDependentLegend": true,
+            "scaleDependentLegend": "theme",
             "showToggleAllLayersCheckbox": true
           },
           "mapClickAction": "identify"
@@ -397,7 +423,8 @@
               "FI_POINT_TOLERANCE": 16,
               "FI_LINE_TOLERANCE": 8,
               "FI_POLYGON_TOLERANCE": 4,
-              "feature_count": 20
+              "feature_count": 20,
+              "region_feature_count": 100
             },
             "enableExport": true,
             "longAttributesDisplay": "wrap",
@@ -423,6 +450,7 @@
           "name": "Print",
           "cfg": {
             "inlinePrintOutput": false,
+            "printExternalLayers": true,
             "gridInitiallyEnabled": false
           }
         },
@@ -437,12 +465,21 @@
           }
         },
         {
-          "name": "DxfExport"
+          "name": "DxfExport",
+          "cfg": {
+              "serviceUrl": "http://127.0.0.1:8001/ows/dxf_geobau",
+              "layerOptions": [
+                  {"label": "Geobau", "layers": "dxfgeobau"},
+                  {"label": "Geobau + Höhenkurven", "layers": "dxfgeobau,hoehenkurven"}
+              ],
+              "formatOptions": "MODE:SYMBOLLAYERSYMBOLOGY;SCALE:500;NO_MTEXT:TEXT"
+          }
         },
         {
           "name": "RasterExport",
           "cfg": {
-            "dpis": [96, 300]
+            "dpis": [96, 300],
+            "exportExternalLayers": true
           }
         },
         {
@@ -468,12 +505,6 @@
           }
         },
         {
-          "name": "IdentifyRegion",
-          "cfg": {
-            "useWfs": false
-          }
-        },
-        {
           "name": "StartupMarker",
           "cfg": {
             "removeMode": "onclickonmarker"
@@ -484,6 +515,18 @@
       },
       {
           "name": "ScratchDrawing"
+      },
+      {
+          "name": "LayerCatalog",
+          "cfg": {
+              "catalogUrl": "http://qwc2.sourcepole.ch/catalog.json"
+          }
+      },
+      {
+          "name": "Bookmark"
+      },
+      {
+          "name": "AttributeTable"
       }
       ]
   }

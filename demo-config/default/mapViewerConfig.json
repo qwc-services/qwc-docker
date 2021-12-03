@@ -25,7 +25,7 @@
         "omitUrlParameterUpdates": false,
         "preserveExtentOnThemeSwitch": true,
         "preserveBackgroundOnThemeSwitch": true,
-        "preserveNonThemeLayersOnThemeSwitch": true,
+        "preserveNonThemeLayersOnThemeSwitch": false,
         "allowReorderingLayers": true,
         "preventSplittingGroupsWhenReordering": false,
         "allowLayerTreeSeparators": false,
@@ -33,11 +33,12 @@
         "globallyDisableDockableDialogs": false,
         "searchThemes": true,
         "allowAddingOtherThemes": true,
-        "allowFractionalZoom": true,
+        "allowFractionalZoom": false,
         "localeAwareNumbers": false,
         "identifyTool": "Identify",
         "wmsDpi": 96,
-        "wmsHidpi": true,
+        "wmsHidpi": false,
+        "qgisServerVersion": 3,
         "defaultFeatureStyle": {
           "strokeColor": [
             0,
@@ -64,6 +65,10 @@
           {
             "label": "Swisstopo WMTS",
             "value": "https://wmts10.geo.admin.ch/EPSG/2056/1.0.0/WMTSCapabilities.xml"
+          },
+          {
+            "label": "Test",
+            "value": "https://ycas.ch/qwc/catalog.json"
           }
         ],
         "projections": [
@@ -100,7 +105,7 @@
               "cfg": {
                 "mapOptions": {
                   "zoomDuration": 250,
-                  "antialiasing": true
+                  "enableRotation": true
                 },
                 "toolsOptions": {
                   "OverviewSupport": {
@@ -147,16 +152,25 @@
                     "icon": "layers"
                   },
                   {
+                    "key": "LayerCatalog",
+                    "icon": "catalog"
+                  },
+                  {
                     "key": "Share",
                     "icon": "share"
+                  },
+                  {
+                    "key": "Bookmark",
+                    "icon": "bookmark"
                   },
                   {
                     "key": "Tools",
                     "icon": "tools",
                     "subitems": [
                       {
-                        "key": "IdentifyRegion",
-                        "icon": "identify_region"
+                        "key": "Identify",
+                        "icon": "identify_region",
+                        "mode": "Region"
                       },
                       {
                         "key": "Measure",
@@ -197,8 +211,8 @@
                   "showProvidersInPlaceholder": false
                 },
                 "appMenuClearsTask": true,
-                "appMenuVisibleOnStartup": false,
-                "logoClickResetsTheme": true
+                "appMenuFilterField": true,
+                "appMenuVisibleOnStartup": false
               }
             },
             {
@@ -229,7 +243,8 @@
                   "FI_POINT_TOLERANCE": 32,
                   "FI_LINE_TOLERANCE": 16,
                   "FI_POLYGON_TOLERANCE": 8,
-                  "feature_count": 20
+                  "feature_count": 20,
+                  "region_feature_count": 100
                 },
                 "enableExport": true,
                 "longAttributesDisplay": "wrap",
@@ -250,6 +265,7 @@
               "name": "Print",
               "cfg": {
                 "inlinePrintOutput": false,
+                "printExternalLayers": true,
                 "gridInitiallyEnabled": false
               }
             },
@@ -275,7 +291,8 @@
                   "width": 480,
                   "height": 400
                 },
-                "bboxDependentLegend": false
+                "bboxDependentLegend": true,
+                "scaleDependentLegend": "theme"
               },
               "mapClickAction": "unset"
             },
@@ -288,7 +305,8 @@
                 "dpis": [
                   96,
                   300
-                ]
+                ],
+                "exportExternalLayers": true
               }
             },
             {
@@ -314,16 +332,19 @@
               }
             },
             {
-              "name": "IdentifyRegion",
-              "cfg": {
-                "useWfs": false
-              }
-            },
-            {
               "name": "StartupMarker",
               "cfg": {
                 "removeMode": "onclickonmarker"
               }
+            },
+            {
+              "name": "LayerCatalog",
+              "cfg": {
+                "catalogUrl": "http://qwc2.sourcepole.ch/catalog.json"
+              }
+            },
+            {
+              "name": "Bookmark"
             }
           ],
           "desktop": [
@@ -332,7 +353,7 @@
               "cfg": {
                 "mapOptions": {
                   "zoomDuration": 250,
-                  "antialiasing": true
+                  "enableRotation": true
                 },
                 "toolsOptions": {
                   "OverviewSupport": {
@@ -361,6 +382,14 @@
                 "position": 5,
                 "task": "LayerTree",
                 "icon": "list-alt"
+              }
+            },
+            {
+              "name": "TaskButton",
+              "cfg": {
+                "position": 6,
+                "task": "Editing",
+                "icon": "editing"
               }
             },
             {
@@ -406,16 +435,25 @@
                     "icon": "layers"
                   },
                   {
+                    "key": "LayerCatalog",
+                    "icon": "catalog"
+                  },
+                  {
                     "key": "Share",
                     "icon": "share"
+                  },
+                  {
+                    "key": "Bookmark",
+                    "icon": "bookmark"
                   },
                   {
                     "key": "Tools",
                     "icon": "tools",
                     "subitems": [
                       {
-                        "key": "IdentifyRegion",
-                        "icon": "identify_region"
+                        "key": "Identify",
+                        "icon": "identify_region",
+                        "mode": "Region"
                       },
                       {
                         "key": "Measure",
@@ -427,6 +465,10 @@
                       },
                       {
                         "key": "Editing",
+                        "icon": "editing"
+                      },
+                      {
+                        "key": "AttributeTable",
                         "icon": "editing"
                       },
                       {
@@ -469,8 +511,9 @@
                     "icon": "print"
                   },
                   {
-                    "key": "IdentifyRegion",
-                    "icon": "identify_region"
+                    "key": "Identify",
+                    "icon": "identify_region",
+                    "mode": "Region"
                   }
                 ],
                 "searchOptions": {
@@ -481,6 +524,7 @@
                   "showProvidersInPlaceholder": false
                 },
                 "appMenuClearsTask": true,
+                "appMenuFilterField": true,
                 "appMenuVisibleOnStartup": false,
                 "logoUrl": "/"
               }
@@ -513,13 +557,14 @@
                 "allowMapTips": true,
                 "allowCompare": true,
                 "allowImport": true,
-                "groupTogglesSublayers": true,
+                "groupTogglesSublayers": false,
                 "grayUnchecked": false,
                 "layerInfoWindowSize": {
                   "width": 480,
                   "height": 400
                 },
-                "bboxDependentLegend": false,
+                "bboxDependentLegend": true,
+                "scaleDependentLegend": "theme",
                 "showToggleAllLayersCheckbox": true
               },
               "mapClickAction": "identify"
@@ -531,7 +576,8 @@
                   "FI_POINT_TOLERANCE": 16,
                   "FI_LINE_TOLERANCE": 8,
                   "FI_POLYGON_TOLERANCE": 4,
-                  "feature_count": 20
+                  "feature_count": 20,
+                  "region_feature_count": 100
                 },
                 "enableExport": true,
                 "longAttributesDisplay": "wrap",
@@ -557,6 +603,7 @@
               "name": "Print",
               "cfg": {
                 "inlinePrintOutput": false,
+                "printExternalLayers": true,
                 "gridInitiallyEnabled": false
               }
             },
@@ -571,7 +618,21 @@
               }
             },
             {
-              "name": "DxfExport"
+              "name": "DxfExport",
+              "cfg": {
+                "serviceUrl": "http://127.0.0.1:8001/ows/dxf_geobau",
+                "layerOptions": [
+                  {
+                    "label": "Geobau",
+                    "layers": "dxfgeobau"
+                  },
+                  {
+                    "label": "Geobau + Höhenkurven",
+                    "layers": "dxfgeobau,hoehenkurven"
+                  }
+                ],
+                "formatOptions": "MODE:SYMBOLLAYERSYMBOLOGY;SCALE:500;NO_MTEXT:TEXT"
+              }
             },
             {
               "name": "RasterExport",
@@ -579,7 +640,8 @@
                 "dpis": [
                   96,
                   300
-                ]
+                ],
+                "exportExternalLayers": true
               }
             },
             {
@@ -605,12 +667,6 @@
               }
             },
             {
-              "name": "IdentifyRegion",
-              "cfg": {
-                "useWfs": false
-              }
-            },
-            {
               "name": "StartupMarker",
               "cfg": {
                 "removeMode": "onclickonmarker"
@@ -621,6 +677,18 @@
             },
             {
               "name": "ScratchDrawing"
+            },
+            {
+              "name": "LayerCatalog",
+              "cfg": {
+                "catalogUrl": "http://qwc2.sourcepole.ch/catalog.json"
+              }
+            },
+            {
+              "name": "Bookmark"
+            },
+            {
+              "name": "AttributeTable"
             }
           ]
         }
@@ -635,6 +703,7 @@
             "name": "qwc_demo",
             "title": "Demo",
             "description": "",
+            "wmsOnly": false,
             "wms_name": "qwc_demo",
             "url": "/ows/qwc_demo",
             "attribution": {
