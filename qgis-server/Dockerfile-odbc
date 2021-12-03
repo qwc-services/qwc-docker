@@ -1,0 +1,13 @@
+ARG QGIS_VERSION=3.16
+FROM sourcepole/qwc-qgis-server:$QGIS_VERSION
+
+MAINTAINER Pirmin Kalberer
+
+# MSSQL drivers
+# https://docs.microsoft.com/de-de/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15
+
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/$(lsb_release -rs)/prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/mssql-release.list && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+    apt-get update && \
+    ACCEPT_EULA=Y apt-get install -y msodbcsql17
+

@@ -1,6 +1,6 @@
 # QGIS Server 3 with Apache FCGI
 
-FROM phusion/baseimage:focal-1.0.0alpha1-amd64
+FROM phusion/baseimage:focal-1.1.0
 
 MAINTAINER Pirmin Kalberer
 
