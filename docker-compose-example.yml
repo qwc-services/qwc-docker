@@ -209,7 +209,7 @@ services:
       - "127.0.0.1:5018:9090"
 
   jasper-reporting-service:
-    image: sourcepole/jasper-reporting-service:0.8.1
+    image: sourcepole/jasper-reporting-service:0.8.2
     volumes:
       - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
       - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
