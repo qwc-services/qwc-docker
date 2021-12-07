@@ -92,12 +92,12 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2021.11.24
+    image: sourcepole/qwc-map-viewer-demo:v2021.12.06
     # Update config.json with:
-    # curl -O volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2021.11.24/static/config.json
+    # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2021.12.06/static/config.json
     # and generate service configuration
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2021.11.24
+    # image: sourcepole/qwc-map-viewer-base:v2021.12.06
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
       - JWT_COOKIE_CSRF_PROTECT=True
