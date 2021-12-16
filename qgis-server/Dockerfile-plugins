@@ -1,0 +1,6 @@
+ARG QGIS_VERSION=3.16
+FROM sourcepole/qwc-qgis-server:$QGIS_VERSION
+
+MAINTAINER Pirmin Kalberer
+
+COPY plugins/ /usr/share/qgis/python/plugins/

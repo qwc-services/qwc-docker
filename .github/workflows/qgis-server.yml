@@ -32,6 +32,19 @@ jobs:
           dockerfile: Dockerfile-ltr
           buildargs: URL_PREFIX
 
+      - name: Build and publish docker image for QGIS Server 3 LTR with plugins
+        uses: elgohr/Publish-Docker-Github-Action@2.12
+        env:
+          QGIS_VERSION: ${{ steps.get_tag_qgis_3_ltr.outputs.version }}
+        with:
+          name: sourcepole/qwc-qgis-server
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          tags: "${{ steps.get_tag_qgis_3_ltr.outputs.version }}-plugins,${{ steps.get_tag_qgis_3_ltr.outputs.minor }}-plugins"
+          workdir: qgis-server
+          dockerfile: Dockerfile-plugins
+          buildargs: QGIS_VERSION
+
       - name: Build and publish docker image for QGIS Server 3 LTR with ODBC driver
         uses: elgohr/Publish-Docker-Github-Action@2.12
         env:
