@@ -1,5 +1,3 @@
-[![CI](https://github.com/qwc-services/qwc-docker/actions/workflows/uwsgi-base.yml/badge.svg)](https://github.com/qwc-services/qwc-docker/actions)
-[![docker](https://img.shields.io/docker/v/sourcepole/qwc-uwsgi-base?label=qwc-uwsgi-base%20image&sort=semver)](https://hub.docker.com/r/sourcepole/qwc-uwsgi-base)
 [![docker](https://img.shields.io/docker/v/sourcepole/qwc-qgis-server?label=qwc-qgis-server%20image&sort=semver)](https://hub.docker.com/r/sourcepole/qwc-qgis-server)
 
 Docker containers for QWC Services
