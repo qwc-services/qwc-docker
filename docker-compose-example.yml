@@ -10,13 +10,10 @@ services:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
     ports:
-    # 5439 is the container-*external* port, the other
-    # containers in this setup will reach this service
-    # over the *internal* network on port 5432!
      - "127.0.0.1:5439:5432"
 
   qwc-qgis-server:
-    image: sourcepole/qwc-qgis-server:3.16
+    image: sourcepole/qwc-qgis-server:3.16-plugins
     ports:
       - "127.0.0.1:8001:80"
     volumes:
@@ -25,7 +22,7 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2.0.11
+    image: sourcepole/qwc-config-generator:v2.0.12
     environment:
         - INPUT_CONFIG_PATH=/srv/qwc_service/config-in
         - OUTPUT_CONFIG_PATH=/srv/qwc_service/config-out
@@ -92,7 +89,7 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2021.12.06
+    image: sourcepole/qwc-map-viewer-demo:v2021.12.15
     # Update config.json with:
     # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2021.12.06/static/config.json
     # and generate service configuration
@@ -145,7 +142,7 @@ services:
   #     - ./pg_service.conf:/var/www/.pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2.1.6
+    image: sourcepole/qwc-db-auth:v2.1.8
     environment:
       - SERVICE_MOUNTPOINT=/auth
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
@@ -195,26 +192,26 @@ services:
   #   ports:
   #     - "127.0.0.1:5015:9090"
 
-  qwc-document-service:
-    image: sourcepole/qwc-document-service:v2.0.5
-    environment:
-      - SERVICE_MOUNTPOINT=/api/v1/document
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
-    volumes:
-      - ./volumes/config:/srv/qwc_service/config:ro
-    depends_on:
-      - jasper-reporting-service
-    ports:
-      - "127.0.0.1:5018:9090"
+  # qwc-document-service:
+  #   image: sourcepole/qwc-document-service:v2.0.5
+  #   environment:
+  #     - SERVICE_MOUNTPOINT=/api/v1/document
+  #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
+  #     - JWT_COOKIE_CSRF_PROTECT=True
+  #   volumes:
+  #     - ./volumes/config:/srv/qwc_service/config:ro
+  #   depends_on:
+  #     - jasper-reporting-service
+  #   ports:
+  #     - "127.0.0.1:5018:9090"
 
-  jasper-reporting-service:
-    image: sourcepole/jasper-reporting-service:0.8.2
-    volumes:
-      - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
-      - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
-    ports:
-      - "127.0.0.1:8002:8080"
+  # jasper-reporting-service:
+  #   image: sourcepole/jasper-reporting-service:0.8.2
+  #   volumes:
+  #     - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
+  #     - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
+  #   ports:
+  #     - "127.0.0.1:8002:8080"
 
   qwc-mapinfo-service:
     image: sourcepole/qwc-mapinfo-service:v2.0.2
