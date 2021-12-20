@@ -59,7 +59,7 @@ services:
       - "127.0.0.1:5012:9090"
 
   qwc-solr:
-    image: solr:8.4
+    image: solr:8.11.1-slim
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
