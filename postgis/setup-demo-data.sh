@@ -2,7 +2,7 @@
 set -e
 
 # import demo data into GeoDB
-ogr2ogr -f PostgreSQL PG:"dbname=qwc_demo user=qwc_admin password=qwc_admin" -lco SCHEMA=qwc_geodb /tmp/demo_geodata.gpkg
+ogr2ogr -f PostgreSQL PG:"dbname=qwc_demo user=qwc_admin password=qwc_admin" -lco SCHEMA=qwc_geodb -lco GEOMETRY_NAME=wkb_geometry /tmp/demo_geodata.gpkg
 
 # create view for fulltext search
 psql -v ON_ERROR_STOP=1 --username qwc_admin -d qwc_demo <<-EOSQL
