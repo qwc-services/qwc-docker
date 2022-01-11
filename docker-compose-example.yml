@@ -180,6 +180,16 @@ services:
     ports:
       - "127.0.0.1:5001:9090"
 
+  # qwc-print-service:
+  #   image: sourcepole/qwc-print-service:v2022.01.12
+  #   environment:
+  #     - SERVICE_MOUNTPOINT=/api/v1/print
+  #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
+  #   volumes:
+  #     - ./volumes/config:/srv/qwc_service/config:ro
+  #   ports:
+  #     - "127.0.0.1:5020:9090"
+
   # qwc-feature-info-service:
   #   image: sourcepole/qwc-feature-info-service:v2022.01.11
   #   environment:
@@ -212,6 +222,17 @@ services:
   #     - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
   #   ports:
   #     - "127.0.0.1:8002:8080"
+
+  #  qwc-ext-service:
+  #  image: sourcepole/qwc-ext-service:v2022.01.11
+  #  environment:
+  #    - SERVICE_MOUNTPOINT=/api/v1/ext
+  #    - JWT_SECRET_KEY=$JWT_SECRET_KEY
+  #    - JWT_COOKIE_CSRF_PROTECT=True
+  #  volumes:
+  #    - ./volumes/config:/srv/qwc_service/config:ro
+  #  ports:
+  #    - "127.0.0.1:5023:9090"
 
   qwc-mapinfo-service:
     image: sourcepole/qwc-mapinfo-service:v2022.01.11
