@@ -125,7 +125,8 @@
                   {"key": "RasterExport", "icon": "rasterexport"}
                 ]},
                 {"key": "Print", "icon": "print"},
-                {"key": "Help", "icon": "info"}
+                {"key": "Help", "icon": "info"},
+                {"key": "Login", "icon": "login"}
               ],
               "searchOptions": {
                 "minScaleDenom": 1000,
@@ -263,6 +264,9 @@
         },
         {
           "name": "Bookmark"
+        },
+        {
+          "name": "Authentication"
         }
       ],
       "desktop": [
@@ -358,7 +362,8 @@
                 ]},
                 {"key": "Print", "icon": "print"},
                 {"key": "Help", "icon": "info"},
-                {"key": "ExternalLink", "icon": "link", "url": "http://example.com?extent=$e$"}
+                {"key": "ExternalLink", "icon": "link", "url": "http://example.com?extent=$e$"},
+                {"key": "Login", "icon": "login"}
               ],
               "toolbarItems": [
                 {"key": "Measure", "mode": "LineString", "icon": "measure_line"},
@@ -527,6 +532,9 @@
       },
       {
           "name": "AttributeTable"
+      },
+      {
+          "name": "Authentication"
       }
       ]
   }
