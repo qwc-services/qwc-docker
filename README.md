@@ -1,8 +1,22 @@
 Docker containers for QWC Services
 ==================================
 
+The QWC Services are a collection of microservices providing configurations for and authorized access to different QWC Map Viewer components.
+
 This repository contains a sample setup for running QWC services with docker.
 
+Table of Contents
+-----------------
+
+- [Quick start](#quick-start)
+- [Architecture overview](#architecture-overview)
+- [Service overview](#service-overview)
+- [Selected configuration topics](#selected-configuration-topics)
+- [Resources and Permissions](#resources-and-permissions)
+    - [Resources](#resources)
+    - [Permissions](#permissions)
+- [Group registration](#group_registration)
+- [Health checks for Kubernetes](#health-checks-for-kubernetes)
 
 Quick start
 -----------
@@ -68,10 +82,12 @@ Update containers:
 * Run `docker-compose-pull <container name>`
 
 
+
+
 Architecture overview
 ---------------------
 
-![qwc-services-arch](https://github.com/qwc-services/qwc-services-core/raw/master/doc/qwc-services-arch.png)
+![qwc-services-arch](./qwc-services-arch.png)
 
 * `API-Gateway`: API Gateway, forwards requests to individual services (http://localhost:8088)
 * `Auth-Service`: Authentication service with local user database (default users: `admin:admin`, `demo:demo`) (http://localhost:8088/auth/login)
@@ -79,8 +95,8 @@ Architecture overview
 * `OGC Service`: Proxy for WMS/WFS requests filtered by permissions, calls QGIS Server (http://localhost:8088/ows/api)
 * `Admin GUI`: Admin GUI (http://localhost:8088/qwc_admin/)
 
-Component overview
-------------------
+Service overview
+----------------
 
 Applications:
 * [QWC2 Map Viewer](https://github.com/qwc-services/qwc-map-viewer): The map viewer application
@@ -109,11 +125,238 @@ Configuration generator:
 * [Configuration generator](https://github.com/qwc-services/qwc-config-generator)
 
 
-Overview which container accesses which volume
-----------------------------------------------
+### Overview which container accesses which volume
 
-An overview of how each container accesses which volume
-can be found [here](docker-volume-matrix.md).
+An overview of how each container accesses which volume can be found [here](docker-volume-matrix.md).
+
+
+Selected configuration topics
+=============================
+
+### Adding QGIS projects
+
+* If necessary, setup new PG service connections:
+  * Locally:
+
+        cat >>~/.pg_service.conf <<EOF
+        [qwc_example_conn]
+        host=localhost
+        port=5439
+        dbname=qwc_example_db
+        user=qwc_service
+        password=qwc_service
+        sslmode=disable
+        EOF
+
+  * For the QWC Docker:
+
+        cat >>~/.pg_service.conf <<EOF
+        [qwc_example_conn]
+        host=qwc-postgis
+        port=5432
+        dbname=qwc_example_db
+        user=qwc_service
+        password=qwc_service
+        sslmode=disable
+        EOF
+
+* Configure project for QWC2
+  * Automatically generated theme configuration: Save project as `<project>.qgs` in `volumes/qgs-resources/scan/` (see [config generator configuration](https://github.com/qwc-services/qwc-config-generator))
+  * Manual theme configuration: Save project as `<project>.qgs` in `volumes/qgs-resources/` and edit `volumes/config-in/default/tenantConfig.json` (see [themesConfig documentation](https://github.com/qgis/qwc2-demo-app/blob/master/doc/QWC2_Documentation.md#configuring-the-themes-in-themesconfigjson)).
+* Launch Admin GUI and generate configuration
+
+### Editable layers
+
+* Preconfigured example: `volumes/qgs-resources/qwc_demo.qgs`, with layers `edit_points`, `edit_lines` and `edit_polygons` configured as editable layers in the Admin GUI
+* Changed the edit form type in the Attributes Form section of the QGIS layer properties dialog:
+  * Autogenerate: A flat edit form will be generated for QWC2
+  * Drag and Drop Designer: A grouped edit form will be generated for QWC2, the generated edit form is stored in `volumes/qwc2/assets/forms/autogen/<dataset>.ui`
+  * Provide ui-file: The specified UI form (must lie next to the project in or below `volumes/qgs-resources`) will be copied to `volumes/qwc2/assets/forms/autogen/<dataset>.ui` and used by QWC2
+  * See [data service documentation](https://github.com/qwc-services/qwc-data-service/blob/master/README.md)
+* Update configuration in Admin GUI
+
+### Enable Fulltext search
+
+Make solr owner of solr data
+    sudo chown 8983:8983 volumes/solr/data
+
+    # Cleanup
+    sudo rm -rf volumes/solr/data/*
+
+    docker-compose restart qwc-solr
+
+    curl 'http://localhost:8983/solr/gdi/dih_geodata?command=full-import'
+    curl 'http://localhost:8983/solr/gdi/dih_geodata?command=status'
+    curl 'http://localhost:8983/solr/gdi/select?q=search_1_stem:austr*'
+
+    curl 'http://localhost:8983/solr/gdi/dih_metadata?command=full-import&clean=false'
+    curl 'http://localhost:8983/solr/gdi/dih_metadata?command=status'
+    curl 'http://localhost:8983/solr/gdi/select?q=search_1_stem:qwc_demo'
+
+Test query for fulltext search:
+
+    curl 'http://localhost:8983/solr/gdi/select?q=search_1_stem:austr*'
+
+
+### Customize QWC2 Viewer
+
+Use the `sourcepole/qwc-map-viewer-base` image rather than `sourcepole/qwc-map-viewer-demo` for `qwc-map-viewer` in `docker-compose.yml`.
+
+Clone and build QWC2 Demo App (see [Quick start](https://github.com/qgis/qwc2-demo-app/blob/master/doc/QWC2_Documentation.md#quick-start)) (or use your custom QWC2 build):
+
+    git clone --recursive https://github.com/qgis/qwc2-demo-app.git
+    cd qwc2-demo-app/
+    yarn install
+    yarn run build
+
+Copy QWC2 files from a build:
+
+    SRCDIR=./qwc2-demo-app/ DSTDIR=./qwc-docker/volumes
+    cp -a SRCDIR/prod/ $DSTDIR/volumes/qwc2/
+
+Note: The viewer `config.json` and `index.html` are by default loaded from `volumes/config-in/default/`, look for `qwc2_config_file` and `qwc2_index_file` in `volumes/config-in/default/tenantConfig.json`.
+
+Note: The config generator will automatically adjust known service URLs in `config.json` (such as `editServiceUrl`) according to the URLs specified in the `mapViewer` section of `tenantConfig.json`, i.e. `data_service_url`
+
+### Configuration database
+
+The [Configuration database](https://github.com/qwc-services/qwc-config-db) (ConfigDB) contains the database schema `qwc_config` for configurations and permissions of QWC services.
+
+This database uses the PostgreSQL connection service `qwc_configdb` by default, which can be setup for the corresponding database in the PostgreSQL connection service file `pg_service.conf`. This default can be overridden by setting the environment variable `CONFIGDB_URL` to a custom DB connection string (see [below](#service-configurations)).
+
+Additional user fields are saved in the table `qwc_config.user_infos` with a a one-to-one relation to `qwc_config.users` via the `user_id` foreign key.
+To add custom user fields, add new columns to your `qwc_config.user_infos` table and set your `USER_INFO_FIELDS` accordingly (see [below](#service-configurations)).
+
+
+#### Database migrations
+
+An existing ConfigDB can be updated to the latest schema by running the database migrations from the `qwc-config-db` directory:
+
+    git clone https://github.com/qwc-services/qwc-config-db.git
+    cd qwc-config-db/
+    # Install alembic, either globally or activate python virtualenv and run `pip install -r requirements.txt`)
+    alembic upgrade head
+
+Note: local PG service definition for `qwc_configdb` must exist:
+
+    cat >>~/.pg_service.conf <<EOF
+    [qwc_configdb]
+    host=localhost
+    port=5439
+    dbname=qwc_demo
+    user=qwc_admin
+    password=qwc_admin
+    sslmode=disable
+    EOF
+
+### Service configurations
+
+QWC services can be configured according to the configuration schema described in the respective service READMEs in `tenantConfig.json`.
+
+Variables can also be set as environment variables in capitalized form in `docker-compose.yml`.
+
+Some variables must be set as environment variables in `docker-compose.yml`:
+
+
+ENV                   | Default value      | Description
+----------------------|--------------------|---------
+`INPUT_CONFIG_PATH`   | `config-in`        | Base path for service configuration files
+`OUTPUT_CONFIG_PATH`  | `/tmp`             | Base path for service configuration files
+`JWT_SECRET_KEY`      | `********`         | secret key for JWT token
+`TENANT_URL_RE`       | None               | Regex for tenant extraction from base URL. Example: ^https?://.+?/(.+?)/
+`TENANT_HEADER`       | None               | Tenant Header name. Example: Tenant
+
+
+See READMEs of services for details.
+
+
+Resources and Permissions
+-------------------------
+
+Permissions and configurations are based on different resources with assigned permissions in the [configuration database](https://github.com/qwc-services/qwc-config-db).
+These can be managed in the [QWC configuration backend](https://github.com/qwc-services/qwc-admin-gui).
+
+
+### Resources
+
+The following resource types are available:
+
+* `map`: WMS corresponding to a QGIS Project
+    * `layer`: layer of a map
+        * `attribute`: attribute of a map layer
+    * `print_template`: print composer template of a QGIS Project
+    * `data`: Data layer for editing
+        * `attribute`: attribute of a data layer
+    * `data_create`: Data layer for creating features
+    * `data_read`: Data layer for reading features
+    * `data_update`: Data layer for updating features
+    * `data_delete`: Data layer for deleting features
+* `viewer`: custom map viewer configuration
+* `viewer_task`: permittable viewer tasks
+
+The resource `name` corresponds to the technical name of its resource (e.g. WMS layer name).
+
+The resource types can be extended by inserting new types into the `qwc_config.resource_types` table.
+These can be queried, e.g. in a custom service, by using `PermissionClient::resource_permissions()` or
+`PermissionClient::resource_restrictions()` from [QWC Services Core](https://github.com/qwc-services/qwc-services-core).
+
+Available `map`, `layer`, `attribute` and `print_template` resources are collected from WMS `GetProjectSettings` and the QGIS projects.
+
+`data` and their `attribute` resources define a data layer for the [Data service](https://github.com/qwc-services/qwc-data-service).
+Database connections and attribute metadata are collected from the QGIS projects.
+
+For more detailed CRUD permissions `data_create`, `data_read`, `data_update` and `data_delete` can be used instead of `data`
+(`data` and `write=False` is equivalent to `data_read`; `data` and `write=True` is equivalent to all CRUD resources combined).
+
+The `viewer` resource defines a custom viewer configuration for the map viewer (see [Custom viewer configurations](https://github.com/qwc-services/qwc-map-viewer#custom-viewer-configurations)).
+
+The `viewer_task` resource defines viewer functionalities (e.g. printing or raster export) that can be restricted or permitted.
+Their `name` (e.g. `RasterExport`) corresponds to the `key` in `menuItems` and `toolbarItems` in the QWC2 `config.json`. Restricted viewer task items are then removed from the menu and toolbar in the map viewer. Viewer tasks not explicitly added as resources are kept unchanged from the `config.json`.
+
+
+### Permissions
+
+Permissions are based on roles. Roles can be assigned to groups or users, and users can be members of groups.
+A special role is `public`, which is always included, whether a user is signed in or not.
+
+Each role can be assigned a permission for a resource.
+The `write` flag is only used for `data` resources and sets whether a data layer is read-only.
+
+Based on the user's identity (user name and/or group name), all corresponding roles and their permissions and restrictions are collected.
+The service configurations are then modified according to these permissions and restrictions.
+
+Using the `DEFAULT_ALLOW` environment variable, some resources can be set to be permitted or restricted by default if no permissions are set (default: `False`). Affected resources are `map`, `layer`, `print_template` and `viewer_task`.
+
+e.g. `DEFAULT_ALLOW=True`: all maps and layers are permitted by default
+e.g. `DEFAULT_ALLOW=False`: maps and layers are only available if their resources and permissions are explicitly configured
+
+
+### Permissions file
+
+The [QWC Config Generator](https://github.com/qwc-services/qwc-config-generator) generates a JSON file for all permissions ([JSON schema](https://github.com/qwc-services/qwc-services-core/blob/master/schemas/qwc-services-permissions.json)) from the QWC ConfigDB. See READMEs of QWC services for service specific contents in `permissions.json`.
+
+Alternatively, a simplified permissions format is also supported, see [unified permissions](doc/unified_permissions.md).
+
+
+Group registration
+------------------
+
+Using the optional [Registration GUI](https://github.com/qwc-services/qwc-registration-gui) allows users to request membership or unsubscribe from registrable groups. These requests can then be accepted or rejected in the [Admin GUI](https://github.com/qwc-services/qwc-admin-gui).
+
+Workflow:
+* Admin GUI
+  * admin user creates new groups with assigned roles and permissions on resources
+  * admin user configures registrable groups
+* Registration GUI
+  * user select desired groups from registrable groups and submits application form
+  * admin users are notified of new registration requests
+* Admin GUI
+  * admin user selects entry from list of pending registration requests
+  * admin user accepts or rejects registration requests for a user
+  * user is added to or removed from accepted groups
+  * user is notified of registration request updates
+* Map Viewer
+  * user permissions are updated for new groups
 
 
 Health checks for Kubernetes
