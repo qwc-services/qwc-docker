@@ -27,11 +27,12 @@ Install docker and docker compose:
 * Docker: https://docs.docker.com/engine/install/
 * docker-compose: (https://docs.docker.com/compose/install/)
 
-Clone qwc-docker and copy docker-compose template
+Clone qwc-docker and copy docker-compose and api-gateway configuration template:
 
     git clone https://github.com/qwc-services/qwc-docker.git
     cd qwc-docker
     cp docker-compose-example.yml docker-compose.yml
+    cp api-gateway/nginx-example.conf api-gateway/nginx.conf
 
 Create a secret key:
 
@@ -81,9 +82,6 @@ Update containers:
 
 * Change image tag for desired container in `docker-compose.yml`
 * Run `docker-compose-pull <container name>`
-
-
-
 
 Architecture overview
 ---------------------
@@ -270,6 +268,31 @@ ENV                   | Default value      | Description
 
 See READMEs of services for details.
 
+### Enabling additional services
+
+* Add container entry in `docker-compose.yml`, ensuring the following two environment variables are set:
+
+      - SERVICE_MOUNTPOINT=/<mountpoint>
+      - JWT_SECRET_KEY=$JWT_SECRET_KEY
+
+  Example:
+
+      qwc-print-service:
+        image: sourcepole/qwc-print-service:v2022.01.13
+        environment:
+          - SERVICE_MOUNTPOINT=/api/v1/print
+          - JWT_SECRET_KEY=$JWT_SECRET_KEY
+        volumes:
+          - ./volumes/config:/srv/qwc_service/config:ro
+        ports:
+          - "127.0.0.1:5020:9090"
+
+* Add corresponding entry in `api-gateway/nginx.conf`, example:
+
+      location /api/v1/print {
+        proxy_pass http://qwc-print-service:9090;
+      }
+
 
 Resources and Permissions
 -------------------------
@@ -448,3 +471,11 @@ Sample requests:
     curl 'http://localhost:5012/qwc_demo.edit_points/'
     curl 'http://localhost:5030/themes.json'
     curl 'http://localhost:5031'
+
+To build containers for local services, in use `build:` rather than `image:` in `docker-compose.yml`:
+
+    qwc-print-service:
+      # image: sourcepole/qwc-print-service:v2022.01.13
+      build:
+        context: ./qwc-services/qwc-print-service
+      # [...]
