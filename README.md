@@ -1,25 +1,35 @@
 Docker containers for QWC Services
 ==================================
 
-Docker installation
--------------------
-
-* Docker: https://docs.docker.com/engine/install/
-* docker-compose: (https://docs.docker.com/compose/install/)
+This repository contains a sample setup for running QWC services with docker.
 
 
 Quick start
 -----------
 
-See [QWC Services Core](https://github.com/qwc-services/qwc-services-core#quick-start)
+Install docker and docker compose:
 
+* Docker: https://docs.docker.com/engine/install/
+* docker-compose: (https://docs.docker.com/compose/install/)
 
-Usage
------
+Clone qwc-docker and copy docker-compose template
 
-Set JWT secret:
+    git clone https://github.com/qwc-services/qwc-docker.git
+    cd qwc-docker
+    cp docker-compose-example.yml docker-compose.yml
+
+Create a secret key:
 
     python3 -c 'import secrets; print("JWT_SECRET_KEY=\"%s\"" % secrets.token_hex(48))' >.env
+
+Set permissions for writable volumes:
+
+    sudo chown -R www-data:www-data volumes/attachments
+    sudo chown -R www-data:www-data volumes/config
+    sudo chown -R www-data:www-data volumes/qgs-resources
+    sudo chown -R www-data:www-data volumes/qwc2/assets
+
+    sudo chown 8983:8983 volumes/solr/data
 
 Start all containers:
 
@@ -33,34 +43,77 @@ Open map viewer:
 
     http://localhost:8088/
 
-Connect to config DB:
+Open Admin GUI (Default admin credentials: username `admin`, password `admin`, requires password change on first login):
 
-    psql "service=qwc_configdb"
+    http://localhost:8088/qwc_admin
+
+Conntect to DB:
+
+    psql "service=qwc_configdb" # Config DB
+    psql "service=qwc_geodb" # Demo data DB
+
+ * See [pg_service.conf](https://github.com/qwc-services/qwc-docker/blob/master/pg_service.conf)
+
+Demo DB superuser password (please change for production use!):
+
+* See `POSTGRES_PASSWORD` in [https://github.com/qwc-services/qwc-demo-db/blob/main/Dockerfile](https://github.com/qwc-services/qwc-demo-db/blob/main/Dockerfile)
 
 Stop all containers:
 
     docker-compose down
 
-Update a single containers:
+Update containers:
 
-    # docker-compose pull <container name>
-    docker-compose pull qwc-map-viewer
-
-Update PostGIS container to ConfigDB migration `ALEMBIC_VERSION` (**NOTE**: Overwrites current database):
-
-    docker-compose build --build-arg ALEMBIC_VERSION=c77774920e5b qwc-postgis
+* Change image tag for desired container in `docker-compose.yml`
+* Run `docker-compose-pull <container name>`
 
 
-Containers:
+Architecture overview
+---------------------
 
-* `qwc-admin-gui`: Admin GUI (http://localhost:8088/qwc_admin/)
-* `qwc-api-gateway`: API Gateway, forwards requests to individual services (http://localhost:8088)
-* `qwc-auth-service`: Authentication service with local user database (default users: `admin:admin`, `demo:demo`) (http://localhost:8088/auth/login)
-* `qwc-data-service`: Data edit using GeoJSON (http://localhost:8088/api/v1/data/api)
-* `qwc-map-viewer`: QWC2 map viewer (http://localhost:8088)
-* `qwc-ogc-service`: Proxy for WMS/WFS requests filtered by permissions, calls QGIS Server (http://localhost:8088/ows/api)
-* `qwc-postgis:` QWC ConfigDB and Demo PostGIS GeoDB (user: `qwc_admin:qwc_admin`) (localhost:5439)
-* `qwc-qgis-server`: QGIS Server (http://localhost:8001/ows/qwc_demo)
+![qwc-services-arch](https://github.com/qwc-services/qwc-services-core/raw/master/doc/qwc-services-arch.png)
+
+* `API-Gateway`: API Gateway, forwards requests to individual services (http://localhost:8088)
+* `Auth-Service`: Authentication service with local user database (default users: `admin:admin`, `demo:demo`) (http://localhost:8088/auth/login)
+* `Map viewer`: QWC2 map viewer (http://localhost:8088)
+* `OGC Service`: Proxy for WMS/WFS requests filtered by permissions, calls QGIS Server (http://localhost:8088/ows/api)
+* `Admin GUI`: Admin GUI (http://localhost:8088/qwc_admin/)
+
+Component overview
+------------------
+
+Applications:
+* [QWC2 Map Viewer](https://github.com/qwc-services/qwc-map-viewer): The map viewer application
+* [QWC admin GUI](https://github.com/qwc-services/qwc-admin-gui): Configuration backend for managing users and permissions
+* [Registration GUI](https://github.com/qwc-services/qwc-registration-gui): GUI for registration of new users
+
+REST services:
+* [DB auth service](https://github.com/qwc-services/qwc-db-auth): Authentication service with local user database
+* [LDAP auth service](https://github.com/qwc-services/qwc-ldap-auth): LDAP Authentication service
+* [Data service](https://github.com/qwc-services/qwc-data-service): Data edit service, required for QWC2 editing functionality
+* [Document service](https://github.com/qwc-services/qwc-document-service): Service for generating Jasper reports
+* [Elevation service](https://github.com/qwc-services/qwc-elevation-service): Service for providing elevation data, required for QWC2 elevation profile
+* [Feature info service](https://github.com/qwc-services/qwc-feature-info-service): Service for providing enhanced GetFeatureInfo responses to QWC2
+* [Fulltext search service](https://github.com/qwc-services/qwc-fulltext-search-service): Fulltext search service for the QWC2 search functionality
+* [Legend service](https://github.com/qwc-services/qwc-legend-service): Service for providing enhanced legend graphics to QWC2
+* [Mapinfo service](https://github.com/qwc-services/qwc-mapinfo-service): Service for providing additional information to the QWC2 right-click map context popup
+* [OGC service](https://github.com/qwc-services/qwc-ogc-service): Proxy for WMS/WFS requests filtered by permissions, calls QGIS Server
+* [Permalink service](https://github.com/qwc-services/qwc-permalink-service): Service for storing compat permalinks and bookmarks generated by QWC2
+* [Print service](https://github.com/qwc-services/qwc-print-service): Service for enhancing the QWC2 GetPrint requests
+
+Configuration database:
+* [DB schema and migrations](https://github.com/qwc-services/qwc-config-db)
+* [Demo database](https://github.com/qwc-services/qwc-demo-db-db)
+
+Configuration generator:
+* [Configuration generator](https://github.com/qwc-services/qwc-config-generator)
+
+
+Overview which container accesses which volume
+----------------------------------------------
+
+An overview of how each container accesses which volume
+can be found [here](docker-volume-matrix.md).
 
 
 Health checks for Kubernetes
@@ -88,44 +141,3 @@ Example checks:
 
 * Check database connection (Example service: qwc-admin-gui)
 * Check if all data files are available and readable (Example service: qwc-elevation-service)
-
-
-DB connection
--------------
-
-Setup PostgreSQL connection service file `~/.pg_service.conf`
-for DB connections from the host machine to PostGIS container:
-
-```
-cat >>~/.pg_service.conf <<EOS
-[qwc_configdb]
-host=localhost
-port=5439
-dbname=qwc_demo
-user=qwc_admin
-password=qwc_admin
-sslmode=disable
-
-[qwc_geodb]
-host=localhost
-port=5439
-dbname=qwc_demo
-user=qwc_service_write
-password=qwc_service_write
-sslmode=disable
-
-[qwc_webmapping]
-host=localhost
-port=5439
-dbname=qwc_demo
-user=qgis_server
-password=qgis_server
-sslmode=disable
-EOS
-```
-
-Overwiev which container accesses which volume
-----------------------------------------------
-
-An overview of how each container accesses which volume 
-can be found [here](docker-volume-matrix.md).
