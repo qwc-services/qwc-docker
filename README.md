@@ -88,7 +88,7 @@ Update containers:
 Architecture overview
 ---------------------
 
-![qwc-services-arch](./qwc-services-arch.png)
+![qwc-services-arch](doc/qwc-services-arch.png)
 
 * `API-Gateway`: API Gateway, forwards requests to individual services (http://localhost:8088)
 * `Auth-Service`: Authentication service with local user database (default users: `admin:admin`, `demo:demo`) (http://localhost:8088/auth/login)
