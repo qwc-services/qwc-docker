@@ -5,6 +5,8 @@ The QWC Services are a collection of microservices providing configurations for 
 
 This repository contains a sample setup for running QWC services with docker.
 
+Please consult the [upgrade notes](UpgradeNotes.md) when updating the docker images.
+
 Table of Contents
 -----------------
 
