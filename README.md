@@ -17,6 +17,7 @@ Table of Contents
     - [Permissions](#permissions)
 - [Group registration](#group_registration)
 - [Health checks for Kubernetes](#health-checks-for-kubernetes)
+- [Development](#development)
 
 Quick start
 -----------
@@ -384,3 +385,66 @@ Example checks:
 
 * Check database connection (Example service: qwc-admin-gui)
 * Check if all data files are available and readable (Example service: qwc-elevation-service)
+
+
+Development
+-----------
+
+Create a QWC services dir:
+
+    mkdir qwc-services
+    cd qwc-services/
+
+Clone [QWC Config DB](https://github.com/qwc-services/qwc-config-db):
+
+    git clone https://github.com/qwc-services/qwc-config-db.git
+
+Clone [QWC Config service](https://github.com/qwc-services/qwc-config-service):
+
+    git clone https://github.com/qwc-services/qwc-config-service.git
+
+Clone [QWC OGC service](https://github.com/qwc-services/qwc-ogc-service):
+
+    git clone https://github.com/qwc-services/qwc-ogc-service.git
+
+Clone [QWC Data service](https://github.com/qwc-services/qwc-data-service):
+
+    git clone https://github.com/qwc-services/qwc-data-service.git
+
+Clone [QWC Map Viewer](https://github.com/qwc-services/qwc-map-viewer):
+
+    git clone https://github.com/qwc-services/qwc-map-viewer.git
+
+Clone [QWC Admin GUI](https://github.com/qwc-services/qwc-admin-gui):
+
+    git clone https://github.com/qwc-services/qwc-admin-gui.git
+
+See READMEs of each service for their setup.
+
+Setup your ConfigDB and run migrations (see [QWC Config DB](https://github.com/qwc-services/qwc-config-db)).
+
+Run local services (set `$QGIS_SERVER_URL` to your QGIS server and `$QWC2_PATH` to your QWC2 files):
+
+    cd qwc-config-service/
+    QGIS_SERVER_URL=http://localhost:8001/ows/ QWC2_PATH=qwc2/ python server.py
+
+    cd qwc-ogc-service/
+    QGIS_SERVER_URL=http://localhost:8001/ows/ CONFIG_SERVICE_URL=http://localhost:5010/ python server.py
+
+    cd qwc-data-service/
+    CONFIG_SERVICE_URL=http://localhost:5010/ python server.py
+
+    cd qwc-map-viewer/
+    OGC_SERVICE_URL=http://localhost:5013/ CONFIG_SERVICE_URL=http://localhost:5010/ QWC2_PATH=qwc2/ python server.py
+
+    cd qwc-admin-gui/
+    python server.py
+
+Sample requests:
+
+    curl 'http://localhost:5010/ogc?ows_type=WMS&ows_name=qwc_demo'
+    curl 'http://localhost:5010/qwc'
+    curl 'http://localhost:5013/qwc_demo?VERSION=1.1.1&SERVICE=WMS&REQUEST=GetCapabilities'
+    curl 'http://localhost:5012/qwc_demo.edit_points/'
+    curl 'http://localhost:5030/themes.json'
+    curl 'http://localhost:5031'
