@@ -18,7 +18,7 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2022.01.08
+    image: sourcepole/qwc-config-generator:v2022.01.12
     environment:
         - INPUT_CONFIG_PATH=/srv/qwc_service/config-in
         - OUTPUT_CONFIG_PATH=/srv/qwc_service/config-out
