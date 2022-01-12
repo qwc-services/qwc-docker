@@ -295,6 +295,19 @@ See READMEs of services for details.
         proxy_pass http://qwc-print-service:9090;
       }
 
+* If necessary, uncomment/add the respective service url in the `mapViewer` config block of `volumes/config-in/default/tenantConfig.json`, i.e.
+
+      {
+        "name": "mapViewer",
+        "generator_config": {
+          # ...
+        },
+        "config": {
+          "print_service_url": "/api/v1/print/",
+          # ...
+        }
+      }
+
 
 Resources and Permissions
 -------------------------
