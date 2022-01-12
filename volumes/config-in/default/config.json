@@ -121,6 +121,7 @@
                   {"key": "Measure", "icon": "measure"},
                   {"key": "Redlining", "icon": "draw"},
                   {"key": "Editing", "icon": "editing"},
+                  {"key": "AttributeTable", "icon": "editing"},
                   {"key": "DxfExport", "icon": "dxfexport"},
                   {"key": "RasterExport", "icon": "rasterexport"}
                 ]},
@@ -233,6 +234,9 @@
         },
         {
           "name": "Editing"
+        },
+        {
+          "name": "AttributeTable"
         },
         {
           "name": "MapCompare"
@@ -454,7 +458,7 @@
         {
           "name": "Print",
           "cfg": {
-            "inlinePrintOutput": false,
+            "inlinePrintOutput": true,
             "printExternalLayers": true,
             "gridInitiallyEnabled": false
           }
