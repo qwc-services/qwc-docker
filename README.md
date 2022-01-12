@@ -5,7 +5,7 @@ The QWC Services are a collection of microservices providing configurations for 
 
 This repository contains a sample setup for running QWC services with docker.
 
-Please consult the [upgrade notes](UpgradeNotes.md) when updating the docker images.
+**Please consult the [upgrade notes](doc/UpgradeNotes.md) when updating the docker images.**
 
 Table of Contents
 -----------------
@@ -128,7 +128,7 @@ Configuration generator:
 
 ### Overview which container accesses which volume
 
-An overview of how each container accesses which volume can be found [here](docker-volume-matrix.md).
+An overview of how each container accesses which volume can be found [here](doc/docker-volume-matrix.md).
 
 
 Selected configuration topics
