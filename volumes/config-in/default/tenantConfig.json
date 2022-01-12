@@ -235,8 +235,8 @@
     {
       "name": "print",
       "config": {
-        "ogc_service_url": "http://qwc-ogc-service/",
-        "qgis_server_version": "3.10.6"
+        "ogc_service_url": "http://qwc-ogc-service:9090/",
+        "qgis_server_version": "3.16"
       }
     },
     {
@@ -323,7 +323,9 @@
     },
     {
       "name": "data",
-      "config": {}
+      "config": {
+        "geometry_default_allow_null": false
+      }
     }
   ]
 }
