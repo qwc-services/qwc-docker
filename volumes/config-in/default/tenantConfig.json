@@ -326,6 +326,13 @@
       "config": {
         "geometry_default_allow_null": false
       }
+    },
+    {
+      "name": "legend",
+      "config": {
+        "default_qgis_server_url": "http://qwc-qgis-server/ows/",
+        "legend_images_path": "/legends/"
+      }
     }
   ]
 }
