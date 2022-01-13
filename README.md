@@ -308,6 +308,16 @@ See READMEs of services for details.
         }
       }
 
+* Add the service configuration block below `services` in `volumes/config-in/default/tenantConfig.json`, according to the service config schema, i.e.
+
+      {
+        "name": "print",
+        "config": {
+          "ogc_service_url": "http://qwc-ogc-service:9090/",
+          "qgis_server_version": "3.16"
+        }
+      }
+
 
 Resources and Permissions
 -------------------------
