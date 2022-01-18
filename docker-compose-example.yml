@@ -101,10 +101,10 @@ services:
       - "127.0.0.1:5030:9090"
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
+      # When using qwc-map-viewer-demo:
+      - ./volumes/qwc2/assets:/qwc2/assets:ro
       # When using own viewer build with qwc-map-viewer-base:
       #- ./volumes/qwc2:/qwc2:ro
-      # Required for generated edit forms:
-      - ./volumes/qwc2/assets/forms:/qwc2/assets/forms:ro
 
   qwc-admin-gui:
     image: sourcepole/qwc-admin-gui:v2022.01.14
