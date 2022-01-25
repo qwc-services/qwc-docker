@@ -9,9 +9,9 @@
       {
         "name": "qwc_demo",
         "online_resources": {
-          "service": "http://qwc-qgis-server/ows/qwc_demo",
-          "feature_info": "http://qwc-qgis-server/ows/qwc_demo",
-          "legend": "http://qwc-qgis-server/ows/qwc_demo"
+          "service": "/ows/qwc_demo",
+          "feature_info": "/api/v1/featureinfo/qwc_demo",
+          "legend": "/api/v1/legend/qwc_demo"
         },
         "root_layer": {
           "name": "qwc_demo",

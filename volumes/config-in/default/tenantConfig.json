@@ -102,9 +102,9 @@
       "generator_config": {
         "wms_services": {
           "online_resources": {
-            "service": "http://qwc-qgis-server/ows/",
-            "feature_info": "http://qwc-qgis-server/ows/",
-            "legend": "http://qwc-qgis-server/ows/"
+            "service": "/ows/",
+            "feature_info": "/api/v1/featureinfo/",
+            "legend": "/api/v1/legend/"
           }
         }
       },
@@ -126,8 +126,8 @@
         "data_service_url": "/api/v1/data/",
         "#document_service_url": "/api/v1/document/",
         "elevation_service_url": "/elevation/",
-        "#info_service_url": "/api/v1/feature-info/",
-        "#legend_service_url": "/api/v1/legend/",
+        "info_service_url": "/api/v1/featureinfo/",
+        "legend_service_url": "/api/v1/legend/",
         "mapinfo_service_url": "/api/v1/mapinfo/",
         "ogc_service_url": "/ows/",
         "permalink_service_url": "/api/v1/permalink/",

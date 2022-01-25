@@ -2,8 +2,8 @@
   "$schema": "https://github.com/qwc-services/qwc-print-service/raw/master/schemas/qwc-print-service.json",
   "service": "print",
   "config": {
-    "ogc_service_url": "http://qwc-ogc-service/",
-    "qgis_server_version": "3.10.6"
+    "ogc_service_url": "http://qwc-ogc-service:9090/",
+    "qgis_server_version": "3.16"
   },
   "resources": {
     "print_templates": [

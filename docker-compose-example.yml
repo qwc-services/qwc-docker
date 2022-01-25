@@ -32,7 +32,7 @@ services:
       - ./pg_service.conf:/var/www/.pg_service.conf:ro
 
   qwc-ogc-service:
-    image: sourcepole/qwc-ogc-service:v2022.01.14
+    image: sourcepole/qwc-ogc-service:v2022.01.25
     environment:
       - SERVICE_MOUNTPOINT=/ows
       - JWT_COOKIE_CSRF_PROTECT=True
@@ -88,12 +88,12 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2022.01.14
+    image: sourcepole/qwc-map-viewer-demo:v2022.01.25
     # Update config.json with:
     # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2022.01.08/static/config.json
     # and generate service configuration
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2022.01.08
+    # image: sourcepole/qwc-map-viewer-base:v2022.01.25
     environment:
       - JWT_SECRET_KEY=$JWT_SECRET_KEY
       - JWT_COOKIE_CSRF_PROTECT=True
@@ -189,18 +189,18 @@ services:
   #   ports:
   #     - "127.0.0.1:5020:9090"
 
-  # qwc-feature-info-service:
-  #   image: sourcepole/qwc-feature-info-service:v2022.01.14
-  #   environment:
-  #     - SERVICE_MOUNTPOINT=/api/v1/feature-info
-  #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
-  #     - JWT_COOKIE_CSRF_PROTECT=True
-  #     # - SKIP_EMPTY_ATTRIBUTES=1
-  #   volumes:
-  #     - ./pg_service.conf:/var/www/.pg_service.conf:ro
-  #     - ./volumes/config:/srv/qwc_service/config:ro
-  #   ports:
-  #     - "127.0.0.1:5015:9090"
+  qwc-feature-info-service:
+    image: sourcepole/qwc-feature-info-service:v2022.01.14
+    environment:
+      - SERVICE_MOUNTPOINT=/api/v1/feature-info
+      - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
+      # - SKIP_EMPTY_ATTRIBUTES=1
+    volumes:
+      - ./pg_service.conf:/var/www/.pg_service.conf:ro
+      - ./volumes/config:/srv/qwc_service/config:ro
+    ports:
+      - "127.0.0.1:5015:9090"
 
   # qwc-document-service:
   #   image: sourcepole/qwc-document-service:v2022.01.14
@@ -248,19 +248,19 @@ services:
     ports:
       - "127.0.0.1:5016:9090"
 
-  # qwc-legend-service:
-  #   image: sourcepole/qwc-legend-service:v2022.01.14
-  #   environment:
-  #     - SERVICE_MOUNTPOINT=/api/v1/legend
-  #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
-  #     - JWT_COOKIE_CSRF_PROTECT=True
-  #   volumes:
-  #     - ./volumes/config:/srv/qwc_service/config:ro
-  #     - ./volumes/legends:/legends
-  #   depends_on:
-  #     - qwc-qgis-server
-  #   ports:
-  #     - "127.0.0.1:5014:9090"
+  qwc-legend-service:
+    image: sourcepole/qwc-legend-service:v2022.01.14
+    environment:
+      - SERVICE_MOUNTPOINT=/api/v1/legend
+      - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - JWT_COOKIE_CSRF_PROTECT=True
+    volumes:
+      - ./volumes/config:/srv/qwc_service/config:ro
+      - ./volumes/legends:/legends
+    depends_on:
+      - qwc-qgis-server
+    ports:
+      - "127.0.0.1:5014:9090"
 
   qwc-api-gateway:
     image: nginx:1.19

@@ -7,8 +7,8 @@
     "data_service_url": "/api/v1/data/",
     "#document_service_url": "/api/v1/document/",
     "elevation_service_url": "/elevation/",
-    "#info_service_url": "/api/v1/feature-info/",
-    "#legend_service_url": "/api/v1/legend/",
+    "info_service_url": "/api/v1/featureinfo/",
+    "legend_service_url": "/api/v1/legend/",
     "mapinfo_service_url": "/api/v1/mapinfo/",
     "ogc_service_url": "/ows/",
     "permalink_service_url": "/api/v1/permalink/",
@@ -65,10 +65,6 @@
           {
             "label": "Swisstopo WMTS",
             "value": "https://wmts10.geo.admin.ch/EPSG/2056/1.0.0/WMTSCapabilities.xml"
-          },
-          {
-            "label": "Test",
-            "value": "https://ycas.ch/qwc/catalog.json"
           }
         ],
         "projections": [
@@ -185,6 +181,10 @@
                         "icon": "editing"
                       },
                       {
+                        "key": "AttributeTable",
+                        "icon": "editing"
+                      },
+                      {
                         "key": "DxfExport",
                         "icon": "dxfexport"
                       },
@@ -201,6 +201,10 @@
                   {
                     "key": "Help",
                     "icon": "info"
+                  },
+                  {
+                    "key": "Login",
+                    "icon": "login"
                   }
                 ],
                 "searchOptions": {
@@ -316,6 +320,9 @@
               "name": "Editing"
             },
             {
+              "name": "AttributeTable"
+            },
+            {
               "name": "MapCompare"
             },
             {
@@ -340,11 +347,14 @@
             {
               "name": "LayerCatalog",
               "cfg": {
-                "catalogUrl": "http://qwc2.sourcepole.ch/catalog.json"
+                "catalogUrl": "http://qwc2.sourcepole.ch/assets/catalog.json"
               }
             },
             {
               "name": "Bookmark"
+            },
+            {
+              "name": "Authentication"
             }
           ],
           "desktop": [
@@ -493,6 +503,10 @@
                     "key": "ExternalLink",
                     "icon": "link",
                     "url": "http://example.com?extent=$e$"
+                  },
+                  {
+                    "key": "Login",
+                    "icon": "login"
                   }
                 ],
                 "toolbarItems": [
@@ -602,7 +616,7 @@
             {
               "name": "Print",
               "cfg": {
-                "inlinePrintOutput": false,
+                "inlinePrintOutput": true,
                 "printExternalLayers": true,
                 "gridInitiallyEnabled": false
               }
@@ -689,6 +703,9 @@
             },
             {
               "name": "AttributeTable"
+            },
+            {
+              "name": "Authentication"
             }
           ]
         }
@@ -952,6 +969,7 @@
             "skipEmptyFeatureAttributes": true,
             "searchProviders": [
               "coordinates",
+              "nominatim",
               {
                 "provider": "solr",
                 "default": [],
@@ -972,7 +990,8 @@
                     "type": "text",
                     "constraints": {
                       "maxlength": 32,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -980,7 +999,8 @@
                     "name": "description",
                     "type": "text",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -990,7 +1010,8 @@
                     "constraints": {
                       "min": -2147483648,
                       "max": 2147483647,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -999,7 +1020,8 @@
                     "type": "text",
                     "constraints": {
                       "pattern": "[0-9]+([\\.,][0-9]+)?",
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1009,7 +1031,8 @@
                     "constraints": {
                       "min": -32768,
                       "max": 32767,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1022,7 +1045,8 @@
                       "min": -999.99,
                       "max": 999.99,
                       "step": 0.01,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1030,7 +1054,8 @@
                     "name": "validated",
                     "type": "boolean",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1038,7 +1063,8 @@
                     "name": "datetime",
                     "type": "date",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   }
                 ]
@@ -1054,7 +1080,8 @@
                     "type": "text",
                     "constraints": {
                       "maxlength": 32,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1062,7 +1089,8 @@
                     "name": "description",
                     "type": "text",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1072,7 +1100,8 @@
                     "constraints": {
                       "min": -2147483648,
                       "max": 2147483647,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1081,7 +1110,8 @@
                     "type": "text",
                     "constraints": {
                       "pattern": "[0-9]+([\\.,][0-9]+)?",
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1091,7 +1121,8 @@
                     "constraints": {
                       "min": -32768,
                       "max": 32767,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1104,7 +1135,8 @@
                       "min": -999.99,
                       "max": 999.99,
                       "step": 0.01,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1112,7 +1144,8 @@
                     "name": "validated",
                     "type": "boolean",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1120,7 +1153,8 @@
                     "name": "datetime",
                     "type": "date",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   }
                 ]
@@ -1136,7 +1170,8 @@
                     "type": "text",
                     "constraints": {
                       "maxlength": 32,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1144,7 +1179,8 @@
                     "name": "description",
                     "type": "text",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1154,7 +1190,8 @@
                     "constraints": {
                       "min": -2147483648,
                       "max": 2147483647,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1163,7 +1200,8 @@
                     "type": "text",
                     "constraints": {
                       "pattern": "[0-9]+([\\.,][0-9]+)?",
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1173,7 +1211,8 @@
                     "constraints": {
                       "min": -32768,
                       "max": 32767,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1186,7 +1225,8 @@
                       "min": -999.99,
                       "max": 999.99,
                       "step": 0.01,
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1194,7 +1234,8 @@
                     "name": "validated",
                     "type": "boolean",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   },
                   {
@@ -1202,7 +1243,8 @@
                     "name": "datetime",
                     "type": "date",
                     "constraints": {
-                      "required": false
+                      "required": false,
+                      "multiline": false
                     }
                   }
                 ]
@@ -1241,7 +1283,7 @@
               "Title": "OpenStreetMap contributors",
               "OnlineResource": "https://www.openstreetmap.org/copyright"
             },
-            "thumbnail": "img/mapthumbs/default.jpg"
+            "thumbnail": "img/mapthumbs/mapnik.jpg"
           },
           {
             "type": "wmts",
