@@ -39,6 +39,7 @@
           ],
           "searchProviders": [
             "coordinates",
+            "nominatim",
             {
               "provider": "solr",
               "default": [

@@ -1,0 +1,25 @@
+{
+    "catalog": [
+        {
+            "title": "Bauzonen",
+            "resource": "wms:http://wms.geo.admin.ch#ch.are.bauzonen"
+        },
+        {
+            "title": "Landeskarten",
+            "sublayers": [
+                {
+                    "title": "Landeskarte 1:1 Million | LK1000",
+                    "resource": "wms:http://wms.geo.admin.ch#ch.swisstopo.pixelkarte-farbe-pk1000.noscale"
+                },
+                {
+                    "title": "Landeskarte 1:100`000 | LK100",
+                    "resource": "wms:http://wms.geo.admin.ch#ch.swisstopo.pixelkarte-farbe-pk100.noscale"
+                },
+                {
+                    "title": "Landeskarte 1:25`000 | LK25",
+                    "resource": "wms:http://wms.geo.admin.ch#ch.swisstopo.pixelkarte-farbe-pk25.noscale"
+                }
+            ]
+        }
+    ]
+}
