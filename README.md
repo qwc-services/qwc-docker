@@ -40,12 +40,25 @@ Create a secret key:
 
     python3 -c 'import secrets; print("JWT_SECRET_KEY=\"%s\"" % secrets.token_hex(48))' >.env
 
-Set permissions for writable volumes:
+Permissions for writable volumes: by default, all QWC services run as `UID=33`, `GID=33`. You can either:
 
-    sudo chown -R www-data:www-data volumes/attachments
-    sudo chown -R www-data:www-data volumes/config
-    sudo chown -R www-data:www-data volumes/qgs-resources
-    sudo chown -R www-data:www-data volumes/qwc2/assets
+- Change the ownership of the writeable volumes accordingly:
+
+      sudo chown -R 33:33 volumes/attachments
+      sudo chown -R 33:33 volumes/config
+      sudo chown -R 33:33 volumes/qgs-resources
+      sudo chown -R 33:33 volumes/qwc2/assets
+
+- Or change the UID/GID which runs the QWC services by setting
+
+      environment:
+        - SERVICE_UID=<UID>
+        - SERVICE_GID=<UID>
+        [...]
+
+  for the various containers in `docker-compose.yml`.
+
+Set permissions for the shared solr data volume:
 
     sudo chown 8983:8983 volumes/solr/data
 
