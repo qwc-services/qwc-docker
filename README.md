@@ -49,14 +49,7 @@ Permissions for writable volumes: by default, all QWC services run as `UID=33`, 
       sudo chown -R 33:33 volumes/qgs-resources
       sudo chown -R 33:33 volumes/qwc2/assets
 
-- Or change the UID/GID which runs the QWC services by setting
-
-      environment:
-        - SERVICE_UID=<UID>
-        - SERVICE_GID=<UID>
-        [...]
-
-  for the various containers in `docker-compose.yml`.
+- Or change the UID/GID which runs the QWC services to match the user/group which owns the shared volumes on the host by setting `SERVICE_GID` and `SERVICE_GID` in `docker-compose.yml` under `x-qwc-service-variables`.
 
 Set permissions for the shared solr data volume:
 
@@ -113,11 +106,13 @@ Service overview
 ----------------
 
 Applications:
+
 * [QWC2 Map Viewer](https://github.com/qwc-services/qwc-map-viewer): The map viewer application
 * [QWC admin GUI](https://github.com/qwc-services/qwc-admin-gui): Configuration backend for managing users and permissions
 * [Registration GUI](https://github.com/qwc-services/qwc-registration-gui): GUI for registration of new users
 
 REST services:
+
 * [DB auth service](https://github.com/qwc-services/qwc-db-auth): Authentication service with local user database
 * [LDAP auth service](https://github.com/qwc-services/qwc-ldap-auth): LDAP Authentication service
 * [Data service](https://github.com/qwc-services/qwc-data-service): Data edit service, required for QWC2 editing functionality
@@ -132,10 +127,12 @@ REST services:
 * [Print service](https://github.com/qwc-services/qwc-print-service): Service for enhancing the QWC2 GetPrint requests
 
 Configuration database:
+
 * [DB schema and migrations](https://github.com/qwc-services/qwc-config-db)
 * [Demo database](https://github.com/qwc-services/qwc-demo-db-db)
 
 Configuration generator:
+
 * [Configuration generator](https://github.com/qwc-services/qwc-config-generator)
 
 
@@ -293,10 +290,10 @@ See READMEs of services for details.
   Example:
 
       qwc-print-service:
-        image: sourcepole/qwc-print-service:v2022.01.13
+        image: sourcepole/qwc-print-service:v2022.01.26
         environment:
-          - SERVICE_MOUNTPOINT=/api/v1/print
-          - JWT_SECRET_KEY=$JWT_SECRET_KEY
+          <<: *qwc-service-variables
+          SERVICE_MOUNTPOINT: '/api/v1/print'
         volumes:
           - ./volumes/config:/srv/qwc_service/config:ro
         ports:

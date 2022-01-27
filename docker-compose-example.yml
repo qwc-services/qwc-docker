@@ -1,7 +1,19 @@
-version: '2.1'
+version: '3.4'
+
+
+x-qwc-service-variables: &qwc-service-variables
+  JWT_SECRET_KEY: $JWT_SECRET_KEY
+  JWT_COOKIE_CSRF_PROTECT: 'True'
+  # Set these o override the UID/GID which runs uwsgi. Useful to ensure uwsgi runs under the same user/group
+  # which owns the shared volumes on host, avoiding the need to change the ownership/permissions of those files/folders.
+  #SERVICE_UID: 1000
+  #SERVICE_GID: 1000
+
+
 services:
+  
   qwc-postgis:
-    image: sourcepole/qwc-demo-db:v2022.01.12
+    image: sourcepole/qwc-demo-db:v2022.01.27
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -18,17 +30,14 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2022.01.26
+    image: sourcepole/qwc-config-generator:v2022.01.27
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
-    # image: sourcepole/qwc-config-generator:v2022.01.26-noqgis
+    # image: sourcepole/qwc-config-generator:v2022.01.27-noqgis
     environment:
-        - INPUT_CONFIG_PATH=/srv/qwc_service/config-in
-        - OUTPUT_CONFIG_PATH=/srv/qwc_service/config-out
-        # Set these (also for other services) to override the UID/GID which runs uwsgi. Useful to ensure
-        # uwsgi runs under the same user/group which owns the shared volumes on host, avoiding the need
-        # to change the ownership/permissions of those files/folders.
-        # - SERVICE_UID=<UID>
-        # - SERVICE_GID=<GID>
+      <<: *qwc-service-variables
+      INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
+      OUTPUT_CONFIG_PATH: '/srv/qwc_service/config-out'
+      GENERATE_DYNAMIC_KVRELS: 1
     ports:
       - "127.0.0.1:5010:9090"
     volumes:
@@ -39,24 +48,22 @@ services:
       - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-ogc-service:
-    image: sourcepole/qwc-ogc-service:v2022.01.26
+    image: sourcepole/qwc-ogc-service:v2022.01.27
     environment:
-      - SERVICE_MOUNTPOINT=/ows
-      - JWT_COOKIE_CSRF_PROTECT=True
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/ows'
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
     ports:
       - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2022.01.26
+    image: sourcepole/qwc-data-service:v2022.01.27
     environment:
-      - SERVICE_MOUNTPOINT=/api/v1/data
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
-      - ATTACHMENTS_BASE_DIR=/attachments
-      - MAX_ATTACHMENT_FILE_SIZE=13107200
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/data'
+      ATTACHMENTS_BASE_DIR: '/attachments'
+      MAX_ATTACHMENT_FILE_SIZE: 1048576
     volumes:
       - ./pg_service-write.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
@@ -83,11 +90,10 @@ services:
       #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
   qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:v2022.01.26
+    image: sourcepole/qwc-fulltext-search-service:v2022.01.27
     environment:
-      - SERVICE_MOUNTPOINT=/api/v2/search
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v2/search'
     ports:
       - "127.0.0.1:5011:9090"
     volumes:
@@ -95,15 +101,15 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2022.01.26
+    image: sourcepole/qwc-map-viewer-demo:v2022.01.27
     # Update config.json with:
     # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2022.01.08/static/config.json
     # and generate service configuration
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2022.01.26
+    # image: sourcepole/qwc-map-viewer-base:v2022.01.27
     environment:
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/'
     ports:
       - "127.0.0.1:5030:9090"
     volumes:
@@ -114,18 +120,18 @@ services:
       #- ./volumes/qwc2:/qwc2:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2022.01.26
+    image: sourcepole/qwc-admin-gui:v2022.01.27
     environment:
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      <<: *qwc-service-variables
       # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
-      - JWT_COOKIE_CSRF_PROTECT=False
-      - 'USER_INFO_FIELDS=[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}]'
-      #- TOTP_ENABLED=False
-      #- GROUP_REGISTRATION_ENABLED=False
-      - IDLE_TIMEOUT=600
-      - DEFAULT_LOCALE=en
-      - MAIL_SUPPRESS_SEND=True
-      - MAIL_DEFAULT_SENDER=from@example.com
+      JWT_COOKIE_CSRF_PROTECT: 'False'
+      USER_INFO_FIELDS: '[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}]'
+      #TOTP_ENABLED: 'False'
+      GROUP_REGISTRATION_ENABLED: 'True'
+      IDLE_TIMEOUT: 600
+      DEFAULT_LOCALE: 'en'
+      MAIL_SUPPRESS_SEND: 'True'
+      MAIL_DEFAULT_SENDER: 'from@example.com'
     ports:
       - "127.0.0.1:5031:9090"
     volumes:
@@ -133,34 +139,32 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   # qwc-registration-gui:
-  #   image: sourcepole/qwc-registration-gui:v2022.01.26
+  #   image: sourcepole/qwc-registration-gui:v2022.01.27
   #   environment:
-  #     - SERVICE_MOUNTPOINT=/registration
-  #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
-  #     - JWT_COOKIE_CSRF_PROTECT=True
-  #     - DEFAULT_LOCALE=en
-  #     - ADMIN_RECIPIENTS=admin@example.com
-  #     - MAIL_SUPPRESS_SEND=True
-  #     - MAIL_DEFAULT_SENDER=from@example.com
+  #     <<: *qwc-service-variables
+  #     SERVICE_MOUNTPOINT: '/registration'
+  #     DEFAULT_LOCALE: 'en'
+  #     ADMIN_RECIPIENTS: 'admin@example.com'
+  #     MAIL_SUPPRESS_SEND: 'True'
+  #     MAIL_DEFAULT_SENDER: 'from@example.com'
   #   ports:
   #     - "127.0.0.1:5032:9090"
   #   volumes:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2022.01.26
+    image: sourcepole/qwc-db-auth:v2022.01.27
     environment:
-      - SERVICE_MOUNTPOINT=/auth
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/auth'
       # https://flask-jwt-extended.readthedocs.io/en/stable/options/#cookie-options
-      - JWT_COOKIE_SAMESITE=Strict
+      JWT_COOKIE_SAMESITE: 'Strict'
       # Enable the following in production (requires https):
-      #- JWT_COOKIE_SECURE=True
-      #- TOTP_ENABLED=False
-      #- TOTP_ISSUER_NAME=QWC Services
-      - MAIL_SUPPRESS_SEND=True
-      - MAIL_DEFAULT_SENDER=from@example.com
+      #JWT_COOKIE_SECURE: 'True'
+      #TOTP_ENABLED: 'False'
+      #TOTP_ISSUER_NAME: 'QWC Services'
+      MAIL_SUPPRESS_SEND: 'True'
+      MAIL_DEFAULT_SENDER: 'from@example.com'
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
@@ -168,18 +172,20 @@ services:
       - "127.0.0.1:5017:9090"
 
   qwc-elevation-service:
-    image: sourcepole/qwc-elevation-service:v2022.01.26
+    image: sourcepole/qwc-elevation-service:v2022.01.27
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/elevation'
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
     ports:
       - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
-    image: sourcepole/qwc-permalink-service:v2022.01.26
+    image: sourcepole/qwc-permalink-service:v2022.01.27
     environment:
-      - SERVICE_MOUNTPOINT=/api/v1/permalink
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/permalink'
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
@@ -187,23 +193,21 @@ services:
       - "127.0.0.1:5001:9090"
 
   # qwc-print-service:
-  #   image: sourcepole/qwc-print-service:v2022.01.26
+  #   image: sourcepole/qwc-print-service:v2022.01.27
   #   environment:
-  #     - SERVICE_MOUNTPOINT=/api/v1/print
-  #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
-  #     - JWT_COOKIE_CSRF_PROTECT=True
+  #     <<: *qwc-service-variables
+  #     SERVICE_MOUNTPOINT: '/api/v1/print'
   #   volumes:
   #     - ./volumes/config:/srv/qwc_service/config:ro
   #   ports:
   #     - "127.0.0.1:5020:9090"
 
   qwc-feature-info-service:
-    image: sourcepole/qwc-feature-info-service:v2022.01.26
+    image: sourcepole/qwc-feature-info-service:v2022.01.27
     environment:
-      - SERVICE_MOUNTPOINT=/api/v1/feature-info
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
-      # - SKIP_EMPTY_ATTRIBUTES=1
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/featureinfo'
+      # SKIP_EMPTY_ATTRIBUTES: 1
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
@@ -211,11 +215,10 @@ services:
       - "127.0.0.1:5015:9090"
 
   # qwc-document-service:
-  #   image: sourcepole/qwc-document-service:v2022.01.26
+  #   image: sourcepole/qwc-document-service:v2022.01.27
   #   environment:
-  #     - SERVICE_MOUNTPOINT=/api/v1/document
-  #     - JWT_SECRET_KEY=$JWT_SECRET_KEY
-  #     - JWT_COOKIE_CSRF_PROTECT=True
+  #     <<: *qwc-service-variables
+  #     SERVICE_MOUNTPOINT: '/api/v1/document'
   #   volumes:
   #     - ./volumes/config:/srv/qwc_service/config:ro
   #   depends_on:
@@ -224,49 +227,32 @@ services:
   #     - "127.0.0.1:5018:9090"
 
   # jasper-reporting-service:
-  #   image: sourcepole/jasper-reporting-service:v2022.01.26
+  #   image: sourcepole/jasper-reporting-service:v2022.01.27
   #   volumes:
   #     - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
   #     - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
   #   ports:
   #     - "127.0.0.1:8002:8080"
 
-  #  qwc-ext-service:
-  #  image: sourcepole/qwc-ext-service:v2022.01.26
-  #  environment:
-  #    - SERVICE_MOUNTPOINT=/api/v1/ext
-  #    - JWT_SECRET_KEY=$JWT_SECRET_KEY
-  #    - JWT_COOKIE_CSRF_PROTECT=True
-  #  volumes:
-  #    - ./volumes/config:/srv/qwc_service/config:ro
-  #  ports:
-  #    - "127.0.0.1:5023:9090"
-
   qwc-mapinfo-service:
-    image: sourcepole/qwc-mapinfo-service:v2022.01.26
+    image: sourcepole/qwc-mapinfo-service:v2022.01.27
     environment:
-      - SERVICE_MOUNTPOINT=/api/v1/mapinfo
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/mapinfo'
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
-    depends_on:
-      - qwc-postgis
     ports:
       - "127.0.0.1:5016:9090"
 
   qwc-legend-service:
-    image: sourcepole/qwc-legend-service:v2022.01.26
+    image: sourcepole/qwc-legend-service:v2022.01.27
     environment:
-      - SERVICE_MOUNTPOINT=/api/v1/legend
-      - JWT_SECRET_KEY=$JWT_SECRET_KEY
-      - JWT_COOKIE_CSRF_PROTECT=True
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/legend'
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
       - ./volumes/legends:/legends
-    depends_on:
-      - qwc-qgis-server
     ports:
       - "127.0.0.1:5014:9090"
 
@@ -279,8 +265,8 @@ services:
     depends_on:
       - qwc-map-viewer
       - qwc-auth-service
-      #- qwc-feature-info-service
-      #- qwc-legend-service
+      - qwc-feature-info-service
+      - qwc-legend-service
       - qwc-mapinfo-service
       - qwc-permalink-service
       - qwc-elevation-service
