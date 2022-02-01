@@ -129,7 +129,7 @@ REST services:
 Configuration database:
 
 * [DB schema and migrations](https://github.com/qwc-services/qwc-config-db)
-* [Demo database](https://github.com/qwc-services/qwc-demo-db-db)
+* [Demo database](https://github.com/qwc-services/qwc-demo-db)
 
 Configuration generator:
 
