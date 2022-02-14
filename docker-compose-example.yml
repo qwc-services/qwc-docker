@@ -26,7 +26,6 @@ services:
       - "127.0.0.1:8001:80"
     volumes:
       - ./volumes/qgs-resources:/data:ro
-      - ./volumes/geodata:/geodata:ro
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
