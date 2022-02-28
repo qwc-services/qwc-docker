@@ -29,9 +29,9 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2022.02.03
+    image: sourcepole/qwc-config-generator:v2022.02.28
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
-    # image: sourcepole/qwc-config-generator:v2022.01.27-noqgis
+    # image: sourcepole/qwc-config-generator:v2022.02.28-noqgis
     environment:
       <<: *qwc-service-variables
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
@@ -57,7 +57,7 @@ services:
       - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2022.02.03
+    image: sourcepole/qwc-data-service:v2022.02.23
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/data'
@@ -100,12 +100,12 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2022.02.03
+    image: sourcepole/qwc-map-viewer-demo:v2022.02.28
     # Update config.json with:
     # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2022.01.08/static/config.json
     # and generate service configuration
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2022.02.03
+    # image: sourcepole/qwc-map-viewer-base:v2022.02.28
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
@@ -119,7 +119,7 @@ services:
       #- ./volumes/qwc2:/qwc2:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2022.01.27
+    image: sourcepole/qwc-admin-gui:v2022.02.08
     environment:
       <<: *qwc-service-variables
       # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
