@@ -21,7 +21,7 @@ services:
      - "127.0.0.1:5439:5432"
 
   qwc-qgis-server:
-    image: sourcepole/qwc-qgis-server:3.16-plugins
+    image: sourcepole/qwc-qgis-server:3.22-plugins
     ports:
       - "127.0.0.1:8001:80"
     volumes:
