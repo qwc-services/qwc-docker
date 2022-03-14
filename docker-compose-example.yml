@@ -72,6 +72,9 @@ services:
     ports:
       - "127.0.0.1:5012:9090"
 
+  # clamav:
+  #   image: clamav/clamav:stable
+
   qwc-solr:
     image: solr:8.11.1-slim
     entrypoint:
@@ -130,7 +133,7 @@ services:
       USER_INFO_FIELDS: '[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}]'
       #TOTP_ENABLED: 'False'
       GROUP_REGISTRATION_ENABLED: 'True'
-      IDLE_TIMEOUT: 600
+      #IDLE_TIMEOUT: 600
       DEFAULT_LOCALE: 'en'
       MAIL_SUPPRESS_SEND: 'True'
       MAIL_DEFAULT_SENDER: 'from@example.com'
@@ -139,6 +142,10 @@ services:
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
+      # required by themes plugin:
+      - ./volumes/config-in:/srv/qwc_service/config-in:ro
+      - ./volumes/config:/srv/qwc_service/config-out
+      - ./volumes/qwc2:/qwc2
 
   # qwc-registration-gui:
   #   image: sourcepole/qwc-registration-gui:v2022.08.22
