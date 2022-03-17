@@ -29,9 +29,9 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2022.02.28
+    image: sourcepole/qwc-config-generator:v2022.03.16
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
-    # image: sourcepole/qwc-config-generator:v2022.02.28-noqgis
+    # image: sourcepole/qwc-config-generator:v2022.03.15-noqgis
     environment:
       <<: *qwc-service-variables
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
@@ -57,7 +57,7 @@ services:
       - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2022.02.23
+    image: sourcepole/qwc-data-service:v2022.03.16
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/data'
