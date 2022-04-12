@@ -80,7 +80,7 @@ Conntect to DB:
 
 Demo DB superuser password (please change for production use!):
 
-* See `POSTGRES_PASSWORD` in [https://github.com/qwc-services/qwc-demo-db/blob/main/Dockerfile](https://github.com/qwc-services/qwc-demo-db/blob/main/Dockerfile)
+* See `POSTGRES_PASSWORD` in [https://github.com/qwc-services/qwc-base-db/blob/main/Dockerfile](https://github.com/qwc-services/qwc-base-db/blob/main/Dockerfile)
 
 Stop all containers:
 
