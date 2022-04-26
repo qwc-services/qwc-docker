@@ -119,7 +119,7 @@ services:
       #- ./volumes/qwc2:/qwc2:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2022.04.08
+    image: sourcepole/qwc-admin-gui:v2022.04.26
     environment:
       <<: *qwc-service-variables
       # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
@@ -152,7 +152,7 @@ services:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2022.04.20
+    image: sourcepole/qwc-db-auth:v2022.04.26
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/auth'
