@@ -29,9 +29,9 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2022.04.22
+    image: sourcepole/qwc-config-generator:v2022.04.24
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
-    # image: sourcepole/qwc-config-generator:v2022.04.22-noqgis
+    # image: sourcepole/qwc-config-generator:v2022.04.24-noqgis
     environment:
       <<: *qwc-service-variables
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
@@ -100,12 +100,12 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2022.02.28
+    image: sourcepole/qwc-map-viewer-demo:v2022.04.26
     # Update config.json with:
     # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2022.01.08/static/config.json
     # and generate service configuration
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2022.02.28
+    # image: sourcepole/qwc-map-viewer-base:v2022.04.26
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
