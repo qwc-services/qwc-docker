@@ -202,7 +202,7 @@ services:
   #     - "127.0.0.1:5020:9090"
 
   qwc-feature-info-service:
-    image: sourcepole/qwc-feature-info-service:v2022.05.05
+    image: sourcepole/qwc-feature-info-service:v2022.05.11
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/featureinfo'
