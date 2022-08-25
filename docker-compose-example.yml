@@ -19,6 +19,8 @@ services:
       interval: 10s
     ports:
      - "127.0.0.1:5439:5432"
+    volumes:
+     - ./volumes/db:/var/lib/postgresql/docker
 
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server:3.22-plugins
@@ -29,9 +31,9 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2022.07.18
+    image: sourcepole/qwc-config-generator:v2022.08.22
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
-    # image: sourcepole/qwc-config-generator:v2022.07.18-noqgis
+    # image: sourcepole/qwc-config-generator:v2022.08.22-noqgis
     environment:
       <<: *qwc-service-variables
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
@@ -47,7 +49,7 @@ services:
       - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-ogc-service:
-    image: sourcepole/qwc-ogc-service:v2022.07.12
+    image: sourcepole/qwc-ogc-service:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/ows'
@@ -57,7 +59,7 @@ services:
       - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2022.07.18
+    image: sourcepole/qwc-data-service:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/data'
@@ -89,7 +91,7 @@ services:
       #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
   qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:v2022.07.12
+    image: sourcepole/qwc-fulltext-search-service:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v2/search'
@@ -100,18 +102,19 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2022.07.13
+    image: sourcepole/qwc-map-viewer-demo:v2022.08.25
     # Update config.json with:
     # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2022.01.08/static/config.json
     # and generate service configuration
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2022.05.05
+    # image: sourcepole/qwc-map-viewer-base:v2022.08.25
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
     ports:
       - "127.0.0.1:5030:9090"
     volumes:
+      - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
       # When using qwc-map-viewer-demo:
       - ./volumes/qwc2/assets:/qwc2/assets:ro
@@ -119,7 +122,7 @@ services:
       #- ./volumes/qwc2:/qwc2:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2022.07.12
+    image: sourcepole/qwc-admin-gui:v2022.08.19
     environment:
       <<: *qwc-service-variables
       # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
@@ -138,7 +141,7 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   # qwc-registration-gui:
-  #   image: sourcepole/qwc-registration-gui:v2022.07.12
+  #   image: sourcepole/qwc-registration-gui:v2022.08.22
   #   environment:
   #     <<: *qwc-service-variables
   #     SERVICE_MOUNTPOINT: '/registration'
@@ -152,7 +155,7 @@ services:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2022.07.12
+    image: sourcepole/qwc-db-auth:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/auth'
@@ -171,7 +174,7 @@ services:
       - "127.0.0.1:5017:9090"
 
   qwc-elevation-service:
-    image: sourcepole/qwc-elevation-service:v2022.07.12
+    image: sourcepole/qwc-elevation-service:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/elevation'
@@ -181,7 +184,7 @@ services:
       - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
-    image: sourcepole/qwc-permalink-service:v2022.07.12
+    image: sourcepole/qwc-permalink-service:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/permalink'
@@ -192,7 +195,7 @@ services:
       - "127.0.0.1:5001:9090"
 
   # qwc-print-service:
-  #   image: sourcepole/qwc-print-service:v2022.07.12
+  #   image: sourcepole/qwc-print-service:v2022.08.22
   #   environment:
   #     <<: *qwc-service-variables
   #     SERVICE_MOUNTPOINT: '/api/v1/print'
@@ -202,7 +205,7 @@ services:
   #     - "127.0.0.1:5020:9090"
 
   qwc-feature-info-service:
-    image: sourcepole/qwc-feature-info-service:v2022.07.22
+    image: sourcepole/qwc-feature-info-service:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/featureinfo'
@@ -214,7 +217,7 @@ services:
       - "127.0.0.1:5015:9090"
 
   # qwc-document-service:
-  #   image: sourcepole/qwc-document-service:v2022.07.12
+  #   image: sourcepole/qwc-document-service:v2022.08.22
   #   environment:
   #     <<: *qwc-service-variables
   #     SERVICE_MOUNTPOINT: '/api/v1/document'
@@ -234,7 +237,7 @@ services:
   #     - "127.0.0.1:8002:8080"
 
   qwc-mapinfo-service:
-    image: sourcepole/qwc-mapinfo-service:v2022.07.12
+    image: sourcepole/qwc-mapinfo-service:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/mapinfo'
@@ -245,7 +248,7 @@ services:
       - "127.0.0.1:5016:9090"
 
   qwc-legend-service:
-    image: sourcepole/qwc-legend-service:v2022.07.12
+    image: sourcepole/qwc-legend-service:v2022.08.22
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/legend'
