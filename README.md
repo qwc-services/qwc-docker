@@ -49,7 +49,7 @@ Permissions for writable volumes: by default, all QWC services run as `UID=33`, 
       sudo chown -R 33:33 volumes/qgs-resources
       sudo chown -R 33:33 volumes/qwc2/assets
 
-- Or change the UID/GID which runs the QWC services to match the user/group which owns the shared volumes on the host by setting `SERVICE_GID` and `SERVICE_GID` in `docker-compose.yml` under `x-qwc-service-variables`.
+- Or change the UID/GID which runs the QWC services to match the user/group which owns the shared volumes on the host by setting `SERVICE_UID` and `SERVICE_GID` in `docker-compose.yml` under `x-qwc-service-variables`.
 
 Set permissions for the shared solr data volume:
 
