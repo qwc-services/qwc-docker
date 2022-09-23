@@ -13,7 +13,7 @@ x-qwc-service-variables: &qwc-service-variables
 services:
   
   qwc-postgis:
-    image: sourcepole/qwc-demo-db:v2022.04.26
+    image: sourcepole/qwc-demo-db:v2022.09.03
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
