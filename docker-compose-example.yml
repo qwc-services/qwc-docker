@@ -31,7 +31,7 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2022.09.23
+    image: sourcepole/qwc-config-generator:v2022.10.05
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
     # image: sourcepole/qwc-config-generator:v2022.08.22-noqgis
     environment:
@@ -91,7 +91,7 @@ services:
       #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
   qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:v2022.08.22
+    image: sourcepole/qwc-fulltext-search-service:v2022.09.27
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v2/search'
@@ -102,12 +102,12 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2022.09.23
+    image: sourcepole/qwc-map-viewer-demo:v2022.10.06
     # Update config.json with:
     # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2022.01.08/static/config.json
     # and generate service configuration
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2022.08.25
+    # image: sourcepole/qwc-map-viewer-base:v2022.10.06
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
@@ -122,7 +122,7 @@ services:
       #- ./volumes/qwc2:/qwc2:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2022.08.19
+    image: sourcepole/qwc-admin-gui:v2022.09.15
     environment:
       <<: *qwc-service-variables
       # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
@@ -184,7 +184,7 @@ services:
       - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
-    image: sourcepole/qwc-permalink-service:v2022.08.22
+    image: sourcepole/qwc-permalink-service:v2022.10.06
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/permalink'
@@ -195,7 +195,7 @@ services:
       - "127.0.0.1:5001:9090"
 
   # qwc-print-service:
-  #   image: sourcepole/qwc-print-service:v2022.08.22
+  #   image: sourcepole/qwc-print-service:v2022.10.06
   #   environment:
   #     <<: *qwc-service-variables
   #     SERVICE_MOUNTPOINT: '/api/v1/print'
