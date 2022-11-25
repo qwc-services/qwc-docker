@@ -24,8 +24,8 @@ services:
 
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server:3.22-plugins
-    ports:
-      - "127.0.0.1:8001:80"
+    # ports:
+    #   - "127.0.0.1:8001:80"
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
@@ -39,8 +39,8 @@ services:
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
       OUTPUT_CONFIG_PATH: '/srv/qwc_service/config-out'
       GENERATE_DYNAMIC_KVRELS: 1
-    ports:
-      - "127.0.0.1:5010:9090"
+    # ports:
+    #   - "127.0.0.1:5010:9090"
     volumes:
       - ./volumes/config-in:/srv/qwc_service/config-in:ro
       - ./volumes/config:/srv/qwc_service/config-out
@@ -55,8 +55,8 @@ services:
       SERVICE_MOUNTPOINT: '/ows'
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
-    ports:
-      - "127.0.0.1:5013:9090"
+    # ports:
+    #   - "127.0.0.1:5013:9090"
 
   qwc-data-service:
     image: sourcepole/qwc-data-service:v2022.09.23
@@ -69,8 +69,8 @@ services:
       - ./pg_service-write.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
       - ./volumes/attachments:/attachments
-    ports:
-      - "127.0.0.1:5012:9090"
+    # ports:
+    #   - "127.0.0.1:5012:9090"
 
   # clamav:
   #   image: clamav/clamav:stable
@@ -98,8 +98,8 @@ services:
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v2/search'
-    ports:
-      - "127.0.0.1:5011:9090"
+    # ports:
+    #   - "127.0.0.1:5011:9090"
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
@@ -114,8 +114,8 @@ services:
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
-    ports:
-      - "127.0.0.1:5030:9090"
+    # ports:
+    #   - "127.0.0.1:5030:9090"
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
@@ -137,8 +137,8 @@ services:
       DEFAULT_LOCALE: 'en'
       MAIL_SUPPRESS_SEND: 'True'
       MAIL_DEFAULT_SENDER: 'from@example.com'
-    ports:
-      - "127.0.0.1:5031:9090"
+    # ports:
+    #   - "127.0.0.1:5031:9090"
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
@@ -156,8 +156,8 @@ services:
   #     ADMIN_RECIPIENTS: 'admin@example.com'
   #     MAIL_SUPPRESS_SEND: 'True'
   #     MAIL_DEFAULT_SENDER: 'from@example.com'
-  #   ports:
-  #     - "127.0.0.1:5032:9090"
+  #   # ports:
+  #   #   - "127.0.0.1:5032:9090"
   #   volumes:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
 
@@ -177,8 +177,8 @@ services:
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
-    ports:
-      - "127.0.0.1:5017:9090"
+    # ports:
+    #   - "127.0.0.1:5017:9090"
 
   qwc-elevation-service:
     image: sourcepole/qwc-elevation-service:v2022.08.22
@@ -187,8 +187,8 @@ services:
       SERVICE_MOUNTPOINT: '/elevation'
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
-    ports:
-      - "127.0.0.1:5002:9090"
+    # ports:
+    #   - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
     image: sourcepole/qwc-permalink-service:v2022.10.06
@@ -198,8 +198,8 @@ services:
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
-    ports:
-      - "127.0.0.1:5001:9090"
+    # ports:
+    #   - "127.0.0.1:5001:9090"
 
   # qwc-print-service:
   #   image: sourcepole/qwc-print-service:v2022.10.06
@@ -208,8 +208,8 @@ services:
   #     SERVICE_MOUNTPOINT: '/api/v1/print'
   #   volumes:
   #     - ./volumes/config:/srv/qwc_service/config:ro
-  #   ports:
-  #     - "127.0.0.1:5020:9090"
+  #   # ports:
+  #   #   - "127.0.0.1:5020:9090"
 
   qwc-feature-info-service:
     image: sourcepole/qwc-feature-info-service:v2022.08.22
@@ -220,8 +220,8 @@ services:
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
-    ports:
-      - "127.0.0.1:5015:9090"
+    # ports:
+    #   - "127.0.0.1:5015:9090"
 
   # qwc-document-service:
   #   image: sourcepole/qwc-document-service:v2022.08.22
@@ -232,16 +232,16 @@ services:
   #     - ./volumes/config:/srv/qwc_service/config:ro
   #   depends_on:
   #     - jasper-reporting-service
-  #   ports:
-  #     - "127.0.0.1:5018:9090"
+  #   # ports:
+  #   #   - "127.0.0.1:5018:9090"
 
   # jasper-reporting-service:
   #   image: sourcepole/jasper-reporting-service:v2022.01.27
   #   volumes:
   #     - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
   #     - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
-  #   ports:
-  #     - "127.0.0.1:8002:8080"
+  #   # ports:
+  #   #   - "127.0.0.1:8002:8080"
 
   qwc-mapinfo-service:
     image: sourcepole/qwc-mapinfo-service:v2022.08.22
@@ -251,8 +251,8 @@ services:
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
-    ports:
-      - "127.0.0.1:5016:9090"
+    # ports:
+    #   - "127.0.0.1:5016:9090"
 
   qwc-legend-service:
     image: sourcepole/qwc-legend-service:v2022.08.22
@@ -262,8 +262,8 @@ services:
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
       - ./volumes/legends:/legends
-    ports:
-      - "127.0.0.1:5014:9090"
+    # ports:
+    #   - "127.0.0.1:5014:9090"
 
   qwc-api-gateway:
     image: nginx:1.19
