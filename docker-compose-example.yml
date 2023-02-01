@@ -23,7 +23,7 @@ services:
      - ./volumes/db:/var/lib/postgresql/docker
 
   qwc-qgis-server:
-    image: sourcepole/qwc-qgis-server:3.22-plugins
+    image: sourcepole/qwc-qgis-server:3.22
     # ports:
     #   - "127.0.0.1:8001:80"
     volumes:
@@ -31,9 +31,9 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2022.10.05
+    image: sourcepole/qwc-config-generator:v2023.01.19
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
-    # image: sourcepole/qwc-config-generator:v2022.08.22-noqgis
+    # image: sourcepole/qwc-config-generator:v2023.01.19-noqgis
     environment:
       <<: *qwc-service-variables
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
@@ -59,7 +59,7 @@ services:
     #   - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2022.09.23
+    image: sourcepole/qwc-data-service:v2023.01.11.1
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/data'
@@ -76,7 +76,7 @@ services:
   #   image: clamav/clamav:stable
 
   qwc-solr:
-    image: solr:8.11.1-slim
+    image: solr:8.11-slim
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -105,12 +105,12 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    image: sourcepole/qwc-map-viewer-demo:v2022.10.06
+    image: sourcepole/qwc-map-viewer-demo:v2023.01.11
     # Update config.json with:
-    # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2022.01.08/static/config.json
+    # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2023.01.11/static/config.json
     # and generate service configuration
     # With custom build added via volume:
-    # image: sourcepole/qwc-map-viewer-base:v2022.10.06
+    # image: sourcepole/qwc-map-viewer-base:v2023.01.11
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
@@ -162,7 +162,7 @@ services:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2022.08.22
+    image: sourcepole/qwc-db-auth:v2022.12.26
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/auth'
@@ -212,7 +212,7 @@ services:
   #   #   - "127.0.0.1:5020:9090"
 
   qwc-feature-info-service:
-    image: sourcepole/qwc-feature-info-service:v2022.08.22
+    image: sourcepole/qwc-feature-info-service:v2022.11.19
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/featureinfo'
@@ -255,7 +255,7 @@ services:
     #   - "127.0.0.1:5016:9090"
 
   qwc-legend-service:
-    image: sourcepole/qwc-legend-service:v2022.08.22
+    image: sourcepole/qwc-legend-service:v2022.12.12
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/legend'
