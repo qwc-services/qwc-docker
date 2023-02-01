@@ -43,10 +43,7 @@
             {
               "provider": "solr",
               "default": [
-              ],
-              "layers": {
-                "countries": "ne_10m_admin_0_countries"
-              }
+              ]
             }
           ],
           "mapCrs": "EPSG:3857",
