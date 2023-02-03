@@ -173,7 +173,7 @@ Selected configuration topics
 
 * Configure project for QWC2
   * Automatically generated theme configuration: Save project as `<project>.qgs` in `volumes/qgs-resources/scan/` (see [config generator configuration](https://github.com/qwc-services/qwc-config-generator))
-  * Manual theme configuration: Save project as `<project>.qgs` in `volumes/qgs-resources/` and edit `volumes/config-in/default/tenantConfig.json` (see [themesConfig documentation](https://github.com/qgis/qwc2-demo-app/blob/master/doc/QWC2_Documentation.md#configuring-the-themes-in-themesconfigjson)).
+  * Manual theme configuration: Save project as `<project>.qgs` in `volumes/qgs-resources/` and edit `volumes/config-in/default/tenantConfig.json` (see [themesConfig documentation](https://github.com/qgis/qwc2-demo-app/blob/master/doc/src/qwc_configuration.md#theme-configuration-qgis-projects-and-the-themesconfigjson-file)).
 * Launch Admin GUI and generate configuration
 
 ### Editable layers
@@ -213,7 +213,7 @@ Test query for fulltext search:
 
 Use the `sourcepole/qwc-map-viewer-base` image rather than `sourcepole/qwc-map-viewer-demo` for `qwc-map-viewer` in `docker-compose.yml`.
 
-Clone and build QWC2 Demo App (see [Quick start](https://github.com/qgis/qwc2-demo-app/blob/master/doc/QWC2_Documentation.md#quick-start)) (or use your custom QWC2 build):
+Clone and build QWC2 Demo App (see [Quick start](https://github.com/qgis/qwc2-demo-app/blob/master/doc/src/quick_start.md)) (or use your custom QWC2 build):
 
     git clone --recursive https://github.com/qgis/qwc2-demo-app.git
     cd qwc2-demo-app/
