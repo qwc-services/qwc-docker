@@ -23,7 +23,7 @@ services:
      - ./volumes/db:/var/lib/postgresql/docker
 
   qwc-qgis-server:
-    image: sourcepole/qwc-qgis-server:3.22
+    image: sourcepole/qwc-qgis-server:3.22-plugins
     # ports:
     #   - "127.0.0.1:8001:80"
     volumes:
@@ -49,7 +49,7 @@ services:
       - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-ogc-service:
-    image: sourcepole/qwc-ogc-service:v2022.08.22
+    image: sourcepole/qwc-ogc-service:v2023.02.03
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/ows'
@@ -162,7 +162,7 @@ services:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2022.12.26
+    image: sourcepole/qwc-db-auth:v2023.02.03
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/auth'
