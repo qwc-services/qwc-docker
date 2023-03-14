@@ -10,6 +10,7 @@ This repository contains a sample setup for running QWC services with docker.
 Table of Contents
 -----------------
 
+- [Versioning](#versioning)
 - [Quick start](#quick-start)
 - [Architecture overview](#architecture-overview)
 - [Service overview](#service-overview)
@@ -20,6 +21,14 @@ Table of Contents
 - [Group registration](#group_registration)
 - [Health checks for Kubernetes](#health-checks-for-kubernetes)
 - [Development](#development)
+
+
+Versioning
+----------
+
+Since February 2023 a new long-term-support branch of QWC2 and its services has been introduced. The respective Docker images are tagged as `vYYYY.x-lts` (i.e. `v2023.0-lts`). This branch will receive bugfix updates for approximately one year. The sample `docker-compose-example.yml` references these images.
+
+The latest versions of QWC2 and its services is available as before, tagged as `vYYYY-MM-DD`.
 
 Quick start
 -----------
