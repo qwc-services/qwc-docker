@@ -6,10 +6,12 @@
     "default_qgis_server_url": "http://qwc-qgis-server/ows/",
     "config_db_url": "postgresql:///?service=qwc_configdb",
     "permissions_default_allow": true,
+    "validate_schema": true,
     "qgis_projects_base_dir": "/data",
     "qgis_projects_scan_base_dir": "/data/scan",
     "qgis_projects_gen_base_dir": "/data/gen",
-    "qwc2_base_dir": "/qwc2"
+    "qwc2_base_dir": "/qwc2",
+    "autogen_keyvaltable_datasets": false
   },
   "themesConfig": {
     "defaultScales": [100000000, 50000000, 25000000, 10000000, 4000000, 2000000, 1000000, 400000, 200000, 80000, 40000, 20000, 10000, 8000, 6000, 4000, 2000, 1000, 500, 250, 100],
@@ -136,7 +138,8 @@
     {
       "name": "featureInfo",
       "config": {
-        "default_qgis_server_url": "http://qwc-qgis-server/ows/"
+        "default_qgis_server_url": "http://qwc-qgis-server/ows/",
+        "skip_empty_attributes": false
       },
       "resources": {
         "wms_services": [
@@ -286,7 +289,12 @@
         "totp_enabled": false,
         "user_info_fields": [],
         "proxy_url_whitelist": [],
-        "proxy_timeout": 60
+        "proxy_timeout": 60,
+        "plugins": ["themes"],
+        "input_config_path": "/src/qwc_service/config-in",
+        "qwc2_path": "/qwc2",
+        "qgs_resources_path": "/qgs-resources",
+        "ows_service_url": "/ows"
       }
     },
     {
