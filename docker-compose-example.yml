@@ -59,7 +59,7 @@ services:
     #   - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:2023.1-lts
+    image: sourcepole/qwc-data-service:v2023.1-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/data'
@@ -94,7 +94,7 @@ services:
       #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
   qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:2023.0-lts
+    image: sourcepole/qwc-fulltext-search-service:v2023.0-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v2/search'
