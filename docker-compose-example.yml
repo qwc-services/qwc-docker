@@ -146,6 +146,7 @@ services:
       # - ./volumes/config-in:/srv/qwc_service/config-in:rw
       # - ./volumes/qwc2:/qwc2
       # - ./volumes/qgs-resources:/qgs-resources
+      # - ./volumes/info-templates:/info_templates
 
   # qwc-registration-gui:
   #   image: sourcepole/qwc-registration-gui:v2022.08.22
@@ -220,6 +221,7 @@ services:
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
+      - ./volumes/info-templates:/info_templates:ro
     # ports:
     #   - "127.0.0.1:5015:9090"
 
