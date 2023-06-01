@@ -145,7 +145,7 @@ services:
       # required by themes plugin:
       # - ./volumes/config-in:/srv/qwc_service/config-in:rw
       # - ./volumes/qwc2:/qwc2
-      # - ./volumes/qgs-resources:/qgs-resource
+      # - ./volumes/qgs-resources:/qgs-resources
       # - ./volumes/info-templates:/info_templates
 
   # qwc-registration-gui:
