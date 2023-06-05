@@ -105,11 +105,9 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
+    # Pre-built qwc2 app
     image: sourcepole/qwc-map-viewer-demo:v2023.1-lts
-    # Update config.json with:
-    # curl -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/v2023.01.11/static/config.json
-    # and generate service configuration
-    # With custom build added via volume:
+    # Or with own viewer build placed in volumes/qwc2
     # image: sourcepole/qwc-map-viewer-base:v2023.01.11
     environment:
       <<: *qwc-service-variables
@@ -217,7 +215,6 @@ services:
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/featureinfo'
-      # SKIP_EMPTY_ATTRIBUTES: 1
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
