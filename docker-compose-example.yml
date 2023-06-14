@@ -31,7 +31,7 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2023.3-lts
+    image: sourcepole/qwc-config-generator:v2023.6-lts
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
     # image: sourcepole/qwc-config-generator:v2023.2-lts-noqgis
     environment:
@@ -106,7 +106,7 @@ services:
 
   qwc-map-viewer:
     # Pre-built qwc2 app
-    image: sourcepole/qwc-map-viewer-demo:v2023.1-lts
+    image: sourcepole/qwc-map-viewer-demo:v2023.3-lts
     # Or with own viewer build placed in volumes/qwc2
     # image: sourcepole/qwc-map-viewer-base:v2023.01.11
     environment:
