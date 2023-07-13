@@ -8,6 +8,8 @@ x-qwc-service-variables: &qwc-service-variables
   # which owns the shared volumes on host, avoiding the need to change the ownership/permissions of those files/folders.
   #SERVICE_UID: 1000
   #SERVICE_GID: 1000
+  # Uncomment this for multi-tenant support, see also api-gateway/nginx-example-multitenant.conf
+  # TENANT_HEADER: Tenant
 
 
 services:
