@@ -108,9 +108,12 @@ services:
 
   qwc-map-viewer:
     # Pre-built qwc2 app
-    image: sourcepole/qwc-map-viewer-demo:v2023.3-lts
+    image: sourcepole/qwc-map-viewer-demo:v2023.4-lts
     # Or with own viewer build placed in volumes/qwc2
-    # image: sourcepole/qwc-map-viewer-base:v2023.01.11
+    # image: sourcepole/qwc-map-viewer-base:latest
+    # Update config.json with:
+    # curl -L -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/master/static/config.json
+    # and generate service configuration
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
