@@ -414,10 +414,8 @@
             }
           },
           "swipeGeometryTypeBlacklist":[
-            "Point"
           ],
           "swipeLayerNameBlacklist":[
-            "*_noswipe"
           ]
         }
       },
