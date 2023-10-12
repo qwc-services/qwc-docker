@@ -22,7 +22,7 @@ services:
     ports:
      - "127.0.0.1:5439:5432"
     volumes:
-     - ./volumes/db:/var/lib/postgresql/docker
+     - ./volumes/db:/var/lib/postgresql/data/
 
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server:3.28-plugins
