@@ -15,14 +15,26 @@ x-qwc-service-variables: &qwc-service-variables
 services:
   
   qwc-postgis:
-    image: sourcepole/qwc-demo-db:v2022.09.03
+    image: sourcepole/qwc-base-db:v2023.10.24
+    environment:
+      POSTGRES_PASSWORD: '' # TODO: Set your postgres password here!
+    volumes:
+     - ./volumes/db:/var/lib/postgresql/docker
+     # If you don't want/need the demo data, you can remove this line
+     - ./volumes/demo-data/setup-demo-data.sh:/docker-entrypoint-initdb.d/2_setup-demo-data.sh
+    ports:
+     - "127.0.0.1:5439:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
-    ports:
-     - "127.0.0.1:5439:5432"
+
+  qwc-config-db-migrate:
+    image: sourcepole/qwc-base-db-migrate:v2023.10.24
     volumes:
-     - ./volumes/db:/var/lib/postgresql/docker
+       ./pg_service.conf:/tmp/pg_service.conf:ro
+    depends_on:
+      qwc-postgis:
+        condition: service_healthy
 
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server:3.28-plugins
@@ -33,9 +45,9 @@ services:
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
 
   qwc-config-service:
-    image: sourcepole/qwc-config-generator:v2023.6-lts
+    # image: sourcepole/qwc-config-generator:latest-lts
     # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
-    # image: sourcepole/qwc-config-generator:v2023.2-lts-noqgis
+    image: sourcepole/qwc-config-generator:latest-lts-noqgis
     environment:
       <<: *qwc-service-variables
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
@@ -51,7 +63,7 @@ services:
       - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-ogc-service:
-    image: sourcepole/qwc-ogc-service:v2023.0-lts
+    image: sourcepole/qwc-ogc-service:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/ows'
@@ -61,16 +73,17 @@ services:
     #   - "127.0.0.1:5013:9090"
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:v2023.1-lts
+    image: sourcepole/qwc-data-service:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/data'
       ATTACHMENTS_BASE_DIR: '/attachments'
       MAX_ATTACHMENT_FILE_SIZE: 1048576
     volumes:
-      - ./pg_service-write.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
       - ./volumes/attachments:/attachments
+      # NOTE: you can mount a pg_service-write.conf with R/W DB users and have R/O DB users in the main pg_service.conf
+      # - ./pg_service-write.conf:/srv/pg_service.conf:ro
     # ports:
     #   - "127.0.0.1:5012:9090"
 
@@ -96,7 +109,7 @@ services:
       #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
   qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:v2023.0-lts
+    image: sourcepole/qwc-fulltext-search-service:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v2/search'
@@ -108,9 +121,9 @@ services:
 
   qwc-map-viewer:
     # Pre-built qwc2 app
-    image: sourcepole/qwc-map-viewer-demo:v2023.4-lts
+    image: sourcepole/qwc-map-viewer-demo:latest-lts
     # Or with own viewer build placed in volumes/qwc2
-    # image: sourcepole/qwc-map-viewer-base:latest
+    # image: sourcepole/qwc-map-viewer-base:latest-lts
     # Update config.json with:
     # curl -L -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/master/static/config.json
     # and generate service configuration
@@ -128,7 +141,7 @@ services:
       #- ./volumes/qwc2:/qwc2:ro
 
   qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:v2023.0-lts
+    image: sourcepole/qwc-admin-gui:latest-lts
     environment:
       <<: *qwc-service-variables
       # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
@@ -152,7 +165,7 @@ services:
       # - ./volumes/info-templates:/info_templates
 
   # qwc-registration-gui:
-  #   image: sourcepole/qwc-registration-gui:v2022.08.22
+  #   image: sourcepole/qwc-registration-gui:latest-lts
   #   environment:
   #     <<: *qwc-service-variables
   #     SERVICE_MOUNTPOINT: '/registration'
@@ -166,7 +179,7 @@ services:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-auth-service:
-    image: sourcepole/qwc-db-auth:v2023.0-lts
+    image: sourcepole/qwc-db-auth:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/auth'
@@ -185,7 +198,7 @@ services:
     #   - "127.0.0.1:5017:9090"
 
   qwc-elevation-service:
-    image: sourcepole/qwc-elevation-service:v2023.0-lts
+    image: sourcepole/qwc-elevation-service:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/elevation'
@@ -195,7 +208,7 @@ services:
     #   - "127.0.0.1:5002:9090"
 
   qwc-permalink-service:
-    image: sourcepole/qwc-permalink-service:v2023.0-lts
+    image: sourcepole/qwc-permalink-service:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/permalink'
@@ -206,7 +219,7 @@ services:
     #   - "127.0.0.1:5001:9090"
 
   # qwc-print-service:
-  #   image: sourcepole/qwc-print-service:v2023.0-lts
+  #   image: sourcepole/qwc-print-service:latest-lts
   #   environment:
   #     <<: *qwc-service-variables
   #     SERVICE_MOUNTPOINT: '/api/v1/print'
@@ -216,7 +229,7 @@ services:
   #   #   - "127.0.0.1:5020:9090"
 
   qwc-feature-info-service:
-    image: sourcepole/qwc-feature-info-service:v2023.0-lts
+    image: sourcepole/qwc-feature-info-service:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/featureinfo'
@@ -228,7 +241,7 @@ services:
     #   - "127.0.0.1:5015:9090"
 
   # qwc-document-service:
-  #   image: sourcepole/qwc-document-service:v2023.0-lts
+  #   image: sourcepole/qwc-document-service:latest-lts
   #   environment:
   #     <<: *qwc-service-variables
   #     SERVICE_MOUNTPOINT: '/api/v1/document'
@@ -240,7 +253,7 @@ services:
   #   #   - "127.0.0.1:5018:9090"
 
   # jasper-reporting-service:
-  #   image: sourcepole/jasper-reporting-service:v2023.0-lts
+  #   image: sourcepole/jasper-reporting-service:latest-lts
   #   volumes:
   #     - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
   #     - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
@@ -248,7 +261,7 @@ services:
   #   #   - "127.0.0.1:8002:8080"
 
   qwc-mapinfo-service:
-    image: sourcepole/qwc-mapinfo-service:v2023.0-lts
+    image: sourcepole/qwc-mapinfo-service:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/mapinfo'
@@ -259,7 +272,7 @@ services:
     #   - "127.0.0.1:5016:9090"
 
   qwc-legend-service:
-    image: sourcepole/qwc-legend-service:v2023.0-lts
+    image: sourcepole/qwc-legend-service:latest-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/legend'
