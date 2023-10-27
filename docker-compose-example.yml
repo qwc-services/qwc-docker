@@ -29,7 +29,7 @@ services:
       interval: 10s
 
   qwc-config-db-migrate:
-    image: sourcepole/qwc-base-db-migrate:v2023.10.24
+    image: sourcepole/qwc-base-db-migrate:v2023.10.27
     volumes:
      - ./pg_service.conf:/tmp/pg_service.conf:ro
     depends_on:
