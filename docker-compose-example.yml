@@ -83,7 +83,7 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
       - ./volumes/attachments:/attachments
       # NOTE: you can mount a pg_service-write.conf with R/W DB users and have R/O DB users in the main pg_service.conf
-      # - ./pg_service-write.conf:/srv/pg_service.conf:ro
+      - ./pg_service-write.conf:/srv/pg_service.conf:ro
     # ports:
     #   - "127.0.0.1:5012:9090"
 
