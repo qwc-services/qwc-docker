@@ -118,6 +118,7 @@
 <field name="id" type="string" indexed="true" required="true" stored="true" multiValued="false"/>
 <field name="sort" type="string" indexed="false" required="false" stored="true" multiValued="false"/>
 <field name="bbox" type="string" indexed="false" required="false" stored="true" multiValued="false"/>
+<field name="srid" type="string" indexed="false" required="false" stored="true" multiValued="false"/>
 <field name="search_1_stem" type="text_de" indexed="true" required="true" stored="false" multiValued="false"/>
 <field name="search_2_stem" type="text_de" indexed="true" required="false" stored="false" multiValued="false"/>
 <field name="search_3_stem" type="text_de" indexed="true" required="false" stored="false" multiValued="false"/>

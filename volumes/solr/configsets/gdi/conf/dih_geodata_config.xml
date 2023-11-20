@@ -27,7 +27,8 @@
                 subclass AS facet,
                 'default' AS tenant,
                 (array_to_json(array_append(ARRAY[id_name::text], id_type::text)))::text AS idfield_meta,
-                (st_asgeojson(st_envelope(geom), 0, 1)::json -> 'bbox')::text AS bbox
+                (st_asgeojson(st_envelope(geom), 0, 1)::json -> 'bbox')::text AS bbox,
+                st_srid(geom) as srid
             FROM index_base">
         </entity>      
     </document>
