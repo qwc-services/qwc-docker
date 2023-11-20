@@ -1,7 +1,7 @@
 <dataConfig>
     <dataSource
         driver="org.postgresql.Driver"
-        url="jdbc:postgresql://qwc-postgis/qwc_demo" user="qwc_service" password="qwc_service" />
+        url="jdbc:postgresql://qwc-postgis/qwc_services" user="qwc_service" password="qwc_service" />
     <document>
         <entity name="ne_10m_admin_0_countries" query="
             WITH index_base AS (

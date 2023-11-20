@@ -1,7 +1,7 @@
 <dataConfig>
     <dataSource
         driver="org.postgresql.Driver"
-        url="jdbc:postgresql://qwc-postgis/qwc_demo" user="qwc_admin" password="qwc_admin" />
+        url="jdbc:postgresql://qwc-postgis/qwc_services" user="qwc_admin" password="qwc_admin" />
     <document>
         <entity name="dataproduct_solr_v" query="
             WITH dataproduct AS (
