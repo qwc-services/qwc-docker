@@ -2,10 +2,19 @@
   "$schema": "https://github.com/qwc-services/qwc-mapinfo-service/raw/master/schemas/qwc-mapinfo-service.json",
   "service": "mapinfo",
   "config": {
-    "db_url": "postgresql:///?service=qwc_geodb",
-    "info_table": "qwc_geodb.ne_10m_admin_0_countries",
-    "info_geom_col": "wkb_geometry",
-    "info_display_col": "name",
-    "info_title": "Country"
+    "queries": [
+      {
+        "db_url": "postgresql:///?service=qwc_geodb",
+        "info_table": "qwc_geodb.ne_10m_admin_0_countries",
+        "info_geom_col": "wkb_geometry",
+        "info_display_col": "name",
+        "info_title": "Country"
+      },
+      {
+        "db_url": "postgresql:///?service=qwc_geodb",
+        "info_sql": "SELECT type FROM qwc_geodb.ne_10m_admin_0_countries WHERE ST_contains(wkb_geometry, ST_SetSRID(ST_Point(:x, :y), :srid)) LIMIT 1",
+        "info_title": "Type"
+      }
+    ]
   }
 }
