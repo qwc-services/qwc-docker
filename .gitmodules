@@ -1,0 +1,3 @@
+[submodule "volumes/qgis-server-plugins"]
+	path = volumes/qgis-server-plugins
+	url = https://github.com/qwc-services/qwc-qgis-server-plugins.git
