@@ -34,7 +34,7 @@ services:
       - ./pg_service.conf:/tmp/pg_service.conf:ro
 
   qwc-qgis-server:
-    image: sourcepole/qwc-qgis-server:3.28-plugins
+    image: sourcepole/qwc-qgis-server:3.34
     # ports:
     #   - "127.0.0.1:8001:80"
     volumes:
