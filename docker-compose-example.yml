@@ -40,6 +40,10 @@ services:
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
+      # This plugin will disables the QGIS Server WMS capabilities cache
+      # If can avoid issues where served capabilities do not reflect the state of a changed project,
+      # with the downside that the serving capabilities will take longer.
+      # - ./volumes/qgis-server-plugins/clear_capabilities:/usr/share/qgis/python/plugins/clear_capabilities:ro
 
   qwc-config-service:
     # image: sourcepole/qwc-config-generator:latest-2024-lts
