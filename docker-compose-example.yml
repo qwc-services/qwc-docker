@@ -4,6 +4,8 @@ version: '3.4'
 x-qwc-service-variables: &qwc-service-variables
   JWT_SECRET_KEY: $JWT_SECRET_KEY
   JWT_COOKIE_CSRF_PROTECT: 'True'
+  # Uncomment if the application is exclusively run over HTTPS to ensure cookies are only sent with HTTPS requests
+  # JWT_COOKIE_SECURE: 'True'
   # Set these to override the UID/GID which runs uwsgi. Useful to ensure uwsgi runs under the same user/group
   # which owns the shared volumes on host, avoiding the need to change the ownership/permissions of those files/folders.
   #SERVICE_UID: 1000
