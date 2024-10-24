@@ -149,7 +149,8 @@ services:
       <<: *qwc-service-variables
       # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
       JWT_COOKIE_CSRF_PROTECT: 'False'
-      USER_INFO_FIELDS: '[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}]'
+      # When setting user info fields, make sure to create corresponding columns (i.e. "surname", "first_name", "street", etc) in qwc_config.user_infos
+      # USER_INFO_FIELDS: '[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}]'
       #TOTP_ENABLED: 'False'
       GROUP_REGISTRATION_ENABLED: 'True'
       #IDLE_TIMEOUT: 600
