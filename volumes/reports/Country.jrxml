@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Test" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e3e7f970-938d-44b9-8854-594680b1c3c3">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="qwc_geodb"/>
+	<parameter name="FEATURE_ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="COUNTRY_ID" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_CONNECTION" class="java.sql.Connection"/>
+	<parameter name="REPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *
+FROM qwc_geodb.ne_10m_admin_0_countries
+WHERE
+	 ogc_fid = $P{FEATURE_ID}]]>
+	</queryString>
+	<field name="ogc_fid" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="ogc_fid"/>
+		<property name="com.jaspersoft.studio.field.label" value="ogc_fid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="featurecla" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="featurecla"/>
+		<property name="com.jaspersoft.studio.field.label" value="featurecla"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="scalerank" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="scalerank"/>
+		<property name="com.jaspersoft.studio.field.label" value="scalerank"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="labelrank" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="labelrank"/>
+		<property name="com.jaspersoft.studio.field.label" value="labelrank"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="sovereignt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sovereignt"/>
+		<property name="com.jaspersoft.studio.field.label" value="sovereignt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="sov_a3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sov_a3"/>
+		<property name="com.jaspersoft.studio.field.label" value="sov_a3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="adm0_dif" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="adm0_dif"/>
+		<property name="com.jaspersoft.studio.field.label" value="adm0_dif"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="level" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="level"/>
+		<property name="com.jaspersoft.studio.field.label" value="level"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="type"/>
+		<property name="com.jaspersoft.studio.field.label" value="type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="admin" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="admin"/>
+		<property name="com.jaspersoft.studio.field.label" value="admin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="adm0_a3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="adm0_a3"/>
+		<property name="com.jaspersoft.studio.field.label" value="adm0_a3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="geou_dif" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="geou_dif"/>
+		<property name="com.jaspersoft.studio.field.label" value="geou_dif"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="geounit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="geounit"/>
+		<property name="com.jaspersoft.studio.field.label" value="geounit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="gu_a3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="gu_a3"/>
+		<property name="com.jaspersoft.studio.field.label" value="gu_a3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="su_dif" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="su_dif"/>
+		<property name="com.jaspersoft.studio.field.label" value="su_dif"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="subunit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="subunit"/>
+		<property name="com.jaspersoft.studio.field.label" value="subunit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="su_a3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="su_a3"/>
+		<property name="com.jaspersoft.studio.field.label" value="su_a3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="brk_diff" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="brk_diff"/>
+		<property name="com.jaspersoft.studio.field.label" value="brk_diff"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_long" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_long"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_long"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="brk_a3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="brk_a3"/>
+		<property name="com.jaspersoft.studio.field.label" value="brk_a3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="brk_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="brk_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="brk_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="brk_group" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="brk_group"/>
+		<property name="com.jaspersoft.studio.field.label" value="brk_group"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="abbrev" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="abbrev"/>
+		<property name="com.jaspersoft.studio.field.label" value="abbrev"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="postal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="postal"/>
+		<property name="com.jaspersoft.studio.field.label" value="postal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="formal_en" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="formal_en"/>
+		<property name="com.jaspersoft.studio.field.label" value="formal_en"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="formal_fr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="formal_fr"/>
+		<property name="com.jaspersoft.studio.field.label" value="formal_fr"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_ciawf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_ciawf"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_ciawf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="note_adm0" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="note_adm0"/>
+		<property name="com.jaspersoft.studio.field.label" value="note_adm0"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="note_brk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="note_brk"/>
+		<property name="com.jaspersoft.studio.field.label" value="note_brk"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_sort" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_sort"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_sort"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_alt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_alt"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_alt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="mapcolor7" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="mapcolor7"/>
+		<property name="com.jaspersoft.studio.field.label" value="mapcolor7"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="mapcolor8" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="mapcolor8"/>
+		<property name="com.jaspersoft.studio.field.label" value="mapcolor8"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="mapcolor9" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="mapcolor9"/>
+		<property name="com.jaspersoft.studio.field.label" value="mapcolor9"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="mapcolor13" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="mapcolor13"/>
+		<property name="com.jaspersoft.studio.field.label" value="mapcolor13"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="pop_est" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="pop_est"/>
+		<property name="com.jaspersoft.studio.field.label" value="pop_est"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="pop_rank" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="pop_rank"/>
+		<property name="com.jaspersoft.studio.field.label" value="pop_rank"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="gdp_md_est" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="gdp_md_est"/>
+		<property name="com.jaspersoft.studio.field.label" value="gdp_md_est"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="pop_year" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="pop_year"/>
+		<property name="com.jaspersoft.studio.field.label" value="pop_year"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="lastcensus" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="lastcensus"/>
+		<property name="com.jaspersoft.studio.field.label" value="lastcensus"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="gdp_year" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="gdp_year"/>
+		<property name="com.jaspersoft.studio.field.label" value="gdp_year"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="economy" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="economy"/>
+		<property name="com.jaspersoft.studio.field.label" value="economy"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="income_grp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="income_grp"/>
+		<property name="com.jaspersoft.studio.field.label" value="income_grp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="wikipedia" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="wikipedia"/>
+		<property name="com.jaspersoft.studio.field.label" value="wikipedia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="fips_10_" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fips_10_"/>
+		<property name="com.jaspersoft.studio.field.label" value="fips_10_"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="iso_a2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="iso_a2"/>
+		<property name="com.jaspersoft.studio.field.label" value="iso_a2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="iso_a3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="iso_a3"/>
+		<property name="com.jaspersoft.studio.field.label" value="iso_a3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="iso_a3_eh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="iso_a3_eh"/>
+		<property name="com.jaspersoft.studio.field.label" value="iso_a3_eh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="iso_n3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="iso_n3"/>
+		<property name="com.jaspersoft.studio.field.label" value="iso_n3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="un_a3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="un_a3"/>
+		<property name="com.jaspersoft.studio.field.label" value="un_a3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="wb_a2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="wb_a2"/>
+		<property name="com.jaspersoft.studio.field.label" value="wb_a2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="wb_a3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="wb_a3"/>
+		<property name="com.jaspersoft.studio.field.label" value="wb_a3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="woe_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="woe_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="woe_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="woe_id_eh" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="woe_id_eh"/>
+		<property name="com.jaspersoft.studio.field.label" value="woe_id_eh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="woe_note" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="woe_note"/>
+		<property name="com.jaspersoft.studio.field.label" value="woe_note"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="adm0_a3_is" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="adm0_a3_is"/>
+		<property name="com.jaspersoft.studio.field.label" value="adm0_a3_is"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="adm0_a3_us" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="adm0_a3_us"/>
+		<property name="com.jaspersoft.studio.field.label" value="adm0_a3_us"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="adm0_a3_un" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="adm0_a3_un"/>
+		<property name="com.jaspersoft.studio.field.label" value="adm0_a3_un"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="adm0_a3_wb" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="adm0_a3_wb"/>
+		<property name="com.jaspersoft.studio.field.label" value="adm0_a3_wb"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="continent" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="continent"/>
+		<property name="com.jaspersoft.studio.field.label" value="continent"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="region_un" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="region_un"/>
+		<property name="com.jaspersoft.studio.field.label" value="region_un"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="subregion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="subregion"/>
+		<property name="com.jaspersoft.studio.field.label" value="subregion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="region_wb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="region_wb"/>
+		<property name="com.jaspersoft.studio.field.label" value="region_wb"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_len" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="name_len"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_len"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="long_len" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="long_len"/>
+		<property name="com.jaspersoft.studio.field.label" value="long_len"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="abbrev_len" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="abbrev_len"/>
+		<property name="com.jaspersoft.studio.field.label" value="abbrev_len"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="tiny" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="tiny"/>
+		<property name="com.jaspersoft.studio.field.label" value="tiny"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="homepart" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="homepart"/>
+		<property name="com.jaspersoft.studio.field.label" value="homepart"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="min_zoom" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="min_zoom"/>
+		<property name="com.jaspersoft.studio.field.label" value="min_zoom"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="min_label" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="min_label"/>
+		<property name="com.jaspersoft.studio.field.label" value="min_label"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="max_label" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="max_label"/>
+		<property name="com.jaspersoft.studio.field.label" value="max_label"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="ne_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="ne_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="ne_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="wikidataid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="wikidataid"/>
+		<property name="com.jaspersoft.studio.field.label" value="wikidataid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_ar" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_ar"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_ar"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_bn" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_bn"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_bn"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_de" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_de"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_de"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_en" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_en"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_en"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_es" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_es"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_es"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_fr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_fr"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_fr"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_el" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_el"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_el"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_hi" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_hi"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_hi"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_hu" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_hu"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_hu"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_it" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_it"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_it"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_ja" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_ja"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_ja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_ko" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_ko"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_ko"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_nl" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_nl"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_nl"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_pl" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_pl"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_pl"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_pt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_pt"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_pt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_ru" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_ru"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_ru"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_sv" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_sv"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_sv"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_tr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_tr"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_tr"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_vi" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_vi"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_vi"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="name_zh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name_zh"/>
+		<property name="com.jaspersoft.studio.field.label" value="name_zh"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<field name="wkb_geometry" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="wkb_geometry"/>
+		<property name="com.jaspersoft.studio.field.label" value="wkb_geometry"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ne_10m_admin_0_countries"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="550" height="79" uuid="5a7b3894-65e1-468f-8555-4f0271105e7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Country: " + $F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="250" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="10" width="550" height="230" uuid="180a3575-74f4-4490-bc69-5ca51e018bd3"/>
+				<textFieldExpression><![CDATA["Formal name: " + $F{formal_en} + "\n" +
+"Continent: " + $F{continent} + "\n" +
+"Subregion: " + $F{subregion} + "\n" +
+"Pop. est: " + $F{pop_est} + " (" + $F{pop_year} + ")"
+]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

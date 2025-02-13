@@ -1,11 +1,4 @@
 {
-  "editServiceUrl":"http://localhost:5012/",
-  "elevationServiceUrl":"http://localhost:5002/",
-  "featureReportService":"http://localhost:5020/",
-  "mapInfoService":"http://localhost:5016/",
-  "permalinkServiceUrl":"http://localhost:5001/",
-  "searchServiceUrl":"http://localhost:5011/",
-  "searchDataServiceUrl":"http://localhost:5011/geom/",
   "omitUrlParameterUpdates":false,
   "urlPositionFormat":"centerAndZoom",
   "urlPositionCrs":"",
@@ -108,8 +101,8 @@
       {
         "name":"BottomBar",
         "cfg":{
-          "viewertitleUrl":"http://qgis.org/",
-          "termsUrl":"http://qgis.org/"
+          "viewertitleUrl":"https://qwc-services.github.io/",
+          "termsUrl":"https://github.com/qwc-services/qwc-docker/blob/master/LICENSE/"
         }
       },
       {
@@ -124,6 +117,9 @@
       },
       {
         "name":"Help",
+        "cfg": {
+          "bodyContentsFragmentUrl": "assets/help.html"
+        },
         "mapClickAction":"identify"
       },
       {
@@ -171,7 +167,7 @@
             "width":480,
             "height":400
           },
-          "bboxDependentLegend":true,
+          "bboxDependentLegend":"theme",
           "scaleDependentLegend":"theme",
           "showToggleAllLayersCheckbox":true
         },
@@ -220,6 +216,13 @@
         }
       },
       {
+        "name":"MapLegend",
+        "cfg":{
+          "bboxDependentLegend":"theme",
+          "scaleDependentLegend":"theme"
+        }
+      },
+      {
         "name":"Measure",
         "cfg":{
           "showMeasureModeSwitcher":true,
@@ -253,6 +256,10 @@
             {
               "title":"Deutsch",
               "value":"de-CH"
+            },
+            {
+              "title":"Français",
+              "value":"fr-FR"
             },
             {
               "title":"Italiano",
@@ -314,6 +321,10 @@
             {
               "key":"LayerTree",
               "icon":"layers"
+            },
+            {
+              "key": "MapLegend",
+              "icon": "list-alt"
             },
             {
               "key":"LayerCatalog",
@@ -464,10 +475,6 @@
               "key":"Identify",
               "icon":"identify_region",
               "mode":"Region"
-            },
-            {
-              "key":"TimeManager",
-              "icon":"clock"
             }
           ]
         }

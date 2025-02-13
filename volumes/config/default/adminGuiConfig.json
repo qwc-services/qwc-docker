@@ -2,11 +2,16 @@
   "$schema": "https://github.com/qwc-services/qwc-admin-gui/raw/master/schemas/qwc-admin-gui.json",
   "service": "admin-gui",
   "config": {
-    "db_url": "postgresql:///?service=qwc_configdb",
     "config_generator_service_url": "http://qwc-config-service:9090",
+    "db_url": "postgresql:///?service=qwc_configdb",
+    "input_config_path": "/src/qwc_service/config-in",
+    "ows_service_url": "/ows",
+    "plugins": [],
+    "qgs_resources_path": "/qgs-resources",
+    "qwc2_path": "/qwc2",
+    "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",
+    "solr_tenant_dih": "dih_geodata_config",
     "totp_enabled": false,
-    "user_info_fields": [],
-    "proxy_url_whitelist": [],
-    "proxy_timeout": 60
+    "user_info_fields": []
   }
 }

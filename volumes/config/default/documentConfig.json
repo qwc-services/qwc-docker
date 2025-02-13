@@ -1,15 +1,11 @@
 {
-  "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-document-service/master/schemas/qwc-document-service.json",
+  "$schema": "https://github.com/qwc-services/qwc-document-service/raw/master/schemas/qwc-document-service.json",
   "service": "document",
-  "config": {
-    "jasper_service_url": "http://jasper-reporting-service:8080/reports",
-    "jasper_timeout": 60
-  },
+  "config": {},
   "resources": {
     "document_templates": [
       {
-        "template": "demo",
-        "report_filename": "PieChartReport"
+        "template": "Country"
       }
     ]
   }

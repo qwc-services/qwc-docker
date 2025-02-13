@@ -2,13 +2,18 @@
   "$schema": "https://github.com/qwc-services/qwc-print-service/raw/master/schemas/qwc-print-service.json",
   "service": "print",
   "config": {
-    "ogc_service_url": "http://qwc-ogc-service:9090/",
-    "qgis_server_version": "3.16"
+    "ogc_service_url": "http://qwc-ogc-service:9090/"
   },
   "resources": {
     "print_templates": [
       {
         "template": "A4 Landscape"
+      },
+      {
+        "template": "A3 Landscape"
+      },
+      {
+        "template": "A3 Landscape"
       }
     ]
   }

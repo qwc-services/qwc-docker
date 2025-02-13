@@ -2,8 +2,8 @@
   "$schema": "https://github.com/qwc-services/qwc-legend-service/raw/master/schemas/qwc-legend-service.json",
   "service": "legend",
   "config": {
-    "default_qgis_server_url": "http://qwc-qgis-server/ows/",
-    "legend_images_path": "/legends/"
+    "legend_images_path": "/legends/",
+    "default_qgis_server_url": "http://qwc-qgis-server/ows/"
   },
   "resources": {
     "wms_services": [
@@ -26,6 +26,26 @@
                 }
               ]
             },
+            {
+              "name": "geographic_lines"
+            },
+            {
+              "name": "country_names"
+            },
+            {
+              "name": "states_provinces"
+            },
+            {
+              "name": "countries"
+            }
+          ]
+        }
+      },
+      {
+        "name": "scan/natural-earth-countries",
+        "root_layer": {
+          "name": "qwc_demo",
+          "layers": [
             {
               "name": "geographic_lines"
             },

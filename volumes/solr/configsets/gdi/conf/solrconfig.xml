@@ -689,7 +689,7 @@
        of SearchComponents (see below) and supports distributed
        queries across multiple shards
     -->
-  <requestHandler name="/ne_10m_admin_0_countries" class="solr.DataImportHandler">
+  <requestHandler name="/dih_geodata_config" class="solr.DataImportHandler">
     <lst name="defaults">
       <str name="config">dih_geodata_config.xml</str>
     </lst>

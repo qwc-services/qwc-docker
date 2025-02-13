@@ -16,13 +16,13 @@ x-qwc-service-variables: &qwc-service-variables
 services:
   
   qwc-postgis:
-    image: sourcepole/qwc-base-db:15 # 15 refers to the Postgres major version
+    image: sourcepole/qwc-base-db:16 # 16 refers to the Postgres major version
     environment:
       POSTGRES_PASSWORD: '' # TODO: Set your postgres password here!
     volumes:
-     - ./volumes/db:/var/lib/postgresql/docker
-     # If you don't want/need the demo data, you can remove this line
-     - ./volumes/demo-data/setup-demo-data.sh:/docker-entrypoint-initdb.d/2_setup-demo-data.sh
+      - ./volumes/db:/var/lib/postgresql/docker
+      # NOTE: Remove this line if you don't want/need the demo data
+      - ./volumes/demo-data/setup-demo-data.sh:/docker-entrypoint-initdb.d/2_setup-demo-data.sh
     ports:
      - "127.0.0.1:5439:5432"
     healthcheck:
@@ -33,18 +33,26 @@ services:
     image: sourcepole/qwc-base-db-migrate:latest-2025-lts
     volumes:
       - ./pg_service.conf:/tmp/pg_service.conf:ro
+      # NOTE: Remove this line if you don't want/need the demo data
+      - ./volumes/demo-data/setup-demo-data-permissions.sh:/tmp/extra-init.d/setup-demo-data-permissions.sh
 
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server:3.34
     # ports:
     #   - "127.0.0.1:8001:80"
+    environment:
+      # QGIS_SERVER_LOG_LEVEL: 0
+      # LOCALE: 'de_DE'
+      FCGID_EXTRA_ENV: 'PRINT_LAYOUT_DIR'
+      PRINT_LAYOUT_DIR: '/layouts'
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
-      # This plugin will disables the QGIS Server WMS capabilities cache
-      # If can avoid issues where served capabilities do not reflect the state of a changed project,
-      # with the downside that the serving capabilities will take longer.
-      # - ./volumes/qgis-server-plugins/clear_capabilities:/usr/share/qgis/python/plugins/clear_capabilities:ro
+      - ./volumes/qgis-server-plugins/print_templates:/usr/share/qgis/python/plugins/print_templates:ro
+      - ./volumes/qgis-server-plugins/split_categorized:/usr/share/qgis/python/plugins/split_categorized:ro
+      - ./volumes/qgis-server-plugins/filter_geom:/usr/share/qgis/python/plugins/filter_geom:ro
+      - ./volumes/qgis-server-plugins/clear_capabilities:/usr/share/qgis/python/plugins/clear_capabilities:ro
+      - ./volumes/print-layouts:/layouts:ro
 
   qwc-config-service:
     image: sourcepole/qwc-config-generator:latest-2025-lts
@@ -60,6 +68,8 @@ services:
       - ./volumes/config:/srv/qwc_service/config-out
       - ./volumes/qwc2:/qwc2
       - ./volumes/qgs-resources:/data
+      - ./volumes/print-layouts:/layouts:ro
+      - ./volumes/reports:/reports
       - ./pg_service.conf:/srv/pg_service.conf:ro
 
   qwc-admin-gui:
@@ -115,18 +125,30 @@ services:
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
       - ./volumes/attachments:/attachments
+      - ./pg_service.conf:/srv/pg_service.conf:ro
       # NOTE: you can mount a pg_service-write.conf with R/W DB users and have R/O DB users in the main pg_service.conf
-      - ./pg_service-write.conf:/srv/pg_service.conf:ro
+      # - ./pg_service-write.conf:/srv/pg_service.conf:ro
 
   # NOTE: you can use clamav for virus scanning in the data service
   # clamav:
   #   image: clamav/clamav:stable
 
+  qwc-document-service:
+    image: sourcepole/qwc-document-service:latest-2025-lts
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/document'
+    volumes:
+      - ./pg_service.conf:/srv/pg_service.conf:ro
+      - ./volumes/reports:/reports
+      - ./volumes/reports/fonts:/srv/qwc_service/fonts
+      - ./volumes/config:/srv/qwc_service/config:ro
+
   qwc-elevation-service:
     image: sourcepole/qwc-elevation-service:latest-2025-lts
     environment:
       <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/elevation'
+      SERVICE_MOUNTPOINT: '/api/v1/elevation'
     volumes:
       - ./volumes/config:/srv/qwc_service/config:ro
 
@@ -186,7 +208,7 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
-    # Pre-built qwc2 app
+    # Stock qwc2 app
     image: sourcepole/qwc-map-viewer:latest-2025-lts
     # Or with own viewer build placed in volumes/qwc2
     # image: sourcepole/qwc-map-viewer-base:latest-2025-lts
@@ -221,21 +243,13 @@ services:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
 
-  # qwc-document-service:
-  #   image: sourcepole/qwc-document-service:latest-2025-lts
-  #   environment:
-  #     <<: *qwc-service-variables
-  #     SERVICE_MOUNTPOINT: '/api/v1/document'
-  #   volumes:
-  #     - ./volumes/config:/srv/qwc_service/config:ro
-
-  # qwc-print-service:
-  #   image: sourcepole/qwc-print-service:latest-2025-lts
-  #   environment:
-  #     <<: *qwc-service-variables
-  #     SERVICE_MOUNTPOINT: '/api/v1/print'
-  #   volumes:
-  #     - ./volumes/config:/srv/qwc_service/config:ro
+  qwc-print-service:
+    image: sourcepole/qwc-print-service:latest-2025-lts
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/print'
+    volumes:
+      - ./volumes/config:/srv/qwc_service/config:ro
 
   # qwc-registration-gui:
   #   image: sourcepole/qwc-registration-gui:latest-2025-lts
@@ -263,6 +277,7 @@ services:
       - qwc-admin-gui
       - qwc-auth-service
       - qwc-data-service
+      - qwc-document-service
       - qwc-elevation-service
       - qwc-feature-info-service
       - qwc-fulltext-search-service
@@ -271,6 +286,5 @@ services:
       - qwc-mapinfo-service
       - qwc-ogc-service
       - qwc-permalink-service
-      #- qwc-document-service:
-      #- qwc-print-service:
+      - qwc-print-service
       #- qwc-registration-gui

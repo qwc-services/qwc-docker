@@ -2,213 +2,46 @@
   "$schema": "https://github.com/qwc-services/qwc-config-generator/raw/master/schemas/qwc-config-generator.json",
   "service": "config-generator",
   "config": {
-    "tenant": "default",
-    "default_qgis_server_url": "http://qwc-qgis-server/ows/",
+    "autogen_keyvaltable_datasets": true,
     "config_db_url": "postgresql:///?service=qwc_configdb",
+    "default_qgis_server_url": "http://qwc-qgis-server/ows/",
+    "generate_nested_nrel_forms": false,
+    "generate_wfs_services": false,
     "permissions_default_allow": true,
-    "validate_schema": true,
     "qgis_projects_base_dir": "/data",
     "qgis_projects_scan_base_dir": "/data/scan",
-    "autogen_keyvaltable_datasets": false,
-    "strip_scan_prefix_from_theme_names": true
+    "strip_scan_prefix_from_theme_names": true,
+    "tenant": "default",
+    "validate_schema": true,
+    "use_default_map_thumbnail": true
   },
   "themesConfig": "./themesConfig.json",
   "services": [
     {
-      "name": "ogc",
-      "generator_config": {
-        "wms_services": {
-          "online_resources": {
-            "service": "/ows/",
-            "feature_info": "/api/v1/featureinfo/",
-            "legend": "/api/v1/legend/"
-          }
-        }
-      }
-    },
-    {
-      "name": "mapViewer",
-      "generator_config": {
-        "qwc2_config": {
-          "qwc2_config_file": "/srv/qwc_service/config-in/default/config.json",
-          "qwc2_index_file": "/srv/qwc_service/config-in/default/index.html"
-        }
-      },
-      "config": {
-        "qwc2_path": "/qwc2/",
-        "auth_service_url": "/auth/",
-        "data_service_url": "/api/v1/data/",
-        "#document_service_url": "/api/v1/document/",
-        "elevation_service_url": "/elevation/",
-        "info_service_url": "/api/v1/featureinfo/",
-        "legend_service_url": "/api/v1/legend/",
-        "mapinfo_service_url": "/api/v1/mapinfo/",
-        "ogc_service_url": "/ows/",
-        "permalink_service_url": "/api/v1/permalink/",
-        "#print_service_url": "/api/v1/print/",
-        "search_service_url": "/api/v2/search/",
-        "search_data_service_url": "/api/v2/search/geom/"
-      }
-    },
-    {
-      "name": "featureInfo",
-      "config": {
-        "skip_empty_attributes": false,
-        "data_service_url": "/api/v1/data/"
-      },
-      "resources": {
-        "wms_services": [
-          {
-            "name": "qwc_demo",
-            "root_layer": {
-              "name": "qwc_demo",
-              "title": "QWC Services Demo WMS",
-              "layers": [
-                {
-                  "name": "edit_demo",
-                  "title": "Edit Demo",
-                  "layers": [
-                    {
-                      "name": "edit_points",
-                      "title": "Edit Points",
-                      "attributes": [
-                        {
-                          "name": "id"
-                        },
-                        {
-                          "name": "name"
-                        },
-                        {
-                          "name": "description"
-                        },
-                        {
-                          "name": "num"
-                        },
-                        {
-                          "name": "value"
-                        },
-                        {
-                          "name": "type"
-                        },
-                        {
-                          "name": "amount"
-                        },
-                        {
-                          "name": "validated",
-                          "format": "{\"t\": \"Yes\", \"f\": \"No\"}"
-                        },
-                        {
-                          "name": "datetime"
-                        },
-                        {
-                          "name": "geometry"
-                        },
-                        {
-                          "name": "maptip"
-                        }
-                      ],
-                      "display_field": "name"
-                    }
-                  ]
-                },
-                {
-                  "name": "countries",
-                  "title": "Countries",
-                  "attributes": [
-                    {
-                      "name": "name",
-                      "alias": "Name"
-                    },
-                    {
-                      "name": "formal_en",
-                      "alias": "Formal name"
-                    },
-                    {
-                      "name": "pop_est",
-                      "alias": "Population"
-                    },
-                    {
-                      "name": "subregion",
-                      "alias": "Subregion"
-                    },
-                    {
-                      "name": "geometry"
-                    }
-                  ],
-                  "display_field": "name",
-                  "info_template": {
-                    "type": "wms",
-                    "wms_url": "http://qwc-qgis-server/ows/qwc_demo",
-                    "template": "<div><h2>Demo Template</h2>Pos: {{ x }}, {{ y }}<br>Name: {{ feature.Name }}</div>"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "print",
-      "config": {
-        "ogc_service_url": "http://qwc-ogc-service:9090/"
-      }
-    },
-    {
-      "name": "search",
-      "config": {
-        "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",
-        "search_result_limit": 50,
-        "db_url": "postgresql:///?service=qwc_geodb"
-      },
-      "resources": {
-        "facets": [
-          {
-            "name": "background",
-            "filter_word": "Background"
-          },
-          {
-            "name": "foreground",
-            "filter_word": "Map"
-          },
-          {
-            "name": "ne_10m_admin_0_countries",
-            "filter_word": "Country",
-            "table_name": "qwc_geodb.ne_10m_admin_0_countries",
-            "geometry_column": "wkb_geometry",
-            "search_id_col": "ogc_fid"
-          }
-        ]
-      },
-      "permissions": [
-        {
-          "role": "public",
-          "permissions": {
-            "dataproducts": [
-              "qwc_demo"
-            ],
-            "solr_facets": [
-              "foreground",
-              "ne_10m_admin_0_countries"
-            ]
-          }
-        }
-      ]
-    },
-    {
       "name": "adminGui",
       "config": {
-        "db_url": "postgresql:///?service=qwc_configdb",
         "config_generator_service_url": "http://qwc-config-service:9090",
-        "totp_enabled": false,
-        "user_info_fields": [],
-        "proxy_url_whitelist": [],
-        "proxy_timeout": 60,
-        "plugins": ["themes"],
+        "db_url": "postgresql:///?service=qwc_configdb",
         "input_config_path": "/src/qwc_service/config-in",
-        "qwc2_path": "/qwc2",
+        "ows_service_url": "/ows",
+        "plugins": [],
         "qgs_resources_path": "/qgs-resources",
-        "ows_service_url": "/ows"
+        "qwc2_path": "/qwc2",
+        "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",
+        "solr_tenant_dih": "dih_geodata_config",
+        "totp_enabled": false,
+        "user_info_fields": []
+      }
+    },
+    {
+      "name": "data",
+      "config": {
+        "geometry_default_allow_null": false
+      }
+    },
+    {
+      "name": "document",
+      "config": {
       }
     },
     {
@@ -224,14 +57,27 @@
       }
     },
     {
+      "name": "featureInfo",
+      "config": {
+        "data_service_url": "/api/v1/data/",
+        "skip_empty_attributes": false
+      }
+    },
+    {
+      "name": "legend",
+      "config": {
+        "legend_images_path": "/legends/"
+      }
+    },
+    {
       "name": "mapinfo",
         "config": {
         "queries": [
           {
             "db_url": "postgresql:///?service=qwc_geodb",
-            "info_table": "qwc_geodb.ne_10m_admin_0_countries",
-            "info_geom_col": "wkb_geometry",
             "info_display_col": "name",
+            "info_geom_col": "wkb_geometry",
+            "info_table": "qwc_geodb.ne_10m_admin_0_countries",
             "info_title": "Country"
           },
           {
@@ -240,6 +86,44 @@
             "info_title": "Type"
           }
         ]
+      }
+    },
+    {
+      "name": "mapViewer",
+      "generator_config": {
+        "qwc2_config": {
+          "qwc2_config_file": "/srv/qwc_service/config-in/default/config.json",
+          "qwc2_index_file": "/srv/qwc_service/config-in/default/index.html"
+        }
+      },
+      "config": {
+        "qwc2_path": "/qwc2/",
+        "auth_service_url": "/auth/",
+        "data_service_url": "/api/v1/data/",
+        "document_service_url": "/api/v1/document/",
+        "elevation_service_url": "/api/v1/elevation/",
+        "info_service_url": "/api/v1/featureinfo/",
+        "legend_service_url": "/api/v1/legend/",
+        "mapinfo_service_url": "/api/v1/mapinfo/",
+        "ogc_service_url": "/ows/",
+        "permalink_service_url": "/api/v1/permalink/",
+        "print_service_url": "/api/v1/print/",
+        "search_service_url": "/api/v2/search/",
+        "search_data_service_url": "/api/v2/search/geom/"
+      }
+    },
+    {
+      "name": "ogc",
+      "config": {
+      },
+      "generator_config": {
+        "wms_services": {
+          "online_resources": {
+            "feature_info": "/api/v1/featureinfo/",
+            "legend": "/api/v1/legend/",
+            "service": "/ows/"
+          }
+        }
       }
     },
     {
@@ -252,15 +136,29 @@
       }
     },
     {
-      "name": "data",
+      "name": "print",
       "config": {
-        "geometry_default_allow_null": false
+        "ogc_service_url": "http://qwc-ogc-service:9090/"
       }
     },
     {
-      "name": "legend",
+      "name": "search",
       "config": {
-        "legend_images_path": "/legends/"
+        "db_url": "postgresql:///?service=qwc_geodb",
+        "search_backend": "solr",
+        "search_result_limit": 50,
+        "solr_service_url": "http://qwc-solr:8983/solr/gdi/select"
+      },
+      "resources": {
+        "facets": [
+          {
+            "name": "ne_10m_admin_0_countries",
+            "filter_word": "Country",
+            "table_name": "qwc_geodb.ne_10m_admin_0_countries",
+            "geometry_column": "wkb_geometry",
+            "search_id_col": "ogc_fid"
+          }
+        ]
       }
     }
   ]

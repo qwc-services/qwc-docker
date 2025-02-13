@@ -1,23 +1,23 @@
 {
     "catalog": [
         {
-            "title": "Bauzonen",
-            "resource": "wms:http://wms.geo.admin.ch#ch.are.bauzonen"
+            "title": "World Cities",
+            "resource": "wms:https://demo.mapserver.org/cgi-bin/wms#cities"
         },
         {
-            "title": "Landeskarten",
+            "title": "EMODnet",
             "sublayers": [
                 {
-                    "title": "Landeskarte 1:1 Million | LK1000",
-                    "resource": "wms:http://wms.geo.admin.ch#ch.swisstopo.pixelkarte-farbe-pk1000.noscale"
+                    "title": "Lighthouses",
+                    "resource": "wms:https://ows.emodnet-humanactivities.eu/geoserver/emodnet/wms#lighthouses"
                 },
                 {
-                    "title": "Landeskarte 1:100`000 | LK100",
-                    "resource": "wms:http://wms.geo.admin.ch#ch.swisstopo.pixelkarte-farbe-pk100.noscale"
+                    "title": "Main Ports",
+                    "resource": "wms:https://ows.emodnet-humanactivities.eu/geoserver/emodnet/wms#portlocations"
                 },
                 {
-                    "title": "Landeskarte 1:25`000 | LK25",
-                    "resource": "wms:http://wms.geo.admin.ch#ch.swisstopo.pixelkarte-farbe-pk25.noscale"
+                    "title": "Pipelines",
+                    "resource": "wms:https://ows.emodnet-humanactivities.eu/geoserver/emodnet/wms#pipelines"
                 }
             ]
         }
