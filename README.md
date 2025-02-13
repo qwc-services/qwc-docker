@@ -1,4 +1,4 @@
-Docker containers for QWC Services
+![Logo](https://github.com/qwc-services/qwc-docker/blob/master/volumes/qwc2/assets/img/qwc-logo.svg?raw=true) Docker containers for QWC Services
 ==================================
 
 The QWC Services are a collection of microservices enhancing the functionality of the [QGIS Web Client](https://github.com/qgis/qwc2-demo-app), including:
