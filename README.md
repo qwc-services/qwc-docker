@@ -1,7 +1,13 @@
 Docker containers for QWC Services
 ==================================
 
-The QWC Services are a collection of microservices providing configurations for and authorized access to different [QWC2 Map Viewer](https://github.com/qgis/qwc2-demo-app) components.
+The QWC Services are a collection of microservices enhancing the functionality of the [QGIS Web Client](https://github.com/qgis/qwc2-demo-app), including:
+
+- Authentication and permission control
+- Editing
+- Fulltext search
+- Permalinks/bookmarks
+- ...
 
 This repository contains a sample setup for running QWC services with docker.
 
@@ -9,6 +15,11 @@ Documentation
 -------------
 
 The documentation is available at [qwc-services.github.io](https://qwc-services.github.io/).
+
+Quick start
+-----------
+
+See [qwc-services.github.io/master/QuickStart/](https://qwc-services.github.io/master/QuickStart/).
 
 Versioning
 ----------
@@ -26,7 +37,7 @@ Health checks are a simple way to let the system know if an instance of the app 
 
 Readiness probes are designed to let Kubernetes know when the app is ready to serve traffic. Kubernetes makes sure the readiness probe passes before allowing a service to send traffic to the pod. If a readiness probe starts to fail, Kubernetes stops sending traffic to the pod until it passes.
 
-**Check is available at: /ready**
+**Check is available at: `/ready`**
 
 Example check:
 
@@ -34,14 +45,14 @@ Example check:
 
 ### Liveness:
 
-**Check is available at: /healthz**
+**Check is available at: `/healthz`**
 
 Liveness probes let Kubernetes know if the app is alive or dead. If the app is alive, then Kubernetes leaves it alone. If the app is dead, Kubernetes removes the Pod and starts a new one to replace it.
 
 Example checks:
 
-* Check database connection (Example service: qwc-admin-gui)
-* Check if all data files are available and readable (Example service: qwc-elevation-service)
+* Check database connection (Example service: `qwc-admin-gui`)
+* Check if all data files are available and readable (Example service: `qwc-elevation-service`)
 
 
 Development
@@ -52,64 +63,14 @@ Create a QWC services dir:
     mkdir qwc-services
     cd qwc-services/
 
-Clone [QWC Config DB](https://github.com/qwc-services/qwc-config-db):
-
-    git clone https://github.com/qwc-services/qwc-config-db.git
-
-Clone [QWC Config service](https://github.com/qwc-services/qwc-config-service):
+Clone the desired service, i.e. the `qwc-config-service`:
 
     git clone https://github.com/qwc-services/qwc-config-service.git
 
-Clone [QWC OGC service](https://github.com/qwc-services/qwc-ogc-service):
+Configure `docker-compose.yml` to build a local image:
 
-    git clone https://github.com/qwc-services/qwc-ogc-service.git
-
-Clone [QWC Data service](https://github.com/qwc-services/qwc-data-service):
-
-    git clone https://github.com/qwc-services/qwc-data-service.git
-
-Clone [QWC Map Viewer](https://github.com/qwc-services/qwc-map-viewer):
-
-    git clone https://github.com/qwc-services/qwc-map-viewer.git
-
-Clone [QWC Admin GUI](https://github.com/qwc-services/qwc-admin-gui):
-
-    git clone https://github.com/qwc-services/qwc-admin-gui.git
-
-See READMEs of each service for their setup.
-
-Setup your ConfigDB and run migrations (see [QWC Config DB](https://github.com/qwc-services/qwc-config-db)).
-
-Run local services (set `$QGIS_SERVER_URL` to your QGIS server and `$QWC2_PATH` to your QWC2 files):
-
-    cd qwc-config-service/
-    QGIS_SERVER_URL=http://localhost:8001/ows/ QWC2_PATH=qwc2/ python server.py
-
-    cd qwc-ogc-service/
-    QGIS_SERVER_URL=http://localhost:8001/ows/ CONFIG_SERVICE_URL=http://localhost:5010/ python server.py
-
-    cd qwc-data-service/
-    CONFIG_SERVICE_URL=http://localhost:5010/ python server.py
-
-    cd qwc-map-viewer/
-    OGC_SERVICE_URL=http://localhost:5013/ CONFIG_SERVICE_URL=http://localhost:5010/ QWC2_PATH=qwc2/ python server.py
-
-    cd qwc-admin-gui/
-    python server.py
-
-Sample requests:
-
-    curl 'http://localhost:5010/ogc?ows_type=WMS&ows_name=qwc_demo'
-    curl 'http://localhost:5010/qwc'
-    curl 'http://localhost:5013/qwc_demo?VERSION=1.1.1&SERVICE=WMS&REQUEST=GetCapabilities'
-    curl 'http://localhost:5012/qwc_demo.edit_points/'
-    curl 'http://localhost:5030/themes.json'
-    curl 'http://localhost:5031'
-
-To build containers for local services, in use `build:` rather than `image:` in `docker-compose.yml`:
-
-    qwc-print-service:
-      # image: sourcepole/qwc-print-service:v2022.01.13
+    qwc-config-service:
+      # image: docker.io/sourcepole/qwc-config-generator:latest-lts
       build:
-        context: ./qwc-services/qwc-print-service
-      # [...]
+        context: ./qwc-services/qwc-config-generator
+      ...

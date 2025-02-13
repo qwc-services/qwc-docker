@@ -9,9 +9,8 @@
     "validate_schema": true,
     "qgis_projects_base_dir": "/data",
     "qgis_projects_scan_base_dir": "/data/scan",
-    "qgis_projects_gen_base_dir": "/data/gen",
-    "qwc2_base_dir": "/qwc2",
-    "autogen_keyvaltable_datasets": false
+    "autogen_keyvaltable_datasets": false,
+    "strip_scan_prefix_from_theme_names": true
   },
   "themesConfig": "./themesConfig.json",
   "services": [
@@ -25,9 +24,6 @@
             "legend": "/api/v1/legend/"
           }
         }
-      },
-      "config": {
-        "default_qgis_server_url": "http://qwc-qgis-server/ows/"
       }
     },
     {
@@ -57,8 +53,8 @@
     {
       "name": "featureInfo",
       "config": {
-        "default_qgis_server_url": "http://qwc-qgis-server/ows/",
-        "skip_empty_attributes": false
+        "skip_empty_attributes": false,
+        "data_service_url": "/api/v1/data/"
       },
       "resources": {
         "wms_services": [
@@ -155,8 +151,7 @@
     {
       "name": "print",
       "config": {
-        "ogc_service_url": "http://qwc-ogc-service:9090/",
-        "qgis_server_version": "3.16"
+        "ogc_service_url": "http://qwc-ogc-service:9090/"
       }
     },
     {
@@ -252,7 +247,8 @@
       "config": {
         "db_url": "postgresql:///?service=qwc_configdb",
         "permalinks_table": "qwc_config.permalinks",
-        "user_permalink_table": "qwc_config.user_permalinks"
+        "user_permalink_table": "qwc_config.user_permalinks",
+        "user_bookmark_table": "qwc_config.user_bookmarks"
       }
     },
     {
@@ -264,7 +260,6 @@
     {
       "name": "legend",
       "config": {
-        "default_qgis_server_url": "http://qwc-qgis-server/ows/",
         "legend_images_path": "/legends/"
       }
     }

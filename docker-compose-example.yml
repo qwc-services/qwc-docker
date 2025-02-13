@@ -1,18 +1,17 @@
 version: '3.4'
 
-
 x-qwc-service-variables: &qwc-service-variables
   JWT_SECRET_KEY: $JWT_SECRET_KEY
   JWT_COOKIE_CSRF_PROTECT: 'True'
+  JWT_COOKIE_SAMESITE: 'Strict'
   # Uncomment if the application is exclusively run over HTTPS to ensure cookies are only sent with HTTPS requests
   # JWT_COOKIE_SECURE: 'True'
   # Set these to override the UID/GID which runs uwsgi. Useful to ensure uwsgi runs under the same user/group
   # which owns the shared volumes on host, avoiding the need to change the ownership/permissions of those files/folders.
-  #SERVICE_UID: 1000
-  #SERVICE_GID: 1000
+  # SERVICE_UID: 1000
+  # SERVICE_GID: 1000
   # Uncomment this for multi-tenant support, see also api-gateway/nginx-example-multitenant.conf
   # TENANT_HEADER: Tenant
-
 
 services:
   
@@ -31,7 +30,7 @@ services:
       interval: 10s
 
   qwc-config-db-migrate:
-    image: sourcepole/qwc-base-db-migrate:latest-2024-lts
+    image: sourcepole/qwc-base-db-migrate:latest-2025-lts
     volumes:
       - ./pg_service.conf:/tmp/pg_service.conf:ro
 
@@ -48,9 +47,7 @@ services:
       # - ./volumes/qgis-server-plugins/clear_capabilities:/usr/share/qgis/python/plugins/clear_capabilities:ro
 
   qwc-config-service:
-    # image: sourcepole/qwc-config-generator:latest-2024-lts
-    # Lightweight variant without qgis, use if you don't need the split_categorized_layers feature
-    image: sourcepole/qwc-config-generator:latest-2024-lts-noqgis
+    image: sourcepole/qwc-config-generator:latest-2025-lts
     environment:
       <<: *qwc-service-variables
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
@@ -65,18 +62,51 @@ services:
       - ./volumes/qgs-resources:/data
       - ./pg_service.conf:/srv/pg_service.conf:ro
 
-  qwc-ogc-service:
-    image: sourcepole/qwc-ogc-service:latest-2024-lts
+  qwc-admin-gui:
+    image: sourcepole/qwc-admin-gui:latest-2025-lts
     environment:
       <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/ows'
+      # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
+      JWT_COOKIE_CSRF_PROTECT: 'False'
+      # When setting user info fields, make sure to create corresponding columns (i.e. "surname", "first_name", "street", etc) in qwc_config.user_infos
+      # USER_INFO_FIELDS: '[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}]'
+      #TOTP_ENABLED: 'False'
+      GROUP_REGISTRATION_ENABLED: 'True'
+      #IDLE_TIMEOUT: 600
+      DEFAULT_LOCALE: 'en'
+      MAIL_SUPPRESS_SEND: 'True'
+      MAIL_DEFAULT_SENDER: 'from@example.com'
     volumes:
+      - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
-    # ports:
-    #   - "127.0.0.1:5013:9090"
+      # required by themes plugin:
+      # - ./volumes/config-in:/srv/qwc_service/config-in:rw
+      # - ./volumes/qwc2:/qwc2
+      # - ./volumes/qgs-resources:/qgs-resources
+      # - ./volumes/info-templates:/info_templates
+
+  qwc-auth-service:
+    image: sourcepole/qwc-db-auth:latest-2025-lts
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/auth'
+      # Enable the following in production (requires https):
+      #JWT_COOKIE_SECURE: 'True'
+      #TOTP_ENABLED: 'False'
+      #TOTP_ISSUER_NAME: 'QWC Services'
+      # MAIL_SUPPRESS_SEND: 'False'
+      # MAIL_DEFAULT_SENDER: 'info@example.com'
+      # MAIL_SERVER: 'mail.example.com'
+      # MAIL_PORT: '465'
+      # MAIL_USERNAME: 'info@example.com'
+      # MAIL_PASSWORD: 'password1234'
+      # MAIL_USE_SSL: 'True'
+    volumes:
+      - ./pg_service.conf:/srv/pg_service.conf:ro
+      - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-data-service:
-    image: sourcepole/qwc-data-service:latest-2024-lts
+    image: sourcepole/qwc-data-service:latest-2025-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/api/v1/data'
@@ -87,11 +117,37 @@ services:
       - ./volumes/attachments:/attachments
       # NOTE: you can mount a pg_service-write.conf with R/W DB users and have R/O DB users in the main pg_service.conf
       - ./pg_service-write.conf:/srv/pg_service.conf:ro
-    # ports:
-    #   - "127.0.0.1:5012:9090"
 
+  # NOTE: you can use clamav for virus scanning in the data service
   # clamav:
   #   image: clamav/clamav:stable
+
+  qwc-elevation-service:
+    image: sourcepole/qwc-elevation-service:latest-2025-lts
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/elevation'
+    volumes:
+      - ./volumes/config:/srv/qwc_service/config:ro
+
+  qwc-feature-info-service:
+    image: sourcepole/qwc-feature-info-service:latest-2025-lts
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/featureinfo'
+    volumes:
+      - ./pg_service.conf:/srv/pg_service.conf:ro
+      - ./volumes/config:/srv/qwc_service/config:ro
+      - ./volumes/info-templates:/info_templates:ro
+
+  qwc-fulltext-search-service:
+    image: sourcepole/qwc-fulltext-search-service:latest-2025-lts
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v2/search'
+    volumes:
+      - ./pg_service.conf:/srv/pg_service.conf:ro
+      - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-solr:
     image: solr:8.11-slim
@@ -111,30 +167,35 @@ services:
       # Change "#credentials" to "credentials" in security.json for adding a user 'solr' with password 'SolrRocks'
       #- ./volumes/solr/security.json:/var/solr/data/security.json:ro
 
-  qwc-fulltext-search-service:
-    image: sourcepole/qwc-fulltext-search-service:latest-2024-lts
+  qwc-legend-service:
+    image: sourcepole/qwc-legend-service:latest-2025-lts
     environment:
       <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/api/v2/search'
-    # ports:
-    #   - "127.0.0.1:5011:9090"
+      SERVICE_MOUNTPOINT: '/api/v1/legend'
+    volumes:
+      - ./volumes/config:/srv/qwc_service/config:ro
+      - ./volumes/legends:/legends
+
+  qwc-mapinfo-service:
+    image: sourcepole/qwc-mapinfo-service:latest-2025-lts
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/mapinfo'
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
 
   qwc-map-viewer:
     # Pre-built qwc2 app
-    image: sourcepole/qwc-map-viewer-demo:latest-2024-lts
+    image: sourcepole/qwc-map-viewer:latest-2025-lts
     # Or with own viewer build placed in volumes/qwc2
-    # image: sourcepole/qwc-map-viewer-base:latest-2024-lts
+    # image: sourcepole/qwc-map-viewer-base:latest-2025-lts
     # Update config.json with:
     # curl -L -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/master/static/config.json
     # and generate service configuration
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
-    # ports:
-    #   - "127.0.0.1:5030:9090"
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
@@ -143,33 +204,41 @@ services:
       # When using own viewer build with qwc-map-viewer-base:
       #- ./volumes/qwc2:/qwc2:ro
 
-  qwc-admin-gui:
-    image: sourcepole/qwc-admin-gui:latest-2024-lts
+  qwc-ogc-service:
+    image: sourcepole/qwc-ogc-service:latest-2025-lts
     environment:
       <<: *qwc-service-variables
-      # Don't enable JWT CSRF protection for admin gui, it conflicts with CSRF protection offered by Flask-WTF
-      JWT_COOKIE_CSRF_PROTECT: 'False'
-      # When setting user info fields, make sure to create corresponding columns (i.e. "surname", "first_name", "street", etc) in qwc_config.user_infos
-      # USER_INFO_FIELDS: '[{"title": "Surname", "name": "surname", "type": "text", "required": true}, {"title": "First name", "name": "first_name", "type": "text", "required": true}, {"title": "Street", "name": "street", "type": "text"}, {"title": "ZIP", "name": "zip", "type": "text"}, {"title": "City", "name": "city", "type": "text"}]'
-      #TOTP_ENABLED: 'False'
-      GROUP_REGISTRATION_ENABLED: 'True'
-      #IDLE_TIMEOUT: 600
-      DEFAULT_LOCALE: 'en'
-      MAIL_SUPPRESS_SEND: 'True'
-      MAIL_DEFAULT_SENDER: 'from@example.com'
-    # ports:
-    #   - "127.0.0.1:5031:9090"
+      SERVICE_MOUNTPOINT: '/ows'
+    volumes:
+      - ./volumes/config:/srv/qwc_service/config:ro
+
+  qwc-permalink-service:
+    image: sourcepole/qwc-permalink-service:latest-2025-lts
+    environment:
+      <<: *qwc-service-variables
+      SERVICE_MOUNTPOINT: '/api/v1/permalink'
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
-      # required by themes plugin:
-      # - ./volumes/config-in:/srv/qwc_service/config-in:rw
-      # - ./volumes/qwc2:/qwc2
-      # - ./volumes/qgs-resources:/qgs-resources
-      # - ./volumes/info-templates:/info_templates
+
+  # qwc-document-service:
+  #   image: sourcepole/qwc-document-service:latest-2025-lts
+  #   environment:
+  #     <<: *qwc-service-variables
+  #     SERVICE_MOUNTPOINT: '/api/v1/document'
+  #   volumes:
+  #     - ./volumes/config:/srv/qwc_service/config:ro
+
+  # qwc-print-service:
+  #   image: sourcepole/qwc-print-service:latest-2025-lts
+  #   environment:
+  #     <<: *qwc-service-variables
+  #     SERVICE_MOUNTPOINT: '/api/v1/print'
+  #   volumes:
+  #     - ./volumes/config:/srv/qwc_service/config:ro
 
   # qwc-registration-gui:
-  #   image: sourcepole/qwc-registration-gui:latest-2024-lts
+  #   image: sourcepole/qwc-registration-gui:latest-2025-lts
   #   environment:
   #     <<: *qwc-service-variables
   #     SERVICE_MOUNTPOINT: '/registration'
@@ -177,134 +246,31 @@ services:
   #     ADMIN_RECIPIENTS: 'admin@example.com'
   #     MAIL_SUPPRESS_SEND: 'True'
   #     MAIL_DEFAULT_SENDER: 'from@example.com'
-  #   # ports:
-  #   #   - "127.0.0.1:5032:9090"
   #   volumes:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
 
-  qwc-auth-service:
-    image: sourcepole/qwc-db-auth:latest-2024-lts
-    environment:
-      <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/auth'
-      # https://flask-jwt-extended.readthedocs.io/en/stable/options/#cookie-options
-      JWT_COOKIE_SAMESITE: 'Strict'
-      # Enable the following in production (requires https):
-      #JWT_COOKIE_SECURE: 'True'
-      #TOTP_ENABLED: 'False'
-      #TOTP_ISSUER_NAME: 'QWC Services'
-      MAIL_SUPPRESS_SEND: 'True'
-      MAIL_DEFAULT_SENDER: 'from@example.com'
-    volumes:
-      - ./pg_service.conf:/srv/pg_service.conf:ro
-      - ./volumes/config:/srv/qwc_service/config:ro
-    # ports:
-    #   - "127.0.0.1:5017:9090"
-
-  qwc-elevation-service:
-    image: sourcepole/qwc-elevation-service:latest-2024-lts
-    environment:
-      <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/elevation'
-    volumes:
-      - ./volumes/config:/srv/qwc_service/config:ro
-    # ports:
-    #   - "127.0.0.1:5002:9090"
-
-  qwc-permalink-service:
-    image: sourcepole/qwc-permalink-service:latest-2024-lts
-    environment:
-      <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/api/v1/permalink'
-    volumes:
-      - ./pg_service.conf:/srv/pg_service.conf:ro
-      - ./volumes/config:/srv/qwc_service/config:ro
-    # ports:
-    #   - "127.0.0.1:5001:9090"
-
-  # qwc-print-service:
-  #   image: sourcepole/qwc-print-service:latest-2024-lts
-  #   environment:
-  #     <<: *qwc-service-variables
-  #     SERVICE_MOUNTPOINT: '/api/v1/print'
-  #   volumes:
-  #     - ./volumes/config:/srv/qwc_service/config:ro
-  #   # ports:
-  #   #   - "127.0.0.1:5020:9090"
-
-  qwc-feature-info-service:
-    image: sourcepole/qwc-feature-info-service:latest-2024-lts
-    environment:
-      <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/api/v1/featureinfo'
-    volumes:
-      - ./pg_service.conf:/srv/pg_service.conf:ro
-      - ./volumes/config:/srv/qwc_service/config:ro
-      - ./volumes/info-templates:/info_templates:ro
-    # ports:
-    #   - "127.0.0.1:5015:9090"
-
-  # qwc-document-service:
-  #   image: sourcepole/qwc-document-service:latest-2024-lts
-  #   environment:
-  #     <<: *qwc-service-variables
-  #     SERVICE_MOUNTPOINT: '/api/v1/document'
-  #   volumes:
-  #     - ./volumes/config:/srv/qwc_service/config:ro
-  #   depends_on:
-  #     - jasper-reporting-service
-  #   # ports:
-  #   #   - "127.0.0.1:5018:9090"
-
-  # jasper-reporting-service:
-  #   image: sourcepole/jasper-reporting-service:latest-2024-lts
-  #   volumes:
-  #     - ./volumes/jasper-reports/config:/srv/jasper-reporting-service/config:ro
-  #     - ./volumes/jasper-reports/demo:/srv/jasper-reporting-service/demo:ro
-  #   # ports:
-  #   #   - "127.0.0.1:8002:8080"
-
-  qwc-mapinfo-service:
-    image: sourcepole/qwc-mapinfo-service:latest-2024-lts
-    environment:
-      <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/api/v1/mapinfo'
-    volumes:
-      - ./pg_service.conf:/srv/pg_service.conf:ro
-      - ./volumes/config:/srv/qwc_service/config:ro
-    # ports:
-    #   - "127.0.0.1:5016:9090"
-
-  qwc-legend-service:
-    image: sourcepole/qwc-legend-service:latest-2024-lts
-    environment:
-      <<: *qwc-service-variables
-      SERVICE_MOUNTPOINT: '/api/v1/legend'
-    volumes:
-      - ./volumes/config:/srv/qwc_service/config:ro
-      - ./volumes/legends:/legends
-    # ports:
-    #   - "127.0.0.1:5014:9090"
-
   qwc-api-gateway:
-    image: nginx:1.19
+    image: nginx:1.27
     ports:
+      # NOTE: The port the qwc application runs on. You can choose another port instead of 8088.
       - "8088:80"
     volumes:
       - ./api-gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - qwc-postgis
-      - qwc-config-service
       - qwc-qgis-server
-      - qwc-ogc-service
-      - qwc-map-viewer
-      - qwc-auth-service
-      - qwc-feature-info-service
-      - qwc-legend-service
-      - qwc-mapinfo-service
-      - qwc-permalink-service
-      - qwc-elevation-service
-      - qwc-fulltext-search-service
-      - qwc-data-service
+      - qwc-config-service
       - qwc-admin-gui
+      - qwc-auth-service
+      - qwc-data-service
+      - qwc-elevation-service
+      - qwc-feature-info-service
+      - qwc-fulltext-search-service
+      - qwc-legend-service
+      - qwc-map-viewer
+      - qwc-mapinfo-service
+      - qwc-ogc-service
+      - qwc-permalink-service
+      #- qwc-document-service:
+      #- qwc-print-service:
       #- qwc-registration-gui

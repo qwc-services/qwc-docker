@@ -1,24 +1,24 @@
 {
-  "searchServiceUrl":"http://localhost:5011/",
-  "searchDataServiceUrl":"http://localhost:5011/geom/",
   "editServiceUrl":"http://localhost:5012/",
-  "mapInfoService":"http://localhost:5016/",
-  "permalinkServiceUrl":"http://localhost:5001/",
   "elevationServiceUrl":"http://localhost:5002/",
   "featureReportService":"http://localhost:5020/",
+  "mapInfoService":"http://localhost:5016/",
+  "permalinkServiceUrl":"http://localhost:5001/",
+  "searchServiceUrl":"http://localhost:5011/",
+  "searchDataServiceUrl":"http://localhost:5011/geom/",
+  "omitUrlParameterUpdates":false,
   "urlPositionFormat":"centerAndZoom",
   "urlPositionCrs":"",
-  "omitUrlParameterUpdates":false,
-  "preserveExtentOnThemeSwitch":true,
   "preserveBackgroundOnThemeSwitch":true,
+  "preserveExtentOnThemeSwitch":true,
   "preserveNonThemeLayersOnThemeSwitch":false,
-  "allowReorderingLayers":true,
-  "preventSplittingGroupsWhenReordering":false,
+  "allowAddingOtherThemes":true,
   "allowLayerTreeSeparators":false,
   "allowRemovingThemeLayers":true,
+  "allowReorderingLayers":true,
+  "preventSplittingGroupsWhenReordering":false,
   "globallyDisableDockableDialogs":false,
   "searchThemes":true,
-  "allowAddingOtherThemes":true,
   "allowFractionalZoom":false,
   "localeAwareNumbers":false,
   "identifyTool":"Identify",
@@ -86,39 +86,15 @@
     }
   ],
   "plugins":{
-    "mobile":[
+    "common": [
       {
-        "name":"Map",
-        "cfg":{
-          "mapOptions":{
-            "zoomDuration":250,
-            "enableRotation":true
-          },
-          "toolsOptions":{
-            "OverviewSupport":{
-              "tipLabel":"Overview"
-            },
-            "LocateSupport":{
-              "keepCurrentZoomLevel":true,
-              "startupMode":"DISABLED"
-            },
-            "ScaleBarSupport":{
-              "units":"metric"
-            }
-          }
-        }
+        "name":"API"
       },
       {
-        "name":"HomeButton",
-        "cfg":{
-          "position":2
-        }
+        "name":"AttributeTable"
       },
       {
-        "name":"LocateButton",
-        "cfg":{
-          "position":1
-        }
+        "name":"Authentication"
       },
       {
         "name":"BackgroundSwitcher",
@@ -127,157 +103,58 @@
         }
       },
       {
-        "name":"TopBar",
-        "cfg":{
-          "menuItems":[
-            {
-              "key":"ThemeSwitcher",
-              "icon":"themes"
-            },
-            {
-              "key":"LayerTree",
-              "icon":"layers"
-            },
-            {
-              "key":"LayerCatalog",
-              "icon":"catalog"
-            },
-            {
-              "key":"Share",
-              "icon":"share"
-            },
-            {
-              "key":"Bookmark",
-              "icon":"bookmark"
-            },
-            {
-              "key":"Tools",
-              "icon":"tools",
-              "subitems":[
-                {
-                  "key":"Identify",
-                  "icon":"identify_region",
-                  "mode":"Region"
-                },
-                {
-                  "key":"Measure",
-                  "icon":"measure"
-                },
-                {
-                  "key":"Redlining",
-                  "icon":"draw"
-                },
-                {
-                  "key":"Editing",
-                  "icon":"editing"
-                },
-                {
-                  "key":"FeatureForm",
-                  "icon":"featureform"
-                },
-                {
-                  "key":"AttributeTable",
-                  "icon":"editing"
-                },
-                {
-                  "key":"DxfExport",
-                  "icon":"dxfexport"
-                },
-                {
-                  "key":"RasterExport",
-                  "icon":"rasterexport"
-                }
-              ]
-            },
-            {
-              "key":"Print",
-              "icon":"print"
-            },
-            {
-              "key":"Help",
-              "icon":"info"
-            },
-            {
-              "key":"Settings",
-              "icon":"cog"
-            },
-            {
-              "key":"Login",
-              "icon":"login"
-            }
-          ],
-          "searchOptions":{
-            "minScaleDenom":1000,
-            "showProviderSelection":true,
-            "providerSelectionAllowAll":true,
-            "zoomToLayers":false,
-            "showProvidersInPlaceholder":false
-          },
-          "appMenuClearsTask":true,
-          "appMenuFilterField":true,
-          "appMenuVisibleOnStartup":false
-        }
-      },
-      {
-        "name":"ThemeSwitcher",
-        "cfg":{
-          "collapsibleGroups":true
-        }
-      },
-      {
-        "name":"Measure",
-        "cfg":{
-          "showMeasureModeSwitcher":true
-        }
+        "name":"Bookmark"
       },
       {
         "name":"BottomBar",
         "cfg":{
-          "displayCoordinates":false,
-          "displayScales":false,
           "viewertitleUrl":"http://qgis.org/",
           "termsUrl":"http://qgis.org/"
         }
       },
       {
-        "name":"Identify",
+        "name":"Editing",
         "cfg":{
-          "params":{
-            "FI_POINT_TOLERANCE":32,
-            "FI_LINE_TOLERANCE":16,
-            "FI_POLYGON_TOLERANCE":8,
-            "feature_count":20,
-            "region_feature_count":100
-          },
-          "enableExport":true,
-          "longAttributesDisplay":"wrap",
-          "displayResultTree":false,
-          "featureInfoReturnsLayerName":true
+          "snapping":true,
+          "snappingActive":true
         }
       },
       {
-        "name":"Share",
-        "cfg":{
-          "showSocials":true,
-          "showLink":true,
-          "showQRCode":true
-        },
-        "mapClickAction":"identify"
-      },
-      {
-        "name":"Print",
-        "cfg":{
-          "inlinePrintOutput":false,
-          "printExternalLayers":true,
-          "gridInitiallyEnabled":false
-        }
+        "name":"FeatureForm"
       },
       {
         "name":"Help",
         "mapClickAction":"identify"
       },
       {
-        "name":"MapCopyright"
+        "name":"Identify",
+        "cfg":{
+          "params":{
+            "FI_POINT_TOLERANCE":16,
+            "FI_LINE_TOLERANCE":8,
+            "FI_POLYGON_TOLERANCE":4,
+            "feature_count":20,
+            "region_feature_count":100
+          },
+          "enableExport":true,
+          "longAttributesDisplay":"wrap",
+          "displayResultTree":false,
+          "featureInfoReturnsLayerName":false,
+          "initialWidth":480,
+          "initialHeight":550
+        }
+      },
+      {
+        "name":"HeightProfile",
+        "cfg":{
+          "heighProfilePrecision":0
+        }
+      },
+      {
+        "name":"LayerCatalog",
+        "cfg":{
+          "catalogUrl":"assets/catalog.json"
+        }
       },
       {
         "name":"LayerTree",
@@ -295,40 +172,45 @@
             "height":400
           },
           "bboxDependentLegend":true,
-          "scaleDependentLegend":"theme"
+          "scaleDependentLegend":"theme",
+          "showToggleAllLayersCheckbox":true
         },
-        "mapClickAction":"unset"
+        "mapClickAction":"identify"
       },
       {
-        "name":"DxfExport"
-      },
-      {
-        "name":"RasterExport",
+        "name":"Map",
         "cfg":{
-          "dpis":[
-            96,
-            300
+          "mapOptions":{
+            "zoomDuration":250,
+            "enableRotation":true
+          },
+          "toolsOptions":{
+            "OverviewSupport":{
+              "tipLabel":"Overview"
+            },
+            "LocateSupport":{
+              "keepCurrentZoomLevel":true,
+              "stopFollowingOnDrag":true,
+              "startupMode":"DISABLED"
+            },
+            "ScaleBarSupport":{
+              "units":"metric"
+            }
+          },
+          "swipeGeometryTypeBlacklist":[
           ],
-          "exportExternalLayers":true
+          "swipeLayerNameBlacklist":[
+          ]
         }
-      },
-      {
-        "name":"Redlining"
-      },
-      {
-        "name":"Editing"
-      },
-      {
-        "name":"AttributeTable"
       },
       {
         "name":"MapCompare"
       },
       {
-        "name":"HeightProfile",
-        "cfg":{
-          "heighProfilePrecision":0
-        }
+        "name":"MapCopyright"
+      },
+      {
+        "name":"MapExport"
       },
       {
         "name":"MapInfoTooltip",
@@ -338,25 +220,27 @@
         }
       },
       {
-        "name":"StartupMarker",
+        "name":"Measure",
         "cfg":{
-          "removeMode":"onclickonmarker"
+          "showMeasureModeSwitcher":true,
+          "snapping":true,
+          "snappingActive":true
         }
       },
       {
-        "name":"LayerCatalog",
+        "name":"Print",
         "cfg":{
-          "catalogUrl":"http://qwc2.sourcepole.ch/assets/catalog.json"
+          "inlinePrintOutput":true,
+          "printExternalLayers":true,
+          "gridInitiallyEnabled":false
         }
       },
       {
-        "name":"Bookmark"
-      },
-      {
-        "name":"Authentication"
-      },
-      {
-        "name":"FeatureForm"
+        "name":"Redlining",
+        "cfg":{
+          "snapping":true,
+          "snappingActive":true
+        }
       },
       {
         "name":"Settings",
@@ -390,80 +274,34 @@
             }
           ]
         }
-      }
-    ],
-    "desktop":[
+      },
       {
-        "name":"Map",
+        "name":"ScratchDrawing"
+      },
+      {
+        "name":"Share",
         "cfg":{
-          "mapOptions":{
-            "zoomDuration":250,
-            "enableRotation":true
-          },
-          "toolsOptions":{
-            "OverviewSupport":{
-              "tipLabel":"Overview"
-            },
-            "LocateSupport":{
-              "keepCurrentZoomLevel":true,
-              "stopFollowingOnDrag":true,
-              "startupMode":"DISABLED"
-            },
-            "ScaleBarSupport":{
-              "units":"metric"
-            }
-          },
-          "swipeGeometryTypeBlacklist":[
-          ],
-          "swipeLayerNameBlacklist":[
-          ]
+          "showSocials":true,
+          "showLink":true,
+          "showQRCode":true
+        },
+        "mapClickAction":"identify"
+      },
+      {
+        "name":"StartupMarker",
+        "cfg":{
+          "removeMode":"onclickonmarker"
         }
       },
       {
-        "name":"TaskButton",
+        "name":"ThemeSwitcher",
         "cfg":{
-          "position":5,
-          "task":"LayerTree",
-          "icon":"list-alt"
+          "collapsibleGroups":true
         }
       },
       {
-        "name":"TaskButton",
-        "cfg":{
-          "position":6,
-          "task":"Editing",
-          "icon":"editing"
-        }
-      },
-      {
-        "name":"HomeButton",
-        "cfg":{
-          "position":4
-        }
-      },
-      {
-        "name":"LocateButton",
-        "cfg":{
-          "position":3
-        }
-      },
-      {
-        "name":"ZoomIn",
-        "cfg":{
-          "position":2
-        }
-      },
-      {
-        "name":"ZoomOut",
-        "cfg":{
-          "position":1
-        }
-      },
-      {
-        "name":"BackgroundSwitcher",
-        "cfg":{
-          "position":0
-        }
+        "name":"TimeManager",
+        "mapClickAction":"identify"
       },
       {
         "name":"TopBar",
@@ -523,11 +361,7 @@
                   "icon":"editing"
                 },
                 {
-                  "key":"DxfExport",
-                  "icon":"dxfexport"
-                },
-                {
-                  "key":"RasterExport",
+                  "key":"MapExport",
                   "icon":"rasterexport"
                 }
               ]
@@ -549,6 +383,68 @@
               "icon":"login"
             }
           ],
+          "searchOptions":{
+            "minScaleDenom":1000,
+            "showProviderSelection":true,
+            "providerSelectionAllowAll":true,
+            "zoomToLayers":false,
+            "showProvidersInPlaceholder":false
+          },
+          "appMenuClearsTask":true,
+          "appMenuFilterField":true,
+          "appMenuVisibleOnStartup":false,
+          "logoUrl":"/"
+        }
+      }
+    ],
+    "mobile":[
+      {
+        "name":"BottomBar",
+        "cfg":{
+          "displayCoordinates":false,
+          "displayScales":false
+        }
+      },
+      {
+        "name":"HomeButton",
+        "cfg":{
+          "position":2
+        }
+      },
+      {
+        "name":"LocateButton",
+        "cfg":{
+          "position":1
+        }
+      }
+    ],
+    "desktop":[
+      {
+        "name":"HomeButton",
+        "cfg":{
+          "position":4
+        }
+      },
+      {
+        "name":"LocateButton",
+        "cfg":{
+          "position":3
+        }
+      },
+      {
+        "name":"MapTip"
+      },
+      {
+        "name":"TaskButton",
+        "cfg":{
+          "position":5,
+          "task":"LayerTree",
+          "icon":"list-alt"
+        }
+      },
+      {
+        "name":"TopBar",
+        "cfg":{
           "toolbarItems":[
             {
               "key":"Measure",
@@ -573,221 +469,19 @@
               "key":"TimeManager",
               "icon":"clock"
             }
-          ],
-          "searchOptions":{
-            "minScaleDenom":1000,
-            "showProviderSelection":true,
-            "providerSelectionAllowAll":true,
-            "zoomToLayers":false,
-            "showProvidersInPlaceholder":false
-          },
-          "appMenuClearsTask":true,
-          "appMenuFilterField":true,
-          "appMenuVisibleOnStartup":false,
-          "logoUrl":"/"
-        }
-      },
-      {
-        "name":"BottomBar",
-        "cfg":{
-          "viewertitleUrl":"http://qgis.org/",
-          "termsUrl":"http://qgis.org/"
-        }
-      },
-      {
-        "name":"Measure",
-        "cfg":{
-          "showMeasureModeSwitcher":true,
-          "snapping":true,
-          "snappingActive":true
-        }
-      },
-      {
-        "name":"ThemeSwitcher",
-        "cfg":{
-          "collapsibleGroups":true
-        }
-      },
-      {
-        "name":"LayerTree",
-        "cfg":{
-          "showLegendIcons":true,
-          "showRootEntry":true,
-          "showQueryableIcon":true,
-          "allowMapTips":true,
-          "allowCompare":true,
-          "allowImport":true,
-          "groupTogglesSublayers":false,
-          "grayUnchecked":false,
-          "layerInfoWindowSize":{
-            "width":480,
-            "height":400
-          },
-          "bboxDependentLegend":true,
-          "scaleDependentLegend":"theme",
-          "showToggleAllLayersCheckbox":true
-        },
-        "mapClickAction":"identify"
-      },
-      {
-        "name":"Identify",
-        "cfg":{
-          "params":{
-            "FI_POINT_TOLERANCE":16,
-            "FI_LINE_TOLERANCE":8,
-            "FI_POLYGON_TOLERANCE":4,
-            "feature_count":20,
-            "region_feature_count":100
-          },
-          "enableExport":true,
-          "longAttributesDisplay":"wrap",
-          "displayResultTree":false,
-          "featureInfoReturnsLayerName":true,
-          "initialWidth":480,
-          "initialHeight":550
-        }
-      },
-      {
-        "name":"MapTip"
-      },
-      {
-        "name":"Share",
-        "cfg":{
-          "showSocials":true,
-          "showLink":true,
-          "showQRCode":true
-        },
-        "mapClickAction":"identify"
-      },
-      {
-        "name":"Print",
-        "cfg":{
-          "inlinePrintOutput":true,
-          "printExternalLayers":true,
-          "gridInitiallyEnabled":false
-        }
-      },
-      {
-        "name":"Help",
-        "mapClickAction":"identify"
-      },
-      {
-        "name":"MapCopyright",
-        "cfg":{
-          "showThemeCopyrightOnly":true
-        }
-      },
-      {
-        "name":"DxfExport",
-        "cfg":{
-
-        }
-      },
-      {
-        "name":"RasterExport",
-        "cfg":{
-          "dpis":[
-            96,
-            300
-          ],
-          "exportExternalLayers":true
-        }
-      },
-      {
-        "name":"Redlining",
-        "cfg":{
-          "snapping":true,
-          "snappingActive":true
-        }
-      },
-      {
-        "name":"Editing",
-        "cfg":{
-          "snapping":true,
-          "snappingActive":true
-        }
-      },
-      {
-        "name":"MapCompare"
-      },
-      {
-        "name":"HeightProfile",
-        "cfg":{
-          "heighProfilePrecision":0
-        }
-      },
-      {
-        "name":"MapInfoTooltip",
-        "cfg":{
-          "elevationPrecision":0,
-          "includeWGS84":true
-        }
-      },
-      {
-        "name":"StartupMarker",
-        "cfg":{
-          "removeMode":"onclickonmarker"
-        }
-      },
-      {
-        "name":"API"
-      },
-      {
-        "name":"ScratchDrawing"
-      },
-      {
-        "name":"LayerCatalog",
-        "cfg":{
-          "catalogUrl":"http://localhost/catalog.json"
-        }
-      },
-      {
-        "name":"Bookmark"
-      },
-      {
-        "name":"AttributeTable"
-      },
-      {
-        "name":"Authentication"
-      },
-      {
-        "name":"FeatureForm"
-      },
-      {
-        "name":"TimeManager",
-        "mapClickAction":"identify"
-      },
-      {
-        "name":"Settings",
-        "cfg":{
-          "languages":[
-            {
-              "title":"English",
-              "value":"en-US"
-            },
-            {
-              "title":"Deutsch",
-              "value":"de-CH"
-            },
-            {
-              "title":"Italiano",
-              "value":"it-IT"
-            }
-          ],
-          "colorSchemes":[
-            {
-              "titleMsgId":"colorschemes.default",
-              "value":"default"
-            },
-            {
-              "titleMsgId":"colorschemes.highcontrast",
-              "value":"highcontrast"
-            },
-            {
-              "titleMsgId":"colorschemes.dark",
-              "value":"dark"
-            }
           ]
+        }
+      },
+      {
+        "name":"ZoomIn",
+        "cfg":{
+          "position":2
+        }
+      },
+      {
+        "name":"ZoomOut",
+        "cfg":{
+          "position":1
         }
       }
     ]
