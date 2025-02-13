@@ -308,6 +308,9 @@
       },
       {
         "name":"TimeManager",
+        "cfg":{
+          "defaultTimelineDisplay":"features"
+        },
         "mapClickAction":"identify"
       },
       {
