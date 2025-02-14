@@ -231,6 +231,13 @@
         }
       },
       {
+        "name": "NewsPopup",
+        "cfg": {
+          "newsDocument": "https://qwc-services.github.io/master/release_notes/ChangeLog/",
+          "newsRev": "20250210"
+        }
+      },
+      {
         "name":"Print",
         "cfg":{
           "inlinePrintOutput":true,
