@@ -1,4 +1,5 @@
 {
+  "routingServiceUrl": "https://valhalla1.openstreetmap.de/",
   "omitUrlParameterUpdates":false,
   "urlPositionFormat":"centerAndZoom",
   "urlPositionCrs":"",
@@ -253,6 +254,9 @@
         }
       },
       {
+        "name":"Routing"
+      },
+      {
         "name":"Settings",
         "cfg":{
           "languages":[
@@ -384,6 +388,10 @@
                 {
                   "key":"MapExport",
                   "icon":"rasterexport"
+                },
+                {
+                  "key":"Routing",
+                  "icon":"routing"
                 }
               ]
             },
