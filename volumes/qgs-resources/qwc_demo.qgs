@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="sandro" version="3.40.3-Bratislava" saveUserFull="Sandro Mani" projectname="QWC Services Demo WMS" saveDateTime="2025-02-14T01:13:53">
+<qgis saveUser="sandro" version="3.40.3-Bratislava" saveUserFull="Sandro Mani" projectname="QWC Services Demo WMS" saveDateTime="2025-02-14T10:09:47">
   <homePath path=""/>
   <title>QWC Services Demo WMS</title>
   <transaction mode="Disabled"/>
@@ -5313,6 +5313,18 @@ def my_form_open(dialog, layer, feature):
       <mapTip enabled="1">[%"name"%]</mapTip>
     </maplayer>
     <maplayer wkbType="Point" type="vector" legendPlaceholderImage="" styleCategories="AllStyleCategories" simplifyDrawingHints="0" autoRefreshMode="Disabled" simplifyDrawingTol="1" symbologyReferenceScale="-1" simplifyAlgorithm="0" minScale="10000000" refreshOnNotifyMessage="" autoRefreshTime="0" hasScaleBasedVisibilityFlag="1" geometry="Point" refreshOnNotifyEnabled="0" maxScale="0" simplifyMaxScale="1" readOnly="0" labelsEnabled="1" simplifyLocal="1">
+      <extent>
+        <xmin>-19729044.15179186686873436</xmin>
+        <ymin>-15878634.34899544157087803</ymin>
+        <xmax>19872743.79607474058866501</xmax>
+        <ymax>12257650.08734293095767498</ymax>
+      </extent>
+      <wgs84extent>
+        <xmin>-177.22901902623493697</xmin>
+        <ymin>-80.51656707235149213</ymin>
+        <xmax>178.51989489405332279</xmax>
+        <ymax>73.34886936285137438</ymax>
+      </wgs84extent>
       <id>ne_10m_admin_0_country_points20180710104138887</id>
       <datasource>service='qwc_geodb' sslmode=disable key='ogc_fid' srid=3857 type=Point checkPrimaryKeyUnicity='1' table="qwc_geodb"."ne_10m_admin_0_country_points" (wkb_geometry)</datasource>
       <shortname>country_names</shortname>
@@ -6285,6 +6297,18 @@ def my_form_open(dialog, layer, feature):
       <mapTip enabled="1"></mapTip>
     </maplayer>
     <maplayer wkbType="MultiLineString" type="vector" legendPlaceholderImage="" styleCategories="AllStyleCategories" simplifyDrawingHints="1" autoRefreshMode="Disabled" simplifyDrawingTol="1" symbologyReferenceScale="-1" simplifyAlgorithm="0" minScale="5000000" refreshOnNotifyMessage="" autoRefreshTime="0" hasScaleBasedVisibilityFlag="1" geometry="Line" refreshOnNotifyEnabled="0" maxScale="0" simplifyMaxScale="1" readOnly="0" labelsEnabled="1" simplifyLocal="1">
+      <extent>
+        <xmin>-19830129.66495271399617195</xmin>
+        <ymin>-6317536.48954548500478268</ymin>
+        <xmax>19864809.76362420991063118</xmax>
+        <ymax>16305918.53466267324984074</ymax>
+      </extent>
+      <wgs84extent>
+        <xmin>-178.1370856409894543</xmin>
+        <ymin>-49.25087001983553137</ymin>
+        <xmax>178.44862226790328918</xmax>
+        <ymax>81.12853131646703275</ymax>
+      </wgs84extent>
       <id>ne_10m_admin_1_states_provinces_lines20180710104138894</id>
       <datasource>service='qwc_geodb' sslmode=disable key='ogc_fid' srid=3857 type=MultiLineString checkPrimaryKeyUnicity='1' table="qwc_geodb"."ne_10m_admin_1_states_provinces_lines" (wkb_geometry)</datasource>
       <shortname>states_provinces</shortname>
@@ -7063,6 +7087,18 @@ def my_form_open(dialog, layer, feature):
       <mapTip enabled="1"></mapTip>
     </maplayer>
     <maplayer wkbType="MultiLineString" type="vector" legendPlaceholderImage="" styleCategories="AllStyleCategories" simplifyDrawingHints="1" autoRefreshMode="Disabled" simplifyDrawingTol="1" symbologyReferenceScale="-1" simplifyAlgorithm="0" minScale="100000000" refreshOnNotifyMessage="" autoRefreshTime="0" hasScaleBasedVisibilityFlag="0" geometry="Line" refreshOnNotifyEnabled="0" maxScale="0" simplifyMaxScale="1" readOnly="0" labelsEnabled="1" simplifyLocal="1">
+      <extent>
+        <xmin>-20037508.34278924390673637</xmin>
+        <ymin>-10029003.18725001998245716</ymin>
+        <xmax>20037507.92021777853369713</xmax>
+        <ymax>10029019.73300611227750778</ymax>
+      </extent>
+      <wgs84extent>
+        <xmin>-180</xmin>
+        <ymin>-66.54992609277604743</ymin>
+        <xmax>179.99999620397576905</xmax>
+        <ymax>66.54998524120267689</ymax>
+      </wgs84extent>
       <id>ne_10m_geographic_lines20180710104138901</id>
       <datasource>service='qwc_geodb' sslmode=disable key='ogc_fid' srid=3857 type=MultiLineString checkPrimaryKeyUnicity='1' table="qwc_geodb"."ne_10m_geographic_lines" (wkb_geometry) sql="featurecla" = 'Circle of latitude'</datasource>
       <shortname>geographic_lines</shortname>
@@ -8159,7 +8195,7 @@ def my_form_open(dialog, layer, feature):
       <value>qwc</value>
       <value>demo</value>
     </WMSKeywordList>
-    <WMSMaxAtlasFeatures type="int">1</WMSMaxAtlasFeatures>
+    <WMSMaxAtlasFeatures type="int">10</WMSMaxAtlasFeatures>
     <WMSOnlineResource type="QString"></WMSOnlineResource>
     <WMSPrecision type="QString">1</WMSPrecision>
     <WMSRestrictedComposers type="QStringList"/>
@@ -9090,7 +9126,7 @@ def my_form_open(dialog, layer, feature):
             </customproperties>
           </LayoutObject>
         </ComposerMapGrid>
-        <AtlasMap scalingMode="2" margin="0.10000000000000001" atlasDriven="0"/>
+        <AtlasMap scalingMode="2" margin="0.10000000000000001" atlasDriven="1"/>
         <labelBlockingItems/>
         <atlasClippingSettings restrictLayers="0" enabled="0" clippingType="0" forceLabelsInside="0">
           <layersToClip/>
@@ -9102,7 +9138,7 @@ def my_form_open(dialog, layer, feature):
           <Option name="atlasRasterFormat" type="QString" value="png"/>
         </Option>
       </customproperties>
-      <Atlas coverageLayer="" sortFeatures="0" enabled="0" hideCoverage="0" filenamePattern="'output_'||@atlas_featurenumber" filterFeatures="0" pageNameExpression=""/>
+      <Atlas coverageLayer="ne_10m_admin_0_countries20180710104138875" coverageLayerSource="service='qwc_geodb' sslmode=disable key='ogc_fid' srid=3857 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;qwc_geodb&quot;.&quot;ne_10m_admin_0_countries&quot; (wkb_geometry)" sortFeatures="0" enabled="1" coverageLayerProvider="postgres" hideCoverage="0" filenamePattern="'output_'||@atlas_featurenumber" coverageLayerName="Countries" filterFeatures="0" pageNameExpression="&quot;name&quot;"/>
     </Layout>
   </Layouts>
   <mapViewDocks3D/>
@@ -9110,7 +9146,7 @@ def my_form_open(dialog, layer, feature):
   <Sensors/>
   <ProjectViewSettings rotation="0" UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent xmin="-2790088.90240375744178891" ymin="2825070.91511310450732708" ymax="8582404.2543188463896513" xmax="5506432.67844593524932861">
+    <DefaultViewExtent xmin="-3418073.09113767184317112" ymin="2825070.91511310450732708" ymax="8582404.2543188463896513" xmax="6134416.86717985011637211">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
