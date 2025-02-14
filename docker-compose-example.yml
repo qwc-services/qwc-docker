@@ -43,6 +43,7 @@ services:
     environment:
       # QGIS_SERVER_LOG_LEVEL: 0
       # LOCALE: 'de_DE'
+      # QGIS_SERVER_IGNORE_BAD_LAYERS: 1
       FCGID_EXTRA_ENV: 'PRINT_LAYOUT_DIR'
       PRINT_LAYOUT_DIR: '/layouts'
     volumes:
