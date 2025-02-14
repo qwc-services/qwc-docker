@@ -43,7 +43,8 @@
                 "featureReport": {
                     "countries": "Country"
                 },
-                "extraLegendParameters": "LAYERTITLE=FALSE"
+                "extraLegendParameters": "LAYERTITLE=FALSE",
+                "defaultPrintLayout": "A4 Landscape"
             }
         ],
         "backgroundLayers": [
