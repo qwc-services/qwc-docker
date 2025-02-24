@@ -43,6 +43,19 @@
                 "featureReport": {
                     "countries": "Country"
                 },
+                "predefinedFilters": [{
+                    "id": "continent_filter",
+                    "title": "Continent",
+                    "filter": {
+                        "countries": ["continent", "=", "$continent$"]
+                    },
+                    "fields": [{
+                        "id": "continent",
+                        "title": "Name",
+                        "defaultValue": "",
+                        "inputConfig": {"type": "select", "options": ["Africa", "Asia", "Europe", "Oceania"]}
+                    }]
+                }],
                 "extraLegendParameters": "LAYERTITLE=FALSE",
                 "defaultPrintLayout": "A4 Landscape"
             }

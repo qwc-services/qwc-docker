@@ -210,6 +210,15 @@
         "name":"MapExport"
       },
       {
+        "name":"MapFilter",
+        "cfg": {
+          "allowCustomFilters": true,
+          "allowFilterByGeom": true,
+          "allowFilterByTime": true,
+          "position": 6
+        }
+      },
+      {
         "name":"MapInfoTooltip",
         "cfg":{
           "elevationPrecision":0,
@@ -357,10 +366,6 @@
               "icon":"tools",
               "subitems":[
                 {
-                  "key":"TimeManager",
-                  "icon":"clock"
-                },
-                {
                   "key":"Identify",
                   "icon":"identify_region",
                   "mode":"Region"
@@ -372,6 +377,10 @@
                 {
                   "key":"Redlining",
                   "icon":"draw"
+                },
+                {
+                  "key": "MapFilter",
+                  "icon": "filter"
                 },
                 {
                   "key":"Editing",
@@ -388,6 +397,10 @@
                 {
                   "key":"MapExport",
                   "icon":"rasterexport"
+                },
+                {
+                  "key":"TimeManager",
+                  "icon":"clock"
                 },
                 {
                   "key":"Routing",
