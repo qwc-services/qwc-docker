@@ -213,16 +213,13 @@ services:
     image: sourcepole/qwc-map-viewer:latest-2025-lts
     # Or with own viewer build placed in volumes/qwc2
     # image: sourcepole/qwc-map-viewer-base:latest-2025-lts
-    # Update config.json with:
-    # curl -L -o volumes/config-in/config.json https://github.com/qgis/qwc2-demo-app/raw/master/static/config.json
-    # and generate service configuration
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
     volumes:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
-      # When using qwc-map-viewer-demo:
+      # When using qwc-map-viewer:
       - ./volumes/qwc2/assets:/qwc2/assets:ro
       # When using own viewer build with qwc-map-viewer-base:
       #- ./volumes/qwc2:/qwc2:ro
