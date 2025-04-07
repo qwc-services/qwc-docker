@@ -912,7 +912,11 @@
         "solr_facets": [
           "ne_10m_admin_0_countries"
         ],
-        "external_links": []
+        "external_links": [],
+        "mapinfo_queries": [
+          "country",
+          "type"
+        ]
       }
     },
     {
@@ -987,7 +991,8 @@
         "document_templates": [],
         "print_templates": [],
         "solr_facets": [],
-        "external_links": []
+        "external_links": [],
+        "mapinfo_queries": []
       }
     }
   ]
