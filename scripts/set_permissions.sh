@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run this script from $HOME/src/qwc-docker to configure permissions for QWC2 Docker containers
+# Run this script from the qwc-docker to configure permissions for QWC2 Docker containers
 # SELinux commands are skipped if SELinux tools are not installed
 
 # Define UID/GID for QWC2 services (override with environment variables or match SERVICE_UID/SERVICE_GID in docker-compose.yml)
@@ -55,8 +55,6 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
 fi
 # Set ownership to QWC2 service UID/GID (matches SERVICE_UID/SERVICE_GID in docker-compose.yml)
 sudo chown -R $QWC_UID:$QWC_GID ./volumes/config
-# Set permissions to 755 for container access
-sudo chmod -R 755 ./volumes/config
 
 # Configure the PostgreSQL service configuration file used by multiple services
 if [ $SELINUX_ENABLED -eq 1 ]; then
@@ -73,8 +71,6 @@ sudo chown $USER:$USER ./pg_service.conf
 sudo chmod 644 ./pg_service.conf
 
 # Configure additional volumes (config-in, qwc2, qgs-resources, attachments, solr/data, solr/configsets)
-# Clear Solr data directory to ensure clean state
-sudo rm -rf ./volumes/solr/data/*
 if [ $SELINUX_ENABLED -eq 1 ]; then
     # Set SELinux type to svirt_sandbox_file_t recursively for all volumes
     sudo chcon -Rt svirt_sandbox_file_t ./volumes
@@ -85,12 +81,8 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
 fi
 # Set ownership to QWC2 service UID/GID for QWC2-related volumes (matches SERVICE_UID/SERVICE_GID in docker-compose.yml)
 sudo chown -R $QWC_UID:$QWC_GID ./volumes/config-in ./volumes/qwc2 ./volumes/qgs-resources ./volumes/attachments
-# Set permissions to 755 for QWC2-related volumes
-sudo chmod -R 755 ./volumes/config-in ./volumes/qwc2 ./volumes/qgs-resources ./volumes/attachments
 # Set ownership to Solr user (UID 8983) for Solr volumes
 sudo chown -R 8983:8983 ./volumes/solr/data ./volumes/solr/configsets
-# Set permissions to 755 for Solr volumes
-sudo chmod -R 755 ./volumes/solr/data ./volumes/solr/configsets
 
 # Configure the demo data permissions script for qwc-config-db-migrate
 if [ $SELINUX_ENABLED -eq 1 ]; then
@@ -103,8 +95,6 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
 fi
 # Set ownership to QWC2 service UID/GID (matches SERVICE_UID/SERVICE_GID in docker-compose.yml)
 sudo chown $QWC_UID:$QWC_GID ./volumes/demo-data/setup-demo-data-permissions.sh
-# Set permissions to 755 to make the script executable
-sudo chmod 755 ./volumes/demo-data/setup-demo-data-permissions.sh
 
 # Configure SELinux network policies for container connectivity
 if [ $SELINUX_ENABLED -eq 1 ]; then
