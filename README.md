@@ -57,8 +57,8 @@ Example checks:
 SELinux
 -------
 
-If you have SELinux enabled, you will need to sandbox certain files and ports to allow the Docker containers access. You can run the script `scripts/set_permissions.sh`
-to do this. Please ensure that the `QWC_UID` and `QWC_GID` in the script matches the `SERVICE_UID` and `SERVICE_GID` set in the docker-compose file.
+If you have SELinux enabled, you will need to sandbox certain files and ports to allow the Docker containers access. You can run `sudo scripts/set_permissions.sh`
+to do this. Please ensure that the `QWC_UID` and `QWC_GID` in the script match the `SERVICE_UID` and `SERVICE_GID` set in the docker-compose file.
 
 
 Development
