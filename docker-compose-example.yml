@@ -37,7 +37,7 @@ services:
       - ./volumes/demo-data/setup-demo-data-permissions.sh:/tmp/extra-init.d/setup-demo-data-permissions.sh
 
   qwc-qgis-server:
-    image: sourcepole/qwc-qgis-server:3.34
+    image: sourcepole/qwc-qgis-server:3.40
     # ports:
     #   - "127.0.0.1:8001:80"
     environment:
