@@ -7,6 +7,9 @@ if [ "$(whoami)" != "root" ]; then
     exit 1
 fi
 
+# Exit immediately if a command exits with non-zero status
+set -e
+
 # Define UID/GID for QWC2 services (override with environment variables or match SERVICE_UID/SERVICE_GID in docker-compose.yml)
 # Example: If docker-compose.yml sets SERVICE_UID: 1010, SERVICE_GID: 1010, run `export QWC_UID=1010 QWC_GID=1010` before this script
 QWC_UID=${QWC_UID:-1000}
@@ -35,6 +38,16 @@ run_selinux_cmd() {
         exit 1
     fi
 }
+
+# Check if ACL tools are available
+if command -v setfacl >/dev/null 2>&1 && command -v getfacl >/dev/null 2>&1; then
+    echo "ACL tools detected, applying ACLs."
+else
+    # If ACL tools are not available, print an error and exit
+    echo "Error: ACL tools (setfacl, getfacl) are required but not detected."
+    echo "Please install them (e.g., on Ubuntu/Debian: sudo apt-get install acl)"
+    exit 1
+fi
 
 # Configure permissions for the PostgreSQL database volume (qwc-postgis)
 if [ $SELINUX_ENABLED -eq 1 ]; then
@@ -96,8 +109,14 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon ./pg_service.conf"
 fi
-chown $USER:$USER ./pg_service.conf
-chmod 644 ./pg_service.conf
+# Set ownership to the current user for local editing
+sudo chown $USER:$USER ./pg_service.conf
+# Set base permissions (owner read/write, group read/write, others none)
+sudo chmod 640 ./pg_service.conf || { echo "Error: Failed to set base permissions on ./pg_service.conf"; exit 1; }
+# Grant read access to the QWC service group
+sudo setfacl -m g:$QWC_GID:r ./pg_service.conf || { echo "Error: Failed to set ACL for group GID $QWC_GID on ./pg_service.conf"; exit 1; }
+# Grant read access to the www-data group (GID 33)
+sudo setfacl -m g:33:r ./pg_service.conf || { echo "Error: Failed to set ACL for www-data group (GID 33) on ./pg_service.conf"; exit 1; }
 
 # Configure additional volumes (config-in, qwc2, qgs-resources, attachments)
 if [ $SELINUX_ENABLED -eq 1 ]; then
