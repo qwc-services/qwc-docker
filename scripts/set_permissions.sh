@@ -2,10 +2,18 @@
 # Run this script from the qwc-docker to configure permissions for QWC2 Docker containers
 # SELinux commands are skipped if SELinux tools are not installed
 
+if [ "$(whoami)" != "root" ]; then
+    echo "Please run me as root"
+    exit 1
+fi
+
 # Define UID/GID for QWC2 services (override with environment variables or match SERVICE_UID/SERVICE_GID in docker-compose.yml)
 # Example: If docker-compose.yml sets SERVICE_UID: 1010, SERVICE_GID: 1010, run `export QWC_UID=1010 QWC_GID=1010` before this script
 QWC_UID=${QWC_UID:-1000}
 QWC_GID=${QWC_GID:-1000}
+
+# Ignore SIGPIPE to prevent broken pipe errors
+trap '' SIGPIPE
 
 # Check if SELinux tools are available
 SELINUX_ENABLED=0
@@ -16,112 +24,175 @@ else
     echo "SELinux tools not detected, skipping SELinux commands."
 fi
 
+# Function to run SELinux commands with error handling and debug logging
+run_selinux_cmd() {
+    local cmd="$1"
+    echo "Running: $cmd"
+    # Redirect all output to prevent pipe breaks
+    if ! $cmd > /dev/null 2> /tmp/set_permissions_error.log; then
+        echo "Error: Failed to execute '$cmd'"
+        echo "Debug output: $(cat /tmp/set_permissions_error.log)"
+        exit 1
+    fi
+}
+
 # Configure permissions for the PostgreSQL database volume (qwc-postgis)
 if [ $SELINUX_ENABLED -eq 1 ]; then
-    # Set SELinux type to svirt_sandbox_file_t recursively for Docker container access
-    sudo chcon -Rt svirt_sandbox_file_t ./volumes/db
-    # Add persistent SELinux file context rule for all files in ./volumes/db
-    sudo semanage fcontext -a -t svirt_sandbox_file_t "./volumes/db(/.*)?"
-    # Apply SELinux context to existing files in ./volumes/db
-    sudo restorecon -R ./volumes/db
+    run_selinux_cmd "chcon -Rt svirt_sandbox_file_t ./volumes/db"
+    # Add or modify persistent SELinux file context rule
+    if semanage fcontext -l | grep -q "^./volumes/db/.*\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/db/.*"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/db/.*'"
+    else
+        #echo "Debug: No context for ./volumes/db/.*, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './volumes/db/.*'"
+    fi
+    run_selinux_cmd "restorecon -R ./volumes/db"
 fi
-# Set ownership to PostgreSQL user (UID 999) for container compatibility
-sudo chown -R 999:999 ./volumes/db
-# Set permissions to 700 for security (owner-only access)
-sudo chmod -R 700 ./volumes/db
+chown -R 999:999 ./volumes/db
+chmod -R 700 ./volumes/db
 
 # Configure the NGINX configuration file for the qwc-api-gateway container
 if [ $SELINUX_ENABLED -eq 1 ]; then
-    # Set SELinux type to svirt_sandbox_file_t for NGINX container access
-    sudo chcon -t svirt_sandbox_file_t ./api-gateway/nginx.conf
-    # Add persistent SELinux file context rule for nginx.conf
-    sudo semanage fcontext -a -t svirt_sandbox_file_t "./api-gateway/nginx.conf"
-    # Apply SELinux context to nginx.conf
-    sudo restorecon ./api-gateway/nginx.conf
+    run_selinux_cmd "chcon -t svirt_sandbox_file_t ./api-gateway/nginx.conf"
+    # Add or modify persistent SELinux file context rule
+    if semanage fcontext -l | grep -q "^./api-gateway/nginx.conf\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./api-gateway/nginx.conf"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './api-gateway/nginx.conf'"
+    else
+        #echo "Debug: No context for ./api-gateway/nginx.conf, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './api-gateway/nginx.conf'"
+    fi
+    run_selinux_cmd "restorecon ./api-gateway/nginx.conf"
 fi
-# Set ownership to the current user for local modifications
-sudo chown $USER:$USER ./api-gateway/nginx.conf
-# Set permissions to 644 (standard for configuration files)
-sudo chmod 644 ./api-gateway/nginx.conf
+chown $USER:$USER ./api-gateway/nginx.conf
+chmod 644 ./api-gateway/nginx.conf
 
 # Configure the configuration volume used by qwc-map-viewer and other services
 if [ $SELINUX_ENABLED -eq 1 ]; then
-    # Set SELinux type to svirt_sandbox_file_t recursively for container access
-    sudo chcon -Rt svirt_sandbox_file_t ./volumes/config
-    # Add persistent SELinux file context rule for all files in ./volumes/config
-    sudo semanage fcontext -a -t svirt_sandbox_file_t "./volumes/config(/.*)?"
-    # Apply SELinux context to existing files in ./volumes/config
-    sudo restorecon -R ./volumes/config
+    run_selinux_cmd "chcon -Rt svirt_sandbox_file_t ./volumes/config"
+    # Add or modify persistent SELinux file context rule
+    if semanage fcontext -l | grep -q "^./volumes/config/.*\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/config/.*"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/config/.*'"
+    else
+        #echo "Debug: No context for ./volumes/config/.*, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './volumes/config/.*'"
+    fi
+    run_selinux_cmd "restorecon -R ./volumes/config"
 fi
-# Set ownership to QWC2 service UID/GID (matches SERVICE_UID/SERVICE_GID in docker-compose.yml)
-sudo chown -R $QWC_UID:$QWC_GID ./volumes/config
+chown -R $QWC_UID:$QWC_GID ./volumes/config
 
 # Configure the PostgreSQL service configuration file used by multiple services
 if [ $SELINUX_ENABLED -eq 1 ]; then
-    # Set SELinux type to svirt_sandbox_file_t for container access
-    sudo chcon -t svirt_sandbox_file_t ./pg_service.conf
-    # Add persistent SELinux file context rule for pg_service.conf
-    sudo semanage fcontext -a -t svirt_sandbox_file_t "./pg_service.conf"
-    # Apply SELinux context to pg_service.conf
-    sudo restorecon ./pg_service.conf
+    run_selinux_cmd "chcon -t svirt_sandbox_file_t ./pg_service.conf"
+    # Add or modify persistent SELinux file context rule
+    if semanage fcontext -l | grep -q "^./pg_service.conf\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./pg_service.conf"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './pg_service.conf'"
+    else
+        #echo "Debug: No context for ./pg_service.conf, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './pg_service.conf'"
+    fi
+    run_selinux_cmd "restorecon ./pg_service.conf"
 fi
-# Set ownership to the current user for local editing
-sudo chown $USER:$USER ./pg_service.conf
-# Set permissions to 644 (standard for configuration files)
-sudo chmod 644 ./pg_service.conf
+chown $USER:$USER ./pg_service.conf
+chmod 644 ./pg_service.conf
 
-# Configure additional volumes (config-in, qwc2, qgs-resources, attachments, solr/data, solr/configsets)
+# Configure additional volumes (config-in, qwc2, qgs-resources, attachments)
 if [ $SELINUX_ENABLED -eq 1 ]; then
-    # Set SELinux type to svirt_sandbox_file_t recursively for all volumes
-    sudo chcon -Rt svirt_sandbox_file_t ./volumes
-    # Add persistent SELinux file context rule for all files in ./volumes
-    sudo semanage fcontext -a -t svirt_sandbox_file_t "./volumes(/.*)?"
-    # Apply SELinux context to all files in ./volumes
-    sudo restorecon -R ./volumes
+    run_selinux_cmd "chcon -Rt svirt_sandbox_file_t ./volumes/config-in ./volumes/qwc2 ./volumes/qgs-resources ./volumes/attachments"
+    # Add or modify persistent SELinux file context rule
+    if semanage fcontext -l | grep -q "^./volumes/config-in/.*\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/config-in/.*"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/config-in/.*'"
+    else
+        #echo "Debug: No context for ./volumes/config-in/.*, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './volumes/config-in/.*'"
+    fi
+    if semanage fcontext -l | grep -q "^./volumes/qwc2/.*\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/qwc2/.*"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/qwc2/.*'"
+    else
+        #echo "Debug: No context for ./volumes/qwc2/.*, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './volumes/qwc2/.*'"
+    fi
+    if semanage fcontext -l | grep -q "^./volumes/qgs-resources/.*\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/qgs-resources/.*"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/qgs-resources/.*'"
+    else
+        #echo "Debug: No context for ./volumes/qgs-resources/.*, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './volumes/qgs-resources/.*'"
+    fi
+    if semanage fcontext -l | grep -q "^./volumes/attachments/.*\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/attachments/.*"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/attachments/.*'"
+    else
+        #echo "Debug: No context for ./volumes/attachments/.*, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './volumes/attachments/.*'"
+    fi
+    run_selinux_cmd "restorecon -R ./volumes/config-in ./volumes/qwc2 ./volumes/qgs-resources ./volumes/attachments"
 fi
-# Set ownership to QWC2 service UID/GID for QWC2-related volumes (matches SERVICE_UID/SERVICE_GID in docker-compose.yml)
-sudo chown -R $QWC_UID:$QWC_GID ./volumes/config-in ./volumes/qwc2 ./volumes/qgs-resources ./volumes/attachments
-# Set ownership to Solr user (UID 8983) for Solr volumes
-sudo chown -R 8983:8983 ./volumes/solr/data ./volumes/solr/configsets
+chown -R $QWC_UID:$QWC_GID ./volumes/config-in ./volumes/qwc2 ./volumes/qgs-resources ./volumes/attachments
+
+# Configure Solr volumes
+if [ $SELINUX_ENABLED -eq 1 ]; then
+    run_selinux_cmd "chcon -Rt container_file_t -l s0 ./volumes/solr/data ./volumes/solr/configsets"
+    # Add or modify persistent SELinux file context rule
+    if semanage fcontext -l | grep -q "^./volumes/solr/data/.*\s.*container_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/solr/data/.*"
+        run_selinux_cmd "semanage fcontext -m -t container_file_t './volumes/solr/data/.*'"
+    else
+        #echo "Debug: No context for ./volumes/solr/data/.*, adding new"
+        run_selinux_cmd "semanage fcontext -a -t container_file_t './volumes/solr/data/.*'"
+    fi
+    if semanage fcontext -l | grep -q "^./volumes/solr/configsets/.*\s.*container_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/solr/configsets/.*"
+        run_selinux_cmd "semanage fcontext -m -t container_file_t './volumes/solr/configsets/.*'"
+    else
+        #echo "Debug: No context for ./volumes/solr/configsets/.*, adding new"
+        run_selinux_cmd "semanage fcontext -a -t container_file_t './volumes/solr/configsets/.*'"
+    fi
+    run_selinux_cmd "restorecon -R ./volumes/solr/data ./volumes/solr/configsets"
+fi
+chown -R 8983:8983 ./volumes/solr/data ./volumes/solr/configsets
 
 # Configure the demo data permissions script for qwc-config-db-migrate
 if [ $SELINUX_ENABLED -eq 1 ]; then
-    # Set SELinux type to svirt_sandbox_file_t for the script
-    sudo chcon -t svirt_sandbox_file_t ./volumes/demo-data/setup-demo-data-permissions.sh
-    # Add persistent SELinux file context rule for the script
-    sudo semanage fcontext -a -t svirt_sandbox_file_t "./volumes/demo-data/setup-demo-data-permissions.sh"
-    # Apply SELinux context to the script
-    sudo restorecon ./volumes/demo-data/setup-demo-data-permissions.sh
+    run_selinux_cmd "chcon -t svirt_sandbox_file_t ./volumes/demo-data/setup-demo-data-permissions.sh"
+    # Add or modify persistent SELinux file context rule
+    if semanage fcontext -l | grep -q "^./volumes/demo-data/setup-demo-data-permissions.sh\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
+        #echo "Debug: Found context for ./volumes/demo-data/setup-demo-data-permissions.sh"
+        run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/demo-data/setup-demo-data-permissions.sh'"
+    else
+        #echo "Debug: No context for ./volumes/demo-data/setup-demo-data-permissions.sh, adding new"
+        run_selinux_cmd "semanage fcontext -a -t svirt_sandbox_file_t './volumes/demo-data/setup-demo-data-permissions.sh'"
+    fi
+    run_selinux_cmd "restorecon ./volumes/demo-data/setup-demo-data-permissions.sh"
 fi
-# Set ownership to QWC2 service UID/GID (matches SERVICE_UID/SERVICE_GID in docker-compose.yml)
-sudo chown $QWC_UID:$QWC_GID ./volumes/demo-data/setup-demo-data-permissions.sh
+chown $QWC_UID:$QWC_GID ./volumes/demo-data/setup-demo-data-permissions.sh
 
 # Configure SELinux network policies for container connectivity
 if [ $SELINUX_ENABLED -eq 1 ]; then
     # Check if container_connect_any boolean exists
     if getsebool container_connect_any >/dev/null 2>&1; then
-        # Enable container_connect_any persistently to allow containers to connect to any port
-        sudo setsebool -P container_connect_any 1
+        run_selinux_cmd "setsebool -P container_connect_any 1"
     else
-        # Print a message if the boolean is not defined (e.g., in older SELinux versions)
         echo "Note: container_connect_any boolean not defined, skipping."
     fi
     # Configure ports 5432 (PostgreSQL), 8088 (QWC2 services), and 8983 (Solr)
     for port in 5432 8088 8983; do
         # Check if the port is already defined as http_port_t
-        if sudo semanage port -l | grep -q "http_port_t.*$port"; then
-            # Modify the port to use http_port_t if it exists
-            sudo semanage port -m -t http_port_t -p tcp $port
+        if semanage port -l | grep -q "http_port_t.*$port" > /dev/null 2>&1; then
+            run_selinux_cmd "semanage port -m -t http_port_t -p tcp $port"
         else
-            # Add the port with http_port_t if it doesn’t exist
-            sudo semanage port -a -t http_port_t -p tcp $port
+            run_selinux_cmd "semanage port -a -t http_port_t -p tcp $port"
         fi
     done
     # Ensure port 5432 is labeled with postgresql_port_t for PostgreSQL access
-    sudo semanage port -m -t postgresql_port_t -p tcp 5432
+    run_selinux_cmd "semanage port -m -t postgresql_port_t -p tcp 5432"
 fi
 
 # Print confirmation and instructions to restart Docker services
 echo "Permissions applied. Restart services with:"
-# Provide command to apply changes by restarting containers
 echo "docker-compose down && docker-compose up -d"
