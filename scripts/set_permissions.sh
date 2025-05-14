@@ -52,10 +52,14 @@ run_selinux_cmd() {
     fi
 }
 
+# below we will set SELinux type to svirt_sandbox_file_t recursively
+# for Docker container access. See
+# https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_atomic_host/7/html/container_security_guide/docker_selinux_security_policy#docker_selinux_security_policy
+
 # Configure permissions for the PostgreSQL database volume (qwc-postgis)
 if [ $SELINUX_ENABLED -eq 1 ]; then
     run_selinux_cmd "chcon -Rt svirt_sandbox_file_t ./volumes/db"
-    # Add or modify persistent SELinux file context rule
+    # Add or modify persistent SELinux file context rule for all files in ./volumes/db
     if semanage fcontext -l | grep -q "^./volumes/db/.*\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
         #echo "Debug: Found context for ./volumes/db/.*"
         run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/db/.*'"
@@ -65,6 +69,7 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon -R ./volumes/db"
 fi
+# Set ownership to the UID that postgres is running under in the qwc-postgis container
 chown -R 999:999 ./volumes/db
 chmod -R 700 ./volumes/db
 
@@ -97,6 +102,7 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon -R ./volumes/config"
 fi
+# services inside the containers are running as $QWC_UID:$QWC_GID
 chown -R $QWC_UID:$QWC_GID ./volumes/config
 
 # Configure the PostgreSQL service configuration file used by multiple services
@@ -171,6 +177,7 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon -R ./volumes/solr/data ./volumes/solr/configsets"
 fi
+# solr inside the conainer is running as 8983
 chown -R 8983:8983 ./volumes/solr/data ./volumes/solr/configsets
 
 # Configure the demo data permissions script for qwc-config-db-migrate
@@ -192,8 +199,10 @@ chown $QWC_UID:$QWC_GID ./volumes/demo-data/setup-demo-data-permissions.sh
 if [ $SELINUX_ENABLED -eq 1 ]; then
     # Check if container_connect_any boolean exists
     if getsebool container_connect_any >/dev/null 2>&1; then
+        # allow containers to connect to any port
         run_selinux_cmd "setsebool -P container_connect_any 1"
     else
+        # Print a message if the boolean is not defined (e.g., in older SELinux versions)
         echo "Note: container_connect_any boolean not defined, skipping."
     fi
     # Configure ports 5432 (PostgreSQL), 8088 (QWC2 services), and 8983 (Solr)
