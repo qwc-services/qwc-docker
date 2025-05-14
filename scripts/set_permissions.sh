@@ -1,16 +1,32 @@
 #!/bin/bash
-# Run this script from the qwc-docker to configure permissions for QWC2 Docker containers
-# SELinux commands are skipped if SELinux tools are not installed
+
+help() {
+   echo 'usage: set_permissions.sh QWC_UID QWC_GID'
+   echo '       set_permissions.sh --help'
+   echo
+   echo '    Run this script from the qwc-docker directory to configure'
+   echo '    permissions for QWC2 Docker containers.'
+   echo
+   echo '    SELinux settings will get applied if SELinux tools are present'
+   echo
+   echo '    Please make sure that QWC_UID and QWC_GID match match the'
+   echo '    SERVICE_UID/SERVICE_GID settings defined in docker-compose.yml'
+   echo '    (qwc-docker sets them to 1000:1000 by default)'
+   echo
+
+   exit 1
+}
+
+[ "$1" == "--help" ] && help
+[ "$1" == "" -o "$2" == "" ] && echo "ERROR: You need to set the QWC_UID QWC_GID parameters" >&2 && exit 2
 
 if [ "$(whoami)" != "root" ]; then
     echo "Please run me as root"
-    exit 1
+    exit 3
 fi
 
-# Define UID/GID for QWC2 services (override with environment variables or match SERVICE_UID/SERVICE_GID in docker-compose.yml)
-# Example: If docker-compose.yml sets SERVICE_UID: 1010, SERVICE_GID: 1010, run `export QWC_UID=1010 QWC_GID=1010` before this script
-QWC_UID=${QWC_UID:-1000}
-QWC_GID=${QWC_GID:-1000}
+QWC_UID="$1"
+QWC_GID="$2"
 
 # Ignore SIGPIPE to prevent broken pipe errors
 trap '' SIGPIPE
@@ -36,10 +52,14 @@ run_selinux_cmd() {
     fi
 }
 
+# below we will set SELinux type to svirt_sandbox_file_t recursively
+# for Docker container access. See
+# https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_atomic_host/7/html/container_security_guide/docker_selinux_security_policy#docker_selinux_security_policy
+
 # Configure permissions for the PostgreSQL database volume (qwc-postgis)
 if [ $SELINUX_ENABLED -eq 1 ]; then
     run_selinux_cmd "chcon -Rt svirt_sandbox_file_t ./volumes/db"
-    # Add or modify persistent SELinux file context rule
+    # Add or modify persistent SELinux file context rule for all files in ./volumes/db
     if semanage fcontext -l | grep -q "^./volumes/db/.*\s.*svirt_sandbox_file_t\s" > /dev/null 2>&1; then
         #echo "Debug: Found context for ./volumes/db/.*"
         run_selinux_cmd "semanage fcontext -m -t svirt_sandbox_file_t './volumes/db/.*'"
@@ -49,6 +69,7 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon -R ./volumes/db"
 fi
+# Set ownership to the UID that postgres is running under in the qwc-postgis container
 chown -R 999:999 ./volumes/db
 chmod -R 700 ./volumes/db
 
@@ -81,6 +102,7 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon -R ./volumes/config"
 fi
+# services inside the containers are running as $QWC_UID:$QWC_GID
 chown -R $QWC_UID:$QWC_GID ./volumes/config
 
 # Configure the PostgreSQL service configuration file used by multiple services
@@ -155,6 +177,7 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon -R ./volumes/solr/data ./volumes/solr/configsets"
 fi
+# solr inside the conainer is running as 8983
 chown -R 8983:8983 ./volumes/solr/data ./volumes/solr/configsets
 
 # Configure the demo data permissions script for qwc-config-db-migrate
@@ -176,8 +199,10 @@ chown $QWC_UID:$QWC_GID ./volumes/demo-data/setup-demo-data-permissions.sh
 if [ $SELINUX_ENABLED -eq 1 ]; then
     # Check if container_connect_any boolean exists
     if getsebool container_connect_any >/dev/null 2>&1; then
+        # allow containers to connect to any port
         run_selinux_cmd "setsebool -P container_connect_any 1"
     else
+        # Print a message if the boolean is not defined (e.g., in older SELinux versions)
         echo "Note: container_connect_any boolean not defined, skipping."
     fi
     # Configure ports 5432 (PostgreSQL), 8088 (QWC2 services), and 8983 (Solr)
