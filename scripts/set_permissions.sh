@@ -1,16 +1,32 @@
 #!/bin/bash
-# Run this script from the qwc-docker to configure permissions for QWC2 Docker containers
-# SELinux commands are skipped if SELinux tools are not installed
+
+help() {
+   echo 'usage: set_permissions.sh QWC_UID QWC_GID'
+   echo '       set_permissions.sh --help'
+   echo
+   echo '    Run this script from the qwc-docker directory to configure'
+   echo '    permissions for QWC2 Docker containers.'
+   echo
+   echo '    SELinux settings will get applied if SELinux tools are present'
+   echo
+   echo '    Please make sure that QWC_UID and QWC_GID match match the'
+   echo '    SERVICE_UID/SERVICE_GID settings defined in docker-compose.yml'
+   echo '    (qwc-docker sets them to 1000:1000 by default)'
+   echo
+
+   exit 1
+}
+
+[ "$1" == "--help" ] && help
+[ "$1" == "" -o "$2" == "" ] && echo "ERROR: You need to set the QWC_UID QWC_GID parameters" >&2 && exit 2
 
 if [ "$(whoami)" != "root" ]; then
     echo "Please run me as root"
-    exit 1
+    exit 3
 fi
 
-# Define UID/GID for QWC2 services (override with environment variables or match SERVICE_UID/SERVICE_GID in docker-compose.yml)
-# Example: If docker-compose.yml sets SERVICE_UID: 1010, SERVICE_GID: 1010, run `export QWC_UID=1010 QWC_GID=1010` before this script
-QWC_UID=${QWC_UID:-1000}
-QWC_GID=${QWC_GID:-1000}
+QWC_UID="$1"
+QWC_GID="$2"
 
 # Ignore SIGPIPE to prevent broken pipe errors
 trap '' SIGPIPE
