@@ -86,8 +86,6 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon ./api-gateway/nginx.conf"
 fi
-chown $USER:$USER ./api-gateway/nginx.conf
-chmod 644 ./api-gateway/nginx.conf
 
 # Configure the configuration volume used by qwc-map-viewer and other services
 if [ $SELINUX_ENABLED -eq 1 ]; then
@@ -118,8 +116,6 @@ if [ $SELINUX_ENABLED -eq 1 ]; then
     fi
     run_selinux_cmd "restorecon ./pg_service.conf"
 fi
-chown $USER:$USER ./pg_service.conf
-chmod 644 ./pg_service.conf
 
 # Configure additional volumes (config-in, qwc2, qgs-resources, attachments)
 if [ $SELINUX_ENABLED -eq 1 ]; then
