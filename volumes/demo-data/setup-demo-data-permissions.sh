@@ -16,5 +16,8 @@ VALUES
   (5, 1, 2, 0, FALSE),
   (2, 2, 4, 0, TRUE),
   (3, 2, 3, 0, TRUE),
-  (4, 2, 5, 0, TRUE)
+  (4, 2, 5, 0, TRUE);
+SELECT setval('${qwc_config_schema}.resources_id_seq', (SELECT MAX(id) FROM ${qwc_config_schema}.resources));
+SELECT setval('${qwc_config_schema}.permissions_id_seq', (SELECT MAX(id) FROM ${qwc_config_schema}.permissions));
+
 EOSQL
