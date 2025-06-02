@@ -22,7 +22,10 @@
       "config": {
         "config_generator_service_url": "http://qwc-config-service:9090",
         "db_url": "postgresql:///?service=qwc_configdb",
-        "input_config_path": "/src/qwc_service/config-in",
+        "input_config_path": "/srv/qwc_service/config-in",
+        "info_templates_path": "/info_templates",
+        "default_qgis_server_url": "http://qwc-qgis-server/ows/",
+        "ows_prefix": "/ows",
         "ows_service_url": "/ows",
         "plugins": [],
         "qgs_resources_path": "/qgs-resources",
