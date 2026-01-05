@@ -484,6 +484,14 @@
           "icon":"list-alt"
         }
       },
+	    {
+        "name": "TaskButton",
+        "cfg": {
+          "position": 6,
+          "task": "Editing",
+          "icon": "editing"
+        }
+	    },
       {
         "name":"TopBar",
         "cfg":{

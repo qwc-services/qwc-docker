@@ -112,7 +112,11 @@
         "permalink_service_url": "/api/v1/permalink/",
         "print_service_url": "/api/v1/print/",
         "search_service_url": "/api/v2/search/",
-        "search_data_service_url": "/api/v2/search/geom/"
+        "search_data_service_url": "/api/v2/search/geom/",
+        "tile_cache_enabled": true,
+        "preload_tiles": true,
+        "smooth_zoom": false,
+        "transition_duration": 100
       }
     },
     {
