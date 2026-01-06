@@ -3,3 +3,7 @@
 .env
 volumes/config/__capabilities_cache
 volumes/demo-data/sql/sensitive
+
+# PROJECT CUSTOM RULES
+/qwc-gcp/terraform/.terraform/
+/qwc-gcp/terraform/.terraform.lock.hcl
