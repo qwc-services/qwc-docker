@@ -2,3 +2,4 @@
 //api-gateway/nginx.conf
 .env
 volumes/config/__capabilities_cache
+volumes/demo-data/sql/sensitive
