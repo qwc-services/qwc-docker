@@ -24,7 +24,7 @@ services:
       # NOTE: Remove this line if you don't want/need the demo data
       - ./volumes/demo-data/setup-demo-data.sh:/docker-entrypoint-initdb.d/2_setup-demo-data.sh
     ports:
-     - "127.0.0.1:5439:5432"
+     - "127.0.0.1:5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U qwc_admin -d qwc_services"]
       interval: 10s
