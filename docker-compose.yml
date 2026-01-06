@@ -18,13 +18,11 @@ services:
   qwc-postgis:
     image: sourcepole/qwc-base-db:16 # 16 refers to the Postgres major version
     environment:
-      POSTGRES_PASSWORD: 'qwc_admin' # TODO: Set your postgres password here!
-      POSTGRES_USER: 'qwc_admin'
-      POSTGRES_DB: 'qwc_services'
+      POSTGRES_PASSWORD: "qwc_admin" # TODO: Set your postgres password here!
     volumes:
       - ./volumes/db:/var/lib/postgresql/docker
       # NOTE: Remove this line if you don't want/need the demo data
-      #- ./volumes/demo-data/setup-demo-data.sh:/docker-entrypoint-initdb.d/2_setup-demo-data.sh
+      - ./volumes/demo-data/setup-demo-data.sh:/docker-entrypoint-initdb.d/2_setup-demo-data.sh
     ports:
      - "127.0.0.1:5439:5432"
     healthcheck:
