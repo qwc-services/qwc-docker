@@ -1,0 +1,2213 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.40.6-Bratislava" saveUserFull="MADANI-APP Amine" saveDateTime="2026-01-12T15:28:52" projectname="" saveUser="madani-app">
+  <homePath path=""/>
+  <title></title>
+  <transaction mode="Disabled"/>
+  <projectFlags set=""/>
+  <projectCrs>
+    <spatialrefsys nativeFormat="Wkt">
+      <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
+      <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+      <srsid>3857</srsid>
+      <srid>3857</srid>
+      <authid>EPSG:3857</authid>
+      <description>WGS 84 / Pseudo-Mercator</description>
+      <projectionacronym>merc</projectionacronym>
+      <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </projectCrs>
+  <verticalCrs>
+    <spatialrefsys nativeFormat="Wkt">
+      <wkt></wkt>
+      <proj4></proj4>
+      <srsid>0</srsid>
+      <srid>0</srid>
+      <authid></authid>
+      <description></description>
+      <projectionacronym></projectionacronym>
+      <ellipsoidacronym></ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </verticalCrs>
+  <elevation-shading-renderer edl-distance-unit="0" is-active="0" combined-method="0" edl-distance="0.5" hillshading-is-active="0" edl-strength="1000" hillshading-is-multidirectional="0" light-altitude="45" light-azimuth="315" edl-is-active="1" hillshading-z-factor="1"/>
+  <layer-tree-group>
+    <customproperties>
+      <Option/>
+    </customproperties>
+    <layer-tree-layer patch_size="-1,-1" expanded="1" providerKey="postgres" name="wo_water_leak_searching" checked="Qt::Checked" legend_split_behavior="0" source="dbname='qwc_services' host=localhost port=5439 user='qwc_admin' key='id' srid=3857 type=LineString checkPrimaryKeyUnicity='0' table=&quot;qwc_geodb&quot;.&quot;wo_water_leak_searching&quot; (geom)" legend_exp="" id="wo_water_leak_searching_d9ae6e70_fa8a_4847_812b_d73d68bbfeab">
+      <customproperties>
+        <Option/>
+      </customproperties>
+    </layer-tree-layer>
+    <layer-tree-layer patch_size="-1,-1" expanded="1" providerKey="postgres" name="wo_water_network" checked="Qt::Checked" legend_split_behavior="0" source="dbname='qwc_services' host=localhost port=5439 user='qwc_admin' key='id' srid=3857 type=Point checkPrimaryKeyUnicity='0' table=&quot;qwc_geodb&quot;.&quot;wo_water_network&quot; (geom)" legend_exp="" id="wo_water_network_d88db359_3a0b_4afa_9569_edf7185506a2">
+      <customproperties>
+        <Option/>
+      </customproperties>
+    </layer-tree-layer>
+    <custom-order enabled="0">
+      <item>wo_water_network_d88db359_3a0b_4afa_9569_edf7185506a2</item>
+      <item>wo_water_leak_searching_d9ae6e70_fa8a_4847_812b_d73d68bbfeab</item>
+    </custom-order>
+  </layer-tree-group>
+  <snapping-settings self-snapping="0" minScale="0" enabled="0" type="1" mode="2" tolerance="12" unit="1" scaleDependencyMode="0" intersection-snapping="0" maxScale="0">
+    <individual-layer-settings>
+      <layer-setting minScale="0" enabled="0" type="1" tolerance="12" units="1" id="wo_water_leak_searching_d9ae6e70_fa8a_4847_812b_d73d68bbfeab" maxScale="0"/>
+      <layer-setting minScale="0" enabled="0" type="1" tolerance="12" units="1" id="wo_water_network_d88db359_3a0b_4afa_9569_edf7185506a2" maxScale="0"/>
+    </individual-layer-settings>
+  </snapping-settings>
+  <relations/>
+  <polymorphicRelations/>
+  <mapcanvas name="theMapCanvas" annotationsVisible="1">
+    <units>meters</units>
+    <extent>
+      <xmin>290154.48116417549317703</xmin>
+      <ymin>6189208.74404924642294645</ymin>
+      <xmax>298941.70135567471152171</xmax>
+      <ymax>6196660.80444234889000654</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys nativeFormat="Wkt">
+        <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
+        <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+        <srsid>3857</srsid>
+        <srid>3857</srid>
+        <authid>EPSG:3857</authid>
+        <description>WGS 84 / Pseudo-Mercator</description>
+        <projectionacronym>merc</projectionacronym>
+        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+        <geographicflag>false</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope/>
+  </mapcanvas>
+  <projectModels/>
+  <legend updateDrawingOrder="true">
+    <legendlayer showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked" name="wo_water_leak_searching" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="1" layerid="wo_water_leak_searching_d9ae6e70_fa8a_4847_812b_d73d68bbfeab" isInOverview="0"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked" name="wo_water_network" open="true">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="1" layerid="wo_water_network_d88db359_3a0b_4afa_9569_edf7185506a2" isInOverview="0"/>
+      </filegroup>
+    </legendlayer>
+  </legend>
+  <mapViewDocks/>
+  <mapcanvas name="mAreaCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368</xmin>
+      <ymin>179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368</ymin>
+      <xmax>-179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368</xmax>
+      <ymax>-179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys nativeFormat="Wkt">
+        <wkt>GEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["Horizontal component of 3D system."],AREA["World."],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope/>
+  </mapcanvas>
+  <main-annotation-layer minScale="1e+08" type="annotation" legendPlaceholderImage="" autoRefreshTime="0" styleCategories="AllStyleCategories" autoRefreshMode="Disabled" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" maxScale="0">
+    <id>Annotations_3d7f88cf_689f_4cbd_9186_a796a101b6d3</id>
+    <datasource></datasource>
+    <keywordList>
+      <value></value>
+    </keywordList>
+    <layername>Annotations</layername>
+    <srs>
+      <spatialrefsys nativeFormat="Wkt">
+        <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
+        <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+        <srsid>3857</srsid>
+        <srid>3857</srid>
+        <authid>EPSG:3857</authid>
+        <description>WGS 84 / Pseudo-Mercator</description>
+        <projectionacronym>merc</projectionacronym>
+        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+        <geographicflag>false</geographicflag>
+      </spatialrefsys>
+    </srs>
+    <resourceMetadata>
+      <identifier></identifier>
+      <parentidentifier></parentidentifier>
+      <language></language>
+      <type></type>
+      <title></title>
+      <abstract></abstract>
+      <links/>
+      <dates/>
+      <fees></fees>
+      <encoding></encoding>
+      <crs>
+        <spatialrefsys nativeFormat="Wkt">
+          <wkt></wkt>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </crs>
+      <extent/>
+    </resourceMetadata>
+    <items/>
+    <flags>
+      <Identifiable>1</Identifiable>
+      <Removable>1</Removable>
+      <Searchable>1</Searchable>
+      <Private>0</Private>
+    </flags>
+    <customproperties>
+      <Option/>
+    </customproperties>
+    <layerOpacity>1</layerOpacity>
+    <blendMode>0</blendMode>
+    <paintEffect/>
+  </main-annotation-layer>
+  <projectlayers>
+    <maplayer symbologyReferenceScale="-1" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" simplifyLocal="1" refreshOnNotifyMessage="" minScale="100000000" styleCategories="AllStyleCategories" simplifyDrawingHints="1" autoRefreshTime="0" legendPlaceholderImage="" maxScale="0" simplifyMaxScale="1" labelsEnabled="0" geometry="Line" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" readOnly="0" type="vector" wkbType="LineString" autoRefreshMode="Disabled">
+      <id>wo_water_leak_searching_d9ae6e70_fa8a_4847_812b_d73d68bbfeab</id>
+      <datasource>service='qwc_geodb' key='id' srid=3857 type=LineString checkPrimaryKeyUnicity='0' table="qwc_geodb"."wo_water_leak_searching" (geom)</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>wo_water_leak_searching</layername>
+      <srs>
+        <spatialrefsys nativeFormat="Wkt">
+          <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
+          <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+          <srsid>3857</srsid>
+          <srid>3857</srid>
+          <authid>EPSG:3857</authid>
+          <description>WGS 84 / Pseudo-Mercator</description>
+          <projectionacronym>merc</projectionacronym>
+          <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <dates/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys nativeFormat="Wkt">
+            <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
+            <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+            <srsid>3857</srsid>
+            <srid>3857</srid>
+            <authid>EPSG:3857</authid>
+            <description>WGS 84 / Pseudo-Mercator</description>
+            <projectionacronym>merc</projectionacronym>
+            <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <metadataUrls/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+        <Private>0</Private>
+      </flags>
+      <temporal enabled="0" endExpression="" durationField="" mode="2" limitMode="0" startField="execution_date_start" startExpression="" fixedDuration="0" accumulate="0" endField="workorder_date_end_target" durationUnit="min">
+        <fixedRange>
+          <start></start>
+          <end></end>
+        </fixedRange>
+      </temporal>
+      <elevation type="IndividualFeatures" clamping="Terrain" symbology="Line" showMarkerSymbolInSurfacePlots="0" extrusion="0" respectLayerSymbol="1" zscale="1" zoffset="0" binding="Centroid" extrusionEnabled="0">
+        <data-defined-properties>
+          <Option type="Map">
+            <Option type="QString" name="name" value=""/>
+            <Option name="properties"/>
+            <Option type="QString" name="type" value="collection"/>
+          </Option>
+        </data-defined-properties>
+        <profileLineSymbol>
+          <symbol type="line" clip_to_extent="1" name="" alpha="1" is_animated="0" force_rhr="0" frame_rate="10">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" enabled="1" pass="0" class="SimpleLine" id="{542a1867-b08d-487f-8c5e-cbb0d2ff42a2}">
+              <Option type="Map">
+                <Option type="QString" name="align_dash_pattern" value="0"/>
+                <Option type="QString" name="capstyle" value="square"/>
+                <Option type="QString" name="customdash" value="5;2"/>
+                <Option type="QString" name="customdash_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="customdash_unit" value="MM"/>
+                <Option type="QString" name="dash_pattern_offset" value="0"/>
+                <Option type="QString" name="dash_pattern_offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="dash_pattern_offset_unit" value="MM"/>
+                <Option type="QString" name="draw_inside_polygon" value="0"/>
+                <Option type="QString" name="joinstyle" value="bevel"/>
+                <Option type="QString" name="line_color" value="231,113,72,255,rgb:0.90588235294117647,0.44313725490196076,0.28235294117647058,1"/>
+                <Option type="QString" name="line_style" value="solid"/>
+                <Option type="QString" name="line_width" value="0.6"/>
+                <Option type="QString" name="line_width_unit" value="MM"/>
+                <Option type="QString" name="offset" value="0"/>
+                <Option type="QString" name="offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="offset_unit" value="MM"/>
+                <Option type="QString" name="ring_filter" value="0"/>
+                <Option type="QString" name="trim_distance_end" value="0"/>
+                <Option type="QString" name="trim_distance_end_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="trim_distance_end_unit" value="MM"/>
+                <Option type="QString" name="trim_distance_start" value="0"/>
+                <Option type="QString" name="trim_distance_start_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="trim_distance_start_unit" value="MM"/>
+                <Option type="QString" name="tweak_dash_pattern_on_corners" value="0"/>
+                <Option type="QString" name="use_custom_dash" value="0"/>
+                <Option type="QString" name="width_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </profileLineSymbol>
+        <profileFillSymbol>
+          <symbol type="fill" clip_to_extent="1" name="" alpha="1" is_animated="0" force_rhr="0" frame_rate="10">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" enabled="1" pass="0" class="SimpleFill" id="{c8dfc6bd-b19e-49bc-b319-bd4b76853e13}">
+              <Option type="Map">
+                <Option type="QString" name="border_width_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="color" value="231,113,72,255,rgb:0.90588235294117647,0.44313725490196076,0.28235294117647058,1"/>
+                <Option type="QString" name="joinstyle" value="bevel"/>
+                <Option type="QString" name="offset" value="0,0"/>
+                <Option type="QString" name="offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="offset_unit" value="MM"/>
+                <Option type="QString" name="outline_color" value="165,81,51,255,rgb:0.6470588235294118,0.31651789120317386,0.20167849240863661,1"/>
+                <Option type="QString" name="outline_style" value="solid"/>
+                <Option type="QString" name="outline_width" value="0.2"/>
+                <Option type="QString" name="outline_width_unit" value="MM"/>
+                <Option type="QString" name="style" value="solid"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </profileFillSymbol>
+        <profileMarkerSymbol>
+          <symbol type="marker" clip_to_extent="1" name="" alpha="1" is_animated="0" force_rhr="0" frame_rate="10">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" enabled="1" pass="0" class="SimpleMarker" id="{1c3a91f4-8e2a-4bdc-91e5-6f22f9e5781a}">
+              <Option type="Map">
+                <Option type="QString" name="angle" value="0"/>
+                <Option type="QString" name="cap_style" value="square"/>
+                <Option type="QString" name="color" value="231,113,72,255,rgb:0.90588235294117647,0.44313725490196076,0.28235294117647058,1"/>
+                <Option type="QString" name="horizontal_anchor_point" value="1"/>
+                <Option type="QString" name="joinstyle" value="bevel"/>
+                <Option type="QString" name="name" value="diamond"/>
+                <Option type="QString" name="offset" value="0,0"/>
+                <Option type="QString" name="offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="offset_unit" value="MM"/>
+                <Option type="QString" name="outline_color" value="165,81,51,255,rgb:0.6470588235294118,0.31651789120317386,0.20167849240863661,1"/>
+                <Option type="QString" name="outline_style" value="solid"/>
+                <Option type="QString" name="outline_width" value="0.2"/>
+                <Option type="QString" name="outline_width_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="outline_width_unit" value="MM"/>
+                <Option type="QString" name="scale_method" value="diameter"/>
+                <Option type="QString" name="size" value="3"/>
+                <Option type="QString" name="size_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="size_unit" value="MM"/>
+                <Option type="QString" name="vertical_anchor_point" value="1"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </profileMarkerSymbol>
+      </elevation>
+      <renderer-v2 type="singleSymbol" forceraster="0" symbollevels="0" referencescale="-1" enableorderby="0">
+        <symbols>
+          <symbol type="line" clip_to_extent="1" name="0" alpha="1" is_animated="0" force_rhr="0" frame_rate="10">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" enabled="1" pass="0" class="SimpleLine" id="{bb64a9f2-7d76-4ab1-87ce-bbcb837d4ef7}">
+              <Option type="Map">
+                <Option type="QString" name="align_dash_pattern" value="0"/>
+                <Option type="QString" name="capstyle" value="square"/>
+                <Option type="QString" name="customdash" value="5;2"/>
+                <Option type="QString" name="customdash_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="customdash_unit" value="MM"/>
+                <Option type="QString" name="dash_pattern_offset" value="0"/>
+                <Option type="QString" name="dash_pattern_offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="dash_pattern_offset_unit" value="MM"/>
+                <Option type="QString" name="draw_inside_polygon" value="0"/>
+                <Option type="QString" name="joinstyle" value="bevel"/>
+                <Option type="QString" name="line_color" value="183,72,75,255,rgb:0.71764705882352942,0.28235294117647058,0.29411764705882354,1"/>
+                <Option type="QString" name="line_style" value="solid"/>
+                <Option type="QString" name="line_width" value="0.26"/>
+                <Option type="QString" name="line_width_unit" value="MM"/>
+                <Option type="QString" name="offset" value="0"/>
+                <Option type="QString" name="offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="offset_unit" value="MM"/>
+                <Option type="QString" name="ring_filter" value="0"/>
+                <Option type="QString" name="trim_distance_end" value="0"/>
+                <Option type="QString" name="trim_distance_end_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="trim_distance_end_unit" value="MM"/>
+                <Option type="QString" name="trim_distance_start" value="0"/>
+                <Option type="QString" name="trim_distance_start_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="trim_distance_start_unit" value="MM"/>
+                <Option type="QString" name="tweak_dash_pattern_on_corners" value="0"/>
+                <Option type="QString" name="use_custom_dash" value="0"/>
+                <Option type="QString" name="width_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+        <data-defined-properties>
+          <Option type="Map">
+            <Option type="QString" name="name" value=""/>
+            <Option name="properties"/>
+            <Option type="QString" name="type" value="collection"/>
+          </Option>
+        </data-defined-properties>
+      </renderer-v2>
+      <selection mode="Default">
+        <selectionColor invalid="1"/>
+      </selection>
+      <customproperties>
+        <Option/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <legend type="default-vector" showLabelLegend="0"/>
+      <referencedLayers/>
+      <fieldConfiguration>
+        <field configurationFlags="NoFlag" name="id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="pipeline_execution_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="pipeline_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="creation_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="update_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="source_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="source_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="local_activity_level2_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="contract_code">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="contract_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="work_site_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="asset_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="request_reason_code_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="request_reason_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="action_code_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="action_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="intervention_stage_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="intervention_description">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="intervention_status_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="request_reason_type_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="street_number">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="street_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="street_name_added_information">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="city_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="workorder_periodicity_value">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="workorder_periodicity_code_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="request_emergency">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="execution_date_start">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="intervention_date_expected">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="workorder_date_start_target">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="workorder_date_end_target">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="execution_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="expected_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="execution_date_end">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="geometry">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="asset_cmms_asset_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="source_uid">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="planner_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="cri_url">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="status_state">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="inspected_length">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="prelocation_techniques">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="location_techniques">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="type_table_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="type_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="gis_asset_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="moveo_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="task_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="datadesk_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="trgm">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="" field="pipeline_execution_time"/>
+        <alias index="2" name="" field="pipeline_id"/>
+        <alias index="3" name="" field="creation_time"/>
+        <alias index="4" name="" field="update_time"/>
+        <alias index="5" name="" field="source_name"/>
+        <alias index="6" name="" field="source_id"/>
+        <alias index="7" name="" field="local_activity_level2_name"/>
+        <alias index="8" name="" field="contract_code"/>
+        <alias index="9" name="" field="contract_name"/>
+        <alias index="10" name="" field="work_site_id"/>
+        <alias index="11" name="" field="asset_id"/>
+        <alias index="12" name="" field="request_reason_code_emitter"/>
+        <alias index="13" name="" field="request_reason_name_emitter"/>
+        <alias index="14" name="" field="action_code_emitter"/>
+        <alias index="15" name="" field="action_name_emitter"/>
+        <alias index="16" name="" field="intervention_stage_name_emitter"/>
+        <alias index="17" name="" field="intervention_description"/>
+        <alias index="18" name="" field="intervention_status_name_emitter"/>
+        <alias index="19" name="" field="request_reason_type_name_emitter"/>
+        <alias index="20" name="" field="street_number"/>
+        <alias index="21" name="" field="street_name"/>
+        <alias index="22" name="" field="street_name_added_information"/>
+        <alias index="23" name="" field="city_name"/>
+        <alias index="24" name="" field="workorder_periodicity_value"/>
+        <alias index="25" name="" field="workorder_periodicity_code_emitter"/>
+        <alias index="26" name="" field="request_emergency"/>
+        <alias index="27" name="" field="execution_date_start"/>
+        <alias index="28" name="" field="intervention_date_expected"/>
+        <alias index="29" name="" field="workorder_date_start_target"/>
+        <alias index="30" name="" field="workorder_date_end_target"/>
+        <alias index="31" name="" field="execution_time"/>
+        <alias index="32" name="" field="expected_time"/>
+        <alias index="33" name="" field="execution_date_end"/>
+        <alias index="34" name="" field="geometry"/>
+        <alias index="35" name="" field="asset_cmms_asset_name"/>
+        <alias index="36" name="" field="source_uid"/>
+        <alias index="37" name="" field="planner_id"/>
+        <alias index="38" name="" field="cri_url"/>
+        <alias index="39" name="" field="status_state"/>
+        <alias index="40" name="" field="inspected_length"/>
+        <alias index="41" name="" field="prelocation_techniques"/>
+        <alias index="42" name="" field="location_techniques"/>
+        <alias index="43" name="" field="type_table_emitter"/>
+        <alias index="44" name="" field="type_name_emitter"/>
+        <alias index="45" name="" field="gis_asset_id"/>
+        <alias index="46" name="" field="moveo_id"/>
+        <alias index="47" name="" field="task_id"/>
+        <alias index="48" name="" field="datadesk_id"/>
+        <alias index="49" name="" field="trgm"/>
+      </aliases>
+      <splitPolicies>
+        <policy policy="Duplicate" field="id"/>
+        <policy policy="Duplicate" field="pipeline_execution_time"/>
+        <policy policy="Duplicate" field="pipeline_id"/>
+        <policy policy="Duplicate" field="creation_time"/>
+        <policy policy="Duplicate" field="update_time"/>
+        <policy policy="Duplicate" field="source_name"/>
+        <policy policy="Duplicate" field="source_id"/>
+        <policy policy="Duplicate" field="local_activity_level2_name"/>
+        <policy policy="Duplicate" field="contract_code"/>
+        <policy policy="Duplicate" field="contract_name"/>
+        <policy policy="Duplicate" field="work_site_id"/>
+        <policy policy="Duplicate" field="asset_id"/>
+        <policy policy="Duplicate" field="request_reason_code_emitter"/>
+        <policy policy="Duplicate" field="request_reason_name_emitter"/>
+        <policy policy="Duplicate" field="action_code_emitter"/>
+        <policy policy="Duplicate" field="action_name_emitter"/>
+        <policy policy="Duplicate" field="intervention_stage_name_emitter"/>
+        <policy policy="Duplicate" field="intervention_description"/>
+        <policy policy="Duplicate" field="intervention_status_name_emitter"/>
+        <policy policy="Duplicate" field="request_reason_type_name_emitter"/>
+        <policy policy="Duplicate" field="street_number"/>
+        <policy policy="Duplicate" field="street_name"/>
+        <policy policy="Duplicate" field="street_name_added_information"/>
+        <policy policy="Duplicate" field="city_name"/>
+        <policy policy="Duplicate" field="workorder_periodicity_value"/>
+        <policy policy="Duplicate" field="workorder_periodicity_code_emitter"/>
+        <policy policy="Duplicate" field="request_emergency"/>
+        <policy policy="Duplicate" field="execution_date_start"/>
+        <policy policy="Duplicate" field="intervention_date_expected"/>
+        <policy policy="Duplicate" field="workorder_date_start_target"/>
+        <policy policy="Duplicate" field="workorder_date_end_target"/>
+        <policy policy="Duplicate" field="execution_time"/>
+        <policy policy="Duplicate" field="expected_time"/>
+        <policy policy="Duplicate" field="execution_date_end"/>
+        <policy policy="Duplicate" field="geometry"/>
+        <policy policy="Duplicate" field="asset_cmms_asset_name"/>
+        <policy policy="Duplicate" field="source_uid"/>
+        <policy policy="Duplicate" field="planner_id"/>
+        <policy policy="Duplicate" field="cri_url"/>
+        <policy policy="Duplicate" field="status_state"/>
+        <policy policy="Duplicate" field="inspected_length"/>
+        <policy policy="Duplicate" field="prelocation_techniques"/>
+        <policy policy="Duplicate" field="location_techniques"/>
+        <policy policy="Duplicate" field="type_table_emitter"/>
+        <policy policy="Duplicate" field="type_name_emitter"/>
+        <policy policy="Duplicate" field="gis_asset_id"/>
+        <policy policy="Duplicate" field="moveo_id"/>
+        <policy policy="Duplicate" field="task_id"/>
+        <policy policy="Duplicate" field="datadesk_id"/>
+        <policy policy="Duplicate" field="trgm"/>
+      </splitPolicies>
+      <duplicatePolicies>
+        <policy policy="Duplicate" field="id"/>
+        <policy policy="Duplicate" field="pipeline_execution_time"/>
+        <policy policy="Duplicate" field="pipeline_id"/>
+        <policy policy="Duplicate" field="creation_time"/>
+        <policy policy="Duplicate" field="update_time"/>
+        <policy policy="Duplicate" field="source_name"/>
+        <policy policy="Duplicate" field="source_id"/>
+        <policy policy="Duplicate" field="local_activity_level2_name"/>
+        <policy policy="Duplicate" field="contract_code"/>
+        <policy policy="Duplicate" field="contract_name"/>
+        <policy policy="Duplicate" field="work_site_id"/>
+        <policy policy="Duplicate" field="asset_id"/>
+        <policy policy="Duplicate" field="request_reason_code_emitter"/>
+        <policy policy="Duplicate" field="request_reason_name_emitter"/>
+        <policy policy="Duplicate" field="action_code_emitter"/>
+        <policy policy="Duplicate" field="action_name_emitter"/>
+        <policy policy="Duplicate" field="intervention_stage_name_emitter"/>
+        <policy policy="Duplicate" field="intervention_description"/>
+        <policy policy="Duplicate" field="intervention_status_name_emitter"/>
+        <policy policy="Duplicate" field="request_reason_type_name_emitter"/>
+        <policy policy="Duplicate" field="street_number"/>
+        <policy policy="Duplicate" field="street_name"/>
+        <policy policy="Duplicate" field="street_name_added_information"/>
+        <policy policy="Duplicate" field="city_name"/>
+        <policy policy="Duplicate" field="workorder_periodicity_value"/>
+        <policy policy="Duplicate" field="workorder_periodicity_code_emitter"/>
+        <policy policy="Duplicate" field="request_emergency"/>
+        <policy policy="Duplicate" field="execution_date_start"/>
+        <policy policy="Duplicate" field="intervention_date_expected"/>
+        <policy policy="Duplicate" field="workorder_date_start_target"/>
+        <policy policy="Duplicate" field="workorder_date_end_target"/>
+        <policy policy="Duplicate" field="execution_time"/>
+        <policy policy="Duplicate" field="expected_time"/>
+        <policy policy="Duplicate" field="execution_date_end"/>
+        <policy policy="Duplicate" field="geometry"/>
+        <policy policy="Duplicate" field="asset_cmms_asset_name"/>
+        <policy policy="Duplicate" field="source_uid"/>
+        <policy policy="Duplicate" field="planner_id"/>
+        <policy policy="Duplicate" field="cri_url"/>
+        <policy policy="Duplicate" field="status_state"/>
+        <policy policy="Duplicate" field="inspected_length"/>
+        <policy policy="Duplicate" field="prelocation_techniques"/>
+        <policy policy="Duplicate" field="location_techniques"/>
+        <policy policy="Duplicate" field="type_table_emitter"/>
+        <policy policy="Duplicate" field="type_name_emitter"/>
+        <policy policy="Duplicate" field="gis_asset_id"/>
+        <policy policy="Duplicate" field="moveo_id"/>
+        <policy policy="Duplicate" field="task_id"/>
+        <policy policy="Duplicate" field="datadesk_id"/>
+        <policy policy="Duplicate" field="trgm"/>
+      </duplicatePolicies>
+      <defaults>
+        <default applyOnUpdate="0" field="id" expression=""/>
+        <default applyOnUpdate="0" field="pipeline_execution_time" expression=""/>
+        <default applyOnUpdate="0" field="pipeline_id" expression=""/>
+        <default applyOnUpdate="0" field="creation_time" expression=""/>
+        <default applyOnUpdate="0" field="update_time" expression=""/>
+        <default applyOnUpdate="0" field="source_name" expression=""/>
+        <default applyOnUpdate="0" field="source_id" expression=""/>
+        <default applyOnUpdate="0" field="local_activity_level2_name" expression=""/>
+        <default applyOnUpdate="0" field="contract_code" expression=""/>
+        <default applyOnUpdate="0" field="contract_name" expression=""/>
+        <default applyOnUpdate="0" field="work_site_id" expression=""/>
+        <default applyOnUpdate="0" field="asset_id" expression=""/>
+        <default applyOnUpdate="0" field="request_reason_code_emitter" expression=""/>
+        <default applyOnUpdate="0" field="request_reason_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="action_code_emitter" expression=""/>
+        <default applyOnUpdate="0" field="action_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="intervention_stage_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="intervention_description" expression=""/>
+        <default applyOnUpdate="0" field="intervention_status_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="request_reason_type_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="street_number" expression=""/>
+        <default applyOnUpdate="0" field="street_name" expression=""/>
+        <default applyOnUpdate="0" field="street_name_added_information" expression=""/>
+        <default applyOnUpdate="0" field="city_name" expression=""/>
+        <default applyOnUpdate="0" field="workorder_periodicity_value" expression=""/>
+        <default applyOnUpdate="0" field="workorder_periodicity_code_emitter" expression=""/>
+        <default applyOnUpdate="0" field="request_emergency" expression=""/>
+        <default applyOnUpdate="0" field="execution_date_start" expression=""/>
+        <default applyOnUpdate="0" field="intervention_date_expected" expression=""/>
+        <default applyOnUpdate="0" field="workorder_date_start_target" expression=""/>
+        <default applyOnUpdate="0" field="workorder_date_end_target" expression=""/>
+        <default applyOnUpdate="0" field="execution_time" expression=""/>
+        <default applyOnUpdate="0" field="expected_time" expression=""/>
+        <default applyOnUpdate="0" field="execution_date_end" expression=""/>
+        <default applyOnUpdate="0" field="geometry" expression=""/>
+        <default applyOnUpdate="0" field="asset_cmms_asset_name" expression=""/>
+        <default applyOnUpdate="0" field="source_uid" expression=""/>
+        <default applyOnUpdate="0" field="planner_id" expression=""/>
+        <default applyOnUpdate="0" field="cri_url" expression=""/>
+        <default applyOnUpdate="0" field="status_state" expression=""/>
+        <default applyOnUpdate="0" field="inspected_length" expression=""/>
+        <default applyOnUpdate="0" field="prelocation_techniques" expression=""/>
+        <default applyOnUpdate="0" field="location_techniques" expression=""/>
+        <default applyOnUpdate="0" field="type_table_emitter" expression=""/>
+        <default applyOnUpdate="0" field="type_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="gis_asset_id" expression=""/>
+        <default applyOnUpdate="0" field="moveo_id" expression=""/>
+        <default applyOnUpdate="0" field="task_id" expression=""/>
+        <default applyOnUpdate="0" field="datadesk_id" expression=""/>
+        <default applyOnUpdate="0" field="trgm" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint unique_strength="1" notnull_strength="1" field="id" exp_strength="0" constraints="3"/>
+        <constraint unique_strength="0" notnull_strength="0" field="pipeline_execution_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="pipeline_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="creation_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="update_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="source_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="source_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="local_activity_level2_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="contract_code" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="contract_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="work_site_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="asset_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="request_reason_code_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="request_reason_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="action_code_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="action_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="intervention_stage_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="intervention_description" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="intervention_status_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="request_reason_type_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="street_number" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="street_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="street_name_added_information" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="city_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="workorder_periodicity_value" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="workorder_periodicity_code_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="request_emergency" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="execution_date_start" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="intervention_date_expected" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="workorder_date_start_target" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="workorder_date_end_target" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="execution_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="expected_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="execution_date_end" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="geometry" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="asset_cmms_asset_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="source_uid" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="planner_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="cri_url" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="status_state" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="inspected_length" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="prelocation_techniques" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="location_techniques" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="type_table_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="type_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="gis_asset_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="moveo_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="1" notnull_strength="0" field="task_id" exp_strength="0" constraints="2"/>
+        <constraint unique_strength="1" notnull_strength="0" field="datadesk_id" exp_strength="0" constraints="2"/>
+        <constraint unique_strength="0" notnull_strength="0" field="trgm" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" exp="" field="id"/>
+        <constraint desc="" exp="" field="pipeline_execution_time"/>
+        <constraint desc="" exp="" field="pipeline_id"/>
+        <constraint desc="" exp="" field="creation_time"/>
+        <constraint desc="" exp="" field="update_time"/>
+        <constraint desc="" exp="" field="source_name"/>
+        <constraint desc="" exp="" field="source_id"/>
+        <constraint desc="" exp="" field="local_activity_level2_name"/>
+        <constraint desc="" exp="" field="contract_code"/>
+        <constraint desc="" exp="" field="contract_name"/>
+        <constraint desc="" exp="" field="work_site_id"/>
+        <constraint desc="" exp="" field="asset_id"/>
+        <constraint desc="" exp="" field="request_reason_code_emitter"/>
+        <constraint desc="" exp="" field="request_reason_name_emitter"/>
+        <constraint desc="" exp="" field="action_code_emitter"/>
+        <constraint desc="" exp="" field="action_name_emitter"/>
+        <constraint desc="" exp="" field="intervention_stage_name_emitter"/>
+        <constraint desc="" exp="" field="intervention_description"/>
+        <constraint desc="" exp="" field="intervention_status_name_emitter"/>
+        <constraint desc="" exp="" field="request_reason_type_name_emitter"/>
+        <constraint desc="" exp="" field="street_number"/>
+        <constraint desc="" exp="" field="street_name"/>
+        <constraint desc="" exp="" field="street_name_added_information"/>
+        <constraint desc="" exp="" field="city_name"/>
+        <constraint desc="" exp="" field="workorder_periodicity_value"/>
+        <constraint desc="" exp="" field="workorder_periodicity_code_emitter"/>
+        <constraint desc="" exp="" field="request_emergency"/>
+        <constraint desc="" exp="" field="execution_date_start"/>
+        <constraint desc="" exp="" field="intervention_date_expected"/>
+        <constraint desc="" exp="" field="workorder_date_start_target"/>
+        <constraint desc="" exp="" field="workorder_date_end_target"/>
+        <constraint desc="" exp="" field="execution_time"/>
+        <constraint desc="" exp="" field="expected_time"/>
+        <constraint desc="" exp="" field="execution_date_end"/>
+        <constraint desc="" exp="" field="geometry"/>
+        <constraint desc="" exp="" field="asset_cmms_asset_name"/>
+        <constraint desc="" exp="" field="source_uid"/>
+        <constraint desc="" exp="" field="planner_id"/>
+        <constraint desc="" exp="" field="cri_url"/>
+        <constraint desc="" exp="" field="status_state"/>
+        <constraint desc="" exp="" field="inspected_length"/>
+        <constraint desc="" exp="" field="prelocation_techniques"/>
+        <constraint desc="" exp="" field="location_techniques"/>
+        <constraint desc="" exp="" field="type_table_emitter"/>
+        <constraint desc="" exp="" field="type_name_emitter"/>
+        <constraint desc="" exp="" field="gis_asset_id"/>
+        <constraint desc="" exp="" field="moveo_id"/>
+        <constraint desc="" exp="" field="task_id"/>
+        <constraint desc="" exp="" field="datadesk_id"/>
+        <constraint desc="" exp="" field="trgm"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <storedexpressions/>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <reuseLastValue/>
+      <dataDefinedFieldProperties/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip enabled="1"></mapTip>
+    </maplayer>
+    <maplayer symbologyReferenceScale="-1" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" simplifyLocal="1" refreshOnNotifyMessage="" minScale="100000000" styleCategories="AllStyleCategories" simplifyDrawingHints="1" autoRefreshTime="0" legendPlaceholderImage="" maxScale="0" simplifyMaxScale="1" labelsEnabled="0" geometry="Point" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" readOnly="0" type="vector" wkbType="Point" autoRefreshMode="Disabled">
+      <extent>
+        <xmin>287761.87796400254592299</xmin>
+        <ymin>6183956.63640601933002472</ymin>
+        <xmax>319954.13412531738867983</xmax>
+        <ymax>6212345.43415233213454485</ymax>
+      </extent>
+      <wgs84extent>
+        <xmin>2.58500893162000001</xmin>
+        <ymin>48.46137093343619284</ymin>
+        <xmax>2.87419688901999937</xmax>
+        <ymax>48.63020000000000209</ymax>
+      </wgs84extent>
+      <id>wo_water_network_d88db359_3a0b_4afa_9569_edf7185506a2</id>
+      <datasource>service='qwc_geodb' key='id' srid=3857 type=Point checkPrimaryKeyUnicity='0' table="qwc_geodb"."wo_water_network" (geom)</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>wo_water_network</layername>
+      <srs>
+        <spatialrefsys nativeFormat="Wkt">
+          <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
+          <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+          <srsid>3857</srsid>
+          <srid>3857</srid>
+          <authid>EPSG:3857</authid>
+          <description>WGS 84 / Pseudo-Mercator</description>
+          <projectionacronym>merc</projectionacronym>
+          <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <dates/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys nativeFormat="Wkt">
+            <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
+            <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+            <srsid>3857</srsid>
+            <srid>3857</srid>
+            <authid>EPSG:3857</authid>
+            <description>WGS 84 / Pseudo-Mercator</description>
+            <projectionacronym>merc</projectionacronym>
+            <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <metadataUrls/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+        <Private>0</Private>
+      </flags>
+      <temporal enabled="0" endExpression="" durationField="" mode="2" limitMode="0" startField="execution_date_start" startExpression="" fixedDuration="0" accumulate="0" endField="workorder_date_end_target" durationUnit="min">
+        <fixedRange>
+          <start></start>
+          <end></end>
+        </fixedRange>
+      </temporal>
+      <elevation type="IndividualFeatures" clamping="Terrain" symbology="Line" showMarkerSymbolInSurfacePlots="0" extrusion="0" respectLayerSymbol="1" zscale="1" zoffset="0" binding="Centroid" extrusionEnabled="0">
+        <data-defined-properties>
+          <Option type="Map">
+            <Option type="QString" name="name" value=""/>
+            <Option name="properties"/>
+            <Option type="QString" name="type" value="collection"/>
+          </Option>
+        </data-defined-properties>
+        <profileLineSymbol>
+          <symbol type="line" clip_to_extent="1" name="" alpha="1" is_animated="0" force_rhr="0" frame_rate="10">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" enabled="1" pass="0" class="SimpleLine" id="{f5949519-d988-4d4d-ab4c-47cf088e1179}">
+              <Option type="Map">
+                <Option type="QString" name="align_dash_pattern" value="0"/>
+                <Option type="QString" name="capstyle" value="square"/>
+                <Option type="QString" name="customdash" value="5;2"/>
+                <Option type="QString" name="customdash_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="customdash_unit" value="MM"/>
+                <Option type="QString" name="dash_pattern_offset" value="0"/>
+                <Option type="QString" name="dash_pattern_offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="dash_pattern_offset_unit" value="MM"/>
+                <Option type="QString" name="draw_inside_polygon" value="0"/>
+                <Option type="QString" name="joinstyle" value="bevel"/>
+                <Option type="QString" name="line_color" value="190,207,80,255,rgb:0.74509803921568629,0.81176470588235294,0.31372549019607843,1"/>
+                <Option type="QString" name="line_style" value="solid"/>
+                <Option type="QString" name="line_width" value="0.6"/>
+                <Option type="QString" name="line_width_unit" value="MM"/>
+                <Option type="QString" name="offset" value="0"/>
+                <Option type="QString" name="offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="offset_unit" value="MM"/>
+                <Option type="QString" name="ring_filter" value="0"/>
+                <Option type="QString" name="trim_distance_end" value="0"/>
+                <Option type="QString" name="trim_distance_end_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="trim_distance_end_unit" value="MM"/>
+                <Option type="QString" name="trim_distance_start" value="0"/>
+                <Option type="QString" name="trim_distance_start_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="trim_distance_start_unit" value="MM"/>
+                <Option type="QString" name="tweak_dash_pattern_on_corners" value="0"/>
+                <Option type="QString" name="use_custom_dash" value="0"/>
+                <Option type="QString" name="width_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </profileLineSymbol>
+        <profileFillSymbol>
+          <symbol type="fill" clip_to_extent="1" name="" alpha="1" is_animated="0" force_rhr="0" frame_rate="10">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" enabled="1" pass="0" class="SimpleFill" id="{bbf4f37b-7e0b-4fe9-847a-a9279f677b96}">
+              <Option type="Map">
+                <Option type="QString" name="border_width_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="color" value="190,207,80,255,rgb:0.74509803921568629,0.81176470588235294,0.31372549019607843,1"/>
+                <Option type="QString" name="joinstyle" value="bevel"/>
+                <Option type="QString" name="offset" value="0,0"/>
+                <Option type="QString" name="offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="offset_unit" value="MM"/>
+                <Option type="QString" name="outline_color" value="136,148,57,255,rgb:0.53221942473487449,0.57982757305256738,0.22409399557488366,1"/>
+                <Option type="QString" name="outline_style" value="solid"/>
+                <Option type="QString" name="outline_width" value="0.2"/>
+                <Option type="QString" name="outline_width_unit" value="MM"/>
+                <Option type="QString" name="style" value="solid"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </profileFillSymbol>
+        <profileMarkerSymbol>
+          <symbol type="marker" clip_to_extent="1" name="" alpha="1" is_animated="0" force_rhr="0" frame_rate="10">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" enabled="1" pass="0" class="SimpleMarker" id="{7bca6ecf-1fa5-4917-bf8d-c0d0ce284d33}">
+              <Option type="Map">
+                <Option type="QString" name="angle" value="0"/>
+                <Option type="QString" name="cap_style" value="square"/>
+                <Option type="QString" name="color" value="190,207,80,255,rgb:0.74509803921568629,0.81176470588235294,0.31372549019607843,1"/>
+                <Option type="QString" name="horizontal_anchor_point" value="1"/>
+                <Option type="QString" name="joinstyle" value="bevel"/>
+                <Option type="QString" name="name" value="diamond"/>
+                <Option type="QString" name="offset" value="0,0"/>
+                <Option type="QString" name="offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="offset_unit" value="MM"/>
+                <Option type="QString" name="outline_color" value="136,148,57,255,rgb:0.53221942473487449,0.57982757305256738,0.22409399557488366,1"/>
+                <Option type="QString" name="outline_style" value="solid"/>
+                <Option type="QString" name="outline_width" value="0.2"/>
+                <Option type="QString" name="outline_width_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="outline_width_unit" value="MM"/>
+                <Option type="QString" name="scale_method" value="diameter"/>
+                <Option type="QString" name="size" value="3"/>
+                <Option type="QString" name="size_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="size_unit" value="MM"/>
+                <Option type="QString" name="vertical_anchor_point" value="1"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </profileMarkerSymbol>
+      </elevation>
+      <renderer-v2 type="singleSymbol" forceraster="0" symbollevels="0" referencescale="-1" enableorderby="0">
+        <symbols>
+          <symbol type="marker" clip_to_extent="1" name="0" alpha="1" is_animated="0" force_rhr="0" frame_rate="10">
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+            <layer locked="0" enabled="1" pass="0" class="SimpleMarker" id="{1ffee70e-e4a9-400d-81a7-44f451d57196}">
+              <Option type="Map">
+                <Option type="QString" name="angle" value="0"/>
+                <Option type="QString" name="cap_style" value="square"/>
+                <Option type="QString" name="color" value="152,125,183,255,rgb:0.59607843137254901,0.49019607843137253,0.71764705882352942,1"/>
+                <Option type="QString" name="horizontal_anchor_point" value="1"/>
+                <Option type="QString" name="joinstyle" value="bevel"/>
+                <Option type="QString" name="name" value="circle"/>
+                <Option type="QString" name="offset" value="0,0"/>
+                <Option type="QString" name="offset_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="offset_unit" value="MM"/>
+                <Option type="QString" name="outline_color" value="35,35,35,255,rgb:0.13725490196078433,0.13725490196078433,0.13725490196078433,1"/>
+                <Option type="QString" name="outline_style" value="solid"/>
+                <Option type="QString" name="outline_width" value="0"/>
+                <Option type="QString" name="outline_width_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="outline_width_unit" value="MM"/>
+                <Option type="QString" name="scale_method" value="diameter"/>
+                <Option type="QString" name="size" value="2"/>
+                <Option type="QString" name="size_map_unit_scale" value="3x:0,0,0,0,0,0"/>
+                <Option type="QString" name="size_unit" value="MM"/>
+                <Option type="QString" name="vertical_anchor_point" value="1"/>
+              </Option>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+        <data-defined-properties>
+          <Option type="Map">
+            <Option type="QString" name="name" value=""/>
+            <Option name="properties"/>
+            <Option type="QString" name="type" value="collection"/>
+          </Option>
+        </data-defined-properties>
+      </renderer-v2>
+      <selection mode="Default">
+        <selectionColor invalid="1"/>
+      </selection>
+      <customproperties>
+        <Option/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <legend type="default-vector" showLabelLegend="0"/>
+      <referencedLayers/>
+      <fieldConfiguration>
+        <field configurationFlags="NoFlag" name="id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="pipeline_execution_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="pipeline_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="creation_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="update_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="source_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="source_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="local_activity_level2_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="contract_code">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="contract_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="work_site_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="asset_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="request_reason_code_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="request_reason_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="action_code_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="action_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="intervention_stage_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="intervention_description">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="intervention_status_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="request_reason_type_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="street_number">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="street_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="street_name_added_information">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="city_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="workorder_periodicity_value">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="workorder_periodicity_code_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="request_emergency">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="execution_date_start">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="intervention_date_expected">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="workorder_date_start_target">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="workorder_date_end_target">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="execution_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="expected_time">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="execution_date_end">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="geometry">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="asset_cmms_asset_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="source_uid">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="planner_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="cri_url">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="type_table_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="type_name_emitter">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="gis_asset_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="moveo_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="task_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="datadesk_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="NoFlag" name="trgm">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="" field="pipeline_execution_time"/>
+        <alias index="2" name="" field="pipeline_id"/>
+        <alias index="3" name="" field="creation_time"/>
+        <alias index="4" name="" field="update_time"/>
+        <alias index="5" name="" field="source_name"/>
+        <alias index="6" name="" field="source_id"/>
+        <alias index="7" name="" field="local_activity_level2_name"/>
+        <alias index="8" name="" field="contract_code"/>
+        <alias index="9" name="" field="contract_name"/>
+        <alias index="10" name="" field="work_site_id"/>
+        <alias index="11" name="" field="asset_id"/>
+        <alias index="12" name="" field="request_reason_code_emitter"/>
+        <alias index="13" name="" field="request_reason_name_emitter"/>
+        <alias index="14" name="" field="action_code_emitter"/>
+        <alias index="15" name="" field="action_name_emitter"/>
+        <alias index="16" name="" field="intervention_stage_name_emitter"/>
+        <alias index="17" name="" field="intervention_description"/>
+        <alias index="18" name="" field="intervention_status_name_emitter"/>
+        <alias index="19" name="" field="request_reason_type_name_emitter"/>
+        <alias index="20" name="" field="street_number"/>
+        <alias index="21" name="" field="street_name"/>
+        <alias index="22" name="" field="street_name_added_information"/>
+        <alias index="23" name="" field="city_name"/>
+        <alias index="24" name="" field="workorder_periodicity_value"/>
+        <alias index="25" name="" field="workorder_periodicity_code_emitter"/>
+        <alias index="26" name="" field="request_emergency"/>
+        <alias index="27" name="" field="execution_date_start"/>
+        <alias index="28" name="" field="intervention_date_expected"/>
+        <alias index="29" name="" field="workorder_date_start_target"/>
+        <alias index="30" name="" field="workorder_date_end_target"/>
+        <alias index="31" name="" field="execution_time"/>
+        <alias index="32" name="" field="expected_time"/>
+        <alias index="33" name="" field="execution_date_end"/>
+        <alias index="34" name="" field="geometry"/>
+        <alias index="35" name="" field="asset_cmms_asset_name"/>
+        <alias index="36" name="" field="source_uid"/>
+        <alias index="37" name="" field="planner_id"/>
+        <alias index="38" name="" field="cri_url"/>
+        <alias index="39" name="" field="type_table_emitter"/>
+        <alias index="40" name="" field="type_name_emitter"/>
+        <alias index="41" name="" field="gis_asset_id"/>
+        <alias index="42" name="" field="moveo_id"/>
+        <alias index="43" name="" field="task_id"/>
+        <alias index="44" name="" field="datadesk_id"/>
+        <alias index="45" name="" field="trgm"/>
+      </aliases>
+      <splitPolicies>
+        <policy policy="Duplicate" field="id"/>
+        <policy policy="Duplicate" field="pipeline_execution_time"/>
+        <policy policy="Duplicate" field="pipeline_id"/>
+        <policy policy="Duplicate" field="creation_time"/>
+        <policy policy="Duplicate" field="update_time"/>
+        <policy policy="Duplicate" field="source_name"/>
+        <policy policy="Duplicate" field="source_id"/>
+        <policy policy="Duplicate" field="local_activity_level2_name"/>
+        <policy policy="Duplicate" field="contract_code"/>
+        <policy policy="Duplicate" field="contract_name"/>
+        <policy policy="Duplicate" field="work_site_id"/>
+        <policy policy="Duplicate" field="asset_id"/>
+        <policy policy="Duplicate" field="request_reason_code_emitter"/>
+        <policy policy="Duplicate" field="request_reason_name_emitter"/>
+        <policy policy="Duplicate" field="action_code_emitter"/>
+        <policy policy="Duplicate" field="action_name_emitter"/>
+        <policy policy="Duplicate" field="intervention_stage_name_emitter"/>
+        <policy policy="Duplicate" field="intervention_description"/>
+        <policy policy="Duplicate" field="intervention_status_name_emitter"/>
+        <policy policy="Duplicate" field="request_reason_type_name_emitter"/>
+        <policy policy="Duplicate" field="street_number"/>
+        <policy policy="Duplicate" field="street_name"/>
+        <policy policy="Duplicate" field="street_name_added_information"/>
+        <policy policy="Duplicate" field="city_name"/>
+        <policy policy="Duplicate" field="workorder_periodicity_value"/>
+        <policy policy="Duplicate" field="workorder_periodicity_code_emitter"/>
+        <policy policy="Duplicate" field="request_emergency"/>
+        <policy policy="Duplicate" field="execution_date_start"/>
+        <policy policy="Duplicate" field="intervention_date_expected"/>
+        <policy policy="Duplicate" field="workorder_date_start_target"/>
+        <policy policy="Duplicate" field="workorder_date_end_target"/>
+        <policy policy="Duplicate" field="execution_time"/>
+        <policy policy="Duplicate" field="expected_time"/>
+        <policy policy="Duplicate" field="execution_date_end"/>
+        <policy policy="Duplicate" field="geometry"/>
+        <policy policy="Duplicate" field="asset_cmms_asset_name"/>
+        <policy policy="Duplicate" field="source_uid"/>
+        <policy policy="Duplicate" field="planner_id"/>
+        <policy policy="Duplicate" field="cri_url"/>
+        <policy policy="Duplicate" field="type_table_emitter"/>
+        <policy policy="Duplicate" field="type_name_emitter"/>
+        <policy policy="Duplicate" field="gis_asset_id"/>
+        <policy policy="Duplicate" field="moveo_id"/>
+        <policy policy="Duplicate" field="task_id"/>
+        <policy policy="Duplicate" field="datadesk_id"/>
+        <policy policy="Duplicate" field="trgm"/>
+      </splitPolicies>
+      <duplicatePolicies>
+        <policy policy="Duplicate" field="id"/>
+        <policy policy="Duplicate" field="pipeline_execution_time"/>
+        <policy policy="Duplicate" field="pipeline_id"/>
+        <policy policy="Duplicate" field="creation_time"/>
+        <policy policy="Duplicate" field="update_time"/>
+        <policy policy="Duplicate" field="source_name"/>
+        <policy policy="Duplicate" field="source_id"/>
+        <policy policy="Duplicate" field="local_activity_level2_name"/>
+        <policy policy="Duplicate" field="contract_code"/>
+        <policy policy="Duplicate" field="contract_name"/>
+        <policy policy="Duplicate" field="work_site_id"/>
+        <policy policy="Duplicate" field="asset_id"/>
+        <policy policy="Duplicate" field="request_reason_code_emitter"/>
+        <policy policy="Duplicate" field="request_reason_name_emitter"/>
+        <policy policy="Duplicate" field="action_code_emitter"/>
+        <policy policy="Duplicate" field="action_name_emitter"/>
+        <policy policy="Duplicate" field="intervention_stage_name_emitter"/>
+        <policy policy="Duplicate" field="intervention_description"/>
+        <policy policy="Duplicate" field="intervention_status_name_emitter"/>
+        <policy policy="Duplicate" field="request_reason_type_name_emitter"/>
+        <policy policy="Duplicate" field="street_number"/>
+        <policy policy="Duplicate" field="street_name"/>
+        <policy policy="Duplicate" field="street_name_added_information"/>
+        <policy policy="Duplicate" field="city_name"/>
+        <policy policy="Duplicate" field="workorder_periodicity_value"/>
+        <policy policy="Duplicate" field="workorder_periodicity_code_emitter"/>
+        <policy policy="Duplicate" field="request_emergency"/>
+        <policy policy="Duplicate" field="execution_date_start"/>
+        <policy policy="Duplicate" field="intervention_date_expected"/>
+        <policy policy="Duplicate" field="workorder_date_start_target"/>
+        <policy policy="Duplicate" field="workorder_date_end_target"/>
+        <policy policy="Duplicate" field="execution_time"/>
+        <policy policy="Duplicate" field="expected_time"/>
+        <policy policy="Duplicate" field="execution_date_end"/>
+        <policy policy="Duplicate" field="geometry"/>
+        <policy policy="Duplicate" field="asset_cmms_asset_name"/>
+        <policy policy="Duplicate" field="source_uid"/>
+        <policy policy="Duplicate" field="planner_id"/>
+        <policy policy="Duplicate" field="cri_url"/>
+        <policy policy="Duplicate" field="type_table_emitter"/>
+        <policy policy="Duplicate" field="type_name_emitter"/>
+        <policy policy="Duplicate" field="gis_asset_id"/>
+        <policy policy="Duplicate" field="moveo_id"/>
+        <policy policy="Duplicate" field="task_id"/>
+        <policy policy="Duplicate" field="datadesk_id"/>
+        <policy policy="Duplicate" field="trgm"/>
+      </duplicatePolicies>
+      <defaults>
+        <default applyOnUpdate="0" field="id" expression=""/>
+        <default applyOnUpdate="0" field="pipeline_execution_time" expression=""/>
+        <default applyOnUpdate="0" field="pipeline_id" expression=""/>
+        <default applyOnUpdate="0" field="creation_time" expression=""/>
+        <default applyOnUpdate="0" field="update_time" expression=""/>
+        <default applyOnUpdate="0" field="source_name" expression=""/>
+        <default applyOnUpdate="0" field="source_id" expression=""/>
+        <default applyOnUpdate="0" field="local_activity_level2_name" expression=""/>
+        <default applyOnUpdate="0" field="contract_code" expression=""/>
+        <default applyOnUpdate="0" field="contract_name" expression=""/>
+        <default applyOnUpdate="0" field="work_site_id" expression=""/>
+        <default applyOnUpdate="0" field="asset_id" expression=""/>
+        <default applyOnUpdate="0" field="request_reason_code_emitter" expression=""/>
+        <default applyOnUpdate="0" field="request_reason_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="action_code_emitter" expression=""/>
+        <default applyOnUpdate="0" field="action_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="intervention_stage_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="intervention_description" expression=""/>
+        <default applyOnUpdate="0" field="intervention_status_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="request_reason_type_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="street_number" expression=""/>
+        <default applyOnUpdate="0" field="street_name" expression=""/>
+        <default applyOnUpdate="0" field="street_name_added_information" expression=""/>
+        <default applyOnUpdate="0" field="city_name" expression=""/>
+        <default applyOnUpdate="0" field="workorder_periodicity_value" expression=""/>
+        <default applyOnUpdate="0" field="workorder_periodicity_code_emitter" expression=""/>
+        <default applyOnUpdate="0" field="request_emergency" expression=""/>
+        <default applyOnUpdate="0" field="execution_date_start" expression=""/>
+        <default applyOnUpdate="0" field="intervention_date_expected" expression=""/>
+        <default applyOnUpdate="0" field="workorder_date_start_target" expression=""/>
+        <default applyOnUpdate="0" field="workorder_date_end_target" expression=""/>
+        <default applyOnUpdate="0" field="execution_time" expression=""/>
+        <default applyOnUpdate="0" field="expected_time" expression=""/>
+        <default applyOnUpdate="0" field="execution_date_end" expression=""/>
+        <default applyOnUpdate="0" field="geometry" expression=""/>
+        <default applyOnUpdate="0" field="asset_cmms_asset_name" expression=""/>
+        <default applyOnUpdate="0" field="source_uid" expression=""/>
+        <default applyOnUpdate="0" field="planner_id" expression=""/>
+        <default applyOnUpdate="0" field="cri_url" expression=""/>
+        <default applyOnUpdate="0" field="type_table_emitter" expression=""/>
+        <default applyOnUpdate="0" field="type_name_emitter" expression=""/>
+        <default applyOnUpdate="0" field="gis_asset_id" expression=""/>
+        <default applyOnUpdate="0" field="moveo_id" expression=""/>
+        <default applyOnUpdate="0" field="task_id" expression=""/>
+        <default applyOnUpdate="0" field="datadesk_id" expression=""/>
+        <default applyOnUpdate="0" field="trgm" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint unique_strength="1" notnull_strength="1" field="id" exp_strength="0" constraints="3"/>
+        <constraint unique_strength="0" notnull_strength="0" field="pipeline_execution_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="pipeline_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="creation_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="update_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="source_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="source_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="local_activity_level2_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="contract_code" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="contract_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="work_site_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="asset_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="request_reason_code_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="request_reason_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="action_code_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="action_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="intervention_stage_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="intervention_description" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="intervention_status_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="request_reason_type_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="street_number" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="street_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="street_name_added_information" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="city_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="workorder_periodicity_value" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="workorder_periodicity_code_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="request_emergency" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="execution_date_start" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="intervention_date_expected" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="workorder_date_start_target" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="workorder_date_end_target" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="execution_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="expected_time" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="execution_date_end" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="geometry" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="asset_cmms_asset_name" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="source_uid" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="planner_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="cri_url" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="type_table_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="type_name_emitter" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="gis_asset_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="0" notnull_strength="0" field="moveo_id" exp_strength="0" constraints="0"/>
+        <constraint unique_strength="1" notnull_strength="0" field="task_id" exp_strength="0" constraints="2"/>
+        <constraint unique_strength="1" notnull_strength="0" field="datadesk_id" exp_strength="0" constraints="2"/>
+        <constraint unique_strength="0" notnull_strength="0" field="trgm" exp_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" exp="" field="id"/>
+        <constraint desc="" exp="" field="pipeline_execution_time"/>
+        <constraint desc="" exp="" field="pipeline_id"/>
+        <constraint desc="" exp="" field="creation_time"/>
+        <constraint desc="" exp="" field="update_time"/>
+        <constraint desc="" exp="" field="source_name"/>
+        <constraint desc="" exp="" field="source_id"/>
+        <constraint desc="" exp="" field="local_activity_level2_name"/>
+        <constraint desc="" exp="" field="contract_code"/>
+        <constraint desc="" exp="" field="contract_name"/>
+        <constraint desc="" exp="" field="work_site_id"/>
+        <constraint desc="" exp="" field="asset_id"/>
+        <constraint desc="" exp="" field="request_reason_code_emitter"/>
+        <constraint desc="" exp="" field="request_reason_name_emitter"/>
+        <constraint desc="" exp="" field="action_code_emitter"/>
+        <constraint desc="" exp="" field="action_name_emitter"/>
+        <constraint desc="" exp="" field="intervention_stage_name_emitter"/>
+        <constraint desc="" exp="" field="intervention_description"/>
+        <constraint desc="" exp="" field="intervention_status_name_emitter"/>
+        <constraint desc="" exp="" field="request_reason_type_name_emitter"/>
+        <constraint desc="" exp="" field="street_number"/>
+        <constraint desc="" exp="" field="street_name"/>
+        <constraint desc="" exp="" field="street_name_added_information"/>
+        <constraint desc="" exp="" field="city_name"/>
+        <constraint desc="" exp="" field="workorder_periodicity_value"/>
+        <constraint desc="" exp="" field="workorder_periodicity_code_emitter"/>
+        <constraint desc="" exp="" field="request_emergency"/>
+        <constraint desc="" exp="" field="execution_date_start"/>
+        <constraint desc="" exp="" field="intervention_date_expected"/>
+        <constraint desc="" exp="" field="workorder_date_start_target"/>
+        <constraint desc="" exp="" field="workorder_date_end_target"/>
+        <constraint desc="" exp="" field="execution_time"/>
+        <constraint desc="" exp="" field="expected_time"/>
+        <constraint desc="" exp="" field="execution_date_end"/>
+        <constraint desc="" exp="" field="geometry"/>
+        <constraint desc="" exp="" field="asset_cmms_asset_name"/>
+        <constraint desc="" exp="" field="source_uid"/>
+        <constraint desc="" exp="" field="planner_id"/>
+        <constraint desc="" exp="" field="cri_url"/>
+        <constraint desc="" exp="" field="type_table_emitter"/>
+        <constraint desc="" exp="" field="type_name_emitter"/>
+        <constraint desc="" exp="" field="gis_asset_id"/>
+        <constraint desc="" exp="" field="moveo_id"/>
+        <constraint desc="" exp="" field="task_id"/>
+        <constraint desc="" exp="" field="datadesk_id"/>
+        <constraint desc="" exp="" field="trgm"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <storedexpressions/>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <reuseLastValue/>
+      <dataDefinedFieldProperties/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip enabled="1"></mapTip>
+    </maplayer>
+  </projectlayers>
+  <layerorder>
+    <layer id="wo_water_network_d88db359_3a0b_4afa_9569_edf7185506a2"/>
+    <layer id="wo_water_leak_searching_d9ae6e70_fa8a_4847_812b_d73d68bbfeab"/>
+  </layerorder>
+  <labelEngineSettings/>
+  <properties>
+    <Digitizing>
+      <AvoidIntersectionsMode type="int">0</AvoidIntersectionsMode>
+    </Digitizing>
+    <Gui>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+      <SelectionColorBluePart type="int">0</SelectionColorBluePart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+    </Gui>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+    <Measure>
+      <Ellipsoid type="QString">EPSG:7030</Ellipsoid>
+    </Measure>
+    <Measurement>
+      <AreaUnits type="QString">m2</AreaUnits>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+    </Measurement>
+    <PAL>
+      <CandidatesLinePerCM type="double">5</CandidatesLinePerCM>
+      <CandidatesPolygonPerCM type="double">2.5</CandidatesPolygonPerCM>
+      <DrawLabelMetrics type="bool">false</DrawLabelMetrics>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+      <DrawUnplaced type="bool">false</DrawUnplaced>
+      <PlacementEngineVersion type="int">1</PlacementEngineVersion>
+      <SearchMethod type="int">0</SearchMethod>
+      <ShowingAllLabels type="bool">false</ShowingAllLabels>
+      <ShowingCandidates type="bool">false</ShowingCandidates>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <TextFormat type="int">0</TextFormat>
+      <UnplacedColor type="QString">255,0,0,255,rgb:1,0,0,1</UnplacedColor>
+    </PAL>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <PositionPrecision>
+      <Automatic type="bool">true</Automatic>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+    </PositionPrecision>
+    <SpatialRefSys>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+    </SpatialRefSys>
+  </properties>
+  <dataDefinedServerProperties>
+    <Option type="Map">
+      <Option type="QString" name="name" value=""/>
+      <Option name="properties"/>
+      <Option type="QString" name="type" value="collection"/>
+    </Option>
+  </dataDefinedServerProperties>
+  <visibility-presets/>
+  <transformContext/>
+  <projectMetadata>
+    <identifier></identifier>
+    <parentidentifier></parentidentifier>
+    <language></language>
+    <type></type>
+    <title></title>
+    <abstract></abstract>
+    <links/>
+    <dates>
+      <date type="Created" value="2026-01-12T14:28:56"/>
+    </dates>
+    <author>MADANI-APP Amine</author>
+    <creation>2026-01-12T14:28:56</creation>
+  </projectMetadata>
+  <Annotations/>
+  <Layouts/>
+  <mapViewDocks3D/>
+  <Bookmarks/>
+  <Sensors/>
+  <ProjectViewSettings rotation="0" UseProjectScales="0">
+    <Scales/>
+  </ProjectViewSettings>
+  <ProjectStyleSettings DefaultSymbolOpacity="1" projectStyleId="attachment:///HswvsH_styles.db" iccProfileId="attachment:///" colorModel="Rgb" RandomizeDefaultSymbolColor="1">
+    <databases/>
+  </ProjectStyleSettings>
+  <ProjectTimeSettings cumulativeTemporalRange="0" frameRate="1" timeStepUnit="h" timeStep="1" totalMovieFrames="100"/>
+  <ElevationProperties FilterInvertSlider="0">
+    <terrainProvider type="flat">
+      <TerrainProvider offset="0" scale="1"/>
+    </terrainProvider>
+  </ElevationProperties>
+  <ProjectDisplaySettings CoordinateAxisOrder="Default" CoordinateType="MapCrs">
+    <BearingFormat id="bearing">
+      <Option type="Map">
+        <Option type="invalid" name="decimal_separator"/>
+        <Option type="int" name="decimals" value="6"/>
+        <Option type="int" name="direction_format" value="0"/>
+        <Option type="int" name="rounding_type" value="0"/>
+        <Option type="bool" name="show_plus" value="false"/>
+        <Option type="bool" name="show_thousand_separator" value="true"/>
+        <Option type="bool" name="show_trailing_zeros" value="false"/>
+        <Option type="invalid" name="thousand_separator"/>
+      </Option>
+    </BearingFormat>
+    <GeographicCoordinateFormat id="geographiccoordinate">
+      <Option type="Map">
+        <Option type="QString" name="angle_format" value="DecimalDegrees"/>
+        <Option type="invalid" name="decimal_separator"/>
+        <Option type="int" name="decimals" value="6"/>
+        <Option type="int" name="rounding_type" value="0"/>
+        <Option type="bool" name="show_leading_degree_zeros" value="false"/>
+        <Option type="bool" name="show_leading_zeros" value="false"/>
+        <Option type="bool" name="show_plus" value="false"/>
+        <Option type="bool" name="show_suffix" value="false"/>
+        <Option type="bool" name="show_thousand_separator" value="true"/>
+        <Option type="bool" name="show_trailing_zeros" value="false"/>
+        <Option type="invalid" name="thousand_separator"/>
+      </Option>
+    </GeographicCoordinateFormat>
+    <CoordinateCustomCrs>
+      <spatialrefsys nativeFormat="Wkt">
+        <wkt>GEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],MEMBER["World Geodetic System 1984 (G2296)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["Horizontal component of 3D system."],AREA["World."],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </CoordinateCustomCrs>
+  </ProjectDisplaySettings>
+  <ProjectGpsSettings destinationLayerProvider="postgres" destinationLayerSource="dbname='qwc_services' host=localhost port=5439 user='qwc_admin' key='id' srid=3857 type=LineString checkPrimaryKeyUnicity='0' table=&quot;qwc_geodb&quot;.&quot;wo_water_leak_searching&quot; (geom)" autoAddTrackVertices="0" autoCommitFeatures="0" destinationLayerName="wo_water_leak_searching" destinationLayer="wo_water_leak_searching_d9ae6e70_fa8a_4847_812b_d73d68bbfeab" destinationFollowsActiveLayer="1">
+    <timeStampFields/>
+  </ProjectGpsSettings>
+</qgis>

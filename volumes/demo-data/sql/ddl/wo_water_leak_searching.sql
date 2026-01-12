@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS qwc_geodb;
+SET search_path = qwc_geodb, public;
+
 CREATE TABLE qwc_geodb.wo_water_leak_searching (
     id integer,
     pipeline_execution_time timestamp with time zone,
@@ -46,13 +49,16 @@ CREATE TABLE qwc_geodb.wo_water_leak_searching (
     location_techniques text COLLATE pg_catalog."default",
     type_table_emitter text COLLATE pg_catalog."default",
     type_name_emitter text COLLATE pg_catalog."default",
+    gis_asset_id text COLLATE pg_catalog."default", 
     moveo_id text,
     task_id text,
     datadesk_id text,
     trgm text
+    
 );
 
 GRANT SELECT ON TABLE qwc_geodb.wo_water_leak_searching TO qwc_service_write;
+GRANT SELECT ON TABLE qwc_geodb.wo_water_leak_searching TO qwc_admin;
 -- TODO add GRANT for other roles as needed
 --GRANT SELECT ON TABLE qwc_geodb.wo_water_leak_searching TO admin;
 

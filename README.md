@@ -1,82 +1,88 @@
-![Logo](https://github.com/qwc-services/qwc-docker/blob/master/volumes/qwc2/assets/img/qwc-logo.svg?raw=true) Docker containers for QWC Services
-==================================
+Configuration QWC (QGIS Web Client) avec données custom et initialisation automatique de la base de données.
 
-The QWC Services are a collection of microservices enhancing the functionality of the [QGIS Web Client](https://github.com/qgis/qwc2), including:
+## Démarrage rapide
+```bash
+git clone <repo>
+cd qwc-docker-gcp
+docker-compose up -d
+```
 
-- Authentication and permission control
-- Editing
-- Fulltext search
-- Permalinks/bookmarks
-- ...
-
-This repository contains a sample setup for running QWC services with docker.
-
-Documentation
--------------
-
-The documentation is available at [qwc-services.github.io](https://qwc-services.github.io/).
-
-Quick start
------------
-
-See [qwc-services.github.io/master/QuickStart/](https://qwc-services.github.io/master/QuickStart/).
-
-Versioning
-----------
-
-Since February 2023 a new long-term-support branch of QWC2 and its services has been introduced. The respective Docker images are tagged as `vYYYY.x-lts` (i.e. `v2023.0-lts`). This branch will receive bugfix updates for approximately one year. The sample `docker-compose-example.yml` references these images.
-
-The latest versions of QWC2 and its services is available as before, tagged as `vYYYY-MM-DD`.
-
-Health checks for Kubernetes
-----------------------------
-
-Health checks are a simple way to let the system know if an instance of the app is working or not working. If an instance of the app is not working, then other services should not access it or send a request to it. Instead, requests should be sent to another instance of the app that is ready, or retried at a later time. The system should also bring the app back to a healthy state.
-
-### Readyness:
-
-Readiness probes are designed to let Kubernetes know when the app is ready to serve traffic. Kubernetes makes sure the readiness probe passes before allowing a service to send traffic to the pod. If a readiness probe starts to fail, Kubernetes stops sending traffic to the pod until it passes.
-
-**Check is available at: `/ready`**
-
-Example check:
-
-* Return ok, if web service is initialized and running
-
-### Liveness:
-
-**Check is available at: `/healthz`**
-
-Liveness probes let Kubernetes know if the app is alive or dead. If the app is alive, then Kubernetes leaves it alone. If the app is dead, Kubernetes removes the Pod and starts a new one to replace it.
-
-Example checks:
-
-* Check database connection (Example service: `qwc-admin-gui`)
-* Check if all data files are available and readable (Example service: `qwc-elevation-service`)
-
-SELinux
--------
-
-If you have SELinux enabled, you will need to sandbox certain files and ports to allow the Docker containers access. You can run `sudo scripts/set_permissions.sh QWC_UID QWC_GID`
-to do this. Please ensure that the `QWC_UID` and `QWC_GID` in the script match the `SERVICE_UID` and `SERVICE_GID` set in the docker-compose file.
+Attends ~2 minutes, puis accède à :
+- **QWC Web** : http://localhost:8088
+- **QWC Admin** : http://localhost:8088/qwc_admin (admin/qwc_admin)
 
 
-Development
------------
+### Tables custom
+- `wo_water_network` : 1,637 interventions réseau
+- `wo_water_leak_searching` : 13,422 recherches de fuites
 
-Create a QWC services dir:
+Ces tables sont créées et remplies automatiquement au démarrage.
 
-    mkdir qwc-services
-    cd qwc-services/
+### Projets QGIS
+- `interventions.qgs` : Visualisation des couches custom dans QWC
 
-Clone the desired service, i.e. the `qwc-config-service`:
 
-    git clone https://github.com/qwc-services/qwc-config-service.git
+### Connexion PostgreSQL (QGIS Desktop)
+```
+Host: localhost
+Port: 5439
+Database: qwc_services
+User: qwc_admin
+Password: qwc_admin
+```
 
-Configure `docker-compose.yml` to build a local image:
+### Modifier un projet QGIS
 
-    qwc-config-service:
-      # image: docker.io/sourcepole/qwc-config-generator:latest-lts
-      build:
-        context: ./qwc-services/qwc-config-generator
-      ...
+1. Ouvre `volumes/qgs-resources/scan/interventions.qgs` dans QGIS Desktop
+2. Fais tes modifications
+3. Sauvegarde (Ctrl+S)
+4. Convertis pour Docker :
+```bash
+   ./volumes/demo-data/prepare-qgs-for-docker.sh
+```
+5. Commit :
+```bash
+   git add volumes/qgs-resources/
+   git commit -m "Update QGIS project"
+```
+
+
+### Ajouter de nouvelles tables
+
+1. Crée le DDL dans `volumes/demo-data/sql/ddl/ma_nouvelle_table.sql`
+2. Crée les INSERT dans `volumes/demo-data/sql/sensitive/ma_nouvelle_table_data.sql`
+3. Recrée la base :
+```bash
+   docker-compose down
+   rm -rf volumes/db/*
+   docker-compose up -d
+```
+
+## Troubleshooting
+
+### Le backup ne se charge pas
+Les scripts d'init ne s'exécutent que si la base est vide. Si tu as déjà démarré Docker avant :
+```bash
+docker-compose down
+rm -rf volumes/db/*
+docker-compose up -d
+```
+
+### Les tables custom n'apparaissent pas dans QGIS
+Vérifie les permissions :
+```bash
+docker-compose exec qwc-postgis psql -U postgres -d qwc_services -c "GRANT SELECT ON ALL TABLES IN SCHEMA qwc_geodb TO qwc_admin;"
+```
+
+
+## 🔒 Sécurité
+
+**Pour la production** :
+- Change tous les mots de passe dans `setup-passwords.sh` ?
+- Utilise des variables d'environnement (fichier `.env`) 
+- Ne commit jamais le dossier `sensitive/` si données réelles
+
+## 📚 Ressources
+
+- [QWC Documentation](https://github.com/qwc-services/qwc-docker)
+- [QGIS Server](https://docs.qgis.org/latest/en/docs/server_manual/)

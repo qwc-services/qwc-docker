@@ -679,6 +679,329 @@
         }
       },
       {
+        "name": "scan/interventions",
+        "root_layer": {
+          "name": "interventions",
+          "title": "Untitled",
+          "layers": [
+            {
+              "name": "wo_water_leak_searching",
+              "title": "wo_water_leak_searching",
+              "attributes": [
+                {
+                  "name": "id"
+                },
+                {
+                  "name": "pipeline_execution_time"
+                },
+                {
+                  "name": "pipeline_id"
+                },
+                {
+                  "name": "creation_time"
+                },
+                {
+                  "name": "update_time"
+                },
+                {
+                  "name": "source_name"
+                },
+                {
+                  "name": "source_id"
+                },
+                {
+                  "name": "local_activity_level2_name"
+                },
+                {
+                  "name": "contract_code"
+                },
+                {
+                  "name": "contract_name"
+                },
+                {
+                  "name": "work_site_id"
+                },
+                {
+                  "name": "asset_id"
+                },
+                {
+                  "name": "request_reason_code_emitter"
+                },
+                {
+                  "name": "request_reason_name_emitter"
+                },
+                {
+                  "name": "action_code_emitter"
+                },
+                {
+                  "name": "action_name_emitter"
+                },
+                {
+                  "name": "intervention_stage_name_emitter"
+                },
+                {
+                  "name": "intervention_description"
+                },
+                {
+                  "name": "intervention_status_name_emitter"
+                },
+                {
+                  "name": "request_reason_type_name_emitter"
+                },
+                {
+                  "name": "street_number"
+                },
+                {
+                  "name": "street_name"
+                },
+                {
+                  "name": "street_name_added_information"
+                },
+                {
+                  "name": "city_name"
+                },
+                {
+                  "name": "workorder_periodicity_value"
+                },
+                {
+                  "name": "workorder_periodicity_code_emitter"
+                },
+                {
+                  "name": "request_emergency"
+                },
+                {
+                  "name": "execution_date_start"
+                },
+                {
+                  "name": "intervention_date_expected"
+                },
+                {
+                  "name": "workorder_date_start_target"
+                },
+                {
+                  "name": "workorder_date_end_target"
+                },
+                {
+                  "name": "execution_time"
+                },
+                {
+                  "name": "expected_time"
+                },
+                {
+                  "name": "execution_date_end"
+                },
+                {
+                  "name": "geometry"
+                },
+                {
+                  "name": "asset_cmms_asset_name"
+                },
+                {
+                  "name": "source_uid"
+                },
+                {
+                  "name": "planner_id"
+                },
+                {
+                  "name": "cri_url"
+                },
+                {
+                  "name": "status_state"
+                },
+                {
+                  "name": "inspected_length"
+                },
+                {
+                  "name": "prelocation_techniques"
+                },
+                {
+                  "name": "location_techniques"
+                },
+                {
+                  "name": "type_table_emitter"
+                },
+                {
+                  "name": "type_name_emitter"
+                },
+                {
+                  "name": "gis_asset_id"
+                },
+                {
+                  "name": "moveo_id"
+                },
+                {
+                  "name": "task_id"
+                },
+                {
+                  "name": "datadesk_id"
+                },
+                {
+                  "name": "trgm"
+                },
+                {
+                  "name": "geometry"
+                },
+                {
+                  "name": "maptip"
+                }
+              ],
+              "display_field": "source_name"
+            },
+            {
+              "name": "wo_water_network",
+              "title": "wo_water_network",
+              "attributes": [
+                {
+                  "name": "id"
+                },
+                {
+                  "name": "pipeline_execution_time"
+                },
+                {
+                  "name": "pipeline_id"
+                },
+                {
+                  "name": "creation_time"
+                },
+                {
+                  "name": "update_time"
+                },
+                {
+                  "name": "source_name"
+                },
+                {
+                  "name": "source_id"
+                },
+                {
+                  "name": "local_activity_level2_name"
+                },
+                {
+                  "name": "contract_code"
+                },
+                {
+                  "name": "contract_name"
+                },
+                {
+                  "name": "work_site_id"
+                },
+                {
+                  "name": "asset_id"
+                },
+                {
+                  "name": "request_reason_code_emitter"
+                },
+                {
+                  "name": "request_reason_name_emitter"
+                },
+                {
+                  "name": "action_code_emitter"
+                },
+                {
+                  "name": "action_name_emitter"
+                },
+                {
+                  "name": "intervention_stage_name_emitter"
+                },
+                {
+                  "name": "intervention_description"
+                },
+                {
+                  "name": "intervention_status_name_emitter"
+                },
+                {
+                  "name": "request_reason_type_name_emitter"
+                },
+                {
+                  "name": "street_number"
+                },
+                {
+                  "name": "street_name"
+                },
+                {
+                  "name": "street_name_added_information"
+                },
+                {
+                  "name": "city_name"
+                },
+                {
+                  "name": "workorder_periodicity_value"
+                },
+                {
+                  "name": "workorder_periodicity_code_emitter"
+                },
+                {
+                  "name": "request_emergency"
+                },
+                {
+                  "name": "execution_date_start"
+                },
+                {
+                  "name": "intervention_date_expected"
+                },
+                {
+                  "name": "workorder_date_start_target"
+                },
+                {
+                  "name": "workorder_date_end_target"
+                },
+                {
+                  "name": "execution_time"
+                },
+                {
+                  "name": "expected_time"
+                },
+                {
+                  "name": "execution_date_end"
+                },
+                {
+                  "name": "geometry"
+                },
+                {
+                  "name": "asset_cmms_asset_name"
+                },
+                {
+                  "name": "source_uid"
+                },
+                {
+                  "name": "planner_id"
+                },
+                {
+                  "name": "cri_url"
+                },
+                {
+                  "name": "type_table_emitter"
+                },
+                {
+                  "name": "type_name_emitter"
+                },
+                {
+                  "name": "gis_asset_id"
+                },
+                {
+                  "name": "moveo_id"
+                },
+                {
+                  "name": "task_id"
+                },
+                {
+                  "name": "datadesk_id"
+                },
+                {
+                  "name": "trgm"
+                },
+                {
+                  "name": "geometry"
+                },
+                {
+                  "name": "maptip"
+                }
+              ],
+              "display_field": "source_name"
+            }
+          ]
+        }
+      },
+      {
         "name": "scan/natural-earth-countries",
         "root_layer": {
           "name": "qwc_demo",

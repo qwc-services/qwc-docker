@@ -1,9 +1,26 @@
-//docker-compose.yml
-//api-gateway/nginx.conf
+# Environment & Secrets
 .env
+
+# PostgreSQL runtime data
+volumes/db/
+
+# QWC cache
 volumes/config/__capabilities_cache
+
+# Données sensibles (décommente si nécessaire)
 volumes/demo-data/sql/sensitive
 
-# PROJECT CUSTOM RULES
+# Terraform
 /qwc-gcp/terraform/.terraform/
 /qwc-gcp/terraform/.terraform.lock.hcl
+/qwc-gcp/terraform/terraform.tfstate
+/qwc-gcp/terraform/terraform.tfstate.backup
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

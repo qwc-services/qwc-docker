@@ -1,4 +1,4 @@
-#version: '3.4'
+version: '3.4'
 
 x-qwc-service-variables: &qwc-service-variables
   JWT_SECRET_KEY: $JWT_SECRET_KEY
@@ -18,15 +18,18 @@ services:
   qwc-postgis:
     image: sourcepole/qwc-base-db:16 # 16 refers to the Postgres major version
     environment:
-      POSTGRES_PASSWORD: "qwc_admin" # TODO: Set your postgres password here!
+      POSTGRES_PASSWORD: 'qwc_admin' # TODO: Set your postgres password here!
     volumes:
+      #- ./volumes/db:/var/lib/postgresql/docker
       - ./volumes/db:/var/lib/postgresql/docker
       # NOTE: Remove this line if you don't want/need the demo data
+      - ./volumes/demo-data/setup-passwords.sh:/docker-entrypoint-initdb.d/1_setup-passwords.sh   
       - ./volumes/demo-data/setup-demo-data.sh:/docker-entrypoint-initdb.d/2_setup-demo-data.sh
+      - ./volumes/demo-data/sql:/docker-entrypoint-initdb.d/sql
     ports:
-     - "127.0.0.1:5432:5432"
+     - "127.0.0.1:5439:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U qwc_admin -d qwc_services"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
 
   qwc-config-db-migrate:
@@ -36,22 +39,16 @@ services:
       # NOTE: Remove this line if you don't want/need the demo data
       - ./volumes/demo-data/setup-demo-data-permissions.sh:/tmp/extra-init.d/setup-demo-data-permissions.sh
 
-
-
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server:3.40
-     # ports:
-     #   - "127.0.0.1:8001:80"
+    # ports:
+    #   - "127.0.0.1:8001:80"
     environment:
-      # # QGIS_SERVER_LOG_LEVEL: 0
-      # # LOCALE: 'de_DE'
-      # # QGIS_SERVER_IGNORE_BAD_LAYERS: 1
+      # QGIS_SERVER_LOG_LEVEL: 0
+      # LOCALE: 'de_DE'
+      # QGIS_SERVER_IGNORE_BAD_LAYERS: 1
       FCGID_EXTRA_ENV: 'PRINT_LAYOUT_DIR'
       PRINT_LAYOUT_DIR: '/layouts'
-      # Optimisation du rendu 
-      QGIS_SERVER_CACHE_SIZE: "100"
-      QGIS_SERVER_CACHE_DIRECTORY: "/tmp/qgis-cache"
-      QGIS_SERVER_PARALLEL_RENDERING: "1"
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
@@ -68,7 +65,6 @@ services:
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
       OUTPUT_CONFIG_PATH: '/srv/qwc_service/config-out'
       GENERATE_DYNAMIC_KVRELS: 1
-      CONFIG_GENERATOR_CONFIG: '{"timeout": 300}'
     # ports:
     #   - "127.0.0.1:5010:9090"
     volumes:
@@ -217,8 +213,8 @@ services:
 
   qwc-map-viewer:
     # Stock qwc2 app
-    image: sourcepole/qwc-map-viewer:latest
-    # Or with own viewer build placed in volumes/qwc2   : 
+    image: sourcepole/qwc-map-viewer:latest-2025-lts
+    # Or with own viewer build placed in volumes/qwc2
     # image: sourcepole/qwc-map-viewer-base:latest-2025-lts
     environment:
       <<: *qwc-service-variables
@@ -228,8 +224,8 @@ services:
       - ./volumes/config:/srv/qwc_service/config:ro
       # When using qwc-map-viewer:
       - ./volumes/qwc2/assets:/qwc2/assets:ro
-      # When using own viewer build with qwc-map-viewer-base: - Amine editing :
-      # - ./volumes/qwc2:/qwc2:ro
+      # When using own viewer build with qwc-map-viewer-base:
+      #- ./volumes/qwc2:/qwc2:ro
 
   qwc-ogc-service:
     image: sourcepole/qwc-ogc-service:latest-2025-lts

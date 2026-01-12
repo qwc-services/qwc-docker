@@ -42,6 +42,20 @@
         }
       },
       {
+        "name": "scan/interventions",
+        "root_layer": {
+          "name": "interventions",
+          "layers": [
+            {
+              "name": "wo_water_leak_searching"
+            },
+            {
+              "name": "wo_water_network"
+            }
+          ]
+        }
+      },
+      {
         "name": "scan/natural-earth-countries",
         "root_layer": {
           "name": "qwc_demo",

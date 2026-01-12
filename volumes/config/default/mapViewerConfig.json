@@ -14,12 +14,17 @@
     "permalink_service_url": "/api/v1/permalink/",
     "print_service_url": "/api/v1/print/",
     "search_service_url": "/api/v2/search/",
-    "search_data_service_url": "/api/v2/search/geom/"
+    "search_data_service_url": "/api/v2/search/geom/",
+    "tile_cache_enabled": true,
+    "preload_tiles": true,
+    "smooth_zoom": false,
+    "transition_duration": 100
   },
   "resources": {
     "qwc2_config": {
       "restricted_viewer_tasks": [],
       "config": {
+        "routingServiceUrl": "https://valhalla1.openstreetmap.de/",
         "omitUrlParameterUpdates": false,
         "urlPositionFormat": "centerAndZoom",
         "urlPositionCrs": "",
@@ -228,6 +233,15 @@
               "name": "MapExport"
             },
             {
+              "name": "MapFilter",
+              "cfg": {
+                "allowCustomFilters": true,
+                "allowFilterByGeom": true,
+                "allowFilterByTime": true,
+                "position": 6
+              }
+            },
+            {
               "name": "MapInfoTooltip",
               "cfg": {
                 "elevationPrecision": 0,
@@ -250,6 +264,13 @@
               }
             },
             {
+              "name": "NewsPopup",
+              "cfg": {
+                "newsDocument": "https://qwc-services.github.io/master/release_notes/ChangeLog/",
+                "newsRev": "20250210"
+              }
+            },
+            {
               "name": "Print",
               "cfg": {
                 "inlinePrintOutput": true,
@@ -263,6 +284,9 @@
                 "snapping": true,
                 "snappingActive": true
               }
+            },
+            {
+              "name": "Routing"
             },
             {
               "name": "Settings",
@@ -327,6 +351,9 @@
             },
             {
               "name": "TimeManager",
+              "cfg": {
+                "defaultTimelineDisplay": "features"
+              },
               "mapClickAction": "identify"
             },
             {
@@ -362,10 +389,6 @@
                     "icon": "tools",
                     "subitems": [
                       {
-                        "key": "TimeManager",
-                        "icon": "clock"
-                      },
-                      {
                         "key": "Identify",
                         "icon": "identify_region",
                         "mode": "Region"
@@ -377,6 +400,10 @@
                       {
                         "key": "Redlining",
                         "icon": "draw"
+                      },
+                      {
+                        "key": "MapFilter",
+                        "icon": "filter"
                       },
                       {
                         "key": "Editing",
@@ -393,6 +420,14 @@
                       {
                         "key": "MapExport",
                         "icon": "rasterexport"
+                      },
+                      {
+                        "key": "TimeManager",
+                        "icon": "clock"
+                      },
+                      {
+                        "key": "Routing",
+                        "icon": "routing"
                       }
                     ]
                   },
@@ -470,6 +505,14 @@
                 "position": 5,
                 "task": "LayerTree",
                 "icon": "list-alt"
+              }
+            },
+            {
+              "name": "TaskButton",
+              "cfg": {
+                "position": 6,
+                "task": "Editing",
+                "icon": "editing"
               }
             },
             {
@@ -637,10 +680,10 @@
                     "bbox": {
                       "crs": "EPSG:4326",
                       "bounds": [
-                        8.541217,
+                        8.024053,
                         47.377464,
-                        8.541461,
-                        47.377751
+                        9.573722,
+                        53.267465
                       ]
                     },
                     "dimensions": [],
@@ -806,10 +849,12 @@
                   "width": 220.0,
                   "height": 190.0
                 },
+                "atlasCoverageLayer": "countries",
+                "atlas_pk": "ogc_fid",
                 "labels": [
                   "user_text"
                 ],
-                "default": false
+                "default": true
               },
               {
                 "name": "A3 Landscape",
@@ -826,7 +871,7 @@
                 "default": false
               }
             ],
-            "extraLegendParameters": "LAYERTITLE=FALSE&RULELABEL=FALSE",
+            "extraLegendParameters": "LAYERTITLE=FALSE",
             "searchProviders": [
               "coordinates",
               "nominatim",
@@ -839,407 +884,36 @@
                 }
               }
             ],
-            "editConfig": {
-              "edit_lines": {
-                "layerName": "edit_lines",
-                "displayField": "name",
-                "editDataset": "qwc_demo.edit_lines",
-                "geomType": "LineString",
-                "form": ":/forms/autogen/qwc_demo_edit_lines.ui?v=1739480089",
+            "editConfig": {},
+            "predefinedFilters": [
+              {
+                "id": "continent_filter",
+                "title": "Continent",
+                "filter": {
+                  "countries": [
+                    "continent",
+                    "=",
+                    "$continent$"
+                  ]
+                },
                 "fields": [
                   {
-                    "id": "id",
-                    "name": "id",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": -2147483648,
-                      "max": 2147483647,
-                      "readOnly": true,
-                      "expression": "",
-                      "hidden": true
-                    }
-                  },
-                  {
-                    "id": "name",
-                    "name": "Name",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "maxlength": 32,
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "description",
-                    "name": "Description",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "required": false,
-                      "expression": "",
-                      "multiline": true
-                    }
-                  },
-                  {
-                    "id": "num",
-                    "name": "Number",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": 0,
-                      "max": 10000,
-                      "required": false,
-                      "expression": "",
-                      "step": 1,
-                      "prec": 0
-                    }
-                  },
-                  {
-                    "id": "value",
-                    "name": "value",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "pattern": "[0-9]+([\\.,][0-9]+)?",
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "type",
-                    "name": "Type",
-                    "type": "list",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": -32768,
-                      "max": 32767,
-                      "required": false,
-                      "expression": "",
-                      "values": [
-                        {
-                          "label": "Type A",
-                          "value": "0"
-                        },
-                        {
-                          "label": "Type B",
-                          "value": "1"
-                        },
-                        {
-                          "label": "Type C",
-                          "value": "2"
-                        }
+                    "id": "continent",
+                    "title": "Name",
+                    "defaultValue": "",
+                    "inputConfig": {
+                      "type": "select",
+                      "options": [
+                        "Africa",
+                        "Asia",
+                        "Europe",
+                        "Oceania"
                       ]
-                    }
-                  },
-                  {
-                    "id": "amount",
-                    "name": "amount",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "numeric_precision": 5,
-                      "numeric_scale": 2,
-                      "min": -999.99,
-                      "max": 999.99,
-                      "step": 0.01,
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "validated",
-                    "name": "Validated",
-                    "type": "boolean",
-                    "data_type": "boolean",
-                    "constraints": {
-                      "required": false,
-                      "expression": ""
-                    }
-                  },
-                  {
-                    "id": "datetime",
-                    "name": "Date",
-                    "type": "date",
-                    "data_type": "date",
-                    "constraints": {
-                      "required": false,
-                      "expression": ""
-                    }
-                  }
-                ]
-              },
-              "edit_points": {
-                "layerName": "edit_points",
-                "displayField": "name",
-                "editDataset": "qwc_demo.edit_points",
-                "geomType": "Point",
-                "form": ":/forms/autogen/qwc_demo_edit_points.ui?v=1739480089",
-                "fields": [
-                  {
-                    "id": "id",
-                    "name": "id",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": -2147483648,
-                      "max": 2147483647,
-                      "readOnly": true,
-                      "expression": "",
-                      "hidden": true
-                    }
-                  },
-                  {
-                    "id": "name",
-                    "name": "Name",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "maxlength": 32,
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "description",
-                    "name": "Description",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "required": false,
-                      "expression": "",
-                      "multiline": true
-                    }
-                  },
-                  {
-                    "id": "num",
-                    "name": "Number",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": 0,
-                      "max": 10000,
-                      "required": false,
-                      "expression": "",
-                      "step": 1,
-                      "prec": 0
-                    }
-                  },
-                  {
-                    "id": "value",
-                    "name": "value",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "pattern": "[0-9]+([\\.,][0-9]+)?",
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "type",
-                    "name": "Type",
-                    "type": "list",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": -32768,
-                      "max": 32767,
-                      "required": false,
-                      "expression": "",
-                      "values": [
-                        {
-                          "label": "Type A",
-                          "value": "0"
-                        },
-                        {
-                          "label": "Type B",
-                          "value": "1"
-                        },
-                        {
-                          "label": "Type C",
-                          "value": "2"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "id": "amount",
-                    "name": "amount",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "numeric_precision": 5,
-                      "numeric_scale": 2,
-                      "min": -999.99,
-                      "max": 999.99,
-                      "step": 0.01,
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "validated",
-                    "name": "Validated",
-                    "type": "boolean",
-                    "data_type": "boolean",
-                    "constraints": {
-                      "required": false,
-                      "expression": ""
-                    }
-                  },
-                  {
-                    "id": "datetime",
-                    "name": "Date",
-                    "type": "date",
-                    "data_type": "date",
-                    "constraints": {
-                      "required": false,
-                      "expression": ""
-                    }
-                  }
-                ]
-              },
-              "edit_polygons": {
-                "layerName": "edit_polygons",
-                "displayField": "name",
-                "editDataset": "qwc_demo.edit_polygons",
-                "geomType": "Polygon",
-                "form": ":/forms/autogen/qwc_demo_edit_polygons.ui?v=1739480089",
-                "fields": [
-                  {
-                    "id": "id",
-                    "name": "id",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": -2147483648,
-                      "max": 2147483647,
-                      "readOnly": true,
-                      "expression": "",
-                      "hidden": true
-                    }
-                  },
-                  {
-                    "id": "name",
-                    "name": "Name",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "maxlength": 32,
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "description",
-                    "name": "Description",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "required": false,
-                      "expression": "",
-                      "multiline": true
-                    }
-                  },
-                  {
-                    "id": "num",
-                    "name": "Number",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": 0,
-                      "max": 10000,
-                      "required": false,
-                      "expression": "",
-                      "step": 1,
-                      "prec": 0
-                    }
-                  },
-                  {
-                    "id": "value",
-                    "name": "value",
-                    "type": "text",
-                    "data_type": "text",
-                    "constraints": {
-                      "pattern": "[0-9]+([\\.,][0-9]+)?",
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "type",
-                    "name": "Type",
-                    "type": "list",
-                    "data_type": "number",
-                    "constraints": {
-                      "min": -32768,
-                      "max": 32767,
-                      "required": false,
-                      "expression": "",
-                      "values": [
-                        {
-                          "label": "Type A",
-                          "value": "0"
-                        },
-                        {
-                          "label": "Type B",
-                          "value": "1"
-                        },
-                        {
-                          "label": "Type C",
-                          "value": "2"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "id": "amount",
-                    "name": "amount",
-                    "type": "number",
-                    "data_type": "number",
-                    "constraints": {
-                      "numeric_precision": 5,
-                      "numeric_scale": 2,
-                      "min": -999.99,
-                      "max": 999.99,
-                      "step": 0.01,
-                      "required": false,
-                      "expression": "",
-                      "multiline": false
-                    }
-                  },
-                  {
-                    "id": "validated",
-                    "name": "Validated",
-                    "type": "boolean",
-                    "data_type": "boolean",
-                    "constraints": {
-                      "required": false,
-                      "expression": ""
-                    }
-                  },
-                  {
-                    "id": "datetime",
-                    "name": "Date",
-                    "type": "date",
-                    "data_type": "date",
-                    "constraints": {
-                      "required": false,
-                      "expression": ""
                     }
                   }
                 ]
               }
-            },
+            ],
             "thumbnail": "img/mapthumbs/qwc_demo.jpg",
             "availableFormats": [
               "image/jpeg",
@@ -1247,7 +921,8 @@
               "image/png; mode=16bit",
               "image/png; mode=8bit",
               "image/png; mode=1bit",
-              "application/dxf"
+              "application/dxf",
+              "application/pdf"
             ],
             "infoFormats": [
               "text/plain",
@@ -1261,6 +936,152 @@
             "printResolutions": [
               100,
               300
+            ]
+          },
+          {
+            "id": "interventions",
+            "name": "interventions",
+            "title": "interventions",
+            "description": "",
+            "wmsOnly": false,
+            "wms_name": "scan/interventions",
+            "url": "/ows/scan/interventions",
+            "attribution": {
+              "Title": null,
+              "OnlineResource": null
+            },
+            "abstract": "",
+            "keywords": "",
+            "onlineResource": "",
+            "contact": {
+              "person": null,
+              "organization": null,
+              "position": null,
+              "phone": null,
+              "email": null
+            },
+            "mapCrs": "EPSG:3857",
+            "bbox": {
+              "crs": "EPSG:4326",
+              "bounds": [
+                2.48628,
+                48.340007,
+                2.956622,
+                48.913079
+              ]
+            },
+            "initialBbox": {
+              "crs": "EPSG:4326",
+              "bounds": [
+                2.48628,
+                48.340007,
+                2.956622,
+                48.913079
+              ]
+            },
+            "sublayers": [
+              {
+                "name": "wo_water_leak_searching",
+                "title": "wo_water_leak_searching",
+                "visibility": true,
+                "geometryType": "LineString",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "défaut": "défaut"
+                },
+                "style": "défaut",
+                "displayField": "source_name",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    2.48628,
+                    48.340007,
+                    2.956622,
+                    48.913079
+                  ]
+                },
+                "dimensions": [],
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                }
+              },
+              {
+                "name": "wo_water_network",
+                "title": "wo_water_network",
+                "visibility": true,
+                "geometryType": "Point",
+                "category_sublayer": false,
+                "queryable": true,
+                "styles": {
+                  "défaut": "défaut"
+                },
+                "style": "défaut",
+                "displayField": "source_name",
+                "opacity": 255,
+                "bbox": {
+                  "crs": "EPSG:4326",
+                  "bounds": [
+                    2.585008,
+                    48.46137,
+                    2.874197,
+                    48.6302
+                  ]
+                },
+                "dimensions": [],
+                "attribution": {
+                  "Title": null,
+                  "OnlineResource": null
+                }
+              }
+            ],
+            "expanded": true,
+            "drawingOrder": [
+              "wo_water_network",
+              "wo_water_leak_searching"
+            ],
+            "externalLayers": [],
+            "backgroundLayers": [],
+            "print": [
+              {
+                "name": "A3 Landscape",
+                "map": {
+                  "name": "map0",
+                  "x": 8.0,
+                  "y": 8.0,
+                  "width": 340.67,
+                  "height": 274.943
+                },
+                "labels": [
+                  "user_text"
+                ],
+                "default": false
+              }
+            ],
+            "searchProviders": [
+              "coordinates"
+            ],
+            "editConfig": {},
+            "thumbnail": "img/mapthumbs/default.jpg",
+            "availableFormats": [
+              "image/jpeg",
+              "image/png",
+              "image/png; mode=16bit",
+              "image/png; mode=8bit",
+              "image/png; mode=1bit",
+              "application/dxf",
+              "application/pdf"
+            ],
+            "infoFormats": [
+              "text/plain",
+              "text/html",
+              "text/xml",
+              "application/vnd.ogc.gml",
+              "application/vnd.ogc.gml/3.1.1",
+              "application/json",
+              "application/geo+json"
             ]
           },
           {
@@ -1322,9 +1143,9 @@
                   "crs": "EPSG:4326",
                   "bounds": [
                     -180.0,
-                    -66.549927,
-                    179.999997,
-                    66.549986
+                    -89.999996,
+                    180.0,
+                    89.999996
                   ]
                 },
                 "dimensions": [],
@@ -1349,10 +1170,10 @@
                 "bbox": {
                   "crs": "EPSG:4326",
                   "bounds": [
-                    -177.22902,
-                    -80.516568,
-                    178.519895,
-                    73.34887
+                    -177.229036,
+                    -80.516569,
+                    178.519897,
+                    73.348872
                   ]
                 },
                 "minScale": 0,
@@ -1379,9 +1200,9 @@
                 "bbox": {
                   "crs": "EPSG:4326",
                   "bounds": [
-                    -178.137086,
+                    -178.137089,
                     -49.250871,
-                    178.448623,
+                    178.448625,
                     81.128532
                   ]
                 },
@@ -1412,7 +1233,7 @@
                     -180.0,
                     -89.501386,
                     180.0,
-                    83.634101
+                    83.634103
                   ]
                 },
                 "dimensions": [],
@@ -1458,7 +1279,8 @@
               "image/png; mode=16bit",
               "image/png; mode=8bit",
               "image/png; mode=1bit",
-              "application/dxf"
+              "application/dxf",
+              "application/pdf"
             ],
             "infoFormats": [
               "text/plain",
@@ -1495,7 +1317,7 @@
             "tileMatrixSet": "GoogleMapsCompatible_Level8",
             "originX": -20037508.34278925,
             "originY": 20037508.34278925,
-            "projection:": "EPSG:3857",
+            "projection": "EPSG:3857",
             "resolutions": [
               156543.03390625,
               78271.516953125,
