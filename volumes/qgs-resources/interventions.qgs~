@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="MADANI-APP Amine" saveDateTime="2026-01-21T16:19:55" projectname="" saveUser="madani-app" version="3.40.6-Bratislava">
+<qgis saveUserFull="MADANI-APP Amine" saveDateTime="2026-01-21T15:43:27" projectname="" saveUser="madani-app" version="3.40.6-Bratislava">
   <homePath path=""/>
   <title></title>
   <transaction mode="Disabled"/>
@@ -755,7 +755,7 @@
           </editWidget>
         </field>
         <field configurationFlags="NoFlag" name="geometry">
-          <editWidget type="Hidden">
+          <editWidget type="TextEdit">
             <config>
               <Option/>
             </config>
@@ -2008,7 +2008,7 @@ def my_form_open(dialog, layer, feature):
           </editWidget>
         </field>
         <field configurationFlags="NoFlag" name="geometry">
-          <editWidget type="Hidden">
+          <editWidget type="TextEdit">
             <config>
               <Option/>
             </config>
@@ -2175,7 +2175,7 @@ def my_form_open(dialog, layer, feature):
         <policy policy="Duplicate" field="execution_time"/>
         <policy policy="Duplicate" field="expected_time"/>
         <policy policy="Duplicate" field="execution_date_end"/>
-        <policy policy="DefaultValue" field="geometry"/>
+        <policy policy="Duplicate" field="geometry"/>
         <policy policy="Duplicate" field="asset_cmms_asset_name"/>
         <policy policy="Duplicate" field="source_uid"/>
         <policy policy="Duplicate" field="planner_id"/>

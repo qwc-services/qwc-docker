@@ -1,25 +1,3 @@
 {
-    "catalog": [
-        {
-            "title": "World Cities",
-            "resource": "wms:https://demo.mapserver.org/cgi-bin/wms#cities"
-        },
-        {
-            "title": "EMODnet",
-            "sublayers": [
-                {
-                    "title": "Lighthouses",
-                    "resource": "wms:https://ows.emodnet-humanactivities.eu/geoserver/emodnet/wms#lighthouses"
-                },
-                {
-                    "title": "Main Ports",
-                    "resource": "wms:https://ows.emodnet-humanactivities.eu/geoserver/emodnet/wms#portlocations"
-                },
-                {
-                    "title": "Pipelines",
-                    "resource": "wms:https://ows.emodnet-humanactivities.eu/geoserver/emodnet/wms#pipelines"
-                }
-            ]
-        }
-    ]
+  "results": []
 }

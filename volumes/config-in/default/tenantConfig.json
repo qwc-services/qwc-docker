@@ -40,6 +40,84 @@
       "name": "data",
       "config": {
         "geometry_default_allow_null": false
+      },
+      "resources": {
+        "datasets": [
+          {
+            "name": "scan/interventions.wo_water_leak_searching",
+            "db_url": "postgresql:///?service=qwc_geodb",
+            "schema": "qwc_geodb",
+            "table_name": "wo_water_leak_searching",
+            "primary_key": "id",
+            "fields": [
+              {
+                "name": "id",
+                "data_type": "integer",
+                "constraints": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "pipeline_id",
+                "data_type": "uuid",
+                "constraints": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "geometry",
+                "data_type": "text",
+                "constraints": {
+                  "hidden": true
+                }
+              }
+            ],
+            "geometry": {
+              "geometry_column": "geom",
+              "geometry_type": "LINESTRING",
+              "srid": 3857
+            }
+          },
+          {
+            "name": "scan/interventions.wo_water_network",
+            "db_url": "postgresql:///?service=qwc_geodb",
+            "schema": "qwc_geodb",
+            "table_name": "wo_water_network",
+            "primary_key": "id",
+            "fields": [
+              {
+                "name": "id",
+                "data_type": "integer",
+                "constraints": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "pipeline_id",
+                "data_type": "uuid",
+                "constraints": {
+                  "readOnly": true,
+                  "hidden": true
+                }
+              },
+              {
+                "name": "geometry",
+                "data_type": "text",
+                "constraints": {
+                  "hidden": true
+                }
+              }
+            ],
+            "geometry": {
+              "geometry_column": "geom",
+              "geometry_type": "POINT",
+              "srid": 3857
+            }
+          }
+        ]
       }
     },
     {

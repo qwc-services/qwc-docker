@@ -266,6 +266,9 @@
         "name":"Routing"
       },
       {
+        "name": "Panoramax"
+      },
+      {
         "name":"Settings",
         "cfg":{
           "languages":[
@@ -332,6 +335,9 @@
           "defaultTimelineDisplay":"features"
         },
         "mapClickAction":"identify"
+      },
+      {
+        "name": "HelloWizard"
       },
       {
         "name":"TopBar",
@@ -405,6 +411,9 @@
                 {
                   "key":"Routing",
                   "icon":"routing"
+                },
+                {"key": "Panoramax",
+                 "icon": "cyclomedia"
                 }
               ]
             },
@@ -423,6 +432,9 @@
             {
               "key":"Login",
               "icon":"login"
+            },
+            {"key": "HelloWizard",
+             "icon": "info"
             }
           ],
           "searchOptions":{
@@ -490,6 +502,14 @@
           "position": 6,
           "task": "Editing",
           "icon": "editing"
+        }
+	    },
+      {
+        "name": "TaskButton",
+        "cfg": {
+          "position": 7,
+          "task": "HelloWizard",
+          "icon": "info"
         }
 	    },
       {

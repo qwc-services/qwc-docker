@@ -39,6 +39,13 @@ services:
       # NOTE: Remove this line if you don't want/need the demo data
       - ./volumes/demo-data/setup-demo-data-permissions.sh:/tmp/extra-init.d/setup-demo-data-permissions.sh
 
+  qwc-qgs-init:
+    image: alpine:latest
+    command: sh /scripts/prepare-qgs-for-docker.sh
+    volumes:
+      - ./volumes/qgs-resources:/data
+      - ./volumes/demo-data/prepare-qgs-for-docker.sh:/scripts/prepare-qgs-for-docker.sh:ro
+
   qwc-qgis-server:
     image: sourcepole/qwc-qgis-server:3.40
     # ports:
@@ -57,9 +64,12 @@ services:
       - ./volumes/qgis-server-plugins/filter_geom:/usr/share/qgis/python/plugins/filter_geom:ro
       - ./volumes/qgis-server-plugins/clear_capabilities:/usr/share/qgis/python/plugins/clear_capabilities:ro
       - ./volumes/print-layouts:/layouts:ro
+    depends_on:
+      - qwc-qgs-init  
 
   qwc-config-service:
     image: sourcepole/qwc-config-generator:latest-2025-lts
+    # image: sourcepole/qwc-config-generator:v2025.11.18
     environment:
       <<: *qwc-service-variables
       INPUT_CONFIG_PATH: '/srv/qwc_service/config-in'
@@ -213,9 +223,9 @@ services:
 
   qwc-map-viewer:
     # Stock qwc2 app
-    image: sourcepole/qwc-map-viewer:latest-2025-lts
+    # image: sourcepole/qwc-map-viewer:latest-2025-lts
     # Or with own viewer build placed in volumes/qwc2
-    # image: sourcepole/qwc-map-viewer-base:latest-2025-lts
+    image: sourcepole/qwc-map-viewer-base:latest-2025-lts
     environment:
       <<: *qwc-service-variables
       SERVICE_MOUNTPOINT: '/'
@@ -223,9 +233,9 @@ services:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
       # When using qwc-map-viewer:
-      - ./volumes/qwc2/assets:/qwc2/assets:ro
+       #- ./volumes/qwc2/assets:/qwc2/assets:ro
       # When using own viewer build with qwc-map-viewer-base:
-      #- ./volumes/qwc2:/qwc2:ro
+      - ./volumes/qwc2:/qwc2:ro
 
   qwc-ogc-service:
     image: sourcepole/qwc-ogc-service:latest-2025-lts
@@ -263,6 +273,28 @@ services:
   #     MAIL_DEFAULT_SENDER: 'from@example.com'
   #   volumes:
   #     - ./pg_service.conf:/srv/pg_service.conf:ro
+  # ========================================
+  # NOUVEAU SERVICE PYTHON API
+  # ========================================
+  python-wizard-api:
+    build:
+      context: ./volumes/python-api
+      dockerfile: Dockerfile
+    container_name: qwc-python-wizard-api
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./volumes/python-api:/app
+    environment:
+      - FLASK_ENV=development
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   qwc-api-gateway:
     image: nginx:1.27
@@ -288,4 +320,5 @@ services:
       - qwc-ogc-service
       - qwc-permalink-service
       - qwc-print-service
+      - python-wizard-api
       #- qwc-registration-gui
