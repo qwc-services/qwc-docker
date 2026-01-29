@@ -10,6 +10,13 @@ volumes/config/__capabilities_cache
 # Données sensibles (décommente si nécessaire)
 volumes/demo-data/sql/sensitive
 
+#fichiers générés par le config generator
+volumes/config/
+
+#build front à recopier dans volumes/qwc2
+volumes/qwc2/
+
+
 # Terraform
 /qwc-gcp/terraform/.terraform/
 /qwc-gcp/terraform/.terraform.lock.hcl

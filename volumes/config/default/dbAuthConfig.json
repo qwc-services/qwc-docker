@@ -1,7 +1,0 @@
-{
-  "$schema": "https://github.com/qwc-services/qwc-db-auth/raw/master/schemas/qwc-db-auth.json",
-  "service": "db-auth",
-  "config": {
-    "db_url": "postgresql:///?service=qwc_configdb"
-  }
-}
