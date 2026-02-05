@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# DB init with debugging and more visibility 
 cd /tmp
 
 if command -v curl >/dev/null 2>&1; then
@@ -12,12 +12,40 @@ else
 fi
 pg_restore -U "$POSTGRES_USER" -d qwc_services -1 qwc_geodb.backup
 
+echo "===================="
 echo "Running custom DDL scripts..."
+echo "===================="
 for f in /docker-entrypoint-initdb.d/sql/ddl/*.sql; do
-  [ -f "$f" ] && echo "Running $f" && psql -U postgres -d qwc_services -v ON_ERROR_STOP=1 -f "$f"
+  if [ -f "$f" ]; then
+    echo ">>> Executing: $f"
+    psql -U postgres -d qwc_services -v ON_ERROR_STOP=1 -f "$f"
+    if [ $? -eq 0 ]; then
+      echo "✓ Successfully executed: $f"
+    else
+      echo "✗ Failed to execute: $f"
+    fi
+  else
+    echo "⚠ File not found: $f"
+  fi
 done
 
+echo "===================="
 echo "Running sensitive data scripts..."
+echo "===================="
 for f in /docker-entrypoint-initdb.d/sql/sensitive/*.sql; do
-  [ -f "$f" ] && echo "Running $f" && psql -U postgres -d qwc_services -v ON_ERROR_STOP=1 -f "$f"
+  if [ -f "$f" ]; then
+    echo ">>> Executing: $f"
+    psql -U postgres -d qwc_services -v ON_ERROR_STOP=1 -f "$f"
+    if [ $? -eq 0 ]; then
+      echo "✓ Successfully executed: $f"
+    else
+      echo "✗ Failed to execute: $f"
+    fi
+  else
+    echo "⚠ File not found: $f"
+  fi
 done
+
+echo "===================="
+echo "All custom scripts executed!"
+echo "===================="
