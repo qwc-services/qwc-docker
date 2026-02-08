@@ -285,9 +285,15 @@
         if (panel) {
             panel.style.display = open ? "flex" : "none";
         }
-        if (open && messageList) {
-            scrollToBottom();
-            if (inputField) inputField.focus();
+        if (open) {
+            // Connect on first open (lazy init)
+            if (!ws && status === "disconnected") {
+                connect();
+            }
+            if (messageList) {
+                scrollToBottom();
+                if (inputField) inputField.focus();
+            }
         }
         // Notify loader to update FAB state
         if (window.SatAppOverlay && window.SatAppOverlay._onToggle) {
@@ -299,8 +305,7 @@
     window.SatAppChat = {
         init: function () {
             buildPanel();
-            connect();
-            // start hidden
+            // WS connects lazily on first toggle open
             panel.style.display = "none";
         },
         toggle: toggle,
