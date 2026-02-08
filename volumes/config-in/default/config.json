@@ -79,10 +79,17 @@
       "label":"SIRGAS 2000 / UTM zone 23S"
     }
   ],
+  "defaultColorScheme": "dark",
   "plugins":{
     "common": [
       {
         "name":"API"
+      },
+      {
+        "name":"SatAppChat"
+      },
+      {
+        "name":"SatAppHistory"
       },
       {
         "name":"AttributeTable"
@@ -102,8 +109,8 @@
       {
         "name":"BottomBar",
         "cfg":{
-          "viewertitleUrl":"https://qwc-services.github.io/",
-          "termsUrl":"https://github.com/qwc-services/qwc-docker/blob/master/LICENSE/"
+          "viewertitleUrl":"https://github.com/cjhorn95/satapp",
+          "termsUrl":"https://github.com/cjhorn95/satapp/blob/main/LICENSE"
         }
       },
       {
@@ -338,6 +345,14 @@
         "cfg":{
           "menuItems":[
             {
+              "key":"SatAppChat",
+              "icon":"comment"
+            },
+            {
+              "key":"SatAppHistory",
+              "icon":"clock"
+            },
+            {
               "key":"ThemeSwitcher",
               "icon":"themes"
             },
@@ -488,6 +503,10 @@
         "name":"TopBar",
         "cfg":{
           "toolbarItems":[
+            {
+              "key":"SatAppChat",
+              "icon":"comment"
+            },
             {
               "key":"Measure",
               "mode":"LineString",

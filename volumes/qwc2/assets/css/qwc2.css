@@ -1,1 +1,40 @@
-/* Add any custom CSS here */
+/* ================================================================
+   SatApp AI — Dark Glassmorphism Theme for QWC2
+   Matches the satapp dark slate palette + backdrop-blur aesthetic
+   ================================================================ */
+
+/* === Color scheme: dark === */
+body.dark {
+    --panelcolor: rgba(15, 23, 42, 0.95);          /* slate-950 */
+    --panelbordercolor: rgba(255, 255, 255, 0.15);
+    --panelheadercolor: rgba(30, 41, 59, 0.9);     /* slate-800 */
+    --titlebarcolor: rgba(30, 41, 59, 0.9);
+    --hovercolor: rgba(51, 65, 85, 0.5);           /* slate-700/50 */
+    --toolbarcolor: rgba(15, 23, 42, 0.85);
+    --textcolor: #f1f5f9;                            /* slate-100 */
+    --dimtextcolor: #94a3b8;                         /* slate-400 */
+    --accentcolor: #60a5fa;                          /* blue-400 */
+    --inputbackgroundcolor: rgba(51, 65, 85, 1);    /* slate-700 */
+    --inputbordercolor: rgba(71, 85, 105, 1);       /* slate-600 */
+}
+
+/* Map background for uncovered areas */
+body.dark #map {
+    background: #0f172a;
+}
+
+/* Glassmorphism effect on panels */
+body.dark .sidebar-panel-body,
+body.dark .identify-body,
+body.dark .layer-tree-panel,
+body.dark .sidebar {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+/* ================================================================
+   SatApp Overlay Styles
+   Note: Overlay panel styles are self-contained in
+   satapp-overlay-loader.js (injected at runtime).
+   This file only contains QWC2 dark-theme overrides.
+   ================================================================ */
