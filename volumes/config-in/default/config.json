@@ -86,12 +86,6 @@
         "name":"API"
       },
       {
-        "name":"SatAppChat"
-      },
-      {
-        "name":"SatAppHistory"
-      },
-      {
         "name":"AttributeTable"
       },
       {
@@ -345,14 +339,6 @@
         "cfg":{
           "menuItems":[
             {
-              "key":"SatAppChat",
-              "icon":"comment"
-            },
-            {
-              "key":"SatAppHistory",
-              "icon":"clock"
-            },
-            {
               "key":"ThemeSwitcher",
               "icon":"themes"
             },
@@ -503,10 +489,6 @@
         "name":"TopBar",
         "cfg":{
           "toolbarItems":[
-            {
-              "key":"SatAppChat",
-              "icon":"comment"
-            },
             {
               "key":"Measure",
               "mode":"LineString",
