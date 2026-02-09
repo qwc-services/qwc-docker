@@ -104,10 +104,10 @@ services:
       - ./pg_service.conf:/srv/pg_service.conf:ro
       - ./volumes/config:/srv/qwc_service/config:ro
       # required by themes plugin:
-      # - ./volumes/config-in:/srv/qwc_service/config-in:rw
-      # - ./volumes/qwc2:/qwc2
-      # - ./volumes/qgs-resources:/qgs-resources
-      # - ./volumes/info-templates:/info_templates
+      - ./volumes/config-in:/srv/qwc_service/config-in:rw
+      - ./volumes/qwc2:/qwc2
+      - ./volumes/qgs-resources:/qgs-resources
+      - ./volumes/info-templates:/info_templates
 
   qwc-auth-service:
     image: sourcepole/qwc-db-auth:latest-2025-lts

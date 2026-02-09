@@ -27,7 +27,7 @@
         "default_qgis_server_url": "http://qwc-qgis-server/ows/",
         "ows_prefix": "/ows",
         "ows_service_url": "/ows",
-        "plugins": [],
+        "plugins": ["config_editor", "themes"],
         "qgs_resources_path": "/qgs-resources",
         "qwc2_path": "/qwc2",
         "solr_service_url": "http://qwc-solr:8983/solr/gdi/select",
