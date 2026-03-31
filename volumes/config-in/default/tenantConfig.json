@@ -10,6 +10,7 @@
     "permissions_default_allow": true,
     "qgis_print_layouts_dir": "/layouts",
     "qgis_projects_base_dir": "/data",
+    "qgis_project_extension": ".qgs",
     "qgis_projects_scan_base_dir": "/data/scan",
     "strip_scan_prefix_from_theme_names": true,
     "tenant": "default",
