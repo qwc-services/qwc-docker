@@ -139,11 +139,14 @@
             "region_feature_count":100
           },
           "enableExport":true,
-          "longAttributesDisplay":"wrap",
-          "displayResultTree":false,
-          "featureInfoReturnsLayerName":false,
-          "initialWidth":480,
-          "initialHeight":550
+          "geometry": {
+            "initialWidth": 480,
+            "initialHeight": 550,
+            "initialX": 0,
+            "initialY": 0
+          },
+          "longAttributesDisplay": "wrap",
+          "resultDisplayMode": "flat"
         }
       },
       {
@@ -257,7 +260,8 @@
         "cfg":{
           "inlinePrintOutput":true,
           "printExternalLayers":true,
-          "gridInitiallyEnabled":false
+          "gridInitiallyEnabled":false,
+          "displayPrintSeries": true
         }
       },
       {
