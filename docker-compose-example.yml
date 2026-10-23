@@ -46,6 +46,7 @@ services:
       # QGIS_SERVER_IGNORE_BAD_LAYERS: 1
       FCGID_EXTRA_ENV: 'PRINT_LAYOUT_DIR'
       PRINT_LAYOUT_DIR: '/layouts'
+      ENABLED_PLUGINS: '["filter_geom", "get_translations", "print_templates", "split_categorized", "clear_capabilities"]'
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
