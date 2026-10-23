@@ -50,10 +50,6 @@ services:
     volumes:
       - ./volumes/qgs-resources:/data:ro
       - ./pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
-      - ./volumes/qgis-server-plugins/print_templates:/usr/share/qgis/python/plugins/print_templates:ro
-      - ./volumes/qgis-server-plugins/split_categorized:/usr/share/qgis/python/plugins/split_categorized:ro
-      - ./volumes/qgis-server-plugins/filter_geom:/usr/share/qgis/python/plugins/filter_geom:ro
-      - ./volumes/qgis-server-plugins/clear_capabilities:/usr/share/qgis/python/plugins/clear_capabilities:ro
       - ./volumes/print-layouts:/layouts:ro
 
   qwc-config-service:
