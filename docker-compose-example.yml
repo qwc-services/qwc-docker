@@ -1,4 +1,4 @@
-name: 'QWC Example'
+name: 'qwc-docker'
 
 x-qwc-service-variables: &qwc-service-variables
   JWT_SECRET_KEY: $JWT_SECRET_KEY
